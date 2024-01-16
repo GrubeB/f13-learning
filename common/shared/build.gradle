@@ -1,0 +1,12 @@
+plugins {
+}
+
+group = "pl.app.common.shared"
+version = "0.1.0"
+
+dependencies {
+}
+
+jar {
+    enabled = true
+}

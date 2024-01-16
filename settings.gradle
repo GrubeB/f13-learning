@@ -1,0 +1,20 @@
+// COMMON
+include "common:shared"
+include "common:util"
+
+include "common:search-criteria"
+include "common:dto-criteria"
+include "common:path-variable"
+include "common:mapper"
+include "common:audit"
+include "common:root-aware"
+include "common:model"
+
+include "common:service:service-support"
+include "common:service:query-service"
+include "common:service:command-service"
+
+include "common:controller:controller-support"
+include "common:controller:query-controller"
+include "common:controller:command-controller"
+

@@ -1,0 +1,14 @@
+plugins {
+}
+
+group = "pl.app.common.service.support"
+version = "0.1.0"
+
+dependencies {
+    implementation project(':common:dto-criteria')
+    implementation project(':common:mapper')
+}
+
+jar {
+    enabled = true
+}

@@ -1,0 +1,20 @@
+plugins {
+}
+
+group = "pl.app.common.conntroler.support"
+version = "0.1.0"
+
+dependencies {
+    implementation project(':common:search-criteria')
+    implementation project(':common:path-variable')
+    implementation project(':common:dto-criteria')
+    implementation project(':common:mapper')
+
+    // https://mvnrepository.com/artifact/com.google.code.findbugs/annotations
+    implementation 'com.google.code.findbugs:annotations:3.0.1'
+}
+
+
+jar {
+    enabled = true
+}
