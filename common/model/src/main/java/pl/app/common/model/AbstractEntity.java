@@ -21,6 +21,5 @@ public abstract class AbstractEntity<ID extends Serializable> extends Audit
     }
 
     @Override
-    @JsonIgnore
     abstract public ID getId();
 }
