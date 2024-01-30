@@ -1,0 +1,31 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: property-service
+  datasource:
+    url: jdbc:postgresql://localhost:5436/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: false
+    baselineOnMigrate: true
+    user: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+#      ddl-auto: validate
+#      ddl-auto: create-drop
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    pl.app: TRACE
