@@ -30,6 +30,8 @@
             <option value="$PROJECT_DIR$/service" />
             <option value="$PROJECT_DIR$/service/learning" />
             <option value="$PROJECT_DIR$/service/learning/learning-service" />
+            <option value="$PROJECT_DIR$/service/property" />
+            <option value="$PROJECT_DIR$/service/property/property-service" />
           </set>
         </option>
       </GradleProjectSettings>

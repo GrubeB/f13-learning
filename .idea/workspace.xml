@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba5a643-8133-4b03-b312-c8e4040a36d1" name="Changes" comment="big boy">
+      <change afterPath="$PROJECT_DIR$/.docker/docker-compose.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/Merger.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/service/learning/learning-service/build.gradle" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/Application.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterController.java" afterDir="false" />
@@ -20,22 +22,150 @@
       <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/ModelMapperConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/RootAwareConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/WebMvcConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/controller/OrganizationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/controller/OrganizationQueryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/dto/OrganizationDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/exception/OrganizationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/mapper/OrganizationMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/model/OrganizationEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/model/OrganizationImageEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/persistence/OrganizationEntityListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/persistence/OrganizationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/service/OrganizationQueryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/service/OrganizationQueryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/service/OrganizationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/organization/service/OrganizationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/controller/GroupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/controller/GroupQueryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/model/GroupEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/model/GroupHasChapterEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/persistance/GroupRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupQueryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupServiceImpl.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/annotation/CommandAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/annotation/CommandHandlerAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/annotation/CommandHandlingAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/bus/CommandBus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/bus/impl/AsynchronousCommandBus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/bus/impl/SynchronousCommandBus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/gateway/CommandGateway.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/gateway/impl/DefaultCommandGateway.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/CommandHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/CommandHandlerContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/CommandHandlerProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/impl/SimpleCommandHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/impl/SimpleCommandHandlerContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/impl/SimpleCommandHandlerProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/impl/SpringCommandHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/command/handler/impl/SpringCommandHandlerContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/annotation/EventAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/annotation/EventHandlerAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/annotation/EventHandlingAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/bus/EventBus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/bus/impl/AsynchronousEventBus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/bus/impl/SynchronousEventBus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/gateway/EventGateway.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/gateway/impl/DefaultEventGateway.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/handler/EventHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/handler/EventHandlerContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/handler/EventHandlerProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/handler/impl/SimpleEventHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/handler/impl/SimpleEventHandlerContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/handler/impl/SimpleEventHandlerProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/cqrs/event/handler/impl/SpringEventHandlerContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/AggregateId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/BaseAggregateRoot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/AggregateRootAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/ApplicationServiceAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/EntityAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/FactoryAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/PolicyAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/RepositoryAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/ServiceAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/SpecificationAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/annotation/ValueObjectAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/event/DomainEventPublisher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/AndNotSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/AndSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/CompositeSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/ConjunctionSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/DisjunctionSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/NotSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/OrNotSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/OrSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/ddd/specification/Specification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/in/AccommodationTypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/in/AccommodationTypeQueryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/out/AccommodationTypeDetailsAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/out/AccommodationTypePersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/out/persistence/mapper/AccommodationMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/out/persistence/model/AccommodationEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/out/persistence/model/AccommodationTypeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/out/persistence/repository/AccommodationTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/Accommodation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationTypeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationTypeFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationTypeSpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/event/AccommodationTypeCreatedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/AddAccommodationUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/CreateAccommodationTypeUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/RemoveAccommodationUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/command/AddAccommodationCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/command/CreateAccommodationTypeCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/command/RemoveAccommodationCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/out/AccommodationTypeRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/out/CreateAccommodationTypeDetailsPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/service/AccommodationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationQueryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/dto/AccommodationTypeDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/mapper/AccommodationTypeQueryMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/controller/AccommodationTypeDetailsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/controller/AccommodationTypeDetailsQueryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/dto/AccommodationTypeDetailsCreateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/dto/AccommodationTypeDetailsDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/mapper/AccommodationTypeDetailsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/model/AccommodationTypeDetailsEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/model/GenderRoomType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/model/RoomType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/persistance/AccommodationTypeDetailsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/service/AccommodationTypeDetailsQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/service/AccommodationTypeDetailsQueryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/service/AccommodationTypeDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/service/AccommodationTypeDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/AuditConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/CqrsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/DDDConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/ModelMapperConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/RootAwareConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/WebMvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/controller/OrganizationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/controller/OrganizationQueryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/dto/OrganizationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/mapper/OrganizationMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/model/OrganizationEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/persistence/OrganizationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/service/OrganizationQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/service/OrganizationQueryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/service/OrganizationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/service/OrganizationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/controller/PropertyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/controller/PropertyQueryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/model/PropertyAddressEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/model/PropertyDetailsEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/model/PropertyEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/model/PropertyType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/persistence/PropertyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/service/PropertyQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/service/PropertyQueryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/service/PropertyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/service/PropertyServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/test/command/TestCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/test/controller/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/test/controller/TestEventHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/test/event/TestEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/test/service/TestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/audit/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/model/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/AbstractEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/AbstractEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,6 +240,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="AnnotationType" />
         <option value="package-info" />
         <option value="Interface" />
         <option value="Class" />
@@ -118,6 +249,16 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://C:/Program Files/Java/jdk-17.0.3.1/lib/src.zip!/java.base/java/util/concurrent/CompletableFuture.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://C:/Program Files/Java/jdk-17.0.3.1/lib/src.zip!/java.base/java/util/concurrent/CompletionStage.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://C:/Program Files/Java/jdk-17.0.3.1/lib/src.zip!/java.base/java/util/concurrent/Future.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.axonframework/axon-messaging/4.9.1/75210a8c0f64d89e0008ecd3dba8630a424dc7ae/axon-messaging-4.9.1-sources.jar!/org/axonframework/commandhandling/AsynchronousCommandBus.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.axonframework/axon-messaging/4.9.1/75210a8c0f64d89e0008ecd3dba8630a424dc7ae/axon-messaging-4.9.1-sources.jar!/org/axonframework/commandhandling/CommandBus.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.axonframework/axon-messaging/4.9.1/75210a8c0f64d89e0008ecd3dba8630a424dc7ae/axon-messaging-4.9.1-sources.jar!/org/axonframework/commandhandling/SimpleCommandBus.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.axonframework/axon-messaging/4.9.1/75210a8c0f64d89e0008ecd3dba8630a424dc7ae/axon-messaging-4.9.1-sources.jar!/org/axonframework/commandhandling/gateway/CommandGateway.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.axonframework/axon-messaging/4.9.1/75210a8c0f64d89e0008ecd3dba8630a424dc7ae/axon-messaging-4.9.1-sources.jar!/org/axonframework/commandhandling/gateway/DefaultCommandGateway.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
@@ -137,26 +278,37 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;W:/000Projekty/SpringBoot/000_F/f12-solo-leveling/common/root-aware/src/main/java/pl/app/common/root-aware&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5360825&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "W:/000Projekty/SpringBoot/000_F/f12-solo-leveling/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5360825",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JAVA"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="pl.app.ddd.specification" />
+      <recent name="pl.app.cqrs.gateway" />
+      <recent name="pl.app.cqrs.handler" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\common\root-aware\src\main\java\pl\app\common\root-aware" />
-      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\common" />
-      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\chapter" />
-      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\service\learning" />
-      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\common\controller\query_controller" />
+      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\property\accommodation_type\application\port\in" />
+      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\property" />
+      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\property\accommodation_type" />
+      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\accommodation_type" />
+      <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\accommodation_type\model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\common\audit\src\main\java\pl\app\common" />
@@ -166,14 +318,14 @@
       <recent name="W:\000Projekty\SpringBoot\000_F\f12-solo-leveling\common\controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="pl.app.learning.config" />
-      <recent name="pl.app.common.audit" />
-      <recent name="pl.app.learning.chapter.persistance" />
-      <recent name="pl.app.learning.chapter.model" />
-      <recent name="pl.app.learning" />
+      <recent name="pl.app.property.accommodation_type.application.port.out" />
+      <recent name="pl.app.ddd.specification" />
+      <recent name="pl.app.property.accommodation_type.application.domain" />
+      <recent name="pl.app.property.config" />
+      <recent name="pl.app.common.mapper" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager" selected="Application.pl.app.property.Application">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pl.app.learning.Application" />
       <module name="f12-solo-leveling.service.learning.learning-service.main" />
@@ -187,101 +339,61 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="f12-solo-leveling [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+    <configuration name="pl.app.property.Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pl.app.property.Application" />
+      <module name="f12-solo-leveling.service.property.property-service.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.app.property.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="2" type="Java Scratch" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_7.java" />
+      <shortenClasspath name="ARGS_FILE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_6.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Java Scratch">
+      <shortenClasspath name="ARGS_FILE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name=".docker/docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value=".docker/docker-compose.yaml" />
+        </settings>
+      </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="f12-solo-leveling [dependencyInsight]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencyInsight" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="f12-solo-leveling [projects]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="projects" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="f12-solo-leveling:service [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/service" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Java Scratch.2" />
+        <item itemvalue="Java Scratch.Scratch" />
+        <item itemvalue="Application.pl.app.property.Application" />
+        <item itemvalue="Docker..docker/docker-compose.yaml: Compose Deployment" />
         <item itemvalue="Application.Application" />
-        <item itemvalue="Gradle.f12-solo-leveling [dependencies]" />
-        <item itemvalue="Gradle.f12-solo-leveling:service [dependencies]" />
-        <item itemvalue="Gradle.f12-solo-leveling [projects]" />
-        <item itemvalue="Gradle.f12-solo-leveling [dependencyInsight]" />
       </list>
     </recent_temporary>
   </component>
@@ -342,11 +454,27 @@
       <option name="project" value="LOCAL" />
       <updated>1705444281139</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="big boy">
+      <option name="closed" value="true" />
+      <created>1705492414233</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1705492414233</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="big boy" />
     <option name="LAST_COMMIT_MESSAGE" value="big boy" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity" memberName="accommodations" />
+        <PinnedItemInfo parentTag="java.util.LinkedHashMap$Entry" memberName="key" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
