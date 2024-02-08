@@ -7,8 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.app.common.mapper.Mapper;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationEntity;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationEntity;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeEntity;
 import pl.app.property.accommodation_type.query.dto.AccommodationTypeDto;
 
 import java.util.AbstractMap;

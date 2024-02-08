@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_type.adapter.out.persistence.model;
+package pl.app.property.accommodation_type.adapter.out.persistence;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

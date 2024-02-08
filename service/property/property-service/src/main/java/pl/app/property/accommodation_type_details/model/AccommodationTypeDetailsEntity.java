@@ -6,8 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import pl.app.common.model.AbstractEntity;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity;
-import pl.app.property.property.model.PropertyEntity;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeEntity;
 
 import java.util.Objects;
 import java.util.UUID;

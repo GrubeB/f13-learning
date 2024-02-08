@@ -1,34 +1,21 @@
-package pl.app.property.accommodation_type.adapter.out.persistence.mapper;
+package pl.app.property.accommodation_type.adapter.out.persistence;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.app.common.mapper.Mapper;
-import pl.app.common.mapper.Merger;
+import pl.app.common.mapper.BaseMapper;
 import pl.app.ddd.AggregateId;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationEntity;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity;
 import pl.app.property.accommodation_type.application.domain.Accommodation;
 import pl.app.property.accommodation_type.application.domain.AccommodationType;
 import pl.app.property.property.model.PropertyEntity;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 @Getter
-public class AccommodationMapper implements
-        Mapper,
-        Merger {
-    private final Map<AbstractMap.SimpleEntry<Class<?>, Class<?>>, Function<?, ?>> mappers = new HashMap<>();
-    private final Map<Class<?>, BiFunction<?, ?, ?>> mergers = new HashMap<>();
-
+public class AccommodationMapper extends BaseMapper {
     @PostConstruct
     void init() {
         addMapper(AccommodationTypeEntity.class, AccommodationType.class, this::mapToAccommodationType);

@@ -1,6 +1,5 @@
 package pl.app.property.property.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -9,9 +8,7 @@ import pl.app.common.model.AbstractEntity;
 import pl.app.property.organization.model.OrganizationEntity;
 
 import java.time.LocalTime;
-import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -50,11 +47,13 @@ public class PropertyEntity extends AbstractEntity<UUID> {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organization_id", nullable = false)
     private OrganizationEntity organization;
+
     public void setPropertyDetails(PropertyDetailsEntity propertyDetails) {
-        this.propertyDetails = null;
-        if (propertyDetails != null) {
+        if (Objects.nonNull(propertyDetails)) {
             propertyDetails.setProperty(this);
             this.propertyDetails = propertyDetails;
+        } else {
+            this.propertyDetails = null;
         }
     }
 

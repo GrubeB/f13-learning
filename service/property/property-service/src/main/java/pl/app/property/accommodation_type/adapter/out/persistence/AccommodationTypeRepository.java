@@ -1,9 +1,8 @@
-package pl.app.property.accommodation_type.adapter.out.persistence.repository;
+package pl.app.property.accommodation_type.adapter.out.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity;
 
 import java.util.UUID;
 

@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.app.property.accommodation_type_details.dto.AccommodationTypeDetailsCreateDto;
+import pl.app.property.accommodation_type_details.dto.AccommodationTypeDetailsDto;
 import pl.app.property.accommodation_type_details.mapper.AccommodationTypeDetailsMapper;
 import pl.app.property.accommodation_type_details.persistance.AccommodationTypeDetailsRepository;
 
@@ -15,4 +17,9 @@ class AccommodationTypeDetailsServiceImpl implements
         AccommodationTypeDetailsService {
     private final AccommodationTypeDetailsRepository repository;
     private final AccommodationTypeDetailsMapper mapper;
+
+    @Override
+    public AccommodationTypeDetailsDto createFromDto(AccommodationTypeDetailsCreateDto accommodationTypeDetailsCreateDto) {
+        return AccommodationTypeDetailsService.super.createFromDto(accommodationTypeDetailsCreateDto);
+    }
 }

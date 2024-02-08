@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.property.accommodation_type.adapter.out.persistence.repository.AccommodationTypeRepository;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeRepository;
 import pl.app.property.accommodation_type.query.dto.AccommodationTypeDto;
 import pl.app.property.accommodation_type.query.mapper.AccommodationTypeQueryMapper;
 

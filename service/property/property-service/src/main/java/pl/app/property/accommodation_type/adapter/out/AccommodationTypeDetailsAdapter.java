@@ -20,7 +20,9 @@ class AccommodationTypeDetailsAdapter implements
         CreateAccommodationTypeDetailsPort {
     private final CommandGateway gateway;
     @Override
-    public void create(AggregateId accommodationTypeId , String name, String abbreviation, String description, GenderRoomType genderRoomType, RoomType roomType) {
-        gateway.sendAsync(new AccommodationTypeDetailsCreateDto(accommodationTypeId.getId(), name, abbreviation, description, genderRoomType, roomType));
+    public void create(AggregateId accommodationTypeId, String name, String abbreviation, String description,
+                       GenderRoomType genderRoomType, RoomType roomType) {
+        gateway.sendAsync(new AccommodationTypeDetailsCreateDto(accommodationTypeId.getId(), name, abbreviation, description,
+                genderRoomType, roomType));
     }
 }

@@ -2,20 +2,16 @@ package pl.app.property.accommodation_type.adapter.out;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.ddd.AggregateId;
-import pl.app.property.accommodation_type.adapter.out.persistence.mapper.AccommodationMapper;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationEntity;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity;
-import pl.app.property.accommodation_type.adapter.out.persistence.repository.AccommodationTypeRepository;
-import pl.app.property.accommodation_type.application.domain.Accommodation;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationMapper;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeEntity;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeRepository;
 import pl.app.property.accommodation_type.application.domain.AccommodationType;
 import pl.app.property.accommodation_type.application.domain.AccommodationTypeException;
 import pl.app.property.accommodation_type.application.port.out.AccommodationTypeRepositoryPort;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @Transactional

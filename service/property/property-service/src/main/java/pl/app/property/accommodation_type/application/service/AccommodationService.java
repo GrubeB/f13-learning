@@ -1,6 +1,7 @@
 package pl.app.property.accommodation_type.application.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.cqrs.command.annotation.CommandHandlerAnnotation;
 import pl.app.cqrs.command.annotation.CommandHandlingAnnotation;
@@ -15,6 +16,7 @@ import pl.app.property.accommodation_type.application.port.in.command.AddAccommo
 import pl.app.property.accommodation_type.application.port.in.command.CreateAccommodationTypeCommand;
 import pl.app.property.accommodation_type.application.port.in.command.RemoveAccommodationCommand;
 import pl.app.property.accommodation_type.application.port.out.AccommodationTypeRepositoryPort;
+import pl.app.property.accommodation_type.application.port.out.CreateAccommodationTypeAvailabilityPort;
 import pl.app.property.accommodation_type.application.port.out.CreateAccommodationTypeDetailsPort;
 
 import java.util.UUID;
@@ -22,12 +24,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional
 @CommandHandlerAnnotation
+@Component
 class AccommodationService implements
         CreateAccommodationTypeUseCase,
         AddAccommodationUseCase,
         RemoveAccommodationUseCase {
     private final AccommodationTypeRepositoryPort accommodationTypeRepositoryPort;
     private final CreateAccommodationTypeDetailsPort createAccommodationTypeDetailsPort;
+    private final CreateAccommodationTypeAvailabilityPort createAccommodationTypeAvailabilityPort;
     private final AccommodationTypeFactory accommodationTypeFactory;
 
     @Override
@@ -37,6 +41,7 @@ class AccommodationService implements
         accommodationTypeRepositoryPort.save(newAccommodationType);
         createAccommodationTypeDetailsPort.create(newAccommodationType.getAggregateId(), command.getName(), command.getAbbreviation(),
                 command.getDescription(), command.getGenderRoomType(), command.getRoomType());
+        createAccommodationTypeAvailabilityPort.create(newAccommodationType.getAggregateId(), newAccommodationType.getPropertyId());
         return newAccommodationType.getAggregateId().getId();
     }
 

@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_type.adapter.out.persistence.model;
+package pl.app.property.accommodation_type.adapter.out.persistence;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,7 +7,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 import pl.app.common.model.AbstractEntity;
 import pl.app.property.accommodation_type_details.model.AccommodationTypeDetailsEntity;
-import pl.app.property.property.model.PropertyDetailsEntity;
 import pl.app.property.property.model.PropertyEntity;
 
 import java.util.LinkedHashSet;
@@ -28,7 +27,7 @@ public class AccommodationTypeEntity extends AbstractEntity<UUID> {
     @Column(name = "accommodation_type_id", nullable = false)
     private UUID accommodationTypeId;
 
-    @OneToOne(fetch = FetchType.EAGER ,orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "details_id")
     private AccommodationTypeDetailsEntity accommodationTypeDetails;
 
@@ -46,20 +45,23 @@ public class AccommodationTypeEntity extends AbstractEntity<UUID> {
     private PropertyEntity property;
 
     public void setAccommodationTypeDetails(AccommodationTypeDetailsEntity accommodationTypeDetails) {
-        this.accommodationTypeDetails = null;
-        if (accommodationTypeDetails != null) {
+        if (Objects.nonNull(accommodationTypeDetails)) {
             accommodationTypeDetails.setAccommodationType(this);
             this.accommodationTypeDetails = accommodationTypeDetails;
+        } else {
+            this.accommodationTypeDetails = null;
         }
     }
+
     public void setAccommodations(Set<AccommodationEntity> accommodations) {
-        this.accommodations.clear();
-        if (accommodations != null) {
-            accommodations.stream()
-                    .peek(ch -> ch.setAccommodationType(this))
-                    .forEach(this.accommodations::add);
+        if (Objects.nonNull(accommodations) && !accommodations.isEmpty()) {
+            accommodations.forEach(ch -> ch.setAccommodationType(this));
+            this.accommodations.addAll(accommodations);
+        } else {
+            this.accommodations.clear();
         }
     }
+
     @Override
     public UUID getId() {
         return accommodationTypeId;

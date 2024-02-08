@@ -5,10 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity;
+import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeEntity;
 import pl.app.property.accommodation_type.query.AccommodationQueryService;
 
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
