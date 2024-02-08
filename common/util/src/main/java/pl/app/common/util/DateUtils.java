@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DateUtils {
-    public static boolean isDataRangeNoCollide(LocalDate testedStart, LocalDate testedEnd, LocalDate targetStart, LocalDate targetEnd) {
+    public static boolean isDateRangesNoCollide(LocalDate testedStart, LocalDate testedEnd, LocalDate targetStart, LocalDate targetEnd) {
         if (testedStart == null || testedEnd == null || targetStart == null || targetEnd == null) {
             throw DateUtilsValidationException.fromNull();
         }
@@ -18,11 +18,11 @@ public class DateUtils {
         return isAfterOrEquals(testedStart, targetStart) && isAfterOrEquals(testedEnd, testedEnd) && isAfterOrEquals(testedStart, targetEnd);
     }
 
-    public static boolean isDataRangeCollide(LocalDate testedStart, LocalDate testedEnd, LocalDate targetStart, LocalDate targetEnd) {
-        return !isDataRangeNoCollide(testedStart, testedEnd, targetStart, targetEnd);
+    public static boolean isDateRangesCollide(LocalDate testedStart, LocalDate testedEnd, LocalDate targetStart, LocalDate targetEnd) {
+        return !isDateRangesNoCollide(testedStart, testedEnd, targetStart, targetEnd);
     }
 
-    public static List<LocalDate> getRangeFromDates(LocalDate start, LocalDate end) {
+    public static List<LocalDate> getDateRangeFromDates(LocalDate start, LocalDate end) {
         if (start == null || end == null) {
             throw DateUtilsValidationException.fromNull();
         }
