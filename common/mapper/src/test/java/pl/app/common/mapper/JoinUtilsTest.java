@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class JoinUtilsTest {
 
     @Test
     void testLeftInclusiveJoin() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.LEFT_INCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.LEFT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga"))
         );
@@ -24,7 +23,7 @@ class JoinUtilsTest {
     }
     @Test
     void testLeftInclusiveJoinByField() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.LEFT_INCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.LEFT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 TestClass::getId
@@ -37,7 +36,7 @@ class JoinUtilsTest {
     }
     @Test
     void testLeftExclusiveJoin() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.LEFT_EXCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.LEFT_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga"))
         );
@@ -47,7 +46,7 @@ class JoinUtilsTest {
                 .findAny().get().getName())
                 .isEqualTo("Zosia");
 
-        List<TestClass> r2 = JoinUtils.collectionJoin(Join.LEFT_EXCLUSIVE,
+        List<TestClass> r2 = JoinUtils.joinCollectionsInNew(Join.LEFT_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia"), new TestClass(13L, "Aga"))
         );
@@ -55,7 +54,7 @@ class JoinUtilsTest {
     }
     @Test
     void testLeftExclusiveJoinByField() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.LEFT_EXCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.LEFT_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 TestClass::getId
@@ -68,7 +67,7 @@ class JoinUtilsTest {
 
     @Test
     void testRightInclusiveJoin() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.RIGHT_INCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.RIGHT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga"))
         );
@@ -84,7 +83,7 @@ class JoinUtilsTest {
     }
     @Test
     void testRightInclusiveJoinByField() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.RIGHT_INCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.RIGHT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 TestClass::getId
@@ -101,7 +100,7 @@ class JoinUtilsTest {
     }
     @Test
     void testRightExclusiveJoin() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.RIGHT_EXCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.RIGHT_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga"))
         );
@@ -109,7 +108,7 @@ class JoinUtilsTest {
     }
     @Test
     void testRightExclusiveJoinByField() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.RIGHT_EXCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.RIGHT_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 TestClass::getId
@@ -121,7 +120,7 @@ class JoinUtilsTest {
 
     @Test
     void testInnerJoin() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.INNER,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.INNER,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga"))
         );
@@ -129,7 +128,7 @@ class JoinUtilsTest {
     }
     @Test
     void testInnerJoinByField() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.INNER,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.INNER,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 TestClass::getId
@@ -140,7 +139,7 @@ class JoinUtilsTest {
     }
     @Test
     void testFullJoin() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.FULL,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.FULL,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga"))
         );
@@ -148,7 +147,7 @@ class JoinUtilsTest {
     }
     @Test
     void testFullJoinByField() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.FULL,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.FULL,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 TestClass::getId
@@ -157,7 +156,7 @@ class JoinUtilsTest {
     }
     @Test
     void testFullExclusiveJoin() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.FULL_OUTER_EXCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.FULL_OUTER_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga"))
         );
@@ -165,7 +164,7 @@ class JoinUtilsTest {
     }
     @Test
     void testFullExclusiveJoinByField() {
-        List<TestClass> r1 = JoinUtils.collectionJoin(Join.FULL_OUTER_EXCLUSIVE,
+        List<TestClass> r1 = JoinUtils.joinCollectionsInNew(Join.FULL_OUTER_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 TestClass::getId

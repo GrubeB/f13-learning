@@ -1,5 +1,7 @@
 package pl.app.common.mapper;
 
+import org.hibernate.collection.spi.*;
+
 import java.util.*;
 import java.util.function.Function;
 
@@ -29,13 +31,26 @@ public class CollectionsUtils {
     @SuppressWarnings("unchecked")
     public static <E, C extends Collection<E>> C createCollectionOfClass(Class<C> collectionType) {
         try {
-            return collectionType.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            if (List.class.isAssignableFrom(collectionType)) {
+            // Hibernate collections
+            if (collectionType.isAssignableFrom(PersistentBag.class)) {
+                return (C) new PersistentBag<E>();
+            }else if (collectionType.isAssignableFrom(PersistentList.class)) {
+                return (C) new PersistentList<E>();
+            } else if (collectionType.isAssignableFrom(PersistentSortedSet.class)) {
+                return (C) new PersistentSortedSet<E>();
+            }else if (collectionType.isAssignableFrom(PersistentSet.class)) {
+                return (C) new PersistentSet<E>();
+            }else if (collectionType.isAssignableFrom(PersistentIdentifierBag.class)) {
+                return (C) new PersistentIdentifierBag<E>();
+            }
+            // Java collections
+            else if (List.class.isAssignableFrom(collectionType)) {
                 return (C) new ArrayList<E>();
             } else if (Set.class.isAssignableFrom(collectionType)) {
                 return (C) new LinkedHashSet<>();
             }
+            return collectionType.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
             return (C) new ArrayList<E>();
         }
     }

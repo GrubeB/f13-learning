@@ -2,7 +2,6 @@ package pl.app.common.mapper;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiFunction;
@@ -23,7 +22,7 @@ class MergerUtilsTest {
     };
     @Test
     void testLeftInclusiveMerge() {
-        List<TestClass> r1 = MergerUtils.collectionMerge(Join.LEFT_INCLUSIVE,
+        List<TestClass> r1 = MergerUtils.mergeCollectionsInNew(Join.LEFT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 mergeFunction
@@ -36,7 +35,7 @@ class MergerUtilsTest {
     }
     @Test
     void testLeftInclusiveMergeByField() {
-        List<TestClass> r1 = MergerUtils.collectionMerge(Join.LEFT_INCLUSIVE,
+        List<TestClass> r1 = MergerUtils.mergeCollectionsInNew(Join.LEFT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 mergeFunction,
@@ -50,7 +49,7 @@ class MergerUtilsTest {
     }
     @Test
     void testLeftExclusiveMerge() {
-        List<TestClass> r1 = MergerUtils.collectionMerge(Join.LEFT_EXCLUSIVE,
+        List<TestClass> r1 = MergerUtils.mergeCollectionsInNew(Join.LEFT_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 mergeFunction
@@ -63,7 +62,7 @@ class MergerUtilsTest {
     }
     @Test
     void testLeftExclusiveMergeByField() {
-        List<TestClass> r1 = MergerUtils.collectionMerge(Join.LEFT_EXCLUSIVE,
+        List<TestClass> r1 = MergerUtils.mergeCollectionsInNew(Join.LEFT_EXCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 mergeFunction,
@@ -73,7 +72,7 @@ class MergerUtilsTest {
     }
     @Test
     void testRightInclusiveMerge() {
-        List<TestClass> r1 = MergerUtils.collectionMerge(Join.RIGHT_INCLUSIVE,
+        List<TestClass> r1 = MergerUtils.mergeCollectionsInNew(Join.RIGHT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 mergeFunction
@@ -86,7 +85,7 @@ class MergerUtilsTest {
     }
     @Test
     void testRightInclusiveMergeByField() {
-        List<TestClass> r1 = MergerUtils.collectionMerge(Join.RIGHT_INCLUSIVE,
+        List<TestClass> r1 = MergerUtils.mergeCollectionsInNew(Join.RIGHT_INCLUSIVE,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 mergeFunction,
@@ -100,7 +99,7 @@ class MergerUtilsTest {
     }
     @Test
     void testInnerMergeByField() {
-        List<TestClass> r1 = MergerUtils.collectionMerge(Join.INNER,
+        List<TestClass> r1 = MergerUtils.mergeCollectionsInNew(Join.INNER,
                 List.of(new TestClass(11L, "Ala"), new TestClass(12L, "Zosia")),
                 List.of(new TestClass(12L, "Zosia2"), new TestClass(13L, "Aga")),
                 mergeFunction,
