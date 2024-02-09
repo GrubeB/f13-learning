@@ -1,5 +1,7 @@
 package pl.app.cqrs.command.gateway.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.app.cqrs.command.bus.CommandBus;
 import pl.app.cqrs.command.gateway.CommandGateway;
 
@@ -8,6 +10,7 @@ import java.util.concurrent.ExecutionException;
 
 public class DefaultCommandGateway implements
         CommandGateway {
+    private final Logger logger = LoggerFactory.getLogger(DefaultCommandGateway.class);
     private final CommandBus synchronousCommandBus;
     private final CommandBus asynchronousCommandBus;
 
@@ -18,6 +21,8 @@ public class DefaultCommandGateway implements
 
     @Override
     public <R, C> R send(C command) {
+        logger.debug("Dispatching command of type: " + command.getClass().getSimpleName() + "\t class: " + command.getClass().getName());
+        logger.trace("Command: " + command);
         CompletableFuture<R> dispatch = this.synchronousCommandBus.dispatch(command);
         try {
             return dispatch.get();

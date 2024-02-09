@@ -32,6 +32,10 @@ public abstract class BaseAggregateRoot {
         return aggregateId.getId();
     }
 
+    public DomainEventPublisher getEventPublisher() {
+        return eventPublisher;
+    }
+
     public void setEventPublisher(DomainEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
     }

@@ -5,13 +5,15 @@ import lombok.RequiredArgsConstructor;
 import pl.app.ddd.AggregateId;
 import pl.app.ddd.annotation.FactoryAnnotation;
 import pl.app.ddd.event.DomainEventPublisher;
+import pl.app.ddd.event.DomainEventPublisherFactory;
 
 @FactoryAnnotation
 @RequiredArgsConstructor
 public class AccommodationTypeFactory {
-    private final DomainEventPublisher domainEventPublisher;
+    private final DomainEventPublisherFactory domainEventPublisherFactory;
 
     public AccommodationType createAccommodationType(AggregateId propertyId) {
-        return new AccommodationType(domainEventPublisher, propertyId);
+        DomainEventPublisher eventPublisher = domainEventPublisherFactory.getEventPublisher();
+        return new AccommodationType(eventPublisher, propertyId);
     }
 }

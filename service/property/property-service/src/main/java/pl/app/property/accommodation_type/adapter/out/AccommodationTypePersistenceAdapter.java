@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.ddd.AggregateId;
+import pl.app.ddd.event.DelayedDomainEventPublisher;
+import pl.app.ddd.event.DomainEventPublisherFactory;
 import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationMapper;
 import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeEntity;
 import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeRepository;
@@ -21,6 +23,7 @@ class AccommodationTypePersistenceAdapter implements
 
     private final AccommodationMapper mapper;
     private final AccommodationTypeRepository repository;
+    private final DomainEventPublisherFactory domainEventPublisherFactory;
 
     @Override
     public void save(AccommodationType aggregate) {
@@ -30,7 +33,14 @@ class AccommodationTypePersistenceAdapter implements
             AccommodationTypeEntity mergedEntity = mapper.merge(existingEntity.get(), mappedAggregate);
             repository.save(mergedEntity);
         } else {
-            repository.save(mappedAggregate);
+            repository.saveAndFlush(mappedAggregate);
+        }
+        afterSave(aggregate);
+    }
+
+    private static void afterSave(AccommodationType aggregate) {
+        if (aggregate.getEventPublisher() instanceof DelayedDomainEventPublisher publisher) {
+            publisher.publishDelayedEvents();
         }
     }
 
@@ -38,6 +48,8 @@ class AccommodationTypePersistenceAdapter implements
     public AccommodationType load(AggregateId aggregateId) {
         AccommodationTypeEntity entity = repository.findById(aggregateId.getId())
                 .orElseThrow(() -> AccommodationTypeException.NotFoundAccommodationTypeException.fromId(aggregateId.getId()));
-        return mapper.map(entity, AccommodationType.class);
+        AccommodationType domain = mapper.map(entity, AccommodationType.class);
+        domain.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
+        return domain;
     }
 }

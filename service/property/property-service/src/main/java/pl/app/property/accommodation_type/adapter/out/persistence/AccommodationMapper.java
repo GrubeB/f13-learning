@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.app.common.mapper.BaseMapper;
+import pl.app.common.mapper.Join;
+import pl.app.common.mapper.MergerUtils;
 import pl.app.ddd.AggregateId;
 import pl.app.property.accommodation_type.application.domain.Accommodation;
 import pl.app.property.accommodation_type.application.domain.AccommodationType;
-import pl.app.property.property.model.PropertyEntity;
+import pl.app.property.property.application.domain.model.PropertyEntity;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,21 +26,7 @@ public class AccommodationMapper extends BaseMapper {
         addMerger(AccommodationTypeEntity.class, this::mergeAccommodationTypeEntity);
     }
 
-    private AccommodationTypeEntity mergeAccommodationTypeEntity(AccommodationTypeEntity target, AccommodationTypeEntity source) {
-        if (target == null) {
-            return target;
-        }
-        if (source.getAccommodationTypeDetails() != null) {
-            target.setAccommodationTypeDetails(source.getAccommodationTypeDetails());
-        }
-        if (source.getAccommodations() != null) {
-            target.setAccommodations(source.getAccommodations());
-        }
-        if (source.getProperty() != null) {
-            target.setProperty(source.getProperty());
-        }
-        return target;
-    }
+    // TO ENTITY
 
     private AccommodationTypeEntity mapToAccommodationTypeEntity(AccommodationType domain) {
         AccommodationTypeEntity entity = AccommodationTypeEntity.builder()
@@ -57,6 +46,38 @@ public class AccommodationMapper extends BaseMapper {
                 .build();
     }
 
+    private AccommodationTypeEntity mergeAccommodationTypeEntity(AccommodationTypeEntity target, AccommodationTypeEntity source) {
+        if (target == null) {
+            return target;
+        }
+        if (source.getAccommodationTypeDetails() != null) {
+            target.setAccommodationTypeDetails(source.getAccommodationTypeDetails());
+        }
+        if (source.getAccommodations() != null) {
+            Set<AccommodationEntity> merged = MergerUtils.mergeCollections(Join.RIGHT_INCLUSIVE, target.getAccommodations(),
+                    source.getAccommodations(), this::mergeAccommodationEntity, AccommodationEntity::getAccommodationId);
+            target.setAccommodations(merged);
+        }
+        return target;
+    }
+
+    private AccommodationEntity mergeAccommodationEntity(AccommodationEntity target, AccommodationEntity source) {
+        if (target == null) {
+            return target;
+        }
+        if (source.getName() != null) {
+            target.setName(source.getName());
+        }
+        if (source.getDescription() != null) {
+            target.setDescription(source.getDescription());
+        }
+        if (source.getAccommodationType() != null) {
+            target.setAccommodationType(source.getAccommodationType());
+        }
+        return target;
+    }
+
+    // TO DOMAIN
     private Accommodation mapToAccommodation(AccommodationEntity entity) {
         return new Accommodation(
                 entity.getAccommodationId(),

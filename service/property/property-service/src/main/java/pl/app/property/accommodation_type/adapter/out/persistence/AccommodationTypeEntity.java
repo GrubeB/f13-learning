@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 import pl.app.common.model.AbstractEntity;
-import pl.app.property.accommodation_type_details.model.AccommodationTypeDetailsEntity;
-import pl.app.property.property.model.PropertyEntity;
+import pl.app.property.accommodation_type_details.application.domain.model.AccommodationTypeDetailsEntity;
+import pl.app.property.property.application.domain.model.PropertyEntity;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -27,10 +27,6 @@ public class AccommodationTypeEntity extends AbstractEntity<UUID> {
     @Column(name = "accommodation_type_id", nullable = false)
     private UUID accommodationTypeId;
 
-    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "details_id")
-    private AccommodationTypeDetailsEntity accommodationTypeDetails;
-
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             mappedBy = "accommodationType",
@@ -43,6 +39,9 @@ public class AccommodationTypeEntity extends AbstractEntity<UUID> {
     @ToString.Exclude
     @JsonIgnore
     private PropertyEntity property;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "accommodationType", orphanRemoval = true)
+    private AccommodationTypeDetailsEntity accommodationTypeDetails;
 
     public void setAccommodationTypeDetails(AccommodationTypeDetailsEntity accommodationTypeDetails) {
         if (Objects.nonNull(accommodationTypeDetails)) {

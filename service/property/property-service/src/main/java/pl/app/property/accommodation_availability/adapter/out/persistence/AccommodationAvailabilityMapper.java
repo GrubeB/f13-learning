@@ -17,7 +17,6 @@ import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationT
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -142,14 +141,14 @@ public class AccommodationAvailabilityMapper extends BaseMapper {
             target.setAccommodationType(source.getAccommodationType());
         }
         if (source.getAccommodationRestrictions() != null) {
-            Set<AccommodationRestrictionEntity> mergedAccommodationRestrictionEntities = MergerUtils.collectionMerge(Join.RIGHT,
+            Set<AccommodationRestrictionEntity> mergedAccommodationRestrictionEntities = MergerUtils.mergeCollectionsInNew(Join.RIGHT,
                     target.getAccommodationRestrictions(),
                     source.getAccommodationRestrictions(),
                     this::merge, AccommodationRestrictionEntity::getId);
             target.setAccommodationRestrictions(mergedAccommodationRestrictionEntities);
         }
         if (source.getAccommodationTypeReservations() != null) {
-            Set<AccommodationTypeReservationEntity> mergedAccommodationTypeReservationEntities = MergerUtils.collectionMerge(Join.RIGHT,
+            Set<AccommodationTypeReservationEntity> mergedAccommodationTypeReservationEntities = MergerUtils.mergeCollectionsInNew(Join.RIGHT,
                     target.getAccommodationTypeReservations(),
                     source.getAccommodationTypeReservations(),
                     this::merge, AccommodationTypeReservationEntity::getId);

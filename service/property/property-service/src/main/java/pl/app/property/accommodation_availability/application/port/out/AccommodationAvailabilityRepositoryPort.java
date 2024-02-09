@@ -2,14 +2,14 @@ package pl.app.property.accommodation_availability.application.port.out;
 
 
 import pl.app.ddd.AggregateId;
-import pl.app.ddd.annotation.RepositoryAnnotation;
+import pl.app.ddd.annotation.DomainRepositoryAnnotation;
 import pl.app.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@RepositoryAnnotation
+@DomainRepositoryAnnotation
 public interface AccommodationAvailabilityRepositoryPort {
     AccommodationTypeAvailability loadByAccommodationTypeId(AggregateId accommodationTypeId);
 

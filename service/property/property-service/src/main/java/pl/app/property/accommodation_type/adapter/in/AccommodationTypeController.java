@@ -23,6 +23,7 @@ import java.util.UUID;
 public class AccommodationTypeController {
     public static final String resourceName = "accommodation-types";
     public static final String resourcePath = "/api/v1/" + resourceName;
+
     public static final String createAccommodationTypePath = "";
     public static final String addAccommodationPath = "/add-accommodation";
     public static final String removeAccommodationPath = "/remove-accommodation";
