@@ -155,12 +155,12 @@ public interface CommandService {
             default DTO updateFromDto(@NonNull ID id, UPDATE_DTO dto) {
                 ENTITY existingEntity = getRepository().findById(id)
                         .orElseThrow(() -> new NotFoundException("Not found object with id: " + id));
-                ENTITY entityFromDto = getMapper().map(dto, resolveArgumentAtIndex(Creatable.DtoCreatableWithParent.class, 1));
+                ENTITY entityFromDto = getMapper().map(dto, resolveArgumentAtIndex(Creatable.DtoCreatable.class, 1));
                 ENTITY mergedEntity = merge(existingEntity, entityFromDto);
                 beforeDtoUpdate(id, dto, existingEntity, mergedEntity);
                 ENTITY savedEntity = getRepository().save(mergedEntity);
                 afterDtoUpdate(id, dto, savedEntity);
-                return getMapper().map(savedEntity, resolveArgumentAtIndex(Creatable.DtoCreatableWithParent.class, 3));
+                return getMapper().map(savedEntity, resolveArgumentAtIndex(Creatable.DtoCreatable.class, 3));
             }
 
 

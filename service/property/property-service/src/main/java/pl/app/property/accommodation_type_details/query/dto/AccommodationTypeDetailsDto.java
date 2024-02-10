@@ -23,5 +23,4 @@ public class AccommodationTypeDetailsDto implements Serializable {
     private String description;
     private GenderRoomType genderRoomType;
     private RoomType roomType;
-    private Set<BaseDto> accommodation;
 }

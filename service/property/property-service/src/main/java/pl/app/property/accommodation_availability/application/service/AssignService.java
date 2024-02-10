@@ -2,9 +2,6 @@ package pl.app.property.accommodation_availability.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import pl.app.cqrs.command.annotation.CommandHandlerAnnotation;
-import pl.app.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeReservation;
@@ -19,7 +16,6 @@ import pl.app.property.accommodation_availability.application.port.out.Accommoda
 
 @Component("accommodationAssignService")
 @RequiredArgsConstructor
-@CommandHandlerAnnotation
 class AssignService implements
         UnassignAccommodationTypeReservationUseCase,
         AutomaticAssignAccommodationTypeReservationUseCase,
@@ -28,7 +24,6 @@ class AssignService implements
     private final AccommodationAvailabilityRepositoryPort repositoryPort;
 
     @Override
-    @CommandHandlingAnnotation
     public void automaticAssign(AutomaticAssignTypeReservationCommand command) {
         AccommodationTypeAvailability availability = repositoryPort.loadByTypeReservationId(command.getTypeReservationId());
         availability.tryToAutoAssignTypeReservation(command.getTypeReservationId());
@@ -36,7 +31,6 @@ class AssignService implements
     }
 
     @Override
-    @CommandHandlingAnnotation
     public void manualAssign(ManualAssignTypeReservationCommand command) {
         AccommodationTypeAvailability availability = repositoryPort.loadByTypeReservationId(command.getTypeReservationId());
         var reservations = command.getReservations().stream()
@@ -48,7 +42,6 @@ class AssignService implements
     }
 
     @Override
-    @CommandHandlingAnnotation
     public void unassign(UnassignTypeReservationCommand command) {
         AccommodationTypeAvailability availability = repositoryPort.loadByTypeReservationId(command.getAccommodationTypeReservationId());
         AccommodationTypeReservation typeReservation = availability.getTypeReservationById(command.getAccommodationTypeReservationId());

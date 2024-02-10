@@ -2,9 +2,6 @@ package pl.app.property.accommodation_availability.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import pl.app.cqrs.command.annotation.CommandHandlerAnnotation;
-import pl.app.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.ddd.AggregateId;
 import pl.app.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.model.Accommodation;
@@ -22,7 +19,6 @@ import java.util.UUID;
 
 @Component("accommodationAvailabilityService")
 @RequiredArgsConstructor
-@CommandHandlerAnnotation
 class AvailabilityService implements
         IsAccommodationAvailableUseCase,
         IsAccommodationTypeAvailableUseCase,
@@ -33,15 +29,14 @@ class AvailabilityService implements
 
 
     @Override
-    @CommandHandlingAnnotation
     public UUID create(CreateAccommodationTypeAvailabilityCommand command) {
-        AccommodationTypeAvailability typeAvailability = accommodationTypeAvailabilityFactory.createAccommodationTypeAvailabilityFactory(command.getPropertyId(), command.getAccommodationTypeId());
+        AccommodationTypeAvailability typeAvailability = accommodationTypeAvailabilityFactory
+                .createAccommodationTypeAvailabilityFactory(new AggregateId(command.getPropertyId()), new AggregateId(command.getAccommodationTypeId()));
         repositoryPort.save(typeAvailability);
         return typeAvailability.getAggregateId().getId();
     }
 
     @Override
-    @CommandHandlingAnnotation
     public Boolean isAccommodationAvailable(IsAccommodationAvailableCommand command) {
         AccommodationTypeAvailability accommodationTypeAvailability = repositoryPort
                 .loadByAccommodationId(command.getAccommodationId(), new DateRange<>(command.getStartDate(), command.getEndDate()));
@@ -50,7 +45,6 @@ class AvailabilityService implements
     }
 
     @Override
-    @CommandHandlingAnnotation
     public Boolean isAccommodationTypeAvailable(IsAccommodationTypeAvailableCommand command) {
         AccommodationTypeAvailability accommodationTypeAvailability = repositoryPort
                 .loadByAccommodationTypeId(new AggregateId(command.getAccommodationTypeId()), new DateRange<>(command.getStartDate(), command.getEndDate()));

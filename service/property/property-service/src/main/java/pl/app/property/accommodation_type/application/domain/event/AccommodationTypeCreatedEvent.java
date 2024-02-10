@@ -14,5 +14,6 @@ import java.util.UUID;
 @ToString
 public class AccommodationTypeCreatedEvent implements
         Serializable {
+    private UUID propertyId;
     private UUID accommodationTypeId;
 }

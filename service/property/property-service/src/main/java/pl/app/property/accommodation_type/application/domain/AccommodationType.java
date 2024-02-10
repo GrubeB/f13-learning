@@ -23,7 +23,7 @@ public class AccommodationType extends BaseAggregateRoot {
         super(eventPublisher);
         this.accommodations = new ArrayList<>();
         this.propertyId = propertyId;
-        eventPublisher.publish(new AccommodationTypeCreatedEvent(this.aggregateId.getId()));
+        eventPublisher.publish(new AccommodationTypeCreatedEvent(this.propertyId.getId(), this.aggregateId.getId()));
     }
 
     public AccommodationType(AggregateId aggregateId, List<Accommodation> accommodations, AggregateId propertyId) {

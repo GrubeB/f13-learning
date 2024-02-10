@@ -2,9 +2,6 @@ package pl.app.property.accommodation_availability.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import pl.app.cqrs.command.annotation.CommandHandlerAnnotation;
-import pl.app.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeReservation;
@@ -18,7 +15,6 @@ import java.util.UUID;
 
 @Component("accommodationTypeReservationService")
 @RequiredArgsConstructor
-@CommandHandlerAnnotation
 class TypeReservationService implements
         RemoveAccommodationTypeReservationUseCase,
         CreateAccommodationTypeReservationUseCase {
@@ -26,7 +22,6 @@ class TypeReservationService implements
     private final AccommodationAvailabilityRepositoryPort repositoryPort;
 
     @Override
-    @CommandHandlingAnnotation
     public UUID createTypeReservation(CreateTypeReservationCommand command) {
         AccommodationTypeAvailability availability = repositoryPort
                 .loadByAccommodationTypeId(command.getAccommodationTypeId(), new DateRange<>(command.getStartDate(), command.getEndDate()));
@@ -37,7 +32,6 @@ class TypeReservationService implements
     }
 
     @Override
-    @CommandHandlingAnnotation
     public void removeTypeReservation(RemoveTypeReservationCommand command) {
         AccommodationTypeAvailability availability = repositoryPort
                 .loadByTypeReservationId(command.getTypeReservationId());

@@ -2,8 +2,6 @@ package pl.app.property.accommodation_availability.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.app.cqrs.command.annotation.CommandHandlerAnnotation;
-import pl.app.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.model.Accommodation;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationRestriction;
@@ -20,7 +18,6 @@ import java.util.UUID;
 
 @Component("accommodationRestrictionService")
 @RequiredArgsConstructor
-@CommandHandlerAnnotation
 class RestrictionService implements
         RemoveAccommodationReservationUseCase,
         ChangeAccommodationReservationStatusUseCase,
@@ -29,7 +26,6 @@ class RestrictionService implements
     private final AccommodationAvailabilityRepositoryPort repositoryPort;
 
     @Override
-    @CommandHandlingAnnotation
     public UUID createRestriction(CreateRestrictionCommand command) {
         AccommodationTypeAvailability availability = repositoryPort
                 .loadByAccommodationId(command.getAccommodationId(), new DateRange<>(command.getStartDate(), command.getEndDate()));
@@ -40,7 +36,6 @@ class RestrictionService implements
     }
 
     @Override
-    @CommandHandlingAnnotation
     public void removeRestriction(RemoveRestrictionCommand command) {
         AccommodationTypeAvailability availability = repositoryPort.loadByRestrictionId(command.getReservationId());
         Accommodation accommodation = availability.getAccommodationByRestrictionId(command.getReservationId());
@@ -49,7 +44,6 @@ class RestrictionService implements
     }
 
     @Override
-    @CommandHandlingAnnotation
     public void changeRestrictionStatus(ChangeRestrictionStatusCommand command) {
         AccommodationTypeAvailability availability = repositoryPort
                 .loadByRestrictionId(command.getRestrictionId());

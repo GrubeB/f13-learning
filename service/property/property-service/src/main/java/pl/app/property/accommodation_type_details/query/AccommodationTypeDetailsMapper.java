@@ -11,6 +11,7 @@ import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationT
 import pl.app.property.accommodation_type.query.AccommodationTypeQueryService;
 import pl.app.property.accommodation_type_details.application.domain.model.AccommodationTypeDetailsEntity;
 import pl.app.property.accommodation_type_details.application.port.in.command.CreateAccommodationTypeDetailsCommand;
+import pl.app.property.accommodation_type_details.application.port.in.command.UpdateAccommodationTypeDetailsCommand;
 import pl.app.property.accommodation_type_details.query.dto.AccommodationTypeDetailsDto;
 
 @Getter
@@ -24,6 +25,7 @@ public class AccommodationTypeDetailsMapper extends BaseMapper {
     void init() {
         addMapper(AccommodationTypeDetailsEntity.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(AccommodationTypeDetailsEntity.class, AccommodationTypeDetailsDto.class, e -> modelMapper.map(e, AccommodationTypeDetailsDto.class));
+        addMapper(UpdateAccommodationTypeDetailsCommand.class, AccommodationTypeDetailsEntity.class, e -> modelMapper.map(e, AccommodationTypeDetailsEntity.class));
         addMapper(CreateAccommodationTypeDetailsCommand.class, AccommodationTypeDetailsEntity.class, this::mapToAccommodationTypeDetailsEntity);
     }
 

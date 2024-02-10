@@ -17,8 +17,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 public class AccommodationTypeDetailsController implements
-        CommandController.Updatable.DtoUpdatable<UUID, AccommodationTypeDetailsEntity, UpdateAccommodationTypeDetailsCommand, AccommodationTypeDetailsDto>,
-        CommandController.Deletable.SimpleDeletable<UUID, AccommodationTypeDetailsEntity> {
+        CommandController.Updatable.DtoUpdatable<UUID, AccommodationTypeDetailsEntity, UpdateAccommodationTypeDetailsCommand, AccommodationTypeDetailsDto> {
+
     public static final String resourceName = "accommodation-type-details";
     public static final String resourcePath = "/api/v1/" + resourceName;
 

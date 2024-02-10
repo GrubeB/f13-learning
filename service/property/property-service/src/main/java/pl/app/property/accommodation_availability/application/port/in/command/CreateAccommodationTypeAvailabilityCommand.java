@@ -12,6 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateAccommodationTypeAvailabilityCommand implements Serializable {
-    private AggregateId accommodationTypeId;
-    private AggregateId propertyId;
+    private UUID propertyId;
+    private UUID accommodationTypeId;
 }
