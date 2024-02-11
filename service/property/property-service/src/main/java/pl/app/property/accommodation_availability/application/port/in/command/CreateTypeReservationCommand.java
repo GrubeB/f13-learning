@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.app.ddd.AggregateId;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateTypeReservationCommand implements Serializable {
-    private AggregateId accommodationTypeId;
+    private UUID accommodationTypeId;
     private LocalDate startDate;
     private LocalDate endDate;
 }

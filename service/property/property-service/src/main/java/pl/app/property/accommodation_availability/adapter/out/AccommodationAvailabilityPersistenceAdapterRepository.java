@@ -6,10 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.ddd.AggregateId;
 import pl.app.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationAvailabilityMapper;
-import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntityRepository;
 import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntity;
+import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntityRepository;
+import pl.app.property.accommodation_availability.application.domain.model.AccommodationAssignmentPolicy;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationAvailabilityException;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
+import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailabilityPolicy;
 import pl.app.property.accommodation_availability.application.port.out.AccommodationAvailabilityRepositoryPort;
 
 import java.time.LocalDate;
@@ -24,66 +26,81 @@ class AccommodationAvailabilityPersistenceAdapterRepository implements
     private final AccommodationTypeAvailabilityEntityRepository repository;
     private final AccommodationAvailabilityMapper mapper;
 
+    private final AccommodationAssignmentPolicy accommodationAssignmentPolicy;
+    private final AccommodationTypeAvailabilityPolicy accommodationTypeAvailabilityPolicy;
+
     @Override
     public AccommodationTypeAvailability loadByAccommodationTypeId(AggregateId accommodationTypeId) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationType_AccommodationTypeId(accommodationTypeId.getId())
+        return repository.findIdByAccommodationType_AccommodationTypeId(accommodationTypeId.getId())
+                .map(aggregateId -> load(new AggregateId(aggregateId)))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
     @Override
     public AccommodationTypeAvailability loadByAccommodationTypeId(AggregateId accommodationTypeId, DateRange<LocalDate> dateRange) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationType_AccommodationTypeId(accommodationTypeId.getId())
+        return repository.findIdByAccommodationType_AccommodationTypeId(accommodationTypeId.getId())
+                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
     @Override
     public AccommodationTypeAvailability loadByAccommodationId(UUID accommodationId) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationType_Accommodations_AccommodationId(accommodationId)
+        return repository.findIdByAccommodationType_Accommodations_AccommodationId(accommodationId)
+                .map(aggregateId -> load(new AggregateId(aggregateId)))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
     @Override
     public AccommodationTypeAvailability loadByAccommodationId(UUID accommodationId, DateRange<LocalDate> dateRange) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationType_Accommodations_AccommodationId(accommodationId)
+        return repository.findIdByAccommodationType_Accommodations_AccommodationId(accommodationId)
+                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
     @Override
     public AccommodationTypeAvailability loadByTypeReservationId(UUID typeReservationId) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationTypeReservations_AccommodationTypeReservationId(typeReservationId)
+        return repository.findIdByAccommodationTypeReservations_AccommodationTypeReservationId(typeReservationId)
+                .map(aggregateId -> load(new AggregateId(aggregateId)))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
     @Override
     public AccommodationTypeAvailability loadByTypeReservationId(UUID typeReservationId, DateRange<LocalDate> dateRange) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationTypeReservations_AccommodationTypeReservationId(typeReservationId)
+        return repository.findIdByAccommodationTypeReservations_AccommodationTypeReservationId(typeReservationId)
+                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
     @Override
     public AccommodationTypeAvailability loadByRestrictionId(UUID reservationId) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationRestrictions_AccommodationRestrictionId(reservationId)
+        return repository.findIdByAccommodationRestrictions_AccommodationRestrictionId(reservationId)
+                .map(aggregateId -> load(new AggregateId(aggregateId)))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
     @Override
     public AccommodationTypeAvailability loadByRestrictionId(UUID reservationId, DateRange<LocalDate> dateRange) {
-        AccommodationTypeAvailabilityEntity entity = repository.findByAccommodationRestrictions_AccommodationRestrictionId(reservationId)
+        return repository.findIdByAccommodationRestrictions_AccommodationRestrictionId(reservationId)
+                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-        return mapper.map(entity, AccommodationTypeAvailability.class);
     }
 
-    private AccommodationTypeAvailability load(AggregateId aggregateId) {
+    @Override
+    public AccommodationTypeAvailability load(AggregateId aggregateId) {
         AccommodationTypeAvailabilityEntity entity = repository.findById(aggregateId.getId())
                 .orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException.fromId(aggregateId.getId()));
-        return mapper.map(entity, AccommodationTypeAvailability.class);
+        AccommodationTypeAvailability aggregate = mapper.map(entity, AccommodationTypeAvailability.class);
+        aggregate.setPolicies(accommodationAssignmentPolicy, accommodationTypeAvailabilityPolicy);
+        return aggregate;
+    }
+
+    @Override
+    public AccommodationTypeAvailability load(AggregateId aggregateId, DateRange<LocalDate> dateRange) {
+        AccommodationTypeAvailabilityEntity entity = repository.findById(aggregateId.getId())
+                .orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException.fromId(aggregateId.getId()));
+        AccommodationTypeAvailability aggregate = mapper.map(entity, AccommodationTypeAvailability.class);
+        aggregate.setPolicies(accommodationAssignmentPolicy, accommodationTypeAvailabilityPolicy);
+        return aggregate;
     }
 
     @Override

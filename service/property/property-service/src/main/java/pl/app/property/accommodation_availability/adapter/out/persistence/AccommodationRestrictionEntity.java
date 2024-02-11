@@ -35,7 +35,7 @@ public class AccommodationRestrictionEntity extends AbstractEntity<UUID> {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "accommodation_id")
     private AccommodationEntity accommodation;
 

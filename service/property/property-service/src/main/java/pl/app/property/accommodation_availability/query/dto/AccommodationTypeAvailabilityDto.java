@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.app.common.shared.dto.BaseDto;
 import pl.app.property.accommodation_availability.application.domain.model.TypeReservationAssignedStatus;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationRestrictionStatus;
 
@@ -18,18 +19,19 @@ import java.util.UUID;
 @NoArgsConstructor
 public class AccommodationTypeAvailabilityDto implements Serializable {
     private UUID accommodationTypeAvailabilityId;
-    private Set<AccommodationReservationDto> accommodationReservation;
-    private Set<AccommodationTypeReservationDto> accommodationTypeReservation;
+    private Set<AccommodationReservationDto> accommodationRestrictions;
+    private Set<AccommodationTypeReservationDto> accommodationTypeReservations;
 
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class AccommodationReservationDto implements Serializable {
-        private UUID accommodationReservationId;
+        private UUID accommodationRestrictionId;
         private AccommodationRestrictionStatus status;
         private LocalDate startDate;
         private LocalDate endDate;
+        private BaseDto accommodation;
     }
 
     @Getter
@@ -41,6 +43,6 @@ public class AccommodationTypeAvailabilityDto implements Serializable {
         private LocalDate startDate;
         private LocalDate endDate;
         private TypeReservationAssignedStatus status;
-        private Set<AccommodationReservationDto> accommodationReservationEntities;
+        private Set<AccommodationReservationDto> accommodationRestrictions;
     }
 }

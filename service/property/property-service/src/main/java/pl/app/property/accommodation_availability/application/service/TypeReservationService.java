@@ -2,6 +2,7 @@ package pl.app.property.accommodation_availability.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.app.ddd.AggregateId;
 import pl.app.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeReservation;
@@ -24,7 +25,7 @@ class TypeReservationService implements
     @Override
     public UUID createTypeReservation(CreateTypeReservationCommand command) {
         AccommodationTypeAvailability availability = repositoryPort
-                .loadByAccommodationTypeId(command.getAccommodationTypeId(), new DateRange<>(command.getStartDate(), command.getEndDate()));
+                .loadByAccommodationTypeId(new AggregateId(command.getAccommodationTypeId()), new DateRange<>(command.getStartDate(), command.getEndDate()));
         AccommodationTypeReservation newTypeReservation = availability.createTypeReservation(new DateRange<>(command.getStartDate(), command.getEndDate()));
         availability.tryToAutoAssignTypeReservation(newTypeReservation);
         repositoryPort.save(availability);

@@ -19,7 +19,7 @@ public class AccommodationTypeAvailabilityQueryController implements
         QueryController.DtoFetchable.Full<UUID, AccommodationTypeAvailabilityEntity> {
 
     public static final String resourceName = "accommodation-type-availabilities";
-    public static final String resourcePath = "/api/v1/accommodation-types/{accommodationTypeId}/" + resourceName;
+    public static final String resourcePath = "/api/v1/" + resourceName;
 
     private final AccommodationTypeAvailabilityQueryService service;
 }

@@ -6,6 +6,8 @@ import pl.app.ddd.AggregateId;
 import pl.app.ddd.BaseAggregateRoot;
 import pl.app.ddd.annotation.AggregateRootAnnotation;
 import pl.app.ddd.event.DomainEventPublisher;
+import pl.app.property.accommodation_type.application.domain.event.AccommodationCreatedEvent;
+import pl.app.property.accommodation_type.application.domain.event.AccommodationRemovedEvent;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationTypeCreatedEvent;
 
 import java.util.ArrayList;
@@ -37,10 +39,13 @@ public class AccommodationType extends BaseAggregateRoot {
             throw new AccommodationTypeException.DuplicatedAccommodationNameException();
         }
         accommodations.add(accommodation);
+        eventPublisher.publish(new AccommodationCreatedEvent(propertyId.getId(), aggregateId.getId(), accommodation.getId()));
     }
 
     public void removeAccommodation(Accommodation accommodation) {
-        accommodations.removeIf(acc -> acc.getId().equals(accommodation.getId()));
+        if (accommodations.removeIf(acc -> acc.getId().equals(accommodation.getId()))) {
+            eventPublisher.publish(new AccommodationRemovedEvent(propertyId.getId(), aggregateId.getId(), accommodation.getId()));
+        }
     }
 
     public void removeAccommodationById(UUID accommodationId) {

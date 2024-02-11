@@ -13,5 +13,5 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RemoveRestrictionCommand implements Serializable {
-    private UUID reservationId;
+    private UUID restrictionId;
 }

@@ -32,7 +32,7 @@ public class AccommodationAvailabilityMapper extends BaseMapper {
     void init() {
         addMapper(AccommodationTypeAvailability.class, AccommodationTypeAvailabilityEntity.class, this::mapToAccommodationTypeAvailabilityEntity);
         addMapper(AccommodationTypeAvailabilityEntity.class, AccommodationTypeAvailability.class, this::mapToAccommodationTypeAvailability);
-        addMerger(AccommodationTypeAvailabilityEntity.class, this::merge);
+        addMerger(AccommodationTypeAvailabilityEntity.class, this::mergeAccommodationTypeAvailabilityEntity);
     }
 
     // TO DOMAIN
@@ -132,7 +132,7 @@ public class AccommodationAvailabilityMapper extends BaseMapper {
         return entity;
     }
 
-    private AccommodationTypeAvailabilityEntity merge(AccommodationTypeAvailabilityEntity target, AccommodationTypeAvailabilityEntity source) {
+    private AccommodationTypeAvailabilityEntity mergeAccommodationTypeAvailabilityEntity(AccommodationTypeAvailabilityEntity target, AccommodationTypeAvailabilityEntity source) {
         if (target == null) {
             return target;
         }
@@ -141,22 +141,23 @@ public class AccommodationAvailabilityMapper extends BaseMapper {
             target.setAccommodationType(source.getAccommodationType());
         }
         if (source.getAccommodationRestrictions() != null) {
-            Set<AccommodationRestrictionEntity> mergedAccommodationRestrictionEntities = MergerUtils.mergeCollectionsInNew(Join.RIGHT,
+            Set<AccommodationRestrictionEntity> mergedAccommodationRestrictionEntities = MergerUtils.mergeCollections(Join.RIGHT,
                     target.getAccommodationRestrictions(),
                     source.getAccommodationRestrictions(),
-                    this::merge, AccommodationRestrictionEntity::getId);
+                    this::mergeAccommodationRestrictionEntity, AccommodationRestrictionEntity::getId);
             target.setAccommodationRestrictions(mergedAccommodationRestrictionEntities);
         }
         if (source.getAccommodationTypeReservations() != null) {
-            Set<AccommodationTypeReservationEntity> mergedAccommodationTypeReservationEntities = MergerUtils.mergeCollectionsInNew(Join.RIGHT,
+            Set<AccommodationTypeReservationEntity> mergedAccommodationTypeReservationEntities = MergerUtils.mergeCollections(Join.RIGHT,
                     target.getAccommodationTypeReservations(),
                     source.getAccommodationTypeReservations(),
-                    this::merge, AccommodationTypeReservationEntity::getId);
+                    this::mergeAccommodationTypeReservationEntity, AccommodationTypeReservationEntity::getId);
             target.setAccommodationTypeReservations(mergedAccommodationTypeReservationEntities);
         }
         return target;
     }
-    private AccommodationRestrictionEntity merge(AccommodationRestrictionEntity target, AccommodationRestrictionEntity source) {
+
+    private AccommodationRestrictionEntity mergeAccommodationRestrictionEntity(AccommodationRestrictionEntity target, AccommodationRestrictionEntity source) {
         if (target == null) {
             return target;
         }
@@ -178,7 +179,8 @@ public class AccommodationAvailabilityMapper extends BaseMapper {
         }
         return target;
     }
-    private AccommodationTypeReservationEntity merge(AccommodationTypeReservationEntity target, AccommodationTypeReservationEntity source) {
+
+    private AccommodationTypeReservationEntity mergeAccommodationTypeReservationEntity(AccommodationTypeReservationEntity target, AccommodationTypeReservationEntity source) {
         if (target == null) {
             return target;
         }
@@ -191,6 +193,13 @@ public class AccommodationAvailabilityMapper extends BaseMapper {
         }
         if (source.getEndDate() != null) {
             target.setEndDate(source.getEndDate());
+        }
+        if (source.getAccommodationRestrictions() != null) {
+            Set<AccommodationRestrictionEntity> mergedAccommodationRestrictionEntity = MergerUtils.mergeCollections(Join.RIGHT,
+                    target.getAccommodationRestrictions(),
+                    source.getAccommodationRestrictions(),
+                    this::mergeAccommodationRestrictionEntity, AccommodationRestrictionEntity::getId);
+            target.setAccommodationRestrictions(mergedAccommodationRestrictionEntity);
         }
         if (source.getAccommodationTypeAvailability() != null) {
             target.setAccommodationTypeAvailability(source.getAccommodationTypeAvailability());

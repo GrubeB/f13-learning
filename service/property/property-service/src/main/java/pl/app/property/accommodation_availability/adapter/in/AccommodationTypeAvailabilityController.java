@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.app.cqrs.command.gateway.CommandGateway;
-import pl.app.property.accommodation_availability.application.port.in.*;
 import pl.app.property.accommodation_availability.application.port.in.command.*;
 
 @RestController
@@ -12,11 +11,11 @@ import pl.app.property.accommodation_availability.application.port.in.command.*;
 @RequiredArgsConstructor
 public class AccommodationTypeAvailabilityController {
     public static final String resourceName = "accommodation-type-availabilities";
-    public static final String resourcePath = "/api/v1/accommodation-types/{accommodationTypeId}/" + resourceName;
+    public static final String resourcePath = "/api/v1/" + resourceName;
 
     public static final String isAccommodationAvailablePath = "/accommodation-availability";
     public static final String isAccommodationTypeAvailablePath = "/accommodation-type-availability";
-    public static final String createAccommodationReservationPath = "/create-reservation";
+    public static final String createAccommodationRestrictionPath = "/create-restriction";
     public static final String createAccommodationTypeReservationPath = "/create-type-reservation";
     public static final String removeAccommodationReservationPath = "/remove-reservation";
     public static final String removeAccommodationTypeReservationPath = "/remove-type-reservation";
@@ -39,9 +38,9 @@ public class AccommodationTypeAvailabilityController {
                 .ok(gateway.send(command));
     }
 
-    @PostMapping(path = createAccommodationReservationPath)
+    @PostMapping(path = createAccommodationRestrictionPath)
     public ResponseEntity<Void> createAccommodationReservation(@RequestBody CreateRestrictionCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .noContent()
                 .build();

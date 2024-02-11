@@ -52,7 +52,7 @@ public class AccommodationTypeAvailability extends BaseAggregateRoot {
 
     // AVAILABILITY
     public void verifyAccommodationTypeAvailability(DateRange<LocalDate> dateRange, Integer numberOdAccommodations) {
-        if (isAccommodationTypeAvailable(dateRange, numberOdAccommodations)) {
+        if (!isAccommodationTypeAvailable(dateRange, numberOdAccommodations)) {
             throw new AccommodationAvailabilityException.AccommodationNoAvailableException();
         }
     }
@@ -60,8 +60,8 @@ public class AccommodationTypeAvailability extends BaseAggregateRoot {
     public boolean isAccommodationTypeAvailable(DateRange<LocalDate> dateRange, Integer numberOdAccommodations) {
         return typeAvailabilityPolicy.isAccommodationTypeAvailable(this, numberOdAccommodations, dateRange);
     }
-    // RESERVATION
 
+    // RESERVATION
     public AccommodationTypeReservation createTypeReservation(DateRange<LocalDate> dateRange) {
         verifyAccommodationTypeAvailability(dateRange, 1);
         AccommodationTypeReservation newAccommodationTypeReservation = new AccommodationTypeReservation(dateRange);
@@ -150,4 +150,10 @@ public class AccommodationTypeAvailability extends BaseAggregateRoot {
                 .filter(typeReservation -> typeReservation.isReservationCollideWith(dateRange))
                 .collect(Collectors.toList());
     }
+
+    public void setPolicies(AccommodationAssignmentPolicy assignmentPolicy, AccommodationTypeAvailabilityPolicy typeAvailabilityPolicy) {
+        this.assignmentPolicy = assignmentPolicy;
+        this.typeAvailabilityPolicy = typeAvailabilityPolicy;
+    }
+
 }

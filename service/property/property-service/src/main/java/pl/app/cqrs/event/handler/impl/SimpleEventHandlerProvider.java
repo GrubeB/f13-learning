@@ -28,7 +28,8 @@ public class SimpleEventHandlerProvider implements
                 .map(handler -> (EventHandler<E>) handler)
                 .collect(Collectors.toSet());
         if (handlers.isEmpty()) {
-            logger.warn("not found event handler that can handle event of type: " + event.getClass());
+            logger.debug("not found event handler that can handle event of type: " + event.getClass().getSimpleName() + "\t class: " + event.getClass().getName());
+            logger.trace("event: " + event);
         }
         return handlers;
     }

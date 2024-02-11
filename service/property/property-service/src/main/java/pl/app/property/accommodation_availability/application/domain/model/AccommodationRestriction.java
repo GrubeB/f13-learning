@@ -55,6 +55,6 @@ public class AccommodationRestriction extends BaseEntity {
     }
     // VERIFYING
     public boolean isRestrictionCollideWith(DateRange<LocalDate> dateRange) {
-        return DateUtils.isDateRangesCollide(dateRange.getFromDate(), dateRange.getToDate(), dateRange.getFromDate(), dateRange.getToDate());
+        return DateUtils.isDateRangesCollide(this.dateRange.getFromDate(), this.dateRange.getToDate(), dateRange.getFromDate(), dateRange.getToDate());
     }
 }

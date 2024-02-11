@@ -17,8 +17,8 @@ public class DefaultEventGateway implements
 
     @Override
     public <C> void publish(C event) {
-        logger.debug("Publishing event of type: " + event.getClass().getSimpleName() + "\t class: " + event.getClass().getName());
-        logger.trace("Event: " + event);
+        logger.debug("publishing event of type: " + event.getClass().getSimpleName() + "\t class: " + event.getClass().getName());
+        logger.trace("event: " + event);
         this.eventBus.publish(event);
     }
 }

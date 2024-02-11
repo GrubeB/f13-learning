@@ -7,12 +7,12 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
 
 @ValueObjectAnnotation
-public class DateRange<T extends Temporal> implements Serializable {
+public class DateRange<T extends Comparable<? super T>> implements Serializable {
     private final T fromDate;
     private final T toDate;
 
     public DateRange(T fromDate, T toDate) {
-        if (!isFromDateIsBeforeToDate()) {
+        if (!isFromDateIsBeforeToDate(fromDate, toDate)) {
             throw new IllegalArgumentException("Start date must be before or equal to end date");
         }
         this.fromDate = fromDate;
@@ -26,9 +26,10 @@ public class DateRange<T extends Temporal> implements Serializable {
     public T getToDate() {
         return toDate;
     }
-    private boolean isFromDateIsBeforeToDate() {
-        return fromDate.getLong(ChronoField.INSTANT_SECONDS) < toDate.getLong(ChronoField.INSTANT_SECONDS)
-                || (fromDate.getLong(ChronoField.INSTANT_SECONDS) == toDate.getLong(ChronoField.INSTANT_SECONDS)
-                && fromDate.getLong(ChronoField.NANO_OF_SECOND) < toDate.getLong(ChronoField.NANO_OF_SECOND));
+    private boolean isFromDateIsBeforeToDate(T fromDate, T toDate) {
+//        return fromDate.getLong(ChronoField.INSTANT_SECONDS) < toDate.getLong(ChronoField.INSTANT_SECONDS)
+//                || (fromDate.getLong(ChronoField.INSTANT_SECONDS) == toDate.getLong(ChronoField.INSTANT_SECONDS)
+//                && fromDate.getLong(ChronoField.NANO_OF_SECOND) < toDate.getLong(ChronoField.NANO_OF_SECOND));
+        return fromDate.compareTo(toDate) <= 0;
     }
 }

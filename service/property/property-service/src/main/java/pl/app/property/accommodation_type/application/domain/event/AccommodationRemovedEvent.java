@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AccommodationCreatedEvent implements
+public class AccommodationRemovedEvent implements
         Serializable {
     private UUID propertyId;
     private UUID accommodationTypeId;

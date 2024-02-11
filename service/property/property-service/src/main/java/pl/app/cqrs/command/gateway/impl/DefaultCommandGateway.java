@@ -21,8 +21,8 @@ public class DefaultCommandGateway implements
 
     @Override
     public <R, C> R send(C command) {
-        logger.debug("Dispatching command of type: " + command.getClass().getSimpleName() + "\t class: " + command.getClass().getName());
-        logger.trace("Command: " + command);
+        logger.debug("dispatching command of type: " + command.getClass().getSimpleName() + "\t class: " + command.getClass().getName());
+        logger.trace("command: " + command);
         CompletableFuture<R> dispatch = this.synchronousCommandBus.dispatch(command);
         try {
             return dispatch.get();
@@ -33,6 +33,8 @@ public class DefaultCommandGateway implements
 
     @Override
     public <C> void sendAsync(C command) {
+        logger.debug("dispatching command of type: " + command.getClass().getSimpleName() + "\t class: " + command.getClass().getName());
+        logger.trace("command: " + command);
         this.asynchronousCommandBus.dispatch(command);
     }
 }

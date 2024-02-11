@@ -37,9 +37,9 @@ class RestrictionService implements
 
     @Override
     public void removeRestriction(RemoveRestrictionCommand command) {
-        AccommodationTypeAvailability availability = repositoryPort.loadByRestrictionId(command.getReservationId());
-        Accommodation accommodation = availability.getAccommodationByRestrictionId(command.getReservationId());
-        accommodation.removeRestriction(command.getReservationId());
+        AccommodationTypeAvailability availability = repositoryPort.loadByRestrictionId(command.getRestrictionId());
+        Accommodation accommodation = availability.getAccommodationByRestrictionId(command.getRestrictionId());
+        accommodation.removeRestriction(command.getRestrictionId());
         repositoryPort.save(availability);
     }
 

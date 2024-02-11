@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.app.common.dto_criteria.Dto;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntity;
 import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntityRepository;
+import pl.app.property.accommodation_availability.application.domain.model.AccommodationAvailabilityException;
 import pl.app.property.accommodation_availability.query.dto.AccommodationTypeAvailabilityDto;
 import pl.app.property.accommodation_availability.query.mapper.AccommodationTypeAvailabilityQueryMapper;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationAvailabilityException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -31,9 +32,12 @@ class AccommodationTypeAvailabilityQueryServiceImpl implements
     }};
 
     @Override
-    public AccommodationTypeAvailabilityEntity fetchByAccommodationTypeId(UUID accommodationTypeId) {
-        return repository.findByAccommodationType_AccommodationTypeId(accommodationTypeId)
+    public <T> T fetchByAccommodationTypeId(UUID accommodationTypeId, Dto dto) {
+        AccommodationTypeAvailabilityEntity accommodationTypeAvailabilityEntity = repository
+                .findIdByAccommodationType_AccommodationTypeId(accommodationTypeId)
+                .map(repository::findById)
+                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new)
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
+        return mapper.map(accommodationTypeAvailabilityEntity, getClass(dto));
     }
-
 }
