@@ -1,10 +1,9 @@
 package pl.app.property.accommodation_type.application.domain;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import pl.app.ddd.BaseEntity;
-import pl.app.ddd.annotation.EntityAnnotation;
+import pl.app.common.ddd.BaseEntity;
+import pl.app.common.ddd.annotation.EntityAnnotation;
 
 import java.util.UUID;
 

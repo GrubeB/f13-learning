@@ -2,7 +2,7 @@ plugins {
     id "org.springframework.boot" version "$ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION"
 }
 
-group = "pl.app.learning"
+group = "pl.app.property"
 version = "0.1.0"
 
 dependencies {
@@ -16,6 +16,8 @@ dependencies {
     implementation project(':common:audit')
     implementation project(':common:model')
     implementation project(':common:root-aware')
+    implementation project(':common:ddd')
+    implementation project(':common:cqrs')
 
     implementation project(':common:controller:command-controller')
     implementation project(':common:controller:controller-support')

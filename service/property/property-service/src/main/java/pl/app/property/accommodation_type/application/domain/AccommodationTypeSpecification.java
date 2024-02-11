@@ -1,10 +1,10 @@
 package pl.app.property.accommodation_type.application.domain;
 
-import pl.app.ddd.annotation.SpecificationAnnotation;
-import pl.app.ddd.specification.CompositeSpecification;
-import pl.app.ddd.specification.ConjunctionSpecification;
-import pl.app.ddd.specification.NotSpecification;
-import pl.app.ddd.specification.Specification;
+import pl.app.common.ddd.annotation.SpecificationAnnotation;
+import pl.app.common.ddd.specification.CompositeSpecification;
+import pl.app.common.ddd.specification.ConjunctionSpecification;
+import pl.app.common.ddd.specification.NotSpecification;
+import pl.app.common.ddd.specification.Specification;
 
 import java.util.List;
 import java.util.stream.Collectors;

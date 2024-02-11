@@ -3,7 +3,7 @@ package pl.app.property.accommodation_type.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pl.app.ddd.AggregateId;
+import pl.app.common.ddd.AggregateId;
 import pl.app.property.accommodation_type.application.domain.Accommodation;
 import pl.app.property.accommodation_type.application.domain.AccommodationType;
 import pl.app.property.accommodation_type.application.domain.AccommodationTypeFactory;

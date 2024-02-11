@@ -3,22 +3,22 @@ package pl.app.property.config;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.app.cqrs.command.bus.impl.AsynchronousCommandBus;
-import pl.app.cqrs.command.bus.impl.SynchronousCommandBus;
-import pl.app.cqrs.command.gateway.CommandGateway;
-import pl.app.cqrs.command.gateway.impl.DefaultCommandGateway;
-import pl.app.cqrs.command.handler.CommandHandlerContext;
-import pl.app.cqrs.command.handler.CommandHandlerProvider;
-import pl.app.cqrs.command.handler.impl.SimpleCommandHandlerProvider;
-import pl.app.cqrs.command.handler.impl.SpringCommandHandlerContext;
-import pl.app.cqrs.event.bus.EventBus;
-import pl.app.cqrs.event.bus.impl.AsynchronousEventBus;
-import pl.app.cqrs.event.gateway.EventGateway;
-import pl.app.cqrs.event.gateway.impl.DefaultEventGateway;
-import pl.app.cqrs.event.handler.EventHandlerContext;
-import pl.app.cqrs.event.handler.EventHandlerProvider;
-import pl.app.cqrs.event.handler.impl.SimpleEventHandlerProvider;
-import pl.app.cqrs.event.handler.impl.SpringEventHandlerContext;
+import pl.app.common.cqrs.command.bus.impl.AsynchronousCommandBus;
+import pl.app.common.cqrs.command.bus.impl.SynchronousCommandBus;
+import pl.app.common.cqrs.command.gateway.CommandGateway;
+import pl.app.common.cqrs.command.gateway.impl.DefaultCommandGateway;
+import pl.app.common.cqrs.command.handler.CommandHandlerContext;
+import pl.app.common.cqrs.command.handler.CommandHandlerProvider;
+import pl.app.common.cqrs.command.handler.impl.SimpleCommandHandlerProvider;
+import pl.app.common.cqrs.command.handler.impl.SpringCommandHandlerContext;
+import pl.app.common.cqrs.event.bus.EventBus;
+import pl.app.common.cqrs.event.bus.impl.AsynchronousEventBus;
+import pl.app.common.cqrs.event.gateway.EventGateway;
+import pl.app.common.cqrs.event.gateway.impl.DefaultEventGateway;
+import pl.app.common.cqrs.event.handler.EventHandlerContext;
+import pl.app.common.cqrs.event.handler.EventHandlerProvider;
+import pl.app.common.cqrs.event.handler.impl.SimpleEventHandlerProvider;
+import pl.app.common.cqrs.event.handler.impl.SpringEventHandlerContext;
 
 @Configuration
 public class CqrsConfig {

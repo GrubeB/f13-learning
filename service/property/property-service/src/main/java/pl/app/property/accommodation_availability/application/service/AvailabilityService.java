@@ -2,8 +2,8 @@ package pl.app.property.accommodation_availability.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.app.ddd.AggregateId;
-import pl.app.ddd.shared.DateRange;
+import pl.app.common.ddd.AggregateId;
+import pl.app.common.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.model.Accommodation;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailabilityFactory;

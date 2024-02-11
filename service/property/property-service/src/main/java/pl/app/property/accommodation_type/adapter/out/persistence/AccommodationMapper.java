@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.mapper.Join;
 import pl.app.common.mapper.MergerUtils;
-import pl.app.ddd.AggregateId;
+import pl.app.common.ddd.AggregateId;
 import pl.app.property.accommodation_type.application.domain.Accommodation;
 import pl.app.property.accommodation_type.application.domain.AccommodationType;
 import pl.app.property.property.application.domain.model.PropertyEntity;

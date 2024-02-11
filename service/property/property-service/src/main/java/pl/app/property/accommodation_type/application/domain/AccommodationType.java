@@ -2,10 +2,10 @@ package pl.app.property.accommodation_type.application.domain;
 
 
 import lombok.Getter;
-import pl.app.ddd.AggregateId;
-import pl.app.ddd.BaseAggregateRoot;
-import pl.app.ddd.annotation.AggregateRootAnnotation;
-import pl.app.ddd.event.DomainEventPublisher;
+import pl.app.common.ddd.AggregateId;
+import pl.app.common.ddd.BaseAggregateRoot;
+import pl.app.common.ddd.annotation.AggregateRootAnnotation;
+import pl.app.common.ddd.event.DomainEventPublisher;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationCreatedEvent;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationRemovedEvent;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationTypeCreatedEvent;

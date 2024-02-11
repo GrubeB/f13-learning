@@ -15,6 +15,8 @@
             <option value="$PROJECT_DIR$/common/controller/command-controller" />
             <option value="$PROJECT_DIR$/common/controller/controller-support" />
             <option value="$PROJECT_DIR$/common/controller/query-controller" />
+            <option value="$PROJECT_DIR$/common/cqrs" />
+            <option value="$PROJECT_DIR$/common/ddd" />
             <option value="$PROJECT_DIR$/common/dto-criteria" />
             <option value="$PROJECT_DIR$/common/mapper" />
             <option value="$PROJECT_DIR$/common/model" />

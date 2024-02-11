@@ -3,7 +3,7 @@ package pl.app.property.accommodation_availability.adapter.in;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.app.cqrs.command.gateway.CommandGateway;
+import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.property.accommodation_availability.application.port.in.command.*;
 
 @RestController

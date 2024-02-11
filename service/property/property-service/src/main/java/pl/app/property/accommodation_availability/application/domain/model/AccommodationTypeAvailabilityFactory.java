@@ -1,12 +1,13 @@
 package pl.app.property.accommodation_availability.application.domain.model;
 
 
-import lombok.RequiredArgsConstructor;
-import pl.app.ddd.AggregateId;
-import pl.app.ddd.annotation.FactoryAnnotation;
-import pl.app.ddd.event.DomainEventPublisher;
+import org.springframework.stereotype.Component;
+import pl.app.common.ddd.AggregateId;
+import pl.app.common.ddd.annotation.FactoryAnnotation;
+import pl.app.common.ddd.event.DomainEventPublisher;
 
 @FactoryAnnotation
+@Component
 public class AccommodationTypeAvailabilityFactory {
     private final DomainEventPublisher domainEventPublisher;
     private final AccommodationAssignmentPolicy accommodationAssignmentPolicy;

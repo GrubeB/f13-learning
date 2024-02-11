@@ -2,10 +2,10 @@ package pl.app.property.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.app.cqrs.event.gateway.EventGateway;
-import pl.app.ddd.event.DomainEventPublisher;
-import pl.app.ddd.event.DomainEventPublisherFactory;
-import pl.app.ddd.event.impl.AbstractDelayedDomainEventPublisher;
+import pl.app.common.cqrs.event.gateway.EventGateway;
+import pl.app.common.ddd.event.DomainEventPublisher;
+import pl.app.common.ddd.event.DomainEventPublisherFactory;
+import pl.app.common.ddd.event.impl.AbstractDelayedDomainEventPublisher;
 
 @Configuration
 public class DDDConfig {

@@ -2,9 +2,9 @@ package pl.app.property.accommodation_availability.application.domain.model;
 
 import lombok.Getter;
 import pl.app.common.util.DateUtils;
-import pl.app.ddd.BaseEntity;
-import pl.app.ddd.annotation.EntityAnnotation;
-import pl.app.ddd.shared.DateRange;
+import pl.app.common.ddd.BaseEntity;
+import pl.app.common.ddd.annotation.EntityAnnotation;
+import pl.app.common.ddd.shared.DateRange;
 
 import java.time.LocalDate;
 import java.util.Objects;

@@ -2,8 +2,8 @@ package pl.app.property.accommodation_availability.adapter.in;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.app.cqrs.command.annotation.CommandHandlerAnnotation;
-import pl.app.cqrs.command.annotation.CommandHandlingAnnotation;
+import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
+import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.property.accommodation_availability.application.port.in.*;
 import pl.app.property.accommodation_availability.application.port.in.command.*;
 

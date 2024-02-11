@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.util.EntityLocationUriUtils;
-import pl.app.cqrs.command.gateway.CommandGateway;
+import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.property.accommodation_type.application.port.in.command.AddAccommodationCommand;
-import pl.app.property.accommodation_type.application.port.in.AddAccommodationUseCase;
 import pl.app.property.accommodation_type.application.port.in.command.CreateAccommodationTypeCommand;
 import pl.app.property.accommodation_type.application.port.in.command.RemoveAccommodationCommand;
-import pl.app.property.accommodation_type.application.port.in.RemoveAccommodationUseCase;
 
 import java.util.UUID;
 

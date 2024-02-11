@@ -1,12 +1,12 @@
 package pl.app.property.accommodation_availability.application.domain.model;
 
 import lombok.Getter;
-import pl.app.ddd.AggregateId;
-import pl.app.ddd.BaseAggregateRoot;
-import pl.app.ddd.annotation.AggregateRootAnnotation;
-import pl.app.ddd.annotation.DataTransferObjectAnnotation;
-import pl.app.ddd.event.DomainEventPublisher;
-import pl.app.ddd.shared.DateRange;
+import pl.app.common.ddd.AggregateId;
+import pl.app.common.ddd.BaseAggregateRoot;
+import pl.app.common.ddd.annotation.AggregateRootAnnotation;
+import pl.app.common.ddd.annotation.DataTransferObjectAnnotation;
+import pl.app.common.ddd.event.DomainEventPublisher;
+import pl.app.common.ddd.shared.DateRange;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
