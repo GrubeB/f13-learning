@@ -62,6 +62,7 @@ public class MergerUtils {
             }
             case RIGHT, RIGHT_INCLUSIVE,
                     FULL, FULL_OUTER_INCLUSIVE -> {
+                target.removeIf(targetElement -> !contains(source, targetElement, fieldProvider)); // removeLeft
                 mergeMid(target, source, merger, fieldProvider);
                 source.stream()
                         .filter(sourceElement -> !contains(target, sourceElement, fieldProvider))
