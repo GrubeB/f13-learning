@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import pl.app.common.aware.RootAware;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -19,12 +19,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_chapter_reference")
-public class ReferenceEntity extends AbstractEntity<UUID> implements
+public class ReferenceEntity extends BaseAuditEntity<UUID> implements
         RootAware<ChapterEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "reference_id", nullable = false)
-    private UUID referenceId;
+    private UUID id;
 
     @Column(name = "reference_name")
     private String name;
@@ -40,7 +40,7 @@ public class ReferenceEntity extends AbstractEntity<UUID> implements
 
     @Override
     public UUID getId() {
-        return this.referenceId;
+        return this.id;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ReferenceEntity extends AbstractEntity<UUID> implements
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ReferenceEntity that = (ReferenceEntity) o;
-        return referenceId != null && Objects.equals(referenceId, that.referenceId);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

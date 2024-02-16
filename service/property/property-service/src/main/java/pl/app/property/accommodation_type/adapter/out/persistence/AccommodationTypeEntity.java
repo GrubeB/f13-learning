@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 import pl.app.property.accommodation_type_details.application.domain.model.AccommodationTypeDetailsEntity;
 import pl.app.property.property.application.domain.model.PropertyEntity;
 
@@ -22,7 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_accommodation_type")
-public class AccommodationTypeEntity extends AbstractEntity<UUID> {
+public class AccommodationTypeEntity extends BaseAuditEntity<UUID> {
     @Id
     @Column(name = "accommodation_type_id", nullable = false)
     private UUID accommodationTypeId;

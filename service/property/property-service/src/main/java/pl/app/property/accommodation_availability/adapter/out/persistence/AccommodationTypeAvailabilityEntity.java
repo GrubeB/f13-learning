@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -23,7 +21,7 @@ import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationT
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_accommodation_type_availability")
-public class AccommodationTypeAvailabilityEntity extends AbstractEntity<UUID> {
+public class AccommodationTypeAvailabilityEntity extends BaseAuditEntity<UUID> {
     @Id
     @Column(name = "accommodation_type_availability_id", nullable = false)
     private UUID accommodationTypeAvailabilityId;

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationRestrictionStatus;
 import pl.app.property.accommodation_type.adapter.out.persistence.AccommodationEntity;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_accommodation_restriction")
-public class AccommodationRestrictionEntity extends AbstractEntity<UUID> {
+public class AccommodationRestrictionEntity extends BaseAuditEntity<UUID> {
 
     @Id
     @Column(name = "accommodation_restriction_id", nullable = false)

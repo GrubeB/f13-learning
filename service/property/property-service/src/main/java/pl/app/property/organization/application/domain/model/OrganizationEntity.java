@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_organization")
-public class OrganizationEntity extends AbstractEntity<UUID> {
+public class OrganizationEntity extends BaseAuditEntity<UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "organization_id", nullable = false)

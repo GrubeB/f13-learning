@@ -15,26 +15,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 
-@Getter
-@Setter
-@MappedSuperclass
-@SuperBuilder
-@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Audit {
+public interface Audit {
+
     @CreatedBy
-    @Column(name = "created_by", nullable = false, updatable = false)
-    private String createdBy;
+    String getCreatedBy();
 
     @CreatedDate
-    @Column(name = "created_date", nullable = false, updatable = false)
-    private Instant createdDate;
+    Instant getCreatedDate();
 
     @LastModifiedBy
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
+    String getLastModifiedBy();
 
     @LastModifiedDate
-    @Column(name = "last_modified_date")
-    private Instant lastModifiedDate;
+    Instant getLastModifiedDate();
 }

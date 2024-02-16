@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import pl.app.common.aware.RootAware;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 import pl.app.learning.chapter.model.ChapterEntity;
 
 import java.util.Objects;
@@ -20,12 +20,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_group_has_chapter")
-public class GroupHasChapterEntity extends AbstractEntity<UUID> implements
+public class GroupHasChapterEntity extends BaseAuditEntity<UUID> implements
         RootAware<GroupEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "group_has_chapter_id", nullable = false)
-    private UUID groupHasChapterId;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
@@ -39,7 +39,7 @@ public class GroupHasChapterEntity extends AbstractEntity<UUID> implements
 
     @Override
     public UUID getId() {
-        return this.groupHasChapterId;
+        return this.id;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class GroupHasChapterEntity extends AbstractEntity<UUID> implements
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         GroupHasChapterEntity that = (GroupHasChapterEntity) o;
-        return groupHasChapterId != null && Objects.equals(groupHasChapterId, that.groupHasChapterId);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

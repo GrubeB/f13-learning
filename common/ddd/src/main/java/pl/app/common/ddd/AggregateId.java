@@ -1,9 +1,13 @@
 package pl.app.common.ddd;
 
+import jakarta.persistence.Embeddable;
+
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AggregateId {
+@Embeddable
+public class AggregateId implements Serializable {
     private UUID aggregateId;
 
     public AggregateId(UUID aggregateId) {

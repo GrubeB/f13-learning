@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import pl.app.common.aware.RootAware;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_property_details")
-public class PropertyDetailsEntity extends AbstractEntity<UUID> implements
+public class PropertyDetailsEntity extends BaseAuditEntity<UUID> implements
         RootAware<PropertyEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

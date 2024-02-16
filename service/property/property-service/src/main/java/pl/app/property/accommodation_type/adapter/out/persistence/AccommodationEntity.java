@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_accommodation")
-public class AccommodationEntity extends AbstractEntity<UUID> {
+public class AccommodationEntity extends BaseAuditEntity<UUID> {
     @Id
     @Column(name = "accommodation_id", nullable = false)
     private UUID accommodationId;

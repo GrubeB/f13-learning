@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 import pl.app.property.organization.application.domain.model.OrganizationEntity;
 
 import java.time.LocalTime;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_property")
-public class PropertyEntity extends AbstractEntity<UUID> {
+public class PropertyEntity extends BaseAuditEntity<UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "property_id", nullable = false)

@@ -4,12 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseSnapshotableEntity;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Getter
@@ -19,11 +16,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_chapter")
-public class ChapterEntity extends AbstractEntity<UUID> {
+public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, ChapterSnapshotEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "chapter_id", nullable = false)
-    private UUID chapterId;
+    private UUID id;
 
     @Column(nullable = false)
     private String topic;
@@ -39,9 +36,20 @@ public class ChapterEntity extends AbstractEntity<UUID> {
     private Set<ReferenceEntity> references = new LinkedHashSet<>();
 
     @Override
-    public UUID getId() {
-        return this.chapterId;
+    public ChapterSnapshotEntity makeSnapshot() {
+        return ChapterSnapshotEntity.builder()
+                .topic(topic)
+                .introduction(introduction)
+                .owner(this)
+                .build();
     }
+
+    @Override
+    public void revertSnapshot(ChapterSnapshotEntity snapshot) {
+        this.topic = snapshot.getTopic();
+        this.introduction = snapshot.getIntroduction();
+    }
+
 
     public void setReferences(Set<ReferenceEntity> references) {
         this.references.forEach(reference -> reference.setChapter(null));
@@ -56,7 +64,7 @@ public class ChapterEntity extends AbstractEntity<UUID> {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ChapterEntity that = (ChapterEntity) o;
-        return chapterId != null && Objects.equals(chapterId, that.chapterId);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

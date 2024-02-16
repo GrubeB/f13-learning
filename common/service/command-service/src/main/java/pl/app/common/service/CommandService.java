@@ -108,7 +108,7 @@ public interface CommandService {
             }
 
             default ENTITY merge(ENTITY existingEntity, ENTITY newEntity) {
-                return newEntity;
+                return existingEntity;
             }
 
             default void afterUpdate(ID id, ENTITY savedEntity, ENTITY oldEntity) {

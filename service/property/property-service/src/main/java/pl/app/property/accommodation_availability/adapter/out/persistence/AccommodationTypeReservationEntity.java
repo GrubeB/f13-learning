@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
-import pl.app.common.model.AbstractEntity;
+import pl.app.common.model.BaseAuditEntity;
 import pl.app.property.accommodation_availability.application.domain.model.TypeReservationAssignedStatus;
 
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_accommodation_type_reservation")
-public class AccommodationTypeReservationEntity extends AbstractEntity<UUID> {
+public class AccommodationTypeReservationEntity extends BaseAuditEntity<UUID> {
     @Id
     @Column(name = "accommodation_type_reservation_id", nullable = false)
     private UUID accommodationTypeReservationId;
