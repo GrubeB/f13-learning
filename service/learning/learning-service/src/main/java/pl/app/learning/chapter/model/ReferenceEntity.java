@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.Hibernate;
 import pl.app.common.aware.RootAware;
-import pl.app.common.model.BaseAuditEntity;
+import pl.app.common.model.BaseSnapshotableEntity;
 
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_chapter_reference")
-public class ReferenceEntity extends BaseAuditEntity<UUID> implements
+public class ReferenceEntity extends BaseSnapshotableEntity<ReferenceEntity, UUID, ReferenceEntitySnapshot> implements
         RootAware<ChapterEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -39,25 +37,18 @@ public class ReferenceEntity extends BaseAuditEntity<UUID> implements
     private ChapterEntity chapter;
 
     @Override
-    public UUID getId() {
-        return this.id;
-    }
-
-    @Override
     public ChapterEntity root() {
         return chapter;
     }
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ReferenceEntity that = (ReferenceEntity) o;
-        return id != null && Objects.equals(id, that.id);
+    public ReferenceEntitySnapshot makeSnapshot() {
+        return new ReferenceEntitySnapshot(this, name, link);
     }
 
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public ReferenceEntity revertSnapshot(ReferenceEntitySnapshot snapshot) {
+        this.name = snapshot.getName();
+        this.link = snapshot.getLink();
+        return this;
     }
 }

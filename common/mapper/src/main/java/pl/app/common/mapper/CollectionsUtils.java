@@ -14,7 +14,7 @@ public class CollectionsUtils {
 
     public static <T, V> Optional<T> getElement(Collection<T> c1, V targetValue, Function<T, V> fieldProvider) {
         return c1.stream()
-                .filter(e -> Objects.equals(targetValue, fieldProvider.apply(e) ))
+                .filter(e -> Objects.equals(targetValue, fieldProvider.apply(e)))
                 .findFirst();
     }
 
@@ -28,19 +28,24 @@ public class CollectionsUtils {
                 .anyMatch(e -> Objects.equals(fieldProvider.apply(e), fieldProvider.apply(target)));
     }
 
+    public static <T1, T2> boolean contains(Collection<T1> collection, T2 target, Function<T1, ?> fieldProvider1, Function<T2, ?> fieldProvider2) {
+        return collection.stream()
+                .anyMatch(e -> Objects.equals(fieldProvider1.apply(e), fieldProvider2.apply(target)));
+    }
+
     @SuppressWarnings("unchecked")
     public static <E, C extends Collection<E>> C createCollectionOfClass(Class<C> collectionType) {
         try {
             // Hibernate collections
             if (collectionType.isAssignableFrom(PersistentBag.class)) {
                 return (C) new PersistentBag<E>();
-            }else if (collectionType.isAssignableFrom(PersistentList.class)) {
+            } else if (collectionType.isAssignableFrom(PersistentList.class)) {
                 return (C) new PersistentList<E>();
             } else if (collectionType.isAssignableFrom(PersistentSortedSet.class)) {
                 return (C) new PersistentSortedSet<E>();
-            }else if (collectionType.isAssignableFrom(PersistentSet.class)) {
+            } else if (collectionType.isAssignableFrom(PersistentSet.class)) {
                 return (C) new PersistentSet<E>();
-            }else if (collectionType.isAssignableFrom(PersistentIdentifierBag.class)) {
+            } else if (collectionType.isAssignableFrom(PersistentIdentifierBag.class)) {
                 return (C) new PersistentIdentifierBag<E>();
             }
             // Java collections

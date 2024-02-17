@@ -17,15 +17,17 @@ import java.util.Objects;
  */
 @MappedSuperclass
 @SuperBuilder
-@NoArgsConstructor
 public abstract class BaseEntity<
         ENTITY extends Identity<ID>,
         ID extends Serializable
         > implements
         Identity<ID> {
+    public BaseEntity() {
+    }
+
     @Override
     @SuppressWarnings("unchecked")
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
@@ -36,7 +38,7 @@ public abstract class BaseEntity<
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

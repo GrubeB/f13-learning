@@ -1,4 +1,4 @@
-package pl.app.common.audit;
+package pl.app.common.model.audit;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.AuditorAware;

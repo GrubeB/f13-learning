@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import pl.app.common.audit.AuditHibernateListenerConfig;
-import pl.app.common.audit.AuditorConfig;
-import pl.app.common.audit.AuthenticationProvider;
+import pl.app.common.model.audit.AuditHibernateListenerConfig;
+import pl.app.common.model.audit.AuditorConfig;
+import pl.app.common.model.audit.AuthenticationProvider;
 
 import java.util.Optional;
 

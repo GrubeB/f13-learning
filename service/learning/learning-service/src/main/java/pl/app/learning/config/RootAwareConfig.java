@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.AuditorAware;
-import pl.app.common.audit.Audit;
+import pl.app.common.model.audit.Audit;
 import pl.app.common.aware.RootAwareServiceOperation;
 
 import java.time.Instant;

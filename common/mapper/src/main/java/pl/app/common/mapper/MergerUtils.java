@@ -3,11 +3,12 @@ package pl.app.common.mapper;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static pl.app.common.mapper.CollectionsUtils.*;
 
 public class MergerUtils {
-    public static <E, C extends Collection<E>, V> C mergeCollections(Join type, C target, C source, BiFunction<E, E, E> merger) {
+    public static <E, C extends Collection<E>> C mergeCollections(Join type, C target, C source, BiFunction<E, E, E> merger) {
         if (Objects.isNull(type)) {
             return target;
         }
@@ -90,9 +91,56 @@ public class MergerUtils {
         return target;
     }
 
+    public static <E, C extends Collection<E>, E2, C2 extends Collection<E2>, V> C mergeCollections(Join type, C target, C2 source,
+                                                                                                    BiFunction<E, E2, E> merger,
+                                                                                                    Supplier<E> targetNewInstance,
+                                                                                                    Function<E, V> targetFieldProvider,
+                                                                                                    Function<E2, V> sourceFieldProvider) {
+        if (Objects.isNull(type) || Objects.isNull(targetFieldProvider) || Objects.isNull(sourceFieldProvider)) {
+            return target;
+        }
+        switch (type) {
+            case LEFT, LEFT_INCLUSIVE -> {
+                mergeMid(target, source, merger, targetFieldProvider, sourceFieldProvider);
+            }
+            case LEFT_EXCLUSIVE -> {
+                target.removeIf(targetElement -> contains(source, targetElement, sourceFieldProvider, targetFieldProvider)); // removeMid
+            }
+            case RIGHT, RIGHT_INCLUSIVE,
+                    FULL, FULL_OUTER_INCLUSIVE -> {
+                target.removeIf(targetElement -> !contains(source, targetElement, sourceFieldProvider, targetFieldProvider)); // removeLeft
+                mergeMid(target, source, merger, targetFieldProvider, sourceFieldProvider);
+                source.stream()
+                        .filter(sourceElement -> !contains(target, sourceElement, targetFieldProvider, sourceFieldProvider))
+                        .map(sourceElement -> merger.apply(targetNewInstance.get(), sourceElement))
+                        .forEach(target::add); // addRight
+            }
+            case RIGHT_EXCLUSIVE -> {
+                List<E> temp = new ArrayList<>(source.size());
+                source.stream()
+                        .filter(sourceElement -> !contains(target, sourceElement, targetFieldProvider, sourceFieldProvider))
+                        .map(sourceElement -> merger.apply(targetNewInstance.get(), sourceElement))
+                        .forEach(temp::add); // addRight
+                target.clear();
+                target.addAll(temp);
+            }
+            case INNER -> {
+                mergeMid(target, source, merger, targetFieldProvider, sourceFieldProvider);
+                target.removeIf(targetElement -> !contains(source, targetElement, sourceFieldProvider, targetFieldProvider)); // removeLeft
+            }
+            case FULL_OUTER_EXCLUSIVE -> {
+                source.stream()
+                        .filter(sourceElement -> !contains(target, sourceElement, targetFieldProvider, sourceFieldProvider))
+                        .map(sourceElement -> merger.apply(targetNewInstance.get(), sourceElement))
+                        .forEach(target::add); // addRight
+                target.removeIf(targetElement -> contains(source, targetElement, sourceFieldProvider, targetFieldProvider)); // removeMid
+            }
+        }
+        return target;
+    }
 
     @SuppressWarnings("unchecked")
-    public static <E, C extends Collection<E>, V> C mergeCollectionsInNew(Join type, C c1, C c2, BiFunction<E, E, E> merger) {
+    public static <E, C extends Collection<E>> C mergeCollectionsInNew(Join type, C c1, C c2, BiFunction<E, E, E> merger) {
         C result = createCollectionOfClass((Class<C>) c1.getClass());
         if (Objects.isNull(type)) {
             return result;
@@ -156,7 +204,7 @@ public class MergerUtils {
         return result;
     }
 
-    private static <E, C extends Collection<E>, V> void mergeMid(C result, C c1, C c2, BiFunction<E, E, E> merger) {
+    private static <E, C extends Collection<E>> void mergeMid(C result, C c1, C c2, BiFunction<E, E, E> merger) {
         c1.stream().filter(e1 -> contains(c2, e1))
                 .map(e1 -> {
                     Optional<E> e2 = getElement(c2, e1);
@@ -172,7 +220,15 @@ public class MergerUtils {
                 }).forEach(result::add);
     }
 
-    private static <E, C extends Collection<E>, V> void mergeMid(C target, C source, BiFunction<E, E, E> merger) {
+    private static <E, C extends Collection<E>, E2, C2 extends Collection<E2>, V> void mergeMid(C result, C c1, C2 c2, BiFunction<E, E2, E> merger, Function<E, V> targetFieldProvider, Function<E2, V> sourceFieldProvider) {
+        c1.stream().filter(e1 -> contains(c2, e1, sourceFieldProvider, targetFieldProvider))
+                .map(e1 -> {
+                    Optional<E2> e2 = getElement(c2, targetFieldProvider.apply(e1), sourceFieldProvider);
+                    return e2.map(e -> merger.apply(e1, e)).orElse(e1);
+                }).forEach(result::add);
+    }
+
+    private static <E, C extends Collection<E>> void mergeMid(C target, C source, BiFunction<E, E, E> merger) {
         target.stream().filter(targetElement -> contains(source, targetElement))
                 .forEach(targetElement -> {
                     Optional<E> sourceElement = getElement(source, targetElement);
@@ -184,6 +240,14 @@ public class MergerUtils {
         target.stream().filter(targetElement -> contains(source, targetElement, fieldProvider))
                 .forEach(targetElement -> {
                     Optional<E> sourceElement = getElement(source, fieldProvider.apply(targetElement), fieldProvider);
+                    sourceElement.map(e -> merger.apply(targetElement, e));
+                });
+    }
+
+    private static <E, C extends Collection<E>, E2, C2 extends Collection<E2>, V> void mergeMid(C target, C2 source, BiFunction<E, E2, E> merger, Function<E, V> targetFieldProvider, Function<E2, V> sourceFieldProvider) {
+        target.stream().filter(targetElement -> contains(source, targetElement, sourceFieldProvider, targetFieldProvider))
+                .forEach(targetElement -> {
+                    Optional<E2> sourceElement = getElement(source, targetFieldProvider.apply(targetElement), sourceFieldProvider);
                     sourceElement.map(e -> merger.apply(targetElement, e));
                 });
     }

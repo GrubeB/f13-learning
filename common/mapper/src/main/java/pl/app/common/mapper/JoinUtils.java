@@ -10,7 +10,7 @@ import static pl.app.common.mapper.CollectionsUtils.contains;
 import static pl.app.common.mapper.CollectionsUtils.createCollectionOfClass;
 
 public class JoinUtils {
-    public static <E, C extends Collection<E>, V> C joinCollections(Join type, C target, C source) {
+    public static <E, C extends Collection<E>> C joinCollections(Join type, C target, C source) {
         if (Objects.isNull(type)) {
             return target;
         }
@@ -51,6 +51,7 @@ public class JoinUtils {
         }
         return target;
     }
+
     public static <E, C extends Collection<E>, V> C joinCollections(Join type, C target, C source, Function<E, V> fieldProvider) {
         if (Objects.isNull(type)) {
             return target;
@@ -73,7 +74,7 @@ public class JoinUtils {
             case RIGHT_EXCLUSIVE -> {
                 List<E> temp = new ArrayList<>(source.size());
                 source.stream()
-                        .filter(e2 -> !contains(target, e2,fieldProvider))
+                        .filter(e2 -> !contains(target, e2, fieldProvider))
                         .forEach(temp::add); // addRight
                 target.clear();
                 target.addAll(temp);
@@ -95,8 +96,9 @@ public class JoinUtils {
         }
         return target;
     }
+
     @SuppressWarnings("unchecked")
-    public static <E, C extends Collection<E>, V> C joinCollectionsInNew(Join type, C c1, C c2) {
+    public static <E, C extends Collection<E>> C joinCollectionsInNew(Join type, C c1, C c2) {
         C result = createCollectionOfClass((Class<C>) c1.getClass());
         if (Objects.isNull(type)) {
             return result;
@@ -125,6 +127,7 @@ public class JoinUtils {
         }
         return result;
     }
+
     @SuppressWarnings("unchecked")
     public static <E, C extends Collection<E>, V> C joinCollectionsInNew(Join type, C c1, C c2, Function<E, V> fieldProvider) {
         if (Objects.isNull(fieldProvider)) {
@@ -159,7 +162,7 @@ public class JoinUtils {
         return result;
     }
 
-    static <E, C extends Collection<E>, V> void addLeft(C result, C c1, C c2) {
+    static <E, C extends Collection<E>> void addLeft(C result, C c1, C c2) {
         c1.stream()
                 .filter(e1 -> !contains(c2, e1))
                 .forEach(result::add);
@@ -171,7 +174,7 @@ public class JoinUtils {
                 .forEach(result::add);
     }
 
-    static <E, C extends Collection<E>, V> void addMid(C result, C c1, C c2) {
+    static <E, C extends Collection<E>> void addMid(C result, C c1, C c2) {
         c1.stream()
                 .filter(e1 -> contains(c2, e1))
                 .forEach(result::add);
@@ -183,7 +186,7 @@ public class JoinUtils {
                 .forEach(result::add);
     }
 
-    static <E, C extends Collection<E>, V> void addRight(C result, C c1, C c2) {
+    static <E, C extends Collection<E>> void addRight(C result, C c1, C c2) {
         c2.stream()
                 .filter(e2 -> !contains(c1, e2))
                 .forEach(result::add);

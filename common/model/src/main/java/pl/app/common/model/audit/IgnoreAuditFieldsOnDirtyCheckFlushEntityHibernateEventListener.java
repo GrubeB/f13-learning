@@ -1,4 +1,4 @@
-package pl.app.common.audit;
+package pl.app.common.model.audit;
 
 import org.hibernate.HibernateException;
 import org.hibernate.event.internal.DefaultFlushEntityEventListener;
@@ -8,10 +8,10 @@ import java.util.List;
 
 public class IgnoreAuditFieldsOnDirtyCheckFlushEntityHibernateEventListener extends DefaultFlushEntityEventListener {
     private static final List<String> IGNORE_DIRTY_CHECK_PROPERTIES = List.of(
-            "createdBy",
-            "createdDate",
-            "lastModifiedBy",
-            "lastModifiedDate"
+            AuditColumnName.CREATED_BY,
+            AuditColumnName.CREATED_DATE,
+            AuditColumnName.LAST_MODIFIED_BY,
+            AuditColumnName.LAST_MODIFIED_DATE
     );
 
     @Override

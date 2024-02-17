@@ -2,15 +2,17 @@ package pl.app.common.model.snapshot;
 
 import pl.app.common.model.Identity;
 
-// Version<Test>
+/**
+ * @param <ENTITY> Type of snapshot owner entity
+ */
 public interface Snapshot<
-        S_O extends Identity<?>    // snapshot owner type
+        ENTITY extends Identity<?>
         > {
     Long getSnapshotNumber();
 
     void setSnapshotNumber(Long snapshotNumber);
 
-    S_O getOwner();
+    ENTITY getOwner();
 
-    void setOwner(S_O snapshotOwner);
+    void setOwner(ENTITY snapshotOwner);
 }

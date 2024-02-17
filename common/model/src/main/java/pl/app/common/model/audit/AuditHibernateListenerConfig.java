@@ -1,4 +1,4 @@
-package pl.app.common.audit;
+package pl.app.common.model.audit;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.event.service.spi.EventListenerRegistry;

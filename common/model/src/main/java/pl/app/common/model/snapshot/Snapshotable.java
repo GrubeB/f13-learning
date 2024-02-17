@@ -8,15 +8,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-// Snapshotable<Test, TestVersion, UUID>
+/**
+ * @param <ENTITY>      Type of entity
+ * @param <ENTITY_ID> Type of entity identifier
+ * @param <SNAPSHOT>    Type of entity snapshot
+ */
 public interface Snapshotable<
-        S_O extends Identity<?>,                     // snapshot owner type
-        S extends Snapshot<S_O> & Identity<S_ID>,    // snapshot type
-        S_ID extends Serializable                    // snapshot id type
+        ENTITY extends Identity<ENTITY_ID>,
+        ENTITY_ID extends Serializable,
+        SNAPSHOT extends Snapshot<ENTITY> & Identity<SnapshotId<ENTITY>>
         > {
-    List<S> getSnapshots();
+    List<SNAPSHOT> getSnapshots();
 
-    default S getLastSnapshot() {
+    default SNAPSHOT getLastSnapshot() {
         if (getSnapshots() != null && !getSnapshots().isEmpty()) {
             return getSnapshots().stream()
                     .filter(version -> Objects.nonNull(version.getSnapshotNumber()))
@@ -27,20 +31,21 @@ public interface Snapshotable<
         }
     }
 
-    S makeSnapshot();
+    SNAPSHOT makeSnapshot();
 
-    default void makeAndStoreSnapshot() {
+    default SNAPSHOT makeAndStoreSnapshot() {
         if (getSnapshots() == null) {
-            throw new RuntimeException("Collection of Snapshots must not be null, to make new snapshot");
+            throw new SnapshotException.NullCollectionException();
         }
-        S newSnapshot = makeSnapshot();
+        SNAPSHOT newSnapshot = makeSnapshot();
         newSnapshot.setSnapshotNumber(getNextSnapshotNumber());
         getSnapshots().add(newSnapshot);
+        return newSnapshot;
     }
 
     default Long getNextSnapshotNumber() {
-        return Instant.now().getEpochSecond();
+        return Instant.now().toEpochMilli();
     }
 
-    void revertSnapshot(S snapshot);
+    ENTITY revertSnapshot(SNAPSHOT snapshot);
 }

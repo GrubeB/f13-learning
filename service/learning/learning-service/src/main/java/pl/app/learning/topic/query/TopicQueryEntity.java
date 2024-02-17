@@ -20,7 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "t_topic")
 @Immutable
-public class TopicQueryEntity extends BaseAuditEntity<UUID> {
+public class TopicQueryEntity extends BaseAuditEntity<TopicQueryEntity, UUID> {
     @Id
     private UUID id;
     private String name;

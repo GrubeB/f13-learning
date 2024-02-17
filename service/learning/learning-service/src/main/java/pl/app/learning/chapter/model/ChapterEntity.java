@@ -3,10 +3,15 @@ package pl.app.learning.chapter.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.Hibernate;
+import pl.app.common.mapper.Join;
+import pl.app.common.mapper.MergerUtils;
 import pl.app.common.model.BaseSnapshotableEntity;
+import pl.app.common.model.snapshot.TransientSnapshotable;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -16,7 +21,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_chapter")
-public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, ChapterSnapshotEntity> {
+public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, ChapterEntitySnapshot> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "chapter_id", nullable = false)
@@ -35,40 +40,42 @@ public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, C
     @Builder.Default
     private Set<ReferenceEntity> references = new LinkedHashSet<>();
 
-    @Override
-    public ChapterSnapshotEntity makeSnapshot() {
-        return ChapterSnapshotEntity.builder()
-                .topic(topic)
-                .introduction(introduction)
-                .owner(this)
-                .build();
-    }
-
-    @Override
-    public void revertSnapshot(ChapterSnapshotEntity snapshot) {
-        this.topic = snapshot.getTopic();
-        this.introduction = snapshot.getIntroduction();
-    }
-
-
     public void setReferences(Set<ReferenceEntity> references) {
         this.references.forEach(reference -> reference.setChapter(null));
-        this.references.clear();
+        this.references = references;
         references.stream()
                 .peek(reference -> reference.setChapter(this))
                 .forEach(this.references::add);
     }
 
+
+    // snapshot
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ChapterEntity that = (ChapterEntity) o;
-        return id != null && Objects.equals(id, that.id);
+    public ChapterEntitySnapshot makeSnapshot() {
+        Set<ReferenceEntitySnapshot> referenceEntitySnapshots = this.references.stream()
+                .map(TransientSnapshotable::makeAndStoreSnapshot)
+                .collect(Collectors.toSet());
+        return new ChapterEntitySnapshot(
+                this,
+                this.topic,
+                this.introduction,
+                referenceEntitySnapshots);
     }
 
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public ChapterEntity revertSnapshot(ChapterEntitySnapshot snapshot) {
+        this.id = snapshot.getOwner().getId();
+        this.topic = snapshot.getTopic();
+        this.introduction = snapshot.getIntroduction();
+        MergerUtils.mergeCollections(
+                Join.RIGHT,
+                this.references,
+                snapshot.getReferences(),
+                ReferenceEntity::revertSnapshot,
+                ReferenceEntity::new,
+                ReferenceEntity::getId,
+                ReferenceEntitySnapshot::getId
+        );
+        return this;
     }
 }

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.learning.chapter.model.ChapterEntity;
-import pl.app.learning.chapter.model.ChapterSnapshotEntity;
+import pl.app.learning.chapter.model.ChapterEntitySnapshot;
 import pl.app.learning.chapter.persistance.ChapterRepository;
 import pl.app.learning.chapter.persistance.ChapterVersionRepository;
 
@@ -20,6 +20,7 @@ class ChapterServiceImpl implements
         ChapterService {
     private final ChapterRepository repository;
     private final ChapterVersionRepository chapterVersionRepository;
+    private final ChapterMapper chapterMapper;
 
     @Override
     public void beforeUpdate(UUID uuid, ChapterEntity existingEntity, ChapterEntity newEntity) {
@@ -28,14 +29,12 @@ class ChapterServiceImpl implements
 
     @Override
     public ChapterEntity merge(ChapterEntity existingEntity, ChapterEntity newEntity) {
-        existingEntity.setTopic(newEntity.getTopic());
-        existingEntity.setIntroduction(newEntity.getIntroduction());
-        return existingEntity;
+            return chapterMapper.merge(existingEntity, newEntity);
     }
 
     @Override
     public void afterUpdate(UUID uuid, ChapterEntity savedEntity, ChapterEntity oldEntity) {
-        List<ChapterSnapshotEntity> transientVersions = savedEntity.getTransientSnapshots();
+        List<ChapterEntitySnapshot> transientVersions = savedEntity.getTransientSnapshots();
         chapterVersionRepository.saveAll(transientVersions);
     }
 }

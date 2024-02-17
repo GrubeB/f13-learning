@@ -7,7 +7,6 @@ version = "0.1.0"
 
 dependencies {
     implementation project(':common:model')
-    implementation project(':common:audit')
 
 
     // SPRING

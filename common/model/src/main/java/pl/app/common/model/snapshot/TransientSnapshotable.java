@@ -7,21 +7,25 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-// TransientSnapshotable<Test, TestVersion, UUID, Short>
+/**
+ * @param <ENTITY>      Type of entity
+ * @param <ENTITY_ID> Type of entity identifier
+ * @param <SNAPSHOT>    Type of entity snapshot
+ */
 public interface TransientSnapshotable<
-        S_O extends Identity<?>,                     // snapshot owner type
-        S extends Snapshot<S_O> & Identity<S_ID>,    // snapshot type
-        S_ID extends Serializable                    // snapshot id type
-        > extends Snapshotable<S_O, S, S_ID> {
+        ENTITY extends Identity<ENTITY_ID>,
+        ENTITY_ID extends Serializable,
+        SNAPSHOT extends Snapshot<ENTITY> & Identity<SnapshotId<ENTITY>>
+        > extends Snapshotable<ENTITY, ENTITY_ID, SNAPSHOT> {
 
-    List<S> getTransientSnapshots();
+    List<SNAPSHOT> getTransientSnapshots();
 
     default boolean hasTransientVersion() {
         return getTransientSnapshots() != null && !getTransientSnapshots().isEmpty();
     }
 
     @Override
-    default S getLastSnapshot() {
+    default SNAPSHOT getLastSnapshot() {
         if (hasTransientVersion()) {
             return getTransientSnapshots().stream()
                     .filter(version -> Objects.nonNull(version.getSnapshotNumber()))
@@ -33,12 +37,13 @@ public interface TransientSnapshotable<
     }
 
     @Override
-    default void makeAndStoreSnapshot() {
+    default SNAPSHOT makeAndStoreSnapshot() {
         if (getTransientSnapshots() == null) {
-            throw new RuntimeException("Collection of Snapshots must not be null, to make new snapshot");
+            throw new SnapshotException.NullCollectionException();
         }
-        S newSnapshot = makeSnapshot();
+        SNAPSHOT newSnapshot = makeSnapshot();
         newSnapshot.setSnapshotNumber(getNextSnapshotNumber());
         getTransientSnapshots().add(newSnapshot);
+        return newSnapshot;
     }
 }

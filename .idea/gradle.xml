@@ -10,7 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/common" />
-            <option value="$PROJECT_DIR$/common/audit" />
             <option value="$PROJECT_DIR$/common/controller" />
             <option value="$PROJECT_DIR$/common/controller/command-controller" />
             <option value="$PROJECT_DIR$/common/controller/controller-support" />

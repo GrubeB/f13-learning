@@ -1,35 +1,25 @@
-package pl.app.common.model;
+package pl.app.common.model.audit;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import pl.app.common.model.audit.Audit;
-import pl.app.common.model.audit.AuditColumnName;
 
-import java.io.Serializable;
 import java.time.Instant;
-/**
- * An abstract class representing the basic entity with auditing.
- *
- * @param <ENTITY>  Entity type
- * @param <ID>      Type of entity identifier
- */
-@EntityListeners(AuditingEntityListener.class)
+
 @MappedSuperclass
 @SuperBuilder
-@JsonIgnoreProperties(value = {"createdBy", "createdDate","lastModifiedBy","lastModifiedDate"})
-public abstract class BaseAuditEntity<
-        ENTITY extends Identity<ID>,
-        ID extends Serializable
-        > extends BaseEntity<ENTITY, ID> implements
-        Audit {
+@EntityListeners(AuditingEntityListener.class)
+public abstract class AbstractAudit {
+
     @CreatedBy
     @Column(name = AuditColumnName.CREATED_BY, nullable = false, updatable = false)
     private String createdBy;
@@ -46,10 +36,9 @@ public abstract class BaseAuditEntity<
     @Column(name = AuditColumnName.LAST_MODIFIED_DATE)
     private Instant lastModifiedDate;
 
-    public BaseAuditEntity() {
+    public AbstractAudit() {
     }
 
-    @Override
     public String getCreatedBy() {
         return createdBy;
     }
@@ -58,7 +47,6 @@ public abstract class BaseAuditEntity<
         this.createdBy = createdBy;
     }
 
-    @Override
     public Instant getCreatedDate() {
         return createdDate;
     }
@@ -67,7 +55,6 @@ public abstract class BaseAuditEntity<
         this.createdDate = createdDate;
     }
 
-    @Override
     public String getLastModifiedBy() {
         return lastModifiedBy;
     }
@@ -76,7 +63,6 @@ public abstract class BaseAuditEntity<
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    @Override
     public Instant getLastModifiedDate() {
         return lastModifiedDate;
     }

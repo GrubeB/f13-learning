@@ -7,7 +7,7 @@ import pl.app.common.model.BaseAuditEntity;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class JpaBaseAggregateRoot extends BaseAuditEntity<UUID> {
+public abstract class JpaBaseAggregateRoot extends BaseAuditEntity<JpaBaseAggregateRoot, UUID> {
 
     @EmbeddedId
     @AttributeOverrides({

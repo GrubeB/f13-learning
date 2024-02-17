@@ -6,7 +6,6 @@ group = "pl.app.common.model"
 version = "0.1.2"
 
 dependencies {
-    implementation project(':common:audit')
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-web"
 
