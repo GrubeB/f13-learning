@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import pl.app.common.model.snapshot.Snapshot;
-import pl.app.common.model.snapshot.SnapshotId;
 import pl.app.common.model.snapshot.TransientSnapshotable;
 
 import java.io.Serializable;
@@ -27,12 +26,12 @@ import java.util.List;
 public abstract class BaseSnapshotableEntity<
         ENTITY extends Identity<ENTITY_ID>,
         ENTITY_ID extends Serializable,
-        SNAPSHOT extends Snapshot<ENTITY> & Identity<SnapshotId<ENTITY>>
+        SNAPSHOT extends Snapshot<ENTITY_ID> & Identity<ENTITY_ID>
         > extends BaseAuditEntity<ENTITY, ENTITY_ID> implements
         TransientSnapshotable<ENTITY, ENTITY_ID, SNAPSHOT> {
 
     @OneToMany
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
     @OrderBy("snapshot_number")
     @ToString.Exclude
     private List<SNAPSHOT> snapshots;

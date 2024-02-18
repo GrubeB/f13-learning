@@ -64,7 +64,7 @@ public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, C
 
     @Override
     public ChapterEntity revertSnapshot(ChapterEntitySnapshot snapshot) {
-        this.id = snapshot.getOwner().getId();
+        this.id = snapshot.getSnapshotOwnerId();
         this.topic = snapshot.getTopic();
         this.introduction = snapshot.getIntroduction();
         MergerUtils.mergeCollections(

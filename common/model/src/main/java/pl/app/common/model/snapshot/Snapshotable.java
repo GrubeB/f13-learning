@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @param <ENTITY>      Type of entity
+ * @param <ENTITY>    Type of entity
  * @param <ENTITY_ID> Type of entity identifier
- * @param <SNAPSHOT>    Type of entity snapshot
+ * @param <SNAPSHOT>  Type of entity snapshot
  */
 public interface Snapshotable<
         ENTITY extends Identity<ENTITY_ID>,
         ENTITY_ID extends Serializable,
-        SNAPSHOT extends Snapshot<ENTITY> & Identity<SnapshotId<ENTITY>>
+        SNAPSHOT extends Snapshot<ENTITY_ID> & Identity<ENTITY_ID>
         > {
     List<SNAPSHOT> getSnapshots();
 

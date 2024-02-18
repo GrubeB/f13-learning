@@ -5,59 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba5a643-8133-4b03-b312-c8e4040a36d1" name="Changes" comment="save">
-      <change afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/audit/AuditColumnName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/SnapshotException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/SnapshotId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntitySnapshot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntitySnapshot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/README2.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/src/main/java/pl/app/common/audit/Audit.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/audit/Audit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/src/main/java/pl/app/common/audit/AuditHibernateListenerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/audit/AuditHibernateListenerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/src/main/java/pl/app/common/audit/AuditorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/audit/AuditorConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/src/main/java/pl/app/common/audit/AuthenticationProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/audit/AuthenticationProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/src/main/java/pl/app/common/audit/DefaultAudit.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/audit/AbstractAudit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/src/main/java/pl/app/common/audit/IgnoreAuditFieldsOnDirtyCheckFlushEntityHibernateEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/audit/IgnoreAuditFieldsOnDirtyCheckFlushEntityHibernateEventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/ddd/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/ddd/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/JpaBaseAggregateRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/JpaBaseAggregateRoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/CollectionsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/CollectionsUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/JoinUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/JoinUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseAuditEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseAuditEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotableEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshotable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshotable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/TransientSnapshotable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/TransientSnapshotable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/root-aware/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/root-aware/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterSnapshotEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterVersionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterVersionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/AuditConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/AuditConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/RootAwareConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/RootAwareConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/controller/GroupController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/controller/GroupQueryController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/model/GroupEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/model/GroupHasChapterEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/persistance/GroupRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupQueryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupQueryServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/group/service/GroupServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/TopicQueryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/TopicQueryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/AuditConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/AuditConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/RootAwareConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/RootAwareConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V1__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V2__chapter.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V2__chapter.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__snapshot.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__snapshot.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V4__topic.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V4__topic.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,6 +120,13 @@
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -193,7 +151,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dawid/Desktop/f12-solo-leveling/common/model/src/main/java/pl/app/common/model/audit&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dawid/Desktop/f12-solo-leveling/service/learning/learning-service/src/main/resources/db/migration&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.5360825&quot;,
@@ -213,11 +171,11 @@
       <recent name="pl.app.cqrs.handler" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\resources\db\migration" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\model\src\main\java\pl\app\common\model\audit" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic\adapter\in" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic\query" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning" />
-      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\model" />
@@ -234,10 +192,10 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="pl.app.learning.chapter.service" />
+      <recent name="pl.app.learning.chapter.controller" />
       <recent name="pl.app.common.model.snapshot" />
       <recent name="pl.app.common.audit" />
       <recent name="pl.app.learning.chapter.persistance" />
-      <recent name="pl.app.common.model" />
     </key>
   </component>
   <component name="RunManager" selected="Application.pl.app.learning.Application">
@@ -565,7 +523,31 @@
       <option name="project" value="LOCAL" />
       <updated>1708048712072</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="save">
+      <option name="closed" value="true" />
+      <created>1708213406072</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1708213406073</updated>
+    </task>
+    <task id="LOCAL-00026" summary="save">
+      <option name="closed" value="true" />
+      <created>1708276666616</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1708276666616</updated>
+    </task>
+    <task id="LOCAL-00027" summary="save">
+      <option name="closed" value="true" />
+      <created>1708276694898</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1708276694898</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

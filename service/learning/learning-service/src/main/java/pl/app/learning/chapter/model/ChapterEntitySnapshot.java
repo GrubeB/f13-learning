@@ -23,7 +23,6 @@ public class ChapterEntitySnapshot extends BaseSnapshotEntity<ChapterEntity, UUI
             fetch = FetchType.EAGER,
             mappedBy = "chapter",
             orphanRemoval = true)
-    @JsonIgnore
     private Set<ReferenceEntitySnapshot> references = new LinkedHashSet<>();
 
     public ChapterEntitySnapshot() {

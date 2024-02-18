@@ -10,15 +10,16 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
   flyway:
-    enabled: false
-    baselineOnMigrate: true
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
     user: postgres
     password: postgres
   jpa:
     show-sql: true
     hibernate:
-#      ddl-auto: validate
-      ddl-auto: create-drop
+      ddl-auto: validate
+#      ddl-auto: create-drop
 #      ddl-auto: update
     properties:
       hibernate:

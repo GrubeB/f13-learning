@@ -1,11 +1,9 @@
 package pl.app.common.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.experimental.SuperBuilder;
 import pl.app.common.model.snapshot.Snapshot;
-import pl.app.common.model.snapshot.SnapshotId;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,65 +18,68 @@ import java.time.Instant;
 @MappedSuperclass
 @SuperBuilder
 //@JsonIgnoreProperties(value = {"owner", "snapshotNumber"})
-@JsonIgnoreProperties(value = {"owner", "snapshotNumber", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
+@JsonIgnoreProperties(value = {"createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 public abstract class BaseSnapshotEntity<
         ENTITY extends Identity<ENTITY_ID>,
         ENTITY_ID extends Serializable,
-        SNAPSHOT extends Identity<SnapshotId<ENTITY>>
-        > extends BaseAuditEntity<SNAPSHOT, SnapshotId<ENTITY>> implements
-        Snapshot<ENTITY> {
-    @Id
-    protected SnapshotId<ENTITY> id;
+        SNAPSHOT extends Identity<ENTITY_ID>
+        > extends BaseAuditEntity<SNAPSHOT, ENTITY_ID> implements
+        Snapshot<ENTITY_ID> {
 
-    //    @Id
-//    @GeneratedValue(strategy = GenerationType.UUID)
-//    @Column(name = "snapshot_id", nullable = false, updatable = false)
-//    protected SNAPSHOT_ID id;
-//    @Column(name = "snapshot_number", nullable = false, updatable = false)
-//    protected Long snapshotNumber;
-//
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "snapshot_id", nullable = false, updatable = false)
+    protected ENTITY_ID id;
+
+    @Column(name = "snapshot_number", nullable = false, updatable = false)
+    protected Long snapshotNumber;
+
 //    @ManyToOne(optional = false)
 //    @JoinColumn(name = "owner_id", nullable = false)
-//    protected ENTITY owner;
+    @Column(name = "owner_id")
+    protected ENTITY_ID ownerId;
+
     public BaseSnapshotEntity() {
-        this.id = new SnapshotId<ENTITY>(null, Instant.now().toEpochMilli());
+        this.snapshotNumber = Instant.now().toEpochMilli();
     }
 
-    public BaseSnapshotEntity(ENTITY owner) {
-        this.id = new SnapshotId<>(owner, Instant.now().toEpochMilli());
+    public BaseSnapshotEntity(ENTITY ownerId) {
+        this.snapshotNumber = Instant.now().toEpochMilli();
+        this.ownerId = ownerId.getId();
     }
 
-    public BaseSnapshotEntity(ENTITY owner, Long snapshotNumber) {
-        this.id = new SnapshotId<>(owner, snapshotNumber);
+    public BaseSnapshotEntity(ENTITY ownerId, Long snapshotNumber) {
+        this.snapshotNumber = snapshotNumber;
+        this.ownerId = ownerId.getId();
     }
 
     @Override
-    public SnapshotId<ENTITY> getId() {
+    public ENTITY_ID getSnapshotOwnerId() {
+        return ownerId;
+    }
+
+    @Override
+    public void setOwnerId(ENTITY_ID ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    @Override
+    public ENTITY_ID getId() {
         return id;
     }
 
     @Override
-    public void setId(SnapshotId<ENTITY> entityIdSnapshotId) {
-        this.id = entityIdSnapshotId;
-    }
-
-    @Override
-    public ENTITY getOwner() {
-        return this.id.getOwner();
-    }
-
-    @Override
-    public void setOwner(ENTITY owner) {
-        this.id.setOwner(owner);
+    public void setId(ENTITY_ID id) {
+        this.id = id;
     }
 
     @Override
     public Long getSnapshotNumber() {
-        return this.id.getSnapshotNumber();
+        return snapshotNumber;
     }
 
     @Override
     public void setSnapshotNumber(Long snapshotNumber) {
-        this.id.setSnapshotNumber(snapshotNumber);
+        this.snapshotNumber = snapshotNumber;
     }
 }

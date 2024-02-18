@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.learning.chapter.model.ChapterEntity;
 import pl.app.learning.chapter.model.ChapterEntitySnapshot;
 import pl.app.learning.chapter.persistance.ChapterRepository;
-import pl.app.learning.chapter.persistance.ChapterVersionRepository;
+import pl.app.learning.chapter.persistance.ChapterSnapshotRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +19,7 @@ import java.util.UUID;
 class ChapterServiceImpl implements
         ChapterService {
     private final ChapterRepository repository;
-    private final ChapterVersionRepository chapterVersionRepository;
+    private final ChapterSnapshotRepository chapterSnapshotRepository;
     private final ChapterMapper chapterMapper;
 
     @Override
@@ -35,6 +35,6 @@ class ChapterServiceImpl implements
     @Override
     public void afterUpdate(UUID uuid, ChapterEntity savedEntity, ChapterEntity oldEntity) {
         List<ChapterEntitySnapshot> transientVersions = savedEntity.getTransientSnapshots();
-        chapterVersionRepository.saveAll(transientVersions);
+        chapterSnapshotRepository.saveAll(transientVersions);
     }
 }

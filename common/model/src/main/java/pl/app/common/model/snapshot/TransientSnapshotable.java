@@ -15,7 +15,7 @@ import java.util.Objects;
 public interface TransientSnapshotable<
         ENTITY extends Identity<ENTITY_ID>,
         ENTITY_ID extends Serializable,
-        SNAPSHOT extends Snapshot<ENTITY> & Identity<SnapshotId<ENTITY>>
+        SNAPSHOT extends Snapshot<ENTITY_ID> & Identity<ENTITY_ID>
         > extends Snapshotable<ENTITY, ENTITY_ID, SNAPSHOT> {
 
     List<SNAPSHOT> getTransientSnapshots();

@@ -1,18 +1,18 @@
 package pl.app.common.model.snapshot;
 
-import pl.app.common.model.Identity;
+import java.io.Serializable;
 
 /**
- * @param <ENTITY> Type of snapshot owner entity
+ * @param <ENTITY_ID> Type of snapshot owner entity identifier
  */
 public interface Snapshot<
-        ENTITY extends Identity<?>
+        ENTITY_ID extends Serializable
         > {
     Long getSnapshotNumber();
 
     void setSnapshotNumber(Long snapshotNumber);
 
-    ENTITY getOwner();
+    ENTITY_ID getSnapshotOwnerId();
 
-    void setOwner(ENTITY snapshotOwner);
+    void setOwnerId(ENTITY_ID snapshotOwnerId);
 }
