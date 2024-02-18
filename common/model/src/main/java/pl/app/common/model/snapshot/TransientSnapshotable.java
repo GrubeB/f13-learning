@@ -3,14 +3,12 @@ package pl.app.common.model.snapshot;
 import pl.app.common.model.Identity;
 
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
- * @param <ENTITY>      Type of entity
+ * @param <ENTITY>    Type of entity
  * @param <ENTITY_ID> Type of entity identifier
- * @param <SNAPSHOT>    Type of entity snapshot
+ * @param <SNAPSHOT>  Type of snapshot
  */
 public interface TransientSnapshotable<
         ENTITY extends Identity<ENTITY_ID>,
@@ -18,22 +16,33 @@ public interface TransientSnapshotable<
         SNAPSHOT extends Snapshot<ENTITY_ID> & Identity<ENTITY_ID>
         > extends Snapshotable<ENTITY, ENTITY_ID, SNAPSHOT> {
 
-    List<SNAPSHOT> getTransientSnapshots();
+    Collection<SNAPSHOT> getTransientSnapshots();
 
     default boolean hasTransientVersion() {
         return getTransientSnapshots() != null && !getTransientSnapshots().isEmpty();
     }
 
     @Override
-    default SNAPSHOT getLastSnapshot() {
+    default Optional<SNAPSHOT> getLastSnapshot() {
         if (hasTransientVersion()) {
             return getTransientSnapshots().stream()
                     .filter(version -> Objects.nonNull(version.getSnapshotNumber()))
-                    .max(Comparator.comparing(Snapshot::getSnapshotNumber))
-                    .orElse(null);
+                    .max(Comparator.comparing(Snapshot::getSnapshotNumber));
         } else {
             return Snapshotable.super.getLastSnapshot();
         }
+    }
+
+    @Override
+    default Optional<SNAPSHOT> getSnapshotBySnapshotNumber(Long snapshotNumber) {
+        if (hasTransientVersion()) {
+            return getTransientSnapshots().stream()
+                    .filter(snapshot -> Objects.equals(snapshot.getSnapshotNumber(), snapshotNumber))
+                    .findFirst();
+        } else {
+            return Snapshotable.super.getSnapshotBySnapshotNumber(snapshotNumber);
+        }
+
     }
 
     @Override

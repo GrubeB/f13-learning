@@ -16,24 +16,22 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional
 @Getter
-class ChapterServiceImpl implements
-        ChapterService {
+class ChapterSnapshotServiceImpl implements
+        ChapterSnapshotService {
     private final ChapterRepository repository;
     private final ChapterSnapshotRepository chapterSnapshotRepository;
     private final ChapterMapper chapterMapper;
-    @Override
-    public void beforeUpdate(UUID uuid, ChapterEntity existingEntity, ChapterEntity newEntity) {
-        existingEntity.makeAndStoreSnapshot();
-    }
 
     @Override
-    public ChapterEntity merge(ChapterEntity existingEntity, ChapterEntity newEntity) {
-        return chapterMapper.merge(existingEntity, newEntity);
-    }
-
-    @Override
-    public void afterUpdate(UUID uuid, ChapterEntity savedEntity, ChapterEntity oldEntity) {
-        List<ChapterEntitySnapshot> transientSnapshots = savedEntity.getTransientSnapshots();
+    public void revertSnapshot(UUID chapterId, Long snapshotNumber) {
+        ChapterEntity chapter = repository.findById(chapterId)
+                .orElseThrow(RuntimeException::new);
+        ChapterEntitySnapshot snapshot = chapter.getSnapshotBySnapshotNumber(snapshotNumber)
+                .orElseThrow(RuntimeException::new);
+        chapter.makeAndStoreSnapshot();
+        chapter.revertSnapshot(snapshot);
+        chapter = repository.save(chapter);
+        List<ChapterEntitySnapshot> transientSnapshots = chapter.getTransientSnapshots();
         chapterSnapshotRepository.saveAll(transientSnapshots);
     }
 }

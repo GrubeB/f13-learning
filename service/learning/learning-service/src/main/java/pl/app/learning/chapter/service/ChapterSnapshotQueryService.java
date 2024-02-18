@@ -21,6 +21,6 @@ public class ChapterSnapshotQueryService implements
     private final ChapterSnapshotRepository repository;
     private final ChapterSnapshotRepository specificationRepository;
     public List<ChapterEntitySnapshot> findByOwnerId(UUID ownerId){
-        return repository.findByOwnerId(ownerId);
+        return repository.findBySnapshotOwnerId(ownerId);
     }
 }

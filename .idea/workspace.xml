@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba5a643-8133-4b03-b312-c8e4040a36d1" name="Changes" comment="save">
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V1__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V2__chapter.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V2__chapter.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__snapshot.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__snapshot.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V4__topic.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V4__topic.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotableEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshotable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshotable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/TransientSnapshotable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/TransientSnapshotable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotQueryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterSnapshotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterSnapshotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotQueryService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,8 +203,8 @@
       <recent name="pl.app.common.mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="pl.app.learning.chapter.service" />
       <recent name="pl.app.learning.chapter.controller" />
+      <recent name="pl.app.learning.chapter.service" />
       <recent name="pl.app.common.model.snapshot" />
       <recent name="pl.app.common.audit" />
       <recent name="pl.app.learning.chapter.persistance" />
@@ -547,7 +559,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708276694898</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="save">
+      <option name="closed" value="true" />
+      <created>1708276843122</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1708276843122</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

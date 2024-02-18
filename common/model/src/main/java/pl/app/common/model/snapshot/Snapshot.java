@@ -14,5 +14,5 @@ public interface Snapshot<
 
     ENTITY_ID getSnapshotOwnerId();
 
-    void setOwnerId(ENTITY_ID snapshotOwnerId);
+    void setSnapshotOwnerId(ENTITY_ID snapshotOwnerId);
 }

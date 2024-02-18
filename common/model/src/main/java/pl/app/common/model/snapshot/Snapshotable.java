@@ -4,31 +4,41 @@ import pl.app.common.model.Identity;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @param <ENTITY>    Type of entity
  * @param <ENTITY_ID> Type of entity identifier
- * @param <SNAPSHOT>  Type of entity snapshot
+ * @param <SNAPSHOT>  Type of snapshot
  */
 public interface Snapshotable<
         ENTITY extends Identity<ENTITY_ID>,
         ENTITY_ID extends Serializable,
         SNAPSHOT extends Snapshot<ENTITY_ID> & Identity<ENTITY_ID>
         > {
-    List<SNAPSHOT> getSnapshots();
+    Collection<SNAPSHOT> getSnapshots();
 
-    default SNAPSHOT getLastSnapshot() {
+    default Optional<SNAPSHOT> getLastSnapshot() {
         if (getSnapshots() != null && !getSnapshots().isEmpty()) {
             return getSnapshots().stream()
-                    .filter(version -> Objects.nonNull(version.getSnapshotNumber()))
-                    .max(Comparator.comparing(Snapshot::getSnapshotNumber))
-                    .orElse(null);
+                    .filter(snapshot -> Objects.nonNull(snapshot.getSnapshotNumber()))
+                    .max(Comparator.comparing(Snapshot::getSnapshotNumber));
         } else {
-            return null;
+            return Optional.empty();
         }
+    }
+
+    default Optional<SNAPSHOT> getSnapshotBySnapshotNumber(Long snapshotNumber) {
+        if (getSnapshots() != null && !getSnapshots().isEmpty()) {
+            return getSnapshots().stream()
+                    .filter(snapshot -> Objects.equals(snapshot.getSnapshotNumber(), snapshotNumber))
+                    .findFirst();
+        } else {
+            return Optional.empty();
+        }
+    }
+    default Long getNextSnapshotNumber() {
+        return Instant.now().toEpochMilli();
     }
 
     SNAPSHOT makeSnapshot();
@@ -43,9 +53,6 @@ public interface Snapshotable<
         return newSnapshot;
     }
 
-    default Long getNextSnapshotNumber() {
-        return Instant.now().toEpochMilli();
-    }
 
     ENTITY revertSnapshot(SNAPSHOT snapshot);
 }

@@ -47,6 +47,7 @@ public class ReferenceEntity extends BaseSnapshotableEntity<ReferenceEntity, UUI
 
     @Override
     public ReferenceEntity revertSnapshot(ReferenceEntitySnapshot snapshot) {
+        this.id = snapshot.getSnapshotOwnerId();
         this.name = snapshot.getName();
         this.link = snapshot.getLink();
         return this;

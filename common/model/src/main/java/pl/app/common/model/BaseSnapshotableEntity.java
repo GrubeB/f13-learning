@@ -20,9 +20,7 @@ import java.util.List;
  */
 @MappedSuperclass
 @SuperBuilder
-//@JsonIgnoreProperties(value = {"snapshots", "transientSnapshots", "lastSnapshot", "nextSnapshotNumber"})
-//@JsonIgnoreProperties(value = {"lastSnapshot", "nextSnapshotNumber"})
-@JsonIgnoreProperties(value = {"lastSnapshot", "nextSnapshotNumber","createdBy", "createdDate","lastModifiedBy","lastModifiedDate"})
+@JsonIgnoreProperties(value = {"snapshots", "transientSnapshots", "lastSnapshot", "nextSnapshotNumber"})
 public abstract class BaseSnapshotableEntity<
         ENTITY extends Identity<ENTITY_ID>,
         ENTITY_ID extends Serializable,

@@ -14,6 +14,6 @@ import java.util.UUID;
 public interface ChapterSnapshotRepository extends
         JpaRepository<ChapterEntitySnapshot, UUID>,
         JpaSpecificationExecutor<ChapterEntitySnapshot> {
-    List<ChapterEntitySnapshot> findByOwnerId(UUID ownerId);
-
+    List<ChapterEntitySnapshot> findBySnapshotOwnerId(UUID snapshotOwnerId);
+    Optional<ChapterEntitySnapshot> findBySnapshotOwnerIdAndSnapshotNumber(UUID snapshotOwnerId, Long snapshotNumber);
 }

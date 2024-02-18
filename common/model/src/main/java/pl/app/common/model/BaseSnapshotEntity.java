@@ -1,7 +1,8 @@
 package pl.app.common.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import pl.app.common.model.snapshot.Snapshot;
 
@@ -17,8 +18,8 @@ import java.time.Instant;
  */
 @MappedSuperclass
 @SuperBuilder
-//@JsonIgnoreProperties(value = {"owner", "snapshotNumber"})
-@JsonIgnoreProperties(value = {"createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
+@Getter
+@Setter
 public abstract class BaseSnapshotEntity<
         ENTITY extends Identity<ENTITY_ID>,
         ENTITY_ID extends Serializable,
@@ -34,52 +35,20 @@ public abstract class BaseSnapshotEntity<
     @Column(name = "snapshot_number", nullable = false, updatable = false)
     protected Long snapshotNumber;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "owner_id", nullable = false)
     @Column(name = "owner_id")
-    protected ENTITY_ID ownerId;
+    protected ENTITY_ID snapshotOwnerId;
 
     public BaseSnapshotEntity() {
         this.snapshotNumber = Instant.now().toEpochMilli();
     }
 
-    public BaseSnapshotEntity(ENTITY ownerId) {
+    public BaseSnapshotEntity(ENTITY snapshotOwnerId) {
         this.snapshotNumber = Instant.now().toEpochMilli();
-        this.ownerId = ownerId.getId();
+        this.snapshotOwnerId = snapshotOwnerId.getId();
     }
 
-    public BaseSnapshotEntity(ENTITY ownerId, Long snapshotNumber) {
+    public BaseSnapshotEntity(ENTITY snapshotOwnerId, Long snapshotNumber) {
         this.snapshotNumber = snapshotNumber;
-        this.ownerId = ownerId.getId();
-    }
-
-    @Override
-    public ENTITY_ID getSnapshotOwnerId() {
-        return ownerId;
-    }
-
-    @Override
-    public void setOwnerId(ENTITY_ID ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    @Override
-    public ENTITY_ID getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(ENTITY_ID id) {
-        this.id = id;
-    }
-
-    @Override
-    public Long getSnapshotNumber() {
-        return snapshotNumber;
-    }
-
-    @Override
-    public void setSnapshotNumber(Long snapshotNumber) {
-        this.snapshotNumber = snapshotNumber;
+        this.snapshotOwnerId = snapshotOwnerId.getId();
     }
 }

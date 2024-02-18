@@ -92,10 +92,8 @@ public class MergerUtils {
     }
 
     public static <E, C extends Collection<E>, E2, C2 extends Collection<E2>, V> C mergeCollections(Join type, C target, C2 source,
-                                                                                                    BiFunction<E, E2, E> merger,
-                                                                                                    Supplier<E> targetNewInstance,
-                                                                                                    Function<E, V> targetFieldProvider,
-                                                                                                    Function<E2, V> sourceFieldProvider) {
+                                                                                                    BiFunction<E, E2, E> merger, Supplier<E> targetNewInstance,
+                                                                                                    Function<E, V> targetFieldProvider, Function<E2, V> sourceFieldProvider) {
         if (Objects.isNull(type) || Objects.isNull(targetFieldProvider) || Objects.isNull(sourceFieldProvider)) {
             return target;
         }

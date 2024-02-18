@@ -67,15 +67,11 @@ public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, C
         this.id = snapshot.getSnapshotOwnerId();
         this.topic = snapshot.getTopic();
         this.introduction = snapshot.getIntroduction();
-        MergerUtils.mergeCollections(
-                Join.RIGHT,
-                this.references,
-                snapshot.getReferences(),
-                ReferenceEntity::revertSnapshot,
-                ReferenceEntity::new,
-                ReferenceEntity::getId,
-                ReferenceEntitySnapshot::getId
-        );
+        MergerUtils.mergeCollections(Join.RIGHT,
+                this.references, snapshot.getReferences(),
+                (e, s) -> e.revertSnapshot(s), ReferenceEntity::new,
+                ReferenceEntity::getId, ReferenceEntitySnapshot::getId);
+        this.references.forEach(reference -> reference.setChapter(this));
         return this;
     }
 }
