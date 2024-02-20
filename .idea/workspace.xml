@@ -5,22 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba5a643-8133-4b03-b312-c8e4040a36d1" name="Changes" comment="save">
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseDomainEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaAuditDomainEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaSnapshotDomainEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaSnapshotableDomainAggregateRoot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/DomainAggregateRoot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/DomainEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/adapter/out/persistance/ReferencePersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/adapter/out/persistance/ReferenceRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/Reference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceVoting.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/UserVote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/AddUserDislikeUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/AddUserLikeUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/CreateReferenceUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/DeleteReferenceUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/UpdateReferenceUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/AddUserDislikeCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/AddUserLikeCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/CreateReferenceCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/DeleteReferenceCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/UpdateReferenceCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/out/ReferenceDomainRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/services/ReferenceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/services/ReferenceVotingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicSnapshotRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicSnapshot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseAggregateRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseDomainAggregateRoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/JpaBaseAggregateRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaAuditDomainAggregateRoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mapper/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/JoinUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/JoinUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/BaseSnapshotableEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshotable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/Snapshotable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/TransientSnapshotable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/model/src/main/java/pl/app/common/model/snapshot/TransientSnapshotable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mapper/src/test/java/pl/app/common/mapper/MergerUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/test/java/pl/app/common/mapper/MergerUtilsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterQueryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotQueryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/Chapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntitySnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/snapshot/ChapterSnapshot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/Reference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntitySnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/snapshot/ReferenceSnapshot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterSnapshotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterSnapshotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterQueryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterQueryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotQueryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicPersistenceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicPersistenceAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/Topic.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/Topic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__topic.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__topic.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/Accommodation.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/Accommodation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationRestriction.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationRestriction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeAvailability.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeAvailability.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/Accommodation.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/Accommodation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +156,7 @@
         <option value="package-info" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -154,40 +204,41 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dawid/Desktop/f12-solo-leveling/service/learning/learning-service/src/main/resources/db/migration&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5360825&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "develop",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/Dawid/Desktop/f12-solo-leveling/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5360825",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;JAVA&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JAVA"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="pl.app.learning.reference.application.port.in" />
       <recent name="pl.app.common.mapper" />
       <recent name="pl.app.ddd.specification" />
       <recent name="pl.app.cqrs.gateway" />
       <recent name="pl.app.cqrs.handler" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\reference\application\port\in" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\resources\db\migration" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\model\src\main\java\pl\app\common\model\audit" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic\adapter\in" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic\query" />
-      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\model" />
@@ -203,15 +254,15 @@
       <recent name="pl.app.common.mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="pl.app.learning.chapter.controller" />
-      <recent name="pl.app.learning.chapter.service" />
-      <recent name="pl.app.common.model.snapshot" />
-      <recent name="pl.app.common.audit" />
-      <recent name="pl.app.learning.chapter.persistance" />
+      <recent name="pl.app.learning.reference.application.domain" />
+      <recent name="pl.app.learning.reference.adapter.out.persistance" />
+      <recent name="pl.app.learning.reference.application.services" />
+      <recent name="pl.app.learning.reference.application.port.in" />
+      <recent name="pl.app.learning.reference.application.port.in.command" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.pl.app.learning.Application">
-    <configuration name="pl.app.learning.Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Application">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pl.app.learning.Application" />
       <module name="f12-solo-leveling.service.learning.learning-service.main" />
       <extension name="coverage">
@@ -224,92 +275,100 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="f12-solo-leveling [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CollectionsUtilsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="dependencies" />
+            <option value=":common:mapper:test" />
+            <option value="--tests" />
+            <option value="&quot;pl.app.common.mapper.CollectionsUtilsTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="f12-solo-leveling:common:cqrs [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="JoinUtilsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/common/cqrs" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value=":common:mapper:test" />
+            <option value="--tests" />
+            <option value="&quot;pl.app.common.mapper.JoinUtilsTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="f12-solo-leveling:common:ddd [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MergerUtilsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/common/ddd" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value=":common:mapper:test" />
+            <option value="--tests" />
+            <option value="&quot;pl.app.common.mapper.MergerUtilsTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="f12-solo-leveling:service:property [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MergerUtilsTest.testRightInclusiveMergeByNullField" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/service/property" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value=":common:mapper:test" />
+            <option value="--tests" />
+            <option value="&quot;pl.app.common.mapper.MergerUtilsTest.testRightInclusiveMergeByNullField&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration default="true" type="Java Scratch">
@@ -326,11 +385,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.pl.app.learning.Application" />
-        <item itemvalue="Gradle.f12-solo-leveling [dependencies]" />
-        <item itemvalue="Gradle.f12-solo-leveling:common:cqrs [build]" />
-        <item itemvalue="Gradle.f12-solo-leveling:service:property [build]" />
-        <item itemvalue="Gradle.f12-solo-leveling:common:ddd [build]" />
+        <item itemvalue="Application.Application" />
+        <item itemvalue="Gradle.MergerUtilsTest" />
+        <item itemvalue="Gradle.JoinUtilsTest" />
+        <item itemvalue="Gradle.CollectionsUtilsTest" />
+        <item itemvalue="Gradle.MergerUtilsTest.testRightInclusiveMergeByNullField" />
       </list>
     </recent_temporary>
   </component>
@@ -567,7 +626,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708276843122</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="save">
+      <option name="closed" value="true" />
+      <created>1708284243039</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1708284243039</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -615,12 +682,14 @@
         <PinnedItemInfo parentTag="pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeEntity" memberName="accommodations" />
         <PinnedItemInfo parentTag="pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity" memberName="accommodations" />
         <PinnedItemInfo parentTag="pl.app.property.accommodation_type.adapter.out.persistence.AccommodationEntity" memberName="accommodationType" />
+        <PinnedItemInfo parentTag="pl.app.learning.chapter.model.ChapterEntity" memberName="references" />
         <PinnedItemInfo parentTag="java.util.LinkedHashMap$Entry" memberName="key" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="GradleRunConfiguration">
         <watch expression="((ChapterEntity)mergedEntity).introduction" custom="pl.app.learning.chapter.model.ChapterEntity" />
+        <watch expression="((ChapterEntity)entity).references" custom="pl.app.learning.chapter.model.ChapterEntity" />
       </configuration>
     </watches-manager>
   </component>

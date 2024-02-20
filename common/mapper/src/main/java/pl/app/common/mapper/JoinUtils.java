@@ -24,12 +24,14 @@ public class JoinUtils {
                 target.removeIf(e1 -> !contains(source, e1)); // removeLeft
                 source.stream()
                         .filter(e2 -> !contains(target, e2))
+                        .toList()
                         .forEach(target::add); // addRight
             }
             case RIGHT_EXCLUSIVE -> {
                 List<E> temp = new ArrayList<>(source.size());
                 source.stream()
                         .filter(e2 -> !contains(target, e2))
+                        .toList()
                         .forEach(temp::add); // addRight
                 target.clear();
                 target.addAll(temp);
@@ -40,11 +42,13 @@ public class JoinUtils {
             case FULL, FULL_OUTER_INCLUSIVE -> {
                 source.stream()
                         .filter(e2 -> !contains(target, e2))
+                        .toList()
                         .forEach(target::add); // addRight
             }
             case FULL_OUTER_EXCLUSIVE -> {
                 source.stream()
                         .filter(e2 -> !contains(target, e2))
+                        .toList()
                         .forEach(target::add); // addRight
                 target.removeIf(e1 -> contains(source, e1)); // removeMid
             }
@@ -69,12 +73,14 @@ public class JoinUtils {
                 target.removeIf(e1 -> !contains(source, e1, fieldProvider)); // removeLeft
                 source.stream()
                         .filter(e2 -> !contains(target, e2, fieldProvider))
+                        .toList()
                         .forEach(target::add); // addRight
             }
             case RIGHT_EXCLUSIVE -> {
                 List<E> temp = new ArrayList<>(source.size());
                 source.stream()
                         .filter(e2 -> !contains(target, e2, fieldProvider))
+                        .toList()
                         .forEach(temp::add); // addRight
                 target.clear();
                 target.addAll(temp);
@@ -85,11 +91,13 @@ public class JoinUtils {
             case FULL, FULL_OUTER_INCLUSIVE -> {
                 source.stream()
                         .filter(e2 -> !contains(target, e2, fieldProvider))
+                        .toList()
                         .forEach(target::add); // addRight
             }
             case FULL_OUTER_EXCLUSIVE -> {
                 source.stream()
                         .filter(e2 -> !contains(target, e2, fieldProvider))
+                        .toList()
                         .forEach(target::add); // addRight
                 target.removeIf(e1 -> contains(source, e1, fieldProvider)); // removeMid
             }

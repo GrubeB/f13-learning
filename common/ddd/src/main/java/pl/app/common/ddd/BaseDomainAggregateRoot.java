@@ -4,39 +4,51 @@ import pl.app.common.ddd.event.DomainEventPublisher;
 
 import java.util.UUID;
 
-public abstract class BaseAggregateRoot {
+public abstract class BaseDomainAggregateRoot implements
+        DomainAggregateRoot<UUID> {
     protected AggregateId aggregateId;
     protected DomainEventPublisher eventPublisher;
 
-    public BaseAggregateRoot() {
+    public BaseDomainAggregateRoot() {
         this.aggregateId = new AggregateId();
     }
 
-    public BaseAggregateRoot(DomainEventPublisher eventPublisher) {
+    public BaseDomainAggregateRoot(DomainEventPublisher eventPublisher) {
         this.aggregateId = new AggregateId();
         this.eventPublisher = eventPublisher;
     }
-    public BaseAggregateRoot(AggregateId aggregateId) {
+
+    public BaseDomainAggregateRoot(AggregateId aggregateId) {
         this.aggregateId = aggregateId;
     }
-    public BaseAggregateRoot(AggregateId aggregateId, DomainEventPublisher eventPublisher) {
+
+    public BaseDomainAggregateRoot(AggregateId aggregateId, DomainEventPublisher eventPublisher) {
         this.aggregateId = aggregateId;
         this.eventPublisher = eventPublisher;
     }
 
+    @Override
     public AggregateId getAggregateId() {
         return aggregateId;
     }
 
-    public UUID getId() {
-        return aggregateId.getId();
+    @Override
+    public void setAggregateId(AggregateId aggregateId) {
+        this.aggregateId = aggregateId;
     }
 
+    @Override
     public DomainEventPublisher getEventPublisher() {
-        return eventPublisher;
+        return this.eventPublisher;
     }
 
+    @Override
     public void setEventPublisher(DomainEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
+    }
+
+    @Override
+    public UUID getId() {
+        return this.aggregateId.getId();
     }
 }
