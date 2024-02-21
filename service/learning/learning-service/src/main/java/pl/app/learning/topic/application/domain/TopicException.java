@@ -2,6 +2,7 @@ package pl.app.learning.topic.application.domain;
 
 
 import pl.app.common.shared.exception.NotFoundException;
+import pl.app.common.shared.exception.ValidationException;
 
 import java.util.UUID;
 
@@ -31,6 +32,15 @@ public interface TopicException {
 
         public static NotFoundTopicSnapshotException fromSnapshotNumber(Long snapshotNumber) {
             return new NotFoundTopicSnapshotException("not found topic snapshot with number: " + snapshotNumber);
+        }
+    }
+    class TopicWrongStatusException extends ValidationException {
+        public TopicWrongStatusException() {
+            super("topic has wrong status to process command");
+        }
+
+        public TopicWrongStatusException(String message) {
+            super(message);
         }
     }
 }

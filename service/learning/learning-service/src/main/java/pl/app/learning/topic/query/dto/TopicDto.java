@@ -9,11 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class TopicDto implements
         Serializable {
     private UUID id;

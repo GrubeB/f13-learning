@@ -5,48 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba5a643-8133-4b03-b312-c8e4040a36d1" name="Changes" comment="save">
-      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseDomainEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaAuditDomainEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaSnapshotDomainEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaSnapshotableDomainAggregateRoot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/DomainAggregateRoot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/DomainEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/adapter/out/persistance/ReferencePersistenceAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/adapter/out/persistance/ReferenceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/Reference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/ReferenceVoting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/domain/UserVote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/AddUserDislikeUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/AddUserLikeUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/CreateReferenceUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/DeleteReferenceUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/UpdateReferenceUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/AddUserDislikeCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/AddUserLikeCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/CreateReferenceCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/DeleteReferenceCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in/command/UpdateReferenceCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/out/ReferenceDomainRepositoryPort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/services/ReferenceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/services/ReferenceVotingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicSnapshotRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicSnapshot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/snapshot/ChapterSnapshot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/port/in/UpdateTopicUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/port/in/command/UpdateTopicCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/adapter/in/TopicRevisionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/adapter/out/persistance/TopicRevisionPersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/adapter/out/persistance/TopicRevisionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/domain/TopicRevision.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/domain/TopicRevisionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/port/in/CreateTopicRevisionUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/port/in/DeleteTopicRevisionUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/port/in/UpdateTopicRevisionUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/port/in/command/CreateTopicRevisionCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/port/in/command/DeleteTopicRevisionCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/port/in/command/UpdateTopicRevisionCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/port/out/TopicRevisionDomainRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/application/service/TopicRevisionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/query/TopicRevisionQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/query/TopicRevisionQueryMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/query/TopicRevisionQueryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/query/TopicRevisionQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic_revision/query/dto/TopicRevisionDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V4__topic_revision.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V5__chapter.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseAggregateRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseDomainAggregateRoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/JpaBaseAggregateRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/ddd/src/main/java/pl/app/common/ddd/BaseJpaAuditDomainAggregateRoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mapper/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/JoinUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/JoinUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/main/java/pl/app/common/mapper/MergerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mapper/src/test/java/pl/app/common/mapper/MergerUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/mapper/src/test/java/pl/app/common/mapper/MergerUtilsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterQueryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/controller/ChapterSnapshotQueryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/Chapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntitySnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/snapshot/ChapterSnapshot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ChapterEntitySnapshot.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/Reference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/ReferenceEntitySnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/model/snapshot/ReferenceSnapshot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/persistance/ChapterRepository.java" afterDir="false" />
@@ -59,11 +48,14 @@
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotQueryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/chapter/service/ChapterSnapshotServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicPersistenceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicPersistenceAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/out/persistance/TopicRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/Topic.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/Topic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__topic.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V3__topic.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicException.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/domain/TopicStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/services/TopicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/application/services/TopicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/TopicQueryEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/TopicQueryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/TopicQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/TopicQueryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/TopicQueryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/dto/TopicDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/query/dto/TopicDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/Accommodation.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/Accommodation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationRestriction.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationRestriction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeAvailability.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeAvailability.java" afterDir="false" />
@@ -213,7 +205,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "develop",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/Dawid/Desktop/f12-solo-leveling/service/learning/learning-service/src/main/java/pl/app/learning/reference/application/port/in",
+    "last_opened_file_path": "C:/Users/Dawid/Desktop/f12-solo-leveling/service/learning/learning-service/src/main/resources/db/migration",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.5360825",
@@ -234,11 +226,11 @@
       <recent name="pl.app.cqrs.handler" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\reference\application\port\in" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\resources\db\migration" />
-      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\model\src\main\java\pl\app\common\model\audit" />
-      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic\adapter\in" />
-      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic\query" />
+      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic_revision\query" />
+      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic_revision\adapter\in" />
+      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\topic_revision\adapter\out\persistance" />
+      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\learning\learning-service\src\main\java\pl\app\learning\category\adapter\out\persistance" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\model" />
@@ -254,11 +246,11 @@
       <recent name="pl.app.common.mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="pl.app.learning.reference.application.domain" />
-      <recent name="pl.app.learning.reference.adapter.out.persistance" />
-      <recent name="pl.app.learning.reference.application.services" />
-      <recent name="pl.app.learning.reference.application.port.in" />
-      <recent name="pl.app.learning.reference.application.port.in.command" />
+      <recent name="pl.app.learning.topic_revision.query" />
+      <recent name="pl.app.learning.topic_revision.query.dto" />
+      <recent name="pl.app.learning.topic_revision.application.domain" />
+      <recent name="pl.app.learning.topic_revision.application.port.out" />
+      <recent name="pl.app.learning.topic_revision.application.service" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Application">
@@ -634,7 +626,31 @@
       <option name="project" value="LOCAL" />
       <updated>1708284243039</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="save">
+      <option name="closed" value="true" />
+      <created>1708404833128</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1708404833128</updated>
+    </task>
+    <task id="LOCAL-00031" summary="save">
+      <option name="closed" value="true" />
+      <created>1708503814993</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1708503814993</updated>
+    </task>
+    <task id="LOCAL-00032" summary="save">
+      <option name="closed" value="true" />
+      <created>1708519412744</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1708519412744</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -680,17 +696,15 @@
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="pl.app.property.accommodation_type.adapter.out.persistence.AccommodationTypeEntity" memberName="accommodations" />
+        <PinnedItemInfo parentTag="pl.app.learning.category.application.domain.Category" memberName="parentCategories" />
+        <PinnedItemInfo parentTag="pl.app.learning.category.application.domain.Category" memberName="aggregateId" />
         <PinnedItemInfo parentTag="pl.app.property.accommodation_type.adapter.out.persistence.model.AccommodationTypeEntity" memberName="accommodations" />
+        <PinnedItemInfo parentTag="pl.app.learning.category.application.domain.Category" memberName="childCategories" />
+        <PinnedItemInfo parentTag="pl.app.learning.reference.application.domain.Reference" memberName="referenceVoting" />
         <PinnedItemInfo parentTag="pl.app.property.accommodation_type.adapter.out.persistence.AccommodationEntity" memberName="accommodationType" />
         <PinnedItemInfo parentTag="pl.app.learning.chapter.model.ChapterEntity" memberName="references" />
         <PinnedItemInfo parentTag="java.util.LinkedHashMap$Entry" memberName="key" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="GradleRunConfiguration">
-        <watch expression="((ChapterEntity)mergedEntity).introduction" custom="pl.app.learning.chapter.model.ChapterEntity" />
-        <watch expression="((ChapterEntity)entity).references" custom="pl.app.learning.chapter.model.ChapterEntity" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

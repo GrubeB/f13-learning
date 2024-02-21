@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -25,6 +25,9 @@
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/service/learning/learning-service/src/main/resources/db/migration/V0_drop_all.sql" connection-id="15fbd809-8859-41da-abb3-c3736596114d" session-id="MAIN" current-schema="public" />
+  </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
@@ -34,7 +37,7 @@
   </component>
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
     <recently-used-interfaces>
-      <mapping database-type="POSTGRES" interface-id="DEFAULT" />
+      <mapping database-type="POSTGRES" interface-id="b250ad64-1ae0-4907-9cb9-9621452b0bed" />
     </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
@@ -450,7 +453,9 @@
         <prompt-execution value="false" />
       </statement-execution>
       <script-execution>
-        <command-line-interfaces />
+        <command-line-interfaces>
+          <value id="b250ad64-1ae0-4907-9cb9-9621452b0bed" name="aaaaaa" executable-path="$PROJECT_DIR$/../../../../Program Files/PostgreSQL/16/bin/psql.exe" database-type="POSTGRES" />
+        </command-line-interfaces>
         <execution-timeout value="300" />
       </script-execution>
       <method-execution>

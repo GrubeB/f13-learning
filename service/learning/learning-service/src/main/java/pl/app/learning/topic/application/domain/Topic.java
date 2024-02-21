@@ -38,6 +38,18 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         categories.forEach(this::addCategory);
     }
 
+    public void updateContent(String name, String content) {
+        this.verifyThatTopicIsInDraftStatus();
+        this.name = name;
+        this.content = content;
+    }
+
+    private void verifyThatTopicIsInDraftStatus() {
+        if (!Objects.equals(TopicStatus.DRAFT, this.status)) {
+            throw new TopicException.TopicWrongStatusException();
+        }
+    }
+
     public void addReferences(List<AggregateId> references) {
         references.forEach(this::addReference);
     }
@@ -114,6 +126,5 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         this.status = snapshot.getStatus();
         return this;
     }
-
 }
 

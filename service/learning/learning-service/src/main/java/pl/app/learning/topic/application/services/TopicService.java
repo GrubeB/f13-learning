@@ -9,9 +9,11 @@ import pl.app.learning.topic.application.domain.TopicFactory;
 import pl.app.learning.topic.application.port.in.ChangeTopicStatusUseCase;
 import pl.app.learning.topic.application.port.in.CreateTopicUseCase;
 import pl.app.learning.topic.application.port.in.DeleteTopicUseCase;
+import pl.app.learning.topic.application.port.in.UpdateTopicUseCase;
 import pl.app.learning.topic.application.port.in.command.ChangeTopicStatusCommand;
 import pl.app.learning.topic.application.port.in.command.CreateTopicCommand;
 import pl.app.learning.topic.application.port.in.command.DeleteTopicCommand;
+import pl.app.learning.topic.application.port.in.command.UpdateTopicCommand;
 import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
 
 import java.util.UUID;
@@ -20,6 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional
 class TopicService implements
+        UpdateTopicUseCase,
         ChangeTopicStatusUseCase,
         DeleteTopicUseCase,
         CreateTopicUseCase {
@@ -36,6 +39,13 @@ class TopicService implements
     @Override
     public void deleteTopic(DeleteTopicCommand command) {
         repositoryPort.delete(new AggregateId(command.getTopicId()));
+    }
+
+    @Override
+    public void update(UpdateTopicCommand command) {
+        Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
+        aggregate.updateContent(command.getName(), command.getContent());
+        repositoryPort.save(aggregate);
     }
 
     @Override
