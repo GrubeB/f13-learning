@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface TopicException {
     class NotFoundTopicException extends NotFoundException {
         public NotFoundTopicException() {
-            super("not found topic type");
+            super("not found topic");
         }
 
         public NotFoundTopicException(String message) {
@@ -17,7 +17,20 @@ public interface TopicException {
         }
 
         public static NotFoundTopicException fromId(UUID topicId) {
-            return new NotFoundTopicException("not found topic type with id: " + topicId);
+            return new NotFoundTopicException("not found topic with id: " + topicId);
+        }
+    }
+    class NotFoundTopicSnapshotException extends NotFoundException {
+        public NotFoundTopicSnapshotException() {
+            super("not found topic snapshot");
+        }
+
+        public NotFoundTopicSnapshotException(String message) {
+            super(message);
+        }
+
+        public static NotFoundTopicSnapshotException fromSnapshotNumber(Long snapshotNumber) {
+            return new NotFoundTopicSnapshotException("not found topic snapshot with number: " + snapshotNumber);
         }
     }
 }

@@ -8,6 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface TopicQueryEntityRepository extends
-        JpaRepository<TopicQueryEntity, UUID>,
-        JpaSpecificationExecutor<TopicQueryEntity> {
+        JpaRepository<TopicQuery, UUID>,
+        JpaSpecificationExecutor<TopicQuery> {
 }

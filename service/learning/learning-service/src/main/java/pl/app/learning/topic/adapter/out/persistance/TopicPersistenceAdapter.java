@@ -16,6 +16,7 @@ import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
 class TopicPersistenceAdapter implements
         TopicDomainRepositoryPort {
     private final TopicRepository repository;
+    private final TopicSnapshotRepository topicSnapshotRepository;
     private final DomainEventPublisherFactory domainEventPublisherFactory;
 
     @Override
@@ -23,14 +24,21 @@ class TopicPersistenceAdapter implements
         Topic entity = repository.findById(aggregateId)
                 .orElseThrow(() -> TopicException.NotFoundTopicException.fromId(aggregateId.getId()));
         entity.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
+        entity.makeAndStoreSnapshot();
         return entity;
     }
 
     @Override
     public void save(Topic aggregate) {
         repository.saveAndFlush(aggregate);
+        topicSnapshotRepository.saveAll(aggregate.getTransientSnapshots());
         if (aggregate.getEventPublisher() instanceof DelayedDomainEventPublisher publisher) {
             publisher.publishDelayedEvents();
         }
+    }
+
+    @Override
+    public void delete(AggregateId aggregateId) {
+        repository.deleteByAggregateId_AggregateId(aggregateId.getId());
     }
 }

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.topic.query.TopicQueryEntity;
+import pl.app.learning.topic.query.TopicQuery;
 import pl.app.learning.topic.query.TopicQueryService;
 
 import java.util.UUID;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 public class TopicQueryController implements
-        QueryController.DtoFetchable.Full<UUID, TopicQueryEntity> {
+        QueryController.DtoFetchable.Full<UUID, TopicQuery> {
     public static final String resourceName = "topics";
     public static final String resourcePath = "/api/v1/" + resourceName;
     public final TopicQueryService service;

@@ -10,4 +10,6 @@ public interface TopicDomainRepositoryPort {
     Topic load(AggregateId aggregateId);
 
     void save(Topic aggregate);
+
+    void delete(AggregateId aggregateId);
 }

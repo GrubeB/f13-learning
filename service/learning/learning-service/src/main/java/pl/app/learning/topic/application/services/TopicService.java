@@ -6,22 +6,42 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.topic.application.domain.Topic;
 import pl.app.learning.topic.application.domain.TopicFactory;
+import pl.app.learning.topic.application.port.in.ChangeTopicStatusUseCase;
 import pl.app.learning.topic.application.port.in.CreateTopicUseCase;
+import pl.app.learning.topic.application.port.in.DeleteTopicUseCase;
+import pl.app.learning.topic.application.port.in.command.ChangeTopicStatusCommand;
 import pl.app.learning.topic.application.port.in.command.CreateTopicCommand;
+import pl.app.learning.topic.application.port.in.command.DeleteTopicCommand;
 import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
+
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
 @Transactional
 class TopicService implements
+        ChangeTopicStatusUseCase,
+        DeleteTopicUseCase,
         CreateTopicUseCase {
     private final TopicFactory factory;
     private final TopicDomainRepositoryPort repositoryPort;
 
     @Override
-    public AggregateId createTopic(CreateTopicCommand command) {
-        Topic newTopic = factory.create(command.getName());
+    public UUID createTopic(CreateTopicCommand command) {
+        Topic newTopic = factory.create(command.getName(), command.getContent(), command.getCategoryIds());
         repositoryPort.save(newTopic);
-        return newTopic.getAggregateId();
+        return newTopic.getId();
+    }
+
+    @Override
+    public void deleteTopic(DeleteTopicCommand command) {
+        repositoryPort.delete(new AggregateId(command.getTopicId()));
+    }
+
+    @Override
+    public void changeStatus(ChangeTopicStatusCommand command) {
+        Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
+        aggregate.changeStatus(command.getStatus());
+        repositoryPort.save(aggregate);
     }
 }
