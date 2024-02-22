@@ -8,27 +8,29 @@ import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.topic.application.domain.Topic;
 import pl.app.learning.topic.application.domain.TopicException;
-import pl.app.learning.topic.application.domain.TopicFactory;
 import pl.app.learning.topic.application.domain.TopicSnapshot;
+import pl.app.learning.topic.application.port.in.MergeRevisionToTopicUseCase;
 import pl.app.learning.topic.application.port.in.RevertTopicSnapshotUseCase;
+import pl.app.learning.topic.application.port.in.command.MergeRevisionToTopicCommand;
 import pl.app.learning.topic.application.port.in.command.RevertTopicSnapshotCommand;
 import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
+import pl.app.learning.topic_revision.query.TopicRevisionQuery;
+import pl.app.learning.topic_revision.query.TopicRevisionQueryService;
 
 @CommandHandlerAnnotation
-@Component
+@Component("pl.app.learning.topic.application.services.TopicRevisionService")
 @RequiredArgsConstructor
 @Transactional
-class TopicSnapshotService implements
-        RevertTopicSnapshotUseCase {
+class TopicRevisionService implements
+        MergeRevisionToTopicUseCase {
     private final TopicDomainRepositoryPort repositoryPort;
-
+    private final TopicRevisionQueryService topicRevisionQueryService;
     @Override
     @CommandHandlingAnnotation
-    public void revertSnapshot(RevertTopicSnapshotCommand command) {
+    public void merge(MergeRevisionToTopicCommand command) {
         Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
-        TopicSnapshot topicSnapshot = aggregate.getSnapshotBySnapshotNumber(command.getSnapshotNumber())
-                .orElseThrow(() -> TopicException.NotFoundTopicSnapshotException.fromSnapshotNumber(command.getSnapshotNumber()));
-        aggregate.revertSnapshot(topicSnapshot);
+        TopicRevisionQuery topicRevisionQuery = topicRevisionQueryService.fetchById(command.getRevisionId());
+        aggregate.mergeRevision(topicRevisionQuery);
         repositoryPort.save(aggregate);
     }
 }

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.topic.query.TopicQuery;
+import pl.app.learning.topic.query.model.TopicQuery;
 import pl.app.learning.topic.query.TopicQueryService;
 
 import java.util.UUID;

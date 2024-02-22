@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.learning.topic.query.TopicQuery;
+import pl.app.learning.topic.query.model.TopicQuery;
 
 @AggregateRootAnnotation
 @Entity

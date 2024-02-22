@@ -18,13 +18,13 @@ public interface TransientSnapshotable<
 
     Collection<SNAPSHOT> getTransientSnapshots();
 
-    default boolean hasTransientVersion() {
+    default boolean hasTransientSnapshot() {
         return getTransientSnapshots() != null && !getTransientSnapshots().isEmpty();
     }
 
     @Override
     default Optional<SNAPSHOT> getLastSnapshot() {
-        if (hasTransientVersion()) {
+        if (hasTransientSnapshot()) {
             return getTransientSnapshots().stream()
                     .filter(version -> Objects.nonNull(version.getSnapshotNumber()))
                     .max(Comparator.comparing(Snapshot::getSnapshotNumber));
@@ -35,14 +35,15 @@ public interface TransientSnapshotable<
 
     @Override
     default Optional<SNAPSHOT> getSnapshotBySnapshotNumber(Long snapshotNumber) {
-        if (hasTransientVersion()) {
-            return getTransientSnapshots().stream()
+        if (hasTransientSnapshot()) {
+            Optional<SNAPSHOT> transientSnapshot = getTransientSnapshots().stream()
                     .filter(snapshot -> Objects.equals(snapshot.getSnapshotNumber(), snapshotNumber))
                     .findFirst();
-        } else {
-            return Snapshotable.super.getSnapshotBySnapshotNumber(snapshotNumber);
+            if(transientSnapshot.isPresent()){
+                return transientSnapshot;
+            }
         }
-
+        return Snapshotable.super.getSnapshotBySnapshotNumber(snapshotNumber);
     }
 
     @Override

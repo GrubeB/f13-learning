@@ -7,6 +7,8 @@ import pl.app.common.mapper.Join;
 import pl.app.common.mapper.MergerUtils;
 import pl.app.common.model.BaseSnapshotableEntity;
 import pl.app.common.model.snapshot.TransientSnapshotable;
+import pl.app.learning.chapter.model.snapshot.ChapterSnapshot;
+import pl.app.learning.chapter.model.snapshot.ReferenceSnapshot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -21,7 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_chapter")
-public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, ChapterEntitySnapshot> {
+public class Chapter extends BaseSnapshotableEntity<Chapter, UUID, ChapterSnapshot> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "chapter_id", nullable = false)
@@ -38,39 +40,41 @@ public class ChapterEntity extends BaseSnapshotableEntity<ChapterEntity, UUID, C
             mappedBy = "chapter",
             orphanRemoval = true)
     @Builder.Default
-    private Set<ReferenceEntity> references = new LinkedHashSet<>();
+    private Set<Reference> references = new LinkedHashSet<>();
 
-    public void setReferences(Set<ReferenceEntity> references) {
-        this.references.forEach(reference -> reference.setChapter(null));
-        this.references = references;
-        references.stream()
-                .peek(reference -> reference.setChapter(this))
-                .forEach(this.references::add);
+    public void setReferences(Set<Reference> references) {
+        this.references.forEach(r -> r.setChapter(null));
+        this.references.clear();
+        references.forEach(this::addReference);
     }
 
+    public void addReference(Reference referenceSnapshot) {
+        this.references.add(referenceSnapshot);
+        referenceSnapshot.setChapter(this);
+    }
 
     // snapshot
     @Override
-    public ChapterEntitySnapshot makeSnapshot() {
-        Set<ReferenceEntitySnapshot> referenceEntitySnapshots = this.references.stream()
+    public ChapterSnapshot makeSnapshot() {
+        Set<ReferenceSnapshot> referenceSnapshots = this.references.stream()
                 .map(TransientSnapshotable::makeAndStoreSnapshot)
                 .collect(Collectors.toSet());
-        return new ChapterEntitySnapshot(
+        return new ChapterSnapshot(
                 this,
                 this.topic,
                 this.introduction,
-                referenceEntitySnapshots);
+                referenceSnapshots);
     }
 
     @Override
-    public ChapterEntity revertSnapshot(ChapterEntitySnapshot snapshot) {
+    public Chapter revertSnapshot(ChapterSnapshot snapshot) {
         this.id = snapshot.getSnapshotOwnerId();
         this.topic = snapshot.getTopic();
         this.introduction = snapshot.getIntroduction();
         MergerUtils.mergeCollections(Join.RIGHT,
                 this.references, snapshot.getReferences(),
-                (e, s) -> e.revertSnapshot(s), ReferenceEntity::new,
-                ReferenceEntity::getId, ReferenceEntitySnapshot::getId);
+                (e, s) -> e.revertSnapshot(s), Reference::new,
+                Reference::getId, ReferenceSnapshot::getId);
         this.references.forEach(reference -> reference.setChapter(this));
         return this;
     }

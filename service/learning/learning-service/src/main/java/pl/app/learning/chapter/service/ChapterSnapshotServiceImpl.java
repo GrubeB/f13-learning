@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.app.learning.chapter.model.ChapterEntity;
-import pl.app.learning.chapter.model.ChapterEntitySnapshot;
+import pl.app.learning.chapter.model.Chapter;
+import pl.app.learning.chapter.model.snapshot.ChapterSnapshot;
 import pl.app.learning.chapter.persistance.ChapterRepository;
 import pl.app.learning.chapter.persistance.ChapterSnapshotRepository;
 
@@ -24,14 +24,14 @@ class ChapterSnapshotServiceImpl implements
 
     @Override
     public void revertSnapshot(UUID chapterId, Long snapshotNumber) {
-        ChapterEntity chapter = repository.findById(chapterId)
+        Chapter chapter = repository.findById(chapterId)
                 .orElseThrow(RuntimeException::new);
-        ChapterEntitySnapshot snapshot = chapter.getSnapshotBySnapshotNumber(snapshotNumber)
+        ChapterSnapshot snapshot = chapter.getSnapshotBySnapshotNumber(snapshotNumber)
                 .orElseThrow(RuntimeException::new);
         chapter.makeAndStoreSnapshot();
         chapter.revertSnapshot(snapshot);
         chapter = repository.save(chapter);
-        List<ChapterEntitySnapshot> transientSnapshots = chapter.getTransientSnapshots();
+        List<ChapterSnapshot> transientSnapshots = chapter.getTransientSnapshots();
         chapterSnapshotRepository.saveAll(transientSnapshots);
     }
 }

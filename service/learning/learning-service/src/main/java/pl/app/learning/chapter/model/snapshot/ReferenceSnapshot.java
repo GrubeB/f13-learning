@@ -1,9 +1,10 @@
-package pl.app.learning.chapter.model;
+package pl.app.learning.chapter.model.snapshot;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.app.common.model.BaseSnapshotEntity;
+import pl.app.learning.chapter.model.Reference;
 
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_chapter_reference_snapshot")
-public class ReferenceEntitySnapshot extends BaseSnapshotEntity<ReferenceEntity, UUID, ReferenceEntitySnapshot> {
+public class ReferenceSnapshot extends BaseSnapshotEntity<Reference, UUID, ReferenceSnapshot> {
     @Column(name = "reference_name")
     private String name;
     private String link;
@@ -23,9 +24,9 @@ public class ReferenceEntitySnapshot extends BaseSnapshotEntity<ReferenceEntity,
     @PrimaryKeyJoinColumn
     @ToString.Exclude
     @JsonIgnore
-    private ChapterEntitySnapshot chapter;
+    private ChapterSnapshot chapter;
 
-    public ReferenceEntitySnapshot(ReferenceEntity owner, String name, String link) {
+    public ReferenceSnapshot(Reference owner, String name, String link) {
         super(owner);
         this.name = name;
         this.link = link;

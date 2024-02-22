@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.chapter.model.ChapterEntity;
+import pl.app.learning.chapter.model.Chapter;
 import pl.app.learning.chapter.service.ChapterQueryService;
 
 import java.util.UUID;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 public class ChapterQueryController implements
-        QueryController.SimpleFetchable.Full<UUID, ChapterEntity> {
+        QueryController.SimpleFetchable.Full<UUID, Chapter> {
     public static final String resourceName = "chapters";
     public static final String resourcePath = "/api/v1/" + resourceName;
 

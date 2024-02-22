@@ -5,13 +5,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
-import pl.app.common.ddd.AggregateId;
 import pl.app.common.util.EntityLocationUriUtils;
 import pl.app.learning.topic.application.port.in.command.ChangeTopicStatusCommand;
 import pl.app.learning.topic.application.port.in.command.CreateTopicCommand;
 import pl.app.learning.topic.application.port.in.command.DeleteTopicCommand;
-import pl.app.learning.topic.query.TopicQuery;
 import pl.app.learning.topic.query.TopicQueryService;
+import pl.app.learning.topic.query.dto.TopicDto;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping(TopicController.resourcePath)
@@ -24,15 +25,15 @@ public class TopicController {
     public final TopicQueryService service;
 
     @PostMapping
-    public ResponseEntity<TopicQuery> createAccommodationType(@RequestBody CreateTopicCommand command, HttpServletRequest request) {
-        AggregateId topicId = gateway.send(command);
-        TopicQuery topic = service.fetchById(topicId.getId());
+    public ResponseEntity<TopicDto> createAccommodationType(@RequestBody CreateTopicCommand command, HttpServletRequest request) {
+        UUID topicId = gateway.send(command);
+        TopicDto topic = service.fetchById(topicId, TopicDto.class);
         return ResponseEntity
                 .created(EntityLocationUriUtils.createdEntityLocationURI(topicId, request.getRequestURI()))
                 .body(topic);
     }
 
-    @DeleteMapping(path = "/{topicId}")
+    @DeleteMapping(path = {"/{topicId}", ""})
     public ResponseEntity<Void> handle(@RequestBody DeleteTopicCommand command) {
         gateway.sendAsync(command);
         return ResponseEntity
@@ -44,6 +45,13 @@ public class TopicController {
 
     @PostMapping(path = changeStatusPath)
     public ResponseEntity<Void> handle(@RequestBody ChangeTopicStatusCommand command) {
+        gateway.sendAsync(command);
+        return ResponseEntity
+                .accepted()
+                .build();
+    }
+    @PutMapping(path = "/{topicId}/status")
+    public ResponseEntity<Void> handle(@PathVariable UUID topicId, @RequestBody ChangeTopicStatusCommand command) {
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()

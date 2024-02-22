@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
 import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
-import pl.app.learning.topic.query.TopicQuery;
+import pl.app.learning.topic.query.model.TopicQuery;
 import pl.app.learning.topic.query.TopicQueryService;
 import pl.app.learning.topic_revision.application.domain.TopicRevision;
 import pl.app.learning.topic_revision.application.port.in.CreateTopicRevisionUseCase;

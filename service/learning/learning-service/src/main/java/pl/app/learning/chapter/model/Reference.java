@@ -6,10 +6,11 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pl.app.common.aware.RootAware;
 import pl.app.common.model.BaseSnapshotableEntity;
+import pl.app.learning.chapter.model.snapshot.ReferenceSnapshot;
 
 import java.util.UUID;
 
-@Entity
+@Entity(name = "referencccce")
 @Getter
 @Setter
 @ToString
@@ -17,8 +18,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_chapter_reference")
-public class ReferenceEntity extends BaseSnapshotableEntity<ReferenceEntity, UUID, ReferenceEntitySnapshot> implements
-        RootAware<ChapterEntity> {
+public class Reference extends BaseSnapshotableEntity<Reference, UUID, ReferenceSnapshot> implements
+        RootAware<Chapter> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "reference_id", nullable = false)
@@ -34,19 +35,21 @@ public class ReferenceEntity extends BaseSnapshotableEntity<ReferenceEntity, UUI
     @JoinColumn(name = "chapter_id")
     @ToString.Exclude
     @JsonIgnore
-    private ChapterEntity chapter;
+    private Chapter chapter;
 
     @Override
-    public ChapterEntity root() {
+    public Chapter root() {
         return chapter;
     }
+
+    // snapshot
     @Override
-    public ReferenceEntitySnapshot makeSnapshot() {
-        return new ReferenceEntitySnapshot(this, name, link);
+    public ReferenceSnapshot makeSnapshot() {
+        return new ReferenceSnapshot(this, name, link);
     }
 
     @Override
-    public ReferenceEntity revertSnapshot(ReferenceEntitySnapshot snapshot) {
+    public Reference revertSnapshot(ReferenceSnapshot snapshot) {
         this.id = snapshot.getSnapshotOwnerId();
         this.name = snapshot.getName();
         this.link = snapshot.getLink();

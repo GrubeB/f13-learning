@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.dto_criteria.Dto;
-import pl.app.common.query_controller.QueryController;
-import pl.app.learning.chapter.model.ChapterEntity;
-import pl.app.learning.chapter.model.ChapterEntitySnapshot;
-import pl.app.learning.chapter.service.ChapterQueryService;
 import pl.app.learning.chapter.service.ChapterSnapshotQueryService;
 
 import java.util.UUID;

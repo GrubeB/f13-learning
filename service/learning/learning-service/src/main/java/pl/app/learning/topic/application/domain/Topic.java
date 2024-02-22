@@ -6,6 +6,7 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaSnapshotableDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
+import pl.app.learning.topic_revision.query.TopicRevisionQuery;
 
 import java.util.*;
 
@@ -107,6 +108,11 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
 
     public void changeStatus(TopicStatus status) {
         this.status = status;
+    }
+
+    public void mergeRevision(TopicRevisionQuery revision) {
+        this.name = revision.getName();
+        this.content = revision.getContent();
     }
 
     @Override

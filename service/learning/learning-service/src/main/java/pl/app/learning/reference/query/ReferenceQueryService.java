@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.reference.query.dto.ReferenceDto;
@@ -25,5 +26,6 @@ public class ReferenceQueryService implements
     private final Map<String, Class<?>> supportedDtoClasses = new LinkedHashMap<>() {{
         put("ReferenceDto", ReferenceDto.class);
         put("BaseDto", BaseDto.class);
+        put("AggregateId", AggregateId.class);
     }};
 }

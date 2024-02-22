@@ -1,4 +1,4 @@
-package pl.app.learning.topic.query;
+package pl.app.learning.topic.query.model;
 
 
 import jakarta.persistence.*;
@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.learning.topic.application.domain.TopicHasCategory;
-import pl.app.learning.topic.application.domain.TopicHasReference;
 import pl.app.learning.topic.application.domain.TopicStatus;
 
 import java.util.LinkedHashSet;

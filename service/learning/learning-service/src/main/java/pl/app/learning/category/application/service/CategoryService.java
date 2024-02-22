@@ -4,6 +4,8 @@ package pl.app.learning.category.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
+import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.category.application.domain.Category;
 import pl.app.learning.category.application.domain.CategoryFactory;
@@ -19,6 +21,7 @@ import pl.app.learning.category.application.port.out.CategoryDomainRepositoryPor
 
 import java.util.UUID;
 
+@CommandHandlerAnnotation
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -31,6 +34,7 @@ class CategoryService implements
     private final CategoryDomainRepositoryPort repository;
 
     @Override
+    @CommandHandlingAnnotation
     public UUID createCategory(CreateCategoryCommand command) {
         Category aggregate = factory.create(command.getName(), command.getDescription());
         repository.save(aggregate);
@@ -38,11 +42,13 @@ class CategoryService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void deleteCategory(DeleteCategoryCommand command) {
         repository.delete(new AggregateId(command.getCategoryId()));
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void updateCategory(UpdateCategoryCommand command) {
         Category aggregate = repository.load(new AggregateId(command.getCategoryId()));
         aggregate.updateInfo(command.getName(), command.getDescription());
@@ -50,6 +56,7 @@ class CategoryService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void changeStatus(ChangeStatusCategoryCommand command) {
         Category aggregate = repository.load(new AggregateId(command.getCategoryId()));
         aggregate.setStatus(command.getStatus());

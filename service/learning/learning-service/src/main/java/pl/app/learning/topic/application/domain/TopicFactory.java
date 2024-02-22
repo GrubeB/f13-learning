@@ -26,7 +26,7 @@ public class TopicFactory {
         List<CategoryQuery> categories = categoryQueryService.fetchByCriteria(new SearchCriteria(List.of(
                 new SearchCriteriaItem("id", Operator.IN, categoryIds.stream().map(UUID::toString).toList())
         )));
-        Topic topic = new Topic(name, content, TopicStatus.UNVERIFIED, categories.stream().map(c -> new AggregateId(c.getId())).toList());
+        Topic topic = new Topic(name, content, TopicStatus.DRAFT, categories.stream().map(c -> new AggregateId(c.getId())).toList());
         topic.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
         return topic;
     }

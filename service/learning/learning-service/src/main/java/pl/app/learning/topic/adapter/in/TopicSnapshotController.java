@@ -12,8 +12,8 @@ import java.util.UUID;
 @RequestMapping(TopicSnapshotController.resourcePath)
 @RequiredArgsConstructor
 public class TopicSnapshotController {
-    public static final String resourceName = "topics";
-    public static final String resourcePath = "/api/v1/" + resourceName;
+    public static final String resourceName = "snapshots";
+    public static final String resourcePath = "/api/v1/topics/{topicId}/" + resourceName;
 
     private final CommandGateway gateway;
     public static final String revertSnapshotPath = "/revert-snapshot";
@@ -25,7 +25,7 @@ public class TopicSnapshotController {
                 .build();
     }
 
-    @PostMapping(path = "/{topicId}/snapshots/{snapshotNumber}")
+    @PostMapping(path = "/{snapshotNumber}")
     public ResponseEntity<Void> removeCategoryFromTopicCommand(@PathVariable UUID topicId, @PathVariable Long snapshotNumber) {
         gateway.sendAsync(new RevertTopicSnapshotCommand(topicId, snapshotNumber));
         return ResponseEntity

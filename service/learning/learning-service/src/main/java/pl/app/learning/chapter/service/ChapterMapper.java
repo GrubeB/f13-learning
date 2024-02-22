@@ -8,10 +8,8 @@ import org.springframework.stereotype.Component;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.mapper.Join;
 import pl.app.common.mapper.MergerUtils;
-import pl.app.learning.chapter.model.ChapterEntity;
-import pl.app.learning.chapter.model.ReferenceEntity;
-
-import java.util.Set;
+import pl.app.learning.chapter.model.Chapter;
+import pl.app.learning.chapter.model.Reference;
 
 @Getter
 @Component
@@ -21,11 +19,11 @@ public class ChapterMapper extends BaseMapper {
 
     @PostConstruct
     void init() {
-        addMerger(ChapterEntity.class, this::mergeChapterEntity);
-        addMerger(ReferenceEntity.class, this::mergeReferenceEntity);
+        addMerger(Chapter.class, this::mergeChapterEntity);
+        addMerger(Reference.class, this::mergeReferenceEntity);
     }
 
-    private ChapterEntity mergeChapterEntity(ChapterEntity target, ChapterEntity source) {
+    private Chapter mergeChapterEntity(Chapter target, Chapter source) {
         if (target == null || source == null) {
             return target;
         }
@@ -36,15 +34,14 @@ public class ChapterMapper extends BaseMapper {
             target.setTopic(source.getIntroduction());
         }
         if (source.getReferences() != null) {
-            Set<ReferenceEntity> merged = MergerUtils.mergeCollections(Join.RIGHT,
+            MergerUtils.mergeCollections(Join.RIGHT,
                     target.getReferences(), source.getReferences(),
-                    this::mergeReferenceEntity, ReferenceEntity::getId);
-            target.setReferences(merged);
+                    this::mergeReferenceEntity, Reference::getId);
         }
         return target;
     }
 
-    private ReferenceEntity mergeReferenceEntity(ReferenceEntity target, ReferenceEntity source) {
+    private Reference mergeReferenceEntity(Reference target, Reference source) {
         if (target == null || source == null) {
             return target;
         }

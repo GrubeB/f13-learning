@@ -4,6 +4,8 @@ package pl.app.learning.category.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
+import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.category.application.domain.Category;
 import pl.app.learning.category.application.port.in.AddChildCategoryUseCase;
@@ -16,6 +18,7 @@ import pl.app.learning.category.application.port.in.command.RemoveChildCategoryC
 import pl.app.learning.category.application.port.in.command.RemoveParentCategoryCommand;
 import pl.app.learning.category.application.port.out.CategoryDomainRepositoryPort;
 
+@CommandHandlerAnnotation
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -26,6 +29,7 @@ class CategoryRelationService implements
         RemoveParentCategoryUseCase{
     private final CategoryDomainRepositoryPort repository;
     @Override
+    @CommandHandlingAnnotation
     public void addChildCategory(AddChildCategoryCommand command) {
         Category aggregate = repository.load(new AggregateId(command.getCategoryId()));
         Category childCategory = repository.load(new AggregateId(command.getChildCategoryId()));
@@ -34,6 +38,7 @@ class CategoryRelationService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void addParentCategory(AddParentCategoryCommand command) {
         Category aggregate = repository.load(new AggregateId(command.getCategoryId()));
         Category parentCategory = repository.load(new AggregateId(command.getParentCategoryId()));
@@ -42,6 +47,7 @@ class CategoryRelationService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void removeChildCategory(RemoveChildCategoryCommand command) {
         Category aggregate = repository.load(new AggregateId(command.getCategoryId()));
         Category childCategory = repository.load(new AggregateId(command.getChildCategoryId()));
@@ -50,6 +56,7 @@ class CategoryRelationService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void removeParentCategory(RemoveParentCategoryCommand command) {
         Category aggregate = repository.load(new AggregateId(command.getCategoryId()));
         Category parentCategory = repository.load(new AggregateId(command.getParentCategoryId()));

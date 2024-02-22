@@ -29,7 +29,7 @@ public class CategoryController {
                 .body(service.fetchById(id, CategoryDto.class));
     }
 
-    @DeleteMapping(path = "/{referenceId}")
+    @DeleteMapping(path = "/{categoryId}")
     public ResponseEntity<Void> handle(@RequestBody DeleteCategoryCommand command) {
         gateway.sendAsync(command);
         return ResponseEntity
@@ -37,7 +37,7 @@ public class CategoryController {
                 .build();
     }
 
-    @PutMapping(path = "/{referenceId}")
+    @PutMapping(path = "/{categoryId}")
     public ResponseEntity<Void> handle(@RequestBody UpdateCategoryCommand command) {
         gateway.sendAsync(command);
         return ResponseEntity

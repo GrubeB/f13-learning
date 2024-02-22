@@ -1,4 +1,4 @@
-package pl.app.learning.topic.query;
+package pl.app.learning.topic.query.model;
 
 
 import jakarta.persistence.Entity;

@@ -3,6 +3,8 @@ package pl.app.learning.topic.application.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
+import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.topic.application.domain.Topic;
 import pl.app.learning.topic.application.domain.TopicFactory;
@@ -18,6 +20,7 @@ import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
 
 import java.util.UUID;
 
+@CommandHandlerAnnotation
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -30,6 +33,7 @@ class TopicService implements
     private final TopicDomainRepositoryPort repositoryPort;
 
     @Override
+    @CommandHandlingAnnotation
     public UUID createTopic(CreateTopicCommand command) {
         Topic newTopic = factory.create(command.getName(), command.getContent(), command.getCategoryIds());
         repositoryPort.save(newTopic);
@@ -37,11 +41,13 @@ class TopicService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void deleteTopic(DeleteTopicCommand command) {
         repositoryPort.delete(new AggregateId(command.getTopicId()));
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void update(UpdateTopicCommand command) {
         Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
         aggregate.updateContent(command.getName(), command.getContent());
@@ -49,6 +55,7 @@ class TopicService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void changeStatus(ChangeTopicStatusCommand command) {
         Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
         aggregate.changeStatus(command.getStatus());
