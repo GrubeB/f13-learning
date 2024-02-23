@@ -1,14 +1,12 @@
-package pl.app.property.property.application.domain.model;
+package pl.app.property.property.application.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.Hibernate;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.property.organization.application.domain.model.OrganizationEntity;
+import pl.app.property.organization.application.domain.Organization;
 
 import java.time.LocalTime;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -19,11 +17,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "t_property")
-public class PropertyEntity extends BaseAuditEntity<UUID> {
+public class Property extends BaseAuditEntity<Property, UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "property_id", nullable = false)
-    private UUID propertyId;
+    private UUID id;
     @Column(name = "property_name", nullable = false)
     private String name;
     @Enumerated(EnumType.STRING)
@@ -42,36 +40,14 @@ public class PropertyEntity extends BaseAuditEntity<UUID> {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JoinColumn(name = "property_details_id")
-    private PropertyDetailsEntity propertyDetails;
+    private PropertyDetails propertyDetails;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organization_id", nullable = false)
-    private OrganizationEntity organization;
+    private Organization organization;
 
-    public void setPropertyDetails(PropertyDetailsEntity propertyDetails) {
-        if (Objects.nonNull(propertyDetails)) {
-            propertyDetails.setProperty(this);
-            this.propertyDetails = propertyDetails;
-        } else {
-            this.propertyDetails = null;
-        }
-    }
-
-    @Override
-    public UUID getId() {
-        return propertyId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        PropertyEntity that = (PropertyEntity) o;
-        return propertyId != null && Objects.equals(propertyId, that.propertyId);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public void setPropertyDetails(PropertyDetails propertyDetails) {
+        this.propertyDetails = propertyDetails;
+        propertyDetails.setProperty(this);
     }
 }

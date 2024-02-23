@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.dto_criteria.Dto;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntity;
-import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntityRepository;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationAvailabilityException;
+import pl.app.property.accommodation_availability.adapter.out.AccommodationTypeAvailabilityEntityRepository;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
 import pl.app.property.accommodation_availability.query.dto.AccommodationTypeAvailabilityDto;
 import pl.app.property.accommodation_availability.query.mapper.AccommodationTypeAvailabilityQueryMapper;
 

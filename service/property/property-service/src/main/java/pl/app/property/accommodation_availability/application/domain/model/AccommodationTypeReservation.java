@@ -1,55 +1,71 @@
 package pl.app.property.accommodation_availability.application.domain.model;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
+import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.util.DateUtils;
-import pl.app.common.ddd.BaseEntity;
+import pl.app.common.ddd.BaseDomainEntity;
 import pl.app.common.ddd.annotation.DataTransferObjectAnnotation;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.common.ddd.shared.DateRange;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAssignmentPolicy;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
-@EntityAnnotation
+@AggregateRootAnnotation
+@Entity
 @Getter
+@Setter
 @AllArgsConstructor
-public class AccommodationTypeReservation extends BaseEntity {
+@Table(name = "t_accommodation_type_reservation")
+public class AccommodationTypeReservation extends BaseJpaAuditDomainAggregateRoot<AccommodationTypeReservation> {
+    @AttributeOverrides({
+            @AttributeOverride(name = "fromDate", column = @Column(name = "from_date", nullable = false)),
+            @AttributeOverride(name = "toDate", column = @Column(name = "to_date", nullable = false)),
+    })
     private DateRange<LocalDate> dateRange;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "assigned_status", nullable = false)
     private TypeReservationAssignedStatus assignedStatus;
-    private List<AccommodationTypeReservationItem> reservationItems;
 
-    public AccommodationTypeReservation(DateRange<LocalDate> dateRange) {
+    @OneToMany(mappedBy = "accommodationTypeReservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private Set<AccommodationTypeReservationItem> reservationItems= new LinkedHashSet<>();
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "accommodation_type_availability",nullable = false)
+    private AccommodationTypeAvailability accommodationTypeAvailability;
+
+    @SuppressWarnings("unused")
+    protected AccommodationTypeReservation() {
+        super();
+    }
+
+    public AccommodationTypeReservation(DateRange<LocalDate> dateRange, AccommodationTypeAvailability accommodationTypeAvailability) {
         super();
         this.dateRange = dateRange;
         this.assignedStatus = TypeReservationAssignedStatus.NO_ASSIGNED;
-        this.reservationItems = new ArrayList<>();
-    }
-
-    public AccommodationTypeReservation(UUID entityId,
-                                        DateRange<LocalDate> dateRange,
-                                        TypeReservationAssignedStatus assignedStatus,
-                                        List<AccommodationTypeReservationItem> reservationItems) {
-        super(entityId);
-        this.dateRange = dateRange;
-        this.assignedStatus = assignedStatus;
-        this.reservationItems = reservationItems;
+        this.accommodationTypeAvailability = accommodationTypeAvailability;
     }
 
     // RESERVATION
-    public void createReservation(Accommodation accommodation, DateRange<LocalDate> dateRange) {
+    public void createReservation(AccommodationAvailability accommodationAvailability, DateRange<LocalDate> dateRange) {
         verifyIfDateRangeCollideWithExistingReservations(dateRange);
-        accommodation.verifyAvailability(dateRange);
-        AccommodationRestriction newRestriction = accommodation.createRestriction(dateRange, AccommodationRestrictionStatus.RESERVED);
-        addReservation(accommodation, newRestriction);
+        accommodationAvailability.verifyAvailability(dateRange);
+        AccommodationRestriction newRestriction = accommodationAvailability.createRestriction(dateRange, AccommodationRestrictionStatus.RESERVED);
+        addReservation(accommodationAvailability, newRestriction);
     }
 
-    private void addReservation(Accommodation accommodation, AccommodationRestriction restriction) {
-        reservationItems.add(new AccommodationTypeReservationItem( accommodation, restriction));
+    private void addReservation(AccommodationAvailability accommodationAvailability, AccommodationRestriction restriction) {
+        reservationItems.add(new AccommodationTypeReservationItem(accommodationAvailability, restriction, this));
 
     }
 
@@ -57,7 +73,7 @@ public class AccommodationTypeReservation extends BaseEntity {
         setAssignedStatus(TypeReservationAssignedStatus.NO_ASSIGNED);
         reservationItems.forEach(reservationItem -> {
             UUID restrictionId = reservationItem.getRestriction().getId();
-            reservationItem.getAccommodation().removeRestriction(restrictionId);
+            reservationItem.getAccommodationAvailability().removeRestriction(restrictionId);
         });
         reservationItems.clear();
     }
@@ -84,14 +100,14 @@ public class AccommodationTypeReservation extends BaseEntity {
             removeAllReservations();
         }
         newReservations.forEach(newReservation -> createReservation(
-                newReservation.accommodation(),
+                newReservation.accommodationAvailability(),
                 newReservation.dateRange()
         ));
         setAssignedStatus(TypeReservationAssignedStatus.MANUAL_ASSIGNED);
     }
 
     @DataTransferObjectAnnotation
-    public record ReservationRequest(Accommodation accommodation, DateRange<LocalDate> dateRange) {
+    public record ReservationRequest(AccommodationAvailability accommodationAvailability, DateRange<LocalDate> dateRange) {
     }
 
     // VERIFYING/VALIDATION

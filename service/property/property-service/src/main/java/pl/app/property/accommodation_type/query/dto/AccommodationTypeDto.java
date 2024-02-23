@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccommodationTypeDto implements Serializable {
-    private UUID accommodationTypeId;
+    private UUID id;
     private Set<AccommodationDto> accommodations;
     private AccommodationTypeDetailsDto accommodationTypeDetails;
 
@@ -24,7 +24,7 @@ public class AccommodationTypeDto implements Serializable {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class AccommodationDto implements Serializable {
-        private UUID accommodationId;
+        private UUID id;
         private String name;
         private String description;
     }

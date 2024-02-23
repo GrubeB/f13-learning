@@ -3,6 +3,7 @@ package pl.app.common.service.support;
 
 import pl.app.common.dto_criteria.Dto;
 import pl.app.common.mapper.Mapper;
+import pl.app.common.mapper.Merger;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -15,7 +16,9 @@ public interface ServiceSupport {
     interface MapperSupport {
         Mapper getMapper();
     }
-
+    interface MergerSupport {
+        Merger getMerger();
+    }
     @SuppressWarnings("unchecked")
     interface DtoSupport {
         default <T> Class<T> getClass(Dto dto) {

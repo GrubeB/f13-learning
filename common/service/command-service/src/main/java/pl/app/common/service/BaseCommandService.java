@@ -10,12 +10,13 @@ public interface BaseCommandService {
             ENTITY create(@Valid ENTITY entity);
         }
 
-        interface CreatableWithParent<ID, ENTITY extends Persistable<ID>, PARENT_ID> {
-            ENTITY create(@NonNull PARENT_ID parentId, @Valid ENTITY entity);
-        }
-
         interface DtoCreatable<ID, ENTITY extends Persistable<ID>, CREATE_DTO, DTO> {
             DTO createFromDto(@Valid CREATE_DTO dto);
+        }
+
+        interface CreatableWithParent<ID, ENTITY extends Persistable<ID>, PARENT_ID> {
+            ENTITY create(@NonNull PARENT_ID parentId, @Valid ENTITY entity);
+
         }
 
         interface DtoCreatableWithParent<ID, ENTITY extends Persistable<ID>, CREATE_DTO, DTO, PARENT_ID> {
@@ -28,12 +29,12 @@ public interface BaseCommandService {
             ENTITY update(@NonNull ID id, ENTITY entity);
         }
 
-        interface UpdatableWithParent<ID, ENTITY extends Persistable<ID>, PARENT_ID> {
-            ENTITY update(PARENT_ID parentId, @NonNull ID id, ENTITY entity);
-        }
-
         interface DtoUpdatable<ID, ENTITY extends Persistable<ID>, UPDATE_DTO, DTO> {
             DTO updateFromDto(@NonNull ID id, UPDATE_DTO dto);
+        }
+
+        interface UpdatableWithParent<ID, ENTITY extends Persistable<ID>, PARENT_ID> {
+            ENTITY update(PARENT_ID parentId, @NonNull ID id, ENTITY entity);
         }
 
         interface DtoUpdatableWithParent<ID, ENTITY extends Persistable<ID>, UPDATE_DTO, DTO, PARENT_ID> {
@@ -46,5 +47,4 @@ public interface BaseCommandService {
             void deleteById(@NonNull ID id);
         }
     }
-
 }

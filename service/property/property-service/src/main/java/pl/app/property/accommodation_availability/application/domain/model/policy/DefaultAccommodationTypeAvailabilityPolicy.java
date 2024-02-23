@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.shared.DateRange;
+import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
 import pl.app.property.accommodation_availability.application.domain.model.*;
 
 import java.time.LocalDate;
@@ -23,16 +24,16 @@ class DefaultAccommodationTypeAvailabilityPolicy implements AccommodationTypeAva
             AccommodationTypeAvailability accommodationTypeAvailability,
             Integer numberOdAccommodations,
             DateRange<LocalDate> dateRange) {
-        final List<Accommodation> accommodations = accommodationTypeAvailability.getAccommodations();
+        final List<AccommodationAvailability> accommodationAvailabilities = accommodationTypeAvailability.getAccommodationAvailabilities();
         final List<AccommodationRestriction> assignedReservation = accommodationTypeAvailability.getAssignedReservationsInRange(dateRange);
         final List<AccommodationTypeReservation> noAssignedReservationTypes = accommodationTypeAvailability.getNoAssignedReservationsInRange(dateRange);
 
         Map<LocalDate, Integer> numberOfReservationOnSpecificDay = getNumberOfReservationOnSpecificDay(assignedReservation, noAssignedReservationTypes);
         if(!numberOfReservationOnSpecificDay.values().stream()
-                .allMatch(numberOfReservations -> numberOfReservations + numberOdAccommodations <= accommodations.size())){
+                .allMatch(numberOfReservations -> numberOfReservations + numberOdAccommodations <= accommodationAvailabilities.size())){
             return false;
         }
-        return accommodations.stream()
+        return accommodationAvailabilities.stream()
                 .anyMatch(accommodation -> accommodation.isAvailable(dateRange));
     }
 

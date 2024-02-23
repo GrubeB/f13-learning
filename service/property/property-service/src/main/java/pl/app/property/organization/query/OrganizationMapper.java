@@ -5,28 +5,37 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import pl.app.common.mapper.Mapper;
+import pl.app.common.ddd.AggregateId;
+import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
+import pl.app.property.organization.application.domain.Organization;
 import pl.app.property.organization.query.dto.OrganizationDto;
-import pl.app.property.organization.application.domain.model.OrganizationEntity;
-
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 @Getter
 @Component
 @RequiredArgsConstructor
-public class OrganizationMapper implements Mapper {
+public class OrganizationMapper extends BaseMapper {
     private final ModelMapper modelMapper;
-
-    private final Map<AbstractMap.SimpleEntry<Class<?>, Class<?>>, Function<?, ?>> mappers = new HashMap<>();
 
     @PostConstruct
     void init() {
-        addMapper(OrganizationEntity.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
-        addMapper(OrganizationEntity.class, OrganizationDto.class, e -> modelMapper.map(e, OrganizationDto.class));
-        addMapper(OrganizationDto.class, OrganizationEntity.class, e -> modelMapper.map(e, OrganizationEntity.class));
+        // to dto
+        addMapper(Organization.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
+        addMapper(Organization.class, OrganizationDto.class, e -> modelMapper.map(e, OrganizationDto.class));
+        addMapper(Organization.class, AggregateId.class, e -> new AggregateId(e.getId()));
+        // to entity
+        addMapper(OrganizationDto.class, Organization.class, e -> modelMapper.map(e, Organization.class));
+        // merge
+        addMerger(Organization.class, this::mergeOrganizationEntity);
+    }
+
+    private Organization mergeOrganizationEntity(Organization target, Organization source) {
+        if (target == null || source == null) {
+            return target;
+        }
+        if (source.getName() != null) {
+            target.setName(source.getName());
+        }
+        return target;
     }
 }

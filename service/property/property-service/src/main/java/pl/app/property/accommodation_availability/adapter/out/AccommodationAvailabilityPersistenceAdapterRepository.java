@@ -4,18 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
+import pl.app.common.ddd.event.DelayedDomainEventPublisher;
+import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationAvailabilityMapper;
-import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntity;
-import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntityRepository;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationAssignmentPolicy;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationAvailabilityException;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAssignmentPolicy;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
+import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailabilityPolicy;
 import pl.app.property.accommodation_availability.application.port.out.AccommodationAvailabilityRepositoryPort;
 
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,7 +22,7 @@ import java.util.UUID;
 class AccommodationAvailabilityPersistenceAdapterRepository implements
         AccommodationAvailabilityRepositoryPort {
     private final AccommodationTypeAvailabilityEntityRepository repository;
-    private final AccommodationAvailabilityMapper mapper;
+    private final DomainEventPublisherFactory domainEventPublisherFactory;
 
     private final AccommodationAssignmentPolicy accommodationAssignmentPolicy;
     private final AccommodationTypeAvailabilityPolicy accommodationTypeAvailabilityPolicy;
@@ -87,31 +85,27 @@ class AccommodationAvailabilityPersistenceAdapterRepository implements
 
     @Override
     public AccommodationTypeAvailability load(AggregateId aggregateId) {
-        AccommodationTypeAvailabilityEntity entity = repository.findById(aggregateId.getId())
+        AccommodationTypeAvailability aggregate = repository.findById(aggregateId)
                 .orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException.fromId(aggregateId.getId()));
-        AccommodationTypeAvailability aggregate = mapper.map(entity, AccommodationTypeAvailability.class);
         aggregate.setPolicies(accommodationAssignmentPolicy, accommodationTypeAvailabilityPolicy);
+        aggregate.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
         return aggregate;
     }
 
     @Override
     public AccommodationTypeAvailability load(AggregateId aggregateId, DateRange<LocalDate> dateRange) {
-        AccommodationTypeAvailabilityEntity entity = repository.findById(aggregateId.getId())
+        AccommodationTypeAvailability aggregate = repository.findById(aggregateId)
                 .orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException.fromId(aggregateId.getId()));
-        AccommodationTypeAvailability aggregate = mapper.map(entity, AccommodationTypeAvailability.class);
         aggregate.setPolicies(accommodationAssignmentPolicy, accommodationTypeAvailabilityPolicy);
+        aggregate.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
         return aggregate;
     }
 
     @Override
     public void save(AccommodationTypeAvailability aggregate) {
-        Optional<AccommodationTypeAvailabilityEntity> existingEntity = repository.findById(aggregate.getAggregateId().getId());
-        AccommodationTypeAvailabilityEntity mappedAggregate = mapper.map(aggregate, AccommodationTypeAvailabilityEntity.class);
-        if (existingEntity.isPresent()) {
-            AccommodationTypeAvailabilityEntity mergedEntity = mapper.merge(existingEntity.get(), mappedAggregate);
-            repository.save(mergedEntity);
-        } else {
-            repository.save(mappedAggregate);
+        repository.saveAndFlush(aggregate);
+        if (aggregate.getEventPublisher() instanceof DelayedDomainEventPublisher publisher) {
+            publisher.publishDelayedEvents();
         }
     }
 

@@ -1,10 +1,16 @@
 package pl.app.property.accommodation_availability.application.domain.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import pl.app.common.util.DateUtils;
-import pl.app.common.ddd.BaseEntity;
+import lombok.Setter;
+import lombok.ToString;
+import pl.app.common.ddd.BaseJpaAuditDomainEntity;
+import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.common.ddd.shared.DateRange;
+import pl.app.common.util.DateUtils;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -12,10 +18,31 @@ import java.util.UUID;
 
 
 @EntityAnnotation
+@AggregateRootAnnotation
+@Entity
 @Getter
-public class AccommodationRestriction extends BaseEntity {
+@Setter
+@ToString
+@AllArgsConstructor
+@Table(name = "t_accommodation_restriction")
+public class AccommodationRestriction extends BaseJpaAuditDomainEntity<AccommodationRestriction> {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "restriction_status", nullable = false)
     private AccommodationRestrictionStatus status;
-    private final DateRange<LocalDate> dateRange;
+    @AttributeOverrides({
+            @AttributeOverride(name = "fromDate", column = @Column(name = "from_date", nullable = false)),
+            @AttributeOverride(name = "toDate", column = @Column(name = "to_date", nullable = false)),
+    })
+    private DateRange<LocalDate> dateRange;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "accommodation_availability", nullable = false)
+    private AccommodationAvailability accommodationAvailability;
+
+    @SuppressWarnings("unused")
+    protected AccommodationRestriction() {
+        super();
+    }
 
     public AccommodationRestriction(DateRange<LocalDate> dateRange, AccommodationRestrictionStatus status) {
         this.status = status;
@@ -27,6 +54,7 @@ public class AccommodationRestriction extends BaseEntity {
         this.status = status;
         this.dateRange = dateRange;
     }
+
     // STATUS
     public void changeStatusTo(AccommodationRestrictionStatus newStatus) {
         if (Objects.isNull(newStatus) || status.equals(newStatus)) {
@@ -53,6 +81,7 @@ public class AccommodationRestriction extends BaseEntity {
             }
         }
     }
+
     // VERIFYING
     public boolean isRestrictionCollideWith(DateRange<LocalDate> dateRange) {
         return DateUtils.isDateRangesCollide(this.dateRange.getFromDate(), this.dateRange.getToDate(), dateRange.getFromDate(), dateRange.getToDate());

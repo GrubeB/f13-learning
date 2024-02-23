@@ -3,7 +3,7 @@ package pl.app.property.accommodation_availability.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.application.domain.model.Accommodation;
+import pl.app.property.accommodation_availability.application.domain.model.AccommodationAvailability;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationRestriction;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
 import pl.app.property.accommodation_availability.application.port.in.ChangeAccommodationReservationStatusUseCase;
@@ -29,8 +29,8 @@ class RestrictionService implements
     public UUID createRestriction(CreateRestrictionCommand command) {
         AccommodationTypeAvailability availability = repositoryPort
                 .loadByAccommodationId(command.getAccommodationId(), new DateRange<>(command.getStartDate(), command.getEndDate()));
-        Accommodation accommodation = availability.getAccommodationById(command.getAccommodationId());
-        AccommodationRestriction newReservation = accommodation.createRestriction(new DateRange<>(command.getStartDate(), command.getEndDate()), command.getStatus());
+        AccommodationAvailability accommodationAvailability = availability.getAccommodationById(command.getAccommodationId());
+        AccommodationRestriction newReservation = accommodationAvailability.createRestriction(new DateRange<>(command.getStartDate(), command.getEndDate()), command.getStatus());
         repositoryPort.save(availability);
         return newReservation.getId();
     }
@@ -38,8 +38,8 @@ class RestrictionService implements
     @Override
     public void removeRestriction(RemoveRestrictionCommand command) {
         AccommodationTypeAvailability availability = repositoryPort.loadByRestrictionId(command.getRestrictionId());
-        Accommodation accommodation = availability.getAccommodationByRestrictionId(command.getRestrictionId());
-        accommodation.removeRestriction(command.getRestrictionId());
+        AccommodationAvailability accommodationAvailability = availability.getAccommodationByRestrictionId(command.getRestrictionId());
+        accommodationAvailability.removeRestriction(command.getRestrictionId());
         repositoryPort.save(availability);
     }
 

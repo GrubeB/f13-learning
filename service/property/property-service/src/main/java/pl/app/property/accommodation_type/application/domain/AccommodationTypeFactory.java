@@ -15,7 +15,9 @@ public class AccommodationTypeFactory {
     private final DomainEventPublisherFactory domainEventPublisherFactory;
 
     public AccommodationType createAccommodationType(AggregateId propertyId) {
+        AccommodationType aggregate = new AccommodationType(propertyId);
         DomainEventPublisher eventPublisher = domainEventPublisherFactory.getEventPublisher();
-        return new AccommodationType(eventPublisher, propertyId);
+        aggregate.setEventPublisher(eventPublisher);
+        return aggregate;
     }
 }

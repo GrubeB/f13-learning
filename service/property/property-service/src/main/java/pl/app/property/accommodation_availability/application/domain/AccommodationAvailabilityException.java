@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_availability.application.domain.model;
+package pl.app.property.accommodation_availability.application.domain;
 
 
 import pl.app.common.shared.exception.NotFoundException;

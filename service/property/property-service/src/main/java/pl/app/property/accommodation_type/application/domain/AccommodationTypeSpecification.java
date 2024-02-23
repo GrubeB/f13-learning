@@ -7,13 +7,14 @@ import pl.app.common.ddd.specification.NotSpecification;
 import pl.app.common.ddd.specification.Specification;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AccommodationTypeSpecification{
     @SpecificationAnnotation
     public static class UniqueAccommodationName implements
             CompositeSpecification<Accommodation> {
-        private final List<Accommodation> accommodations;
+        private final Set<Accommodation> accommodations;
         public UniqueAccommodationName(AccommodationType accommodationType) {
             this.accommodations = accommodationType.getAccommodations();
         }

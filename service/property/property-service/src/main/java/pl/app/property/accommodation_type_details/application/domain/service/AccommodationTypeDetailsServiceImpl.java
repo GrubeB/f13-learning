@@ -18,4 +18,5 @@ class AccommodationTypeDetailsServiceImpl implements
         AccommodationTypeDetailsService {
     private final AccommodationTypeDetailsRepository repository;
     private final AccommodationTypeDetailsMapper mapper;
+    private final AccommodationTypeDetailsMapper merger;
 }

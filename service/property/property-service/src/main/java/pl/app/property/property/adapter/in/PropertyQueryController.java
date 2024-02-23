@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.property.property.application.domain.model.PropertyEntity;
+import pl.app.property.property.application.domain.Property;
 import pl.app.property.property.query.PropertyQueryService;
 
 import java.util.UUID;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 public class PropertyQueryController implements
-        QueryController.SimpleFetchable.Full<UUID, PropertyEntity> {
+        QueryController.DtoFetchable.Full<UUID, Property> {
     public static final String resourceName = "properties";
     public static final String resourcePath = "/api/v1/" + resourceName;
 

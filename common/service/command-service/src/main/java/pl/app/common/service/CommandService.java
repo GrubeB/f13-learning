@@ -45,7 +45,7 @@ public interface CommandService {
                 return getMapper().map(savedEntity, resolveArgumentAtIndex(DtoCreatable.class, 3));
             }
 
-            default void beforeDtoSave(CREATE_DTO dto, ENTITY entity) {
+            default void beforeDtoSave(CREATE_DTO dto, ENTITY mappedEntity) {
             }
 
             default void afterDtoSave(CREATE_DTO dto, ENTITY savedEntity) {
@@ -81,7 +81,7 @@ public interface CommandService {
                 return getMapper().map(savedEntity, resolveArgumentAtIndex(DtoCreatableWithParent.class, 3));
             }
 
-            default void beforeDtoSave(CREATE_DTO dto, ENTITY entity) {
+            default void beforeDtoSave(CREATE_DTO dto, ENTITY mappedEntity) {
             }
 
             default void afterDtoSave(CREATE_DTO dto, ENTITY savedEntity) {
@@ -92,53 +92,20 @@ public interface CommandService {
 
     interface Updatable {
         interface SimpleUpdatable<ID, ENTITY extends Persistable<ID>> extends
-                BaseCommandService.Updatable.SimpleUpdatable<ID, ENTITY> {
+                BaseCommandService.Updatable.SimpleUpdatable<ID, ENTITY>,
+                ServiceSupport.MergerSupport {
             @Override
             default ENTITY update(@NonNull ID id, ENTITY entity) {
                 ENTITY existingEntity = getRepository().findById(id)
                         .orElseThrow(() -> new NotFoundException("Not found object with id: " + id));
                 beforeUpdate(id, existingEntity, entity);
-                ENTITY mergedEntity = merge(existingEntity, entity);
+                ENTITY mergedEntity = getMerger().merge(existingEntity, entity);
                 ENTITY savedEntity = getRepository().save(mergedEntity);
                 afterUpdate(id, savedEntity, existingEntity);
                 return savedEntity;
             }
 
             default void beforeUpdate(ID id, ENTITY existingEntity, ENTITY newEntity) {
-            }
-
-            default ENTITY merge(ENTITY existingEntity, ENTITY newEntity) {
-                return existingEntity;
-            }
-
-            default void afterUpdate(ID id, ENTITY savedEntity, ENTITY oldEntity) {
-            }
-
-            JpaRepository<ENTITY, ID> getRepository();
-        }
-
-
-        interface UpdatableWithParent<ID, ENTITY extends Persistable<ID>, PARENT_ID> extends
-                BaseCommandService.Updatable.UpdatableWithParent<ID, ENTITY, PARENT_ID>,
-                ServiceSupport.ParentSetterSupport<ENTITY, PARENT_ID> {
-            @Override
-            default ENTITY update(PARENT_ID parentId, @NonNull ID id, ENTITY entity) {
-                ENTITY existingEntity = getRepository().findById(id)
-                        .orElseThrow(() -> new NotFoundException("Not found object with id: " + id));
-                ENTITY mergedEntity = merge(existingEntity, entity);
-                settingParentBeforeSave(parentId, mergedEntity);
-                beforeUpdate(id, existingEntity, mergedEntity);
-                ENTITY savedEntity = getRepository().save(mergedEntity);
-                afterUpdate(id, savedEntity, existingEntity);
-                return savedEntity;
-            }
-
-
-            default void beforeUpdate(ID id, ENTITY existingEntity, ENTITY newEntity) {
-            }
-
-            default ENTITY merge(ENTITY existingEntity, ENTITY newEntity) {
-                return newEntity;
             }
 
             default void afterUpdate(ID id, ENTITY savedEntity, ENTITY oldEntity) {
@@ -150,13 +117,14 @@ public interface CommandService {
         interface DtoUpdatable<ID, ENTITY extends Persistable<ID>, UPDATE_DTO, DTO> extends
                 BaseCommandService.Updatable.DtoUpdatable<ID, ENTITY, UPDATE_DTO, DTO>,
                 ServiceSupport.InterfaceArgumentResolverSupport,
-                ServiceSupport.MapperSupport {
+                ServiceSupport.MapperSupport,
+                ServiceSupport.MergerSupport {
             @Override
             default DTO updateFromDto(@NonNull ID id, UPDATE_DTO dto) {
                 ENTITY existingEntity = getRepository().findById(id)
                         .orElseThrow(() -> new NotFoundException("Not found object with id: " + id));
                 ENTITY entityFromDto = getMapper().map(dto, resolveArgumentAtIndex(Creatable.DtoCreatable.class, 1));
-                ENTITY mergedEntity = merge(existingEntity, entityFromDto);
+                ENTITY mergedEntity = getMerger().merge(existingEntity, entityFromDto);
                 beforeDtoUpdate(id, dto, existingEntity, mergedEntity);
                 ENTITY savedEntity = getRepository().save(mergedEntity);
                 afterDtoUpdate(id, dto, savedEntity);
@@ -167,11 +135,34 @@ public interface CommandService {
             default void beforeDtoUpdate(ID id, UPDATE_DTO dto, ENTITY existingEntity, ENTITY newEntity) {
             }
 
-            default ENTITY merge(ENTITY existingEntity, ENTITY newEntity) {
-                return newEntity;
+            default void afterDtoUpdate(ID id, UPDATE_DTO dto, ENTITY savedEntity) {
             }
 
-            default void afterDtoUpdate(ID id, UPDATE_DTO dto, ENTITY savedEntity) {
+            JpaRepository<ENTITY, ID> getRepository();
+        }
+
+
+        interface UpdatableWithParent<ID, ENTITY extends Persistable<ID>, PARENT_ID> extends
+                BaseCommandService.Updatable.UpdatableWithParent<ID, ENTITY, PARENT_ID>,
+                ServiceSupport.ParentSetterSupport<ENTITY, PARENT_ID>,
+                ServiceSupport.MergerSupport {
+            @Override
+            default ENTITY update(PARENT_ID parentId, @NonNull ID id, ENTITY entity) {
+                ENTITY existingEntity = getRepository().findById(id)
+                        .orElseThrow(() -> new NotFoundException("Not found object with id: " + id));
+                ENTITY mergedEntity = getMerger().merge(existingEntity, entity);
+                settingParentBeforeSave(parentId, mergedEntity);
+                beforeUpdate(id, existingEntity, mergedEntity);
+                ENTITY savedEntity = getRepository().save(mergedEntity);
+                afterUpdate(id, savedEntity, existingEntity);
+                return savedEntity;
+            }
+
+
+            default void beforeUpdate(ID id, ENTITY existingEntity, ENTITY newEntity) {
+            }
+
+            default void afterUpdate(ID id, ENTITY savedEntity, ENTITY oldEntity) {
             }
 
             JpaRepository<ENTITY, ID> getRepository();
@@ -181,13 +172,14 @@ public interface CommandService {
                 BaseCommandService.Updatable.DtoUpdatableWithParent<ID, ENTITY, UPDATE_DTO, DTO, PARENT_ID>,
                 ServiceSupport.ParentSetterSupport<ENTITY, PARENT_ID>,
                 ServiceSupport.InterfaceArgumentResolverSupport,
-                ServiceSupport.MapperSupport {
+                ServiceSupport.MapperSupport,
+                ServiceSupport.MergerSupport {
             @Override
             default DTO updateFromDto(PARENT_ID parentId, @NonNull ID id, UPDATE_DTO dto) {
                 ENTITY existingEntity = getRepository().findById(id)
                         .orElseThrow(() -> new NotFoundException("Not found object with id: " + id));
                 ENTITY entityFromDto = getMapper().map(dto, resolveArgumentAtIndex(Creatable.DtoCreatableWithParent.class, 1));
-                ENTITY mergedEntity = merge(existingEntity, entityFromDto);
+                ENTITY mergedEntity = getMerger().merge(existingEntity, entityFromDto);
                 settingParentBeforeSave(parentId, mergedEntity);
                 beforeDtoUpdate(id, dto, existingEntity, mergedEntity);
                 ENTITY savedEntity = getRepository().save(mergedEntity);
@@ -196,10 +188,6 @@ public interface CommandService {
             }
 
             default void beforeDtoUpdate(ID id, UPDATE_DTO dto, ENTITY existingEntity, ENTITY newEntity) {
-            }
-
-            default ENTITY merge(ENTITY existingEntity, ENTITY newEntity) {
-                return newEntity;
             }
 
             default void afterDtoUpdate(ID id, UPDATE_DTO dto, ENTITY savedEntity) {

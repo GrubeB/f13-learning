@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.application.domain.model.Accommodation;
+import pl.app.property.accommodation_availability.application.domain.model.AccommodationAvailability;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailabilityFactory;
+import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityFactory;
 import pl.app.property.accommodation_availability.application.port.in.CreateAccommodationTypeAvailabilityUseCase;
 import pl.app.property.accommodation_availability.application.port.in.IsAccommodationAvailableUseCase;
 import pl.app.property.accommodation_availability.application.port.in.IsAccommodationTypeAvailableUseCase;
@@ -40,8 +40,8 @@ class AvailabilityService implements
     public Boolean isAccommodationAvailable(IsAccommodationAvailableCommand command) {
         AccommodationTypeAvailability accommodationTypeAvailability = repositoryPort
                 .loadByAccommodationId(command.getAccommodationId(), new DateRange<>(command.getStartDate(), command.getEndDate()));
-        Accommodation accommodation = accommodationTypeAvailability.getAccommodationById(command.getAccommodationId());
-        return accommodation.isAvailable(new DateRange<>(command.getStartDate(), command.getEndDate()));
+        AccommodationAvailability accommodationAvailability = accommodationTypeAvailability.getAccommodationById(command.getAccommodationId());
+        return accommodationAvailability.isAvailable(new DateRange<>(command.getStartDate(), command.getEndDate()));
     }
 
     @Override

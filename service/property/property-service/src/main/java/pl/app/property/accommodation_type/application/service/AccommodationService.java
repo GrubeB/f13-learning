@@ -29,24 +29,24 @@ class AccommodationService implements
 
     @Override
     public UUID createAccommodationType(CreateAccommodationTypeCommand command) {
-        AccommodationType newAccommodationType = accommodationTypeFactory.createAccommodationType(new AggregateId(command.getPropertyId()));
-        accommodationTypeRepositoryPort.save(newAccommodationType);
-        return newAccommodationType.getAggregateId().getId();
+        AccommodationType newAggregate = accommodationTypeFactory.createAccommodationType(new AggregateId(command.getPropertyId()));
+        accommodationTypeRepositoryPort.save(newAggregate);
+        return newAggregate.getAggregateId().getId();
     }
 
     @Override
     public UUID addAccommodation(AddAccommodationCommand command) {
-        AccommodationType accommodationType = accommodationTypeRepositoryPort.load(new AggregateId(command.getAccommodationTypeId()));
-        Accommodation newAccommodation = new Accommodation(command.getName(), command.getDescription());
-        accommodationType.addAccommodation(newAccommodation);
-        accommodationTypeRepositoryPort.save(accommodationType);
+        AccommodationType aggregate = accommodationTypeRepositoryPort.load(new AggregateId(command.getAccommodationTypeId()));
+        Accommodation newAccommodation = new Accommodation(aggregate, command.getName(), command.getDescription());
+        aggregate.addAccommodation(newAccommodation);
+        accommodationTypeRepositoryPort.save(aggregate);
         return newAccommodation.getId();
     }
 
     @Override
     public void removeAccommodation(RemoveAccommodationCommand command) {
-        AccommodationType accommodationType = accommodationTypeRepositoryPort.load(new AggregateId(command.getAccommodationTypeId()));
-        accommodationType.removeAccommodationById(command.getAccommodationId());
-        accommodationTypeRepositoryPort.save(accommodationType);
+        AccommodationType aggregate = accommodationTypeRepositoryPort.load(new AggregateId(command.getAccommodationTypeId()));
+        aggregate.removeAccommodationById(new AggregateId(command.getAccommodationId()));
+        accommodationTypeRepositoryPort.save(aggregate);
     }
 }

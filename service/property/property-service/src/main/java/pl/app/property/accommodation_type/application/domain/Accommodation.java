@@ -1,25 +1,32 @@
 package pl.app.property.accommodation_type.application.domain;
 
 
+import jakarta.persistence.*;
 import lombok.Getter;
-import pl.app.common.ddd.BaseEntity;
+import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 
-import java.util.UUID;
-
 @EntityAnnotation
+@Entity
 @Getter
-public class Accommodation extends BaseEntity {
+@Table(name = "t_accommodation")
+public class Accommodation extends BaseJpaAuditDomainAggregateRoot<AccommodationType> {
+    @Column(name = "accommodation_name", nullable = false)
     private String name;
     private String description;
 
-    public Accommodation(String name, String description) {
+    @ManyToOne
+    @JoinColumn(name = "accommodation_type", nullable = false)
+    private AccommodationType accommodationType;
+
+    @SuppressWarnings("unused")
+    protected Accommodation() {
         super();
-        this.name = name;
-        this.description = description;
     }
-    public Accommodation(UUID entityId, String name, String description) {
-        super(entityId);
+
+    public Accommodation(AccommodationType accommodationType, String name, String description) {
+        super();
+        this.accommodationType = accommodationType;
         this.name = name;
         this.description = description;
     }

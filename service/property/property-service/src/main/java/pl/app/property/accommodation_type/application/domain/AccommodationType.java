@@ -1,36 +1,51 @@
 package pl.app.property.accommodation_type.application.domain;
 
 
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
-import pl.app.common.ddd.BaseAggregateRoot;
+import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.common.ddd.event.DomainEventPublisher;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationCreatedEvent;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationRemovedEvent;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationTypeCreatedEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.Set;
+
 
 @AggregateRootAnnotation
+@Entity
 @Getter
-public class AccommodationType extends BaseAggregateRoot {
-    private final List<Accommodation> accommodations;
-    private final AggregateId propertyId;
-
-    public AccommodationType(DomainEventPublisher eventPublisher, AggregateId propertyId) {
-        super(eventPublisher);
-        this.accommodations = new ArrayList<>();
-        this.propertyId = propertyId;
-        eventPublisher.publish(new AccommodationTypeCreatedEvent(this.propertyId.getId(), this.aggregateId.getId()));
+@Table(name = "t_accommodation_type")
+public class AccommodationType extends BaseJpaAuditDomainAggregateRoot<AccommodationType> {
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "accommodationType",
+            orphanRemoval = true)
+    @Builder.Default
+    private Set<Accommodation> accommodations = new LinkedHashSet<>();
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "property_id", nullable = false))
+    })
+    private AggregateId property;
+    @SuppressWarnings("unused")
+    protected AccommodationType() {
+        super();
     }
 
-    public AccommodationType(AggregateId aggregateId, List<Accommodation> accommodations, AggregateId propertyId) {
+    public AccommodationType(AggregateId propertyId) {
+        super();
+        this.property = propertyId;
+        eventPublisher.publish(new AccommodationTypeCreatedEvent(this.property.getId(), this.aggregateId.getId()));
+    }
+
+    public AccommodationType(AggregateId aggregateId, Set<Accommodation> accommodations, AggregateId propertyId) {
         super(aggregateId);
-        this.propertyId = propertyId;
+        this.property = propertyId;
         this.accommodations = accommodations;
     }
 
@@ -39,24 +54,24 @@ public class AccommodationType extends BaseAggregateRoot {
             throw new AccommodationTypeException.DuplicatedAccommodationNameException();
         }
         accommodations.add(accommodation);
-        eventPublisher.publish(new AccommodationCreatedEvent(propertyId.getId(), aggregateId.getId(), accommodation.getId()));
+        eventPublisher.publish(new AccommodationCreatedEvent(property.getId(), aggregateId.getId(), accommodation.getId()));
     }
 
     public void removeAccommodation(Accommodation accommodation) {
-        if (accommodations.removeIf(acc -> acc.getId().equals(accommodation.getId()))) {
-            eventPublisher.publish(new AccommodationRemovedEvent(propertyId.getId(), aggregateId.getId(), accommodation.getId()));
+        if (accommodations.removeIf(acc -> acc.getAggregateId().equals(accommodation.getAggregateId()))) {
+            eventPublisher.publish(new AccommodationRemovedEvent(property.getId(), aggregateId.getId(), accommodation.getId()));
         }
     }
 
-    public void removeAccommodationById(UUID accommodationId) {
-        Accommodation accommodationToRemove = getAccommodationById(accommodationId)
-                .orElseThrow(() -> AccommodationTypeException.NotFoundAccommodationException.fromId(accommodationId));
+    public void removeAccommodationById(AggregateId accommodation) {
+        Accommodation accommodationToRemove = getAccommodationById(accommodation)
+                .orElseThrow(() -> AccommodationTypeException.NotFoundAccommodationException.fromId(accommodation.getId()));
         this.removeAccommodation(accommodationToRemove);
     }
 
-    private Optional<Accommodation> getAccommodationById(UUID accommodationId) {
+    private Optional<Accommodation> getAccommodationById(AggregateId accommodation) {
         return this.accommodations.stream()
-                .filter(acc -> acc.getId().equals(accommodationId))
+                .filter(acc -> acc.getAggregateId().equals(accommodation))
                 .findFirst();
     }
 }

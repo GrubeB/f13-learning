@@ -1,5 +1,8 @@
-package pl.app.property.property.application.domain.model;
+package pl.app.property.property.application.domain;
 
+import lombok.Getter;
+
+@Getter
 public enum PropertyType {
     APARTMENT("Apartment"),
     HOLIDAY_HOME("Holiday home"),
@@ -26,9 +29,5 @@ public enum PropertyType {
 
     PropertyType(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 }

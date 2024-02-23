@@ -1,53 +1,60 @@
 package pl.app.property.accommodation_availability.application.domain.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.ToString;
 import pl.app.common.ddd.AggregateId;
-import pl.app.common.ddd.BaseAggregateRoot;
+import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.ddd.annotation.DataTransferObjectAnnotation;
-import pl.app.common.ddd.event.DomainEventPublisher;
 import pl.app.common.ddd.shared.DateRange;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAssignmentPolicy;
+import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
+import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 
 @AggregateRootAnnotation
+@Entity
 @Getter
-public class AccommodationTypeAvailability extends BaseAggregateRoot {
+@Table(name = "t_accommodation_type_availability")
+public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRoot<AccommodationTypeAvailability> {
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "property_id", nullable = false))
+    })
     private AggregateId propertyId;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "accommodation_type_id", nullable = false))
+    })
     private AggregateId accommodationTypeId;
-    private List<Accommodation> accommodations;
-    private List<AccommodationTypeReservation> typeReservations;
 
+    @OneToMany(mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private Set<AccommodationAvailability> accommodationAvailabilities = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private Set<AccommodationTypeReservation> typeReservations = new LinkedHashSet<>();
+
+    @Transient
     private AccommodationAssignmentPolicy assignmentPolicy;
+    @Transient
     private AccommodationTypeAvailabilityPolicy typeAvailabilityPolicy;
-    public AccommodationTypeAvailability(DomainEventPublisher eventPublisher, AggregateId propertyId, AggregateId accommodationTypeId,
-                                         AccommodationAssignmentPolicy assignmentPolicy, AccommodationTypeAvailabilityPolicy typeAvailabilityPolicy) {
-        super(eventPublisher);
-        this.propertyId = propertyId;
-        this.accommodationTypeId = accommodationTypeId;
-        this.accommodations = new ArrayList<>();
-        this.typeReservations = new ArrayList<>();
-        this.assignmentPolicy = assignmentPolicy;
-        this.typeAvailabilityPolicy = typeAvailabilityPolicy;
+
+    @SuppressWarnings("unused")
+    protected AccommodationTypeAvailability() {
+        super();
     }
 
-    public AccommodationTypeAvailability(AggregateId aggregateId,
-                                         DomainEventPublisher eventPublisher,
-                                         AggregateId propertyId,
-                                         AggregateId accommodationTypeId,
-                                         List<Accommodation> accommodations,
-                                         List<AccommodationTypeReservation> typeReservations) {
-        super(aggregateId, eventPublisher);
+    public AccommodationTypeAvailability(AggregateId propertyId, AggregateId accommodationTypeId) {
+        super();
         this.propertyId = propertyId;
         this.accommodationTypeId = accommodationTypeId;
-        this.accommodations = accommodations;
-        this.typeReservations = typeReservations;
     }
 
     // AVAILABILITY
@@ -64,7 +71,7 @@ public class AccommodationTypeAvailability extends BaseAggregateRoot {
     // RESERVATION
     public AccommodationTypeReservation createTypeReservation(DateRange<LocalDate> dateRange) {
         verifyAccommodationTypeAvailability(dateRange, 1);
-        AccommodationTypeReservation newAccommodationTypeReservation = new AccommodationTypeReservation(dateRange);
+        AccommodationTypeReservation newAccommodationTypeReservation = new AccommodationTypeReservation(dateRange, this);
         typeReservations.add(newAccommodationTypeReservation);
         return newAccommodationTypeReservation;
     }
@@ -102,22 +109,22 @@ public class AccommodationTypeAvailability extends BaseAggregateRoot {
     }
 
     // GETTERS
-    public Accommodation getAccommodationById(UUID accommodationId) {
-        return accommodations.stream()
-                .filter(accommodation -> accommodation.getId().equals(accommodationId))
+    public AccommodationAvailability getAccommodationById(UUID accommodationId) {
+        return accommodationAvailabilities.stream()
+                .filter(accommodation -> Objects.equals(accommodation.getId(), accommodationId))
                 .findFirst().orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationException.fromId(accommodationId));
     }
 
-    public Accommodation getAccommodationByRestrictionId(UUID restrictionId) {
-        return accommodations.stream()
+    public AccommodationAvailability getAccommodationByRestrictionId(UUID restrictionId) {
+        return accommodationAvailabilities.stream()
                 .filter(accommodation -> accommodation.containsRestrictionById(restrictionId))
                 .findFirst().orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationException::new);
     }
 
     public List<AccommodationRestriction> getReservations() {
-        return this.accommodations.stream()
-                .map(Accommodation::getRestrictions)
-                .flatMap(List::stream)
+        return this.accommodationAvailabilities.stream()
+                .map(AccommodationAvailability::getRestrictions)
+                .flatMap(Set::stream)
                 .collect(Collectors.toList());
     }
 
