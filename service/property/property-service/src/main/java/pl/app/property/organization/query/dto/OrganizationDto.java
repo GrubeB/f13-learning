@@ -9,6 +9,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrganizationDto implements Serializable {
-    private UUID organizationId;
+    private UUID id;
     private String name;
 }

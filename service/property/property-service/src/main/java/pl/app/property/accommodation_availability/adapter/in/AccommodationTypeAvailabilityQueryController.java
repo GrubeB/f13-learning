@@ -5,10 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.property.accommodation_availability.adapter.out.persistence.AccommodationTypeAvailabilityEntity;
 import pl.app.property.accommodation_availability.query.AccommodationTypeAvailabilityQueryService;
+import pl.app.property.accommodation_availability.query.model.AccommodationTypeAvailabilityQuery;
 
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -16,10 +15,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 public class AccommodationTypeAvailabilityQueryController implements
-        QueryController.DtoFetchable.Full<UUID, AccommodationTypeAvailabilityEntity> {
-
+        QueryController.DtoFetchable.Full<UUID, AccommodationTypeAvailabilityQuery> {
     public static final String resourceName = "accommodation-type-availabilities";
     public static final String resourcePath = "/api/v1/" + resourceName;
-
-    private final AccommodationTypeAvailabilityQueryService service;
+    public final AccommodationTypeAvailabilityQueryService service;
 }

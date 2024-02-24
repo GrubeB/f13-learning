@@ -21,8 +21,8 @@ import java.util.UUID;
 @Getter
 public class AccommodationTypeQueryService implements
         QueryService.Full<UUID, AccommodationTypeQuery> {
-    private final AccommodationTypeRepository repository;
-    private final AccommodationTypeRepository specificationRepository;
+    private final AccommodationTypeQueryRepository repository;
+    private final AccommodationTypeQueryRepository specificationRepository;
     private final AccommodationTypeQueryMapper mapper;
 
     private final Map<String, Class<?>> supportedDtoClasses = new LinkedHashMap<>() {{

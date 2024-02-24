@@ -7,6 +7,7 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
+import pl.app.common.ddd.event.DomainEventPublisher;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationCreatedEvent;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationRemovedEvent;
 import pl.app.property.accommodation_type.application.domain.event.AccommodationTypeCreatedEvent;
@@ -25,7 +26,6 @@ public class AccommodationType extends BaseJpaAuditDomainAggregateRoot<Accommoda
             cascade = CascadeType.ALL,
             mappedBy = "accommodationType",
             orphanRemoval = true)
-    @Builder.Default
     private Set<Accommodation> accommodations = new LinkedHashSet<>();
     @Embedded
     @AttributeOverrides({
@@ -37,16 +37,10 @@ public class AccommodationType extends BaseJpaAuditDomainAggregateRoot<Accommoda
         super();
     }
 
-    public AccommodationType(AggregateId propertyId) {
-        super();
+    public AccommodationType(DomainEventPublisher eventPublisher, AggregateId propertyId) {
+        super(eventPublisher);
         this.property = propertyId;
         eventPublisher.publish(new AccommodationTypeCreatedEvent(this.property.getId(), this.aggregateId.getId()));
-    }
-
-    public AccommodationType(AggregateId aggregateId, Set<Accommodation> accommodations, AggregateId propertyId) {
-        super(aggregateId);
-        this.property = propertyId;
-        this.accommodations = accommodations;
     }
 
     public void addAccommodation(Accommodation accommodation) {

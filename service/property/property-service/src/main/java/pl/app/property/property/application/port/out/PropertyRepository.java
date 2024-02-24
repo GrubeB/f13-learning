@@ -13,6 +13,4 @@ import java.util.UUID;
 public interface PropertyRepository extends
         JpaRepository<Property, UUID>,
         JpaSpecificationExecutor<Property> {
-    @Query("select p.propertyId from PropertyEntity p")
-    List<UUID> findIdAll();
 }

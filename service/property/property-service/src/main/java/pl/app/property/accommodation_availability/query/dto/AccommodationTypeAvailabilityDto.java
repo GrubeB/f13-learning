@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.app.common.ddd.AggregateId;
+import pl.app.common.ddd.shared.DateRange;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.property.accommodation_availability.application.domain.model.TypeReservationAssignedStatus;
 import pl.app.property.accommodation_availability.application.domain.model.AccommodationRestrictionStatus;
+import pl.app.property.accommodation_availability.application.domain.model.TypeReservationAssignedStatus;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,31 +20,50 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccommodationTypeAvailabilityDto implements Serializable {
-    private UUID accommodationTypeAvailabilityId;
-    private Set<AccommodationReservationDto> accommodationRestrictions;
-    private Set<AccommodationTypeReservationDto> accommodationTypeReservations;
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class AccommodationReservationDto implements Serializable {
-        private UUID accommodationRestrictionId;
-        private AccommodationRestrictionStatus status;
-        private LocalDate startDate;
-        private LocalDate endDate;
-        private BaseDto accommodation;
-    }
+    private UUID id;
+    private BaseDto propertyId;
+    private BaseDto accommodationTypeId;
+    private Set<AccommodationAvailabilityDto> accommodationAvailabilities;
+    private Set<AccommodationTypeReservationDto> typeReservations;
 
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class AccommodationTypeReservationDto implements Serializable {
-        private UUID accommodationTypeReservationId;
-        private LocalDate startDate;
-        private LocalDate endDate;
-        private TypeReservationAssignedStatus status;
-        private Set<AccommodationReservationDto> accommodationRestrictions;
+        private UUID id;
+        private DateRange<LocalDate> dateRange;
+        private TypeReservationAssignedStatus assignedStatus;
+        private Set<AccommodationTypeReservationItemDto> reservationItems;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class AccommodationTypeReservationItemDto implements Serializable {
+        private UUID id;
+        private AccommodationAvailabilityDto accommodationAvailability;
+        private AccommodationRestrictionDto restriction;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class AccommodationAvailabilityDto implements Serializable {
+        private UUID id;
+        private AggregateId accommodationId;
+        private Set<AccommodationRestrictionDto> restrictions;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class AccommodationRestrictionDto implements Serializable {
+        private UUID id;
+        private AccommodationRestrictionStatus status;
+        private DateRange<LocalDate> dateRange;
     }
 }

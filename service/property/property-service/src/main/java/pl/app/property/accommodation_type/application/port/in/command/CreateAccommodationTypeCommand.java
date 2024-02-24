@@ -2,8 +2,8 @@ package pl.app.property.accommodation_type.application.port.in.command;
 
 import lombok.*;
 import pl.app.common.cqrs.command.annotation.CommandAnnotation;
-import pl.app.property.accommodation_type_details.application.domain.model.GenderRoomType;
-import pl.app.property.accommodation_type_details.application.domain.model.RoomType;
+import pl.app.property.accommodation_type_details.application.domain.GenderRoomType;
+import pl.app.property.accommodation_type_details.application.domain.RoomType;
 
 import java.io.Serializable;
 import java.util.UUID;

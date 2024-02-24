@@ -19,7 +19,7 @@ import java.util.UUID;
 public class PropertyDetails extends BaseAuditEntity<PropertyDetails, UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "property_details_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
     private String email;
     private String phone;

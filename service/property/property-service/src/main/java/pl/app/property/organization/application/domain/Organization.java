@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Organization extends BaseAuditEntity<Organization, UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "organization_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
     @Column(nullable = false)

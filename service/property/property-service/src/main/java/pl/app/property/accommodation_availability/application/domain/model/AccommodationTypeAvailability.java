@@ -25,12 +25,12 @@ import java.util.stream.Collectors;
 public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRoot<AccommodationTypeAvailability> {
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "aggregateId", column = @Column(name = "property_id", nullable = false))
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "property", nullable = false))
     })
     private AggregateId propertyId;
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "aggregateId", column = @Column(name = "accommodation_type_id", nullable = false))
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "accommodation_type", nullable = false))
     })
     private AggregateId accommodationTypeId;
 
@@ -140,22 +140,22 @@ public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRo
                 .findAny().orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeReservationException.fromId(typeReservationId));
     }
 
-    public List<AccommodationRestriction> getAssignedReservationsInRange(DateRange<LocalDate> dateRange) {
+    public Set<AccommodationRestriction> getAssignedReservationsInRange(DateRange<LocalDate> dateRange) {
         return getReservations().stream()
                 .filter(reservation -> reservation.isRestrictionCollideWith(dateRange))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public List<AccommodationTypeReservation> getNoAssignedReservations() {
+    public Set<AccommodationTypeReservation> getNoAssignedReservations() {
         return this.typeReservations.stream()
                 .filter(Predicate.not(AccommodationTypeReservation::isAssigned))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public List<AccommodationTypeReservation> getNoAssignedReservationsInRange(DateRange<LocalDate> dateRange) {
+    public Set<AccommodationTypeReservation> getNoAssignedReservationsInRange(DateRange<LocalDate> dateRange) {
         return this.getNoAssignedReservations().stream()
                 .filter(typeReservation -> typeReservation.isReservationCollideWith(dateRange))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public void setPolicies(AccommodationAssignmentPolicy assignmentPolicy, AccommodationTypeAvailabilityPolicy typeAvailabilityPolicy) {

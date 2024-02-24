@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 // try to reserve only one accommodation
 // policy may reserve 1 reservation
@@ -24,7 +25,7 @@ class DefaultAccommodationAssignmentPolicy implements
     public List<PossibleReservation> getPossibleAccommodationToReservation(
             AccommodationTypeAvailability availability,
             AccommodationTypeReservation typeReservation) {
-        final List<AccommodationAvailability> accommodationAvailabilities = availability.getAccommodationAvailabilities();
+        final Set<AccommodationAvailability> accommodationAvailabilities = availability.getAccommodationAvailabilities();
         final DateRange<LocalDate> dateRange = typeReservation.getDateRange();
 
         Optional<AccommodationAvailability> possibleAccommodation = accommodationAvailabilities.stream()

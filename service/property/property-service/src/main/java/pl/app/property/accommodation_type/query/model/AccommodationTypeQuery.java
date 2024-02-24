@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.property.accommodation_type_details.application.domain.model.AccommodationTypeDetails;
+import pl.app.property.accommodation_type_details.application.domain.AccommodationTypeDetails;
 
 import java.util.Set;
 import java.util.UUID;

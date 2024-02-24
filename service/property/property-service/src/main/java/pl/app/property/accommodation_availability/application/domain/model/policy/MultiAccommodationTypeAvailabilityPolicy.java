@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 // without overbooking
 // any number of accommodations
@@ -22,9 +23,9 @@ class MultiAccommodationTypeAvailabilityPolicy implements AccommodationTypeAvail
             AccommodationTypeAvailability accommodationTypeAvailability,
             Integer numberOdAccommodations,
             DateRange<LocalDate> dateRange) {
-        final List<AccommodationAvailability> accommodationAvailabilities = accommodationTypeAvailability.getAccommodationAvailabilities();
-        final List<AccommodationRestriction> assignedReservation = accommodationTypeAvailability.getAssignedReservationsInRange(dateRange);
-        final List<AccommodationTypeReservation> noAssignedReservationTypes = accommodationTypeAvailability.getNoAssignedReservationsInRange(dateRange);
+        final Set<AccommodationAvailability> accommodationAvailabilities = accommodationTypeAvailability.getAccommodationAvailabilities();
+        final Set<AccommodationRestriction> assignedReservation = accommodationTypeAvailability.getAssignedReservationsInRange(dateRange);
+        final Set<AccommodationTypeReservation> noAssignedReservationTypes = accommodationTypeAvailability.getNoAssignedReservationsInRange(dateRange);
 
         Map<LocalDate, Integer> numberOfReservationOnSpecificDay = getNumberOfReservationOnSpecificDay(assignedReservation, noAssignedReservationTypes);
         return numberOfReservationOnSpecificDay.values().stream()
@@ -32,8 +33,8 @@ class MultiAccommodationTypeAvailabilityPolicy implements AccommodationTypeAvail
     }
 
     private Map<LocalDate, Integer> getNumberOfReservationOnSpecificDay(
-            List<AccommodationRestriction> assignedReservation,
-            List<AccommodationTypeReservation> noAssignedReservationTypes) {
+            Set<AccommodationRestriction> assignedReservation,
+            Set<AccommodationTypeReservation> noAssignedReservationTypes) {
         Map<LocalDate, Integer> numberOfReservationOnSpecificDay = new HashMap<>(); // date, numberOfReservations
         assignedReservation.forEach(reservation -> {
             LocalDate reservationStartDate = reservation.getDateRange().getFromDate();

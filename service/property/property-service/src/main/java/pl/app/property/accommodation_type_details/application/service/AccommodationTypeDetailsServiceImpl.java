@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_type_details.application.domain.service;
+package pl.app.property.accommodation_type_details.application.service;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

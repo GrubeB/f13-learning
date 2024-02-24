@@ -1,5 +1,5 @@
 CREATE TABLE t_property_address (
-  address_id UUID NOT NULL,
+  id UUID NOT NULL,
    created_by VARCHAR(255) NOT NULL,
    created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
    last_modified_by VARCHAR(255),
@@ -10,11 +10,11 @@ CREATE TABLE t_property_address (
    country VARCHAR(255),
    region VARCHAR(255),
    zip_code VARCHAR(255),
-   CONSTRAINT pk_t_property_address PRIMARY KEY (address_id)
+   CONSTRAINT pk_t_property_address PRIMARY KEY (id)
 );
 
 CREATE TABLE t_property_details (
-  property_details_id UUID NOT NULL,
+   id UUID NOT NULL,
    created_by VARCHAR(255) NOT NULL,
    created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
    last_modified_by VARCHAR(255),
@@ -24,14 +24,14 @@ CREATE TABLE t_property_details (
    website VARCHAR(255),
    description VARCHAR(255),
    address_id UUID NOT NULL,
-   CONSTRAINT pk_t_property_details PRIMARY KEY (property_details_id)
+   CONSTRAINT pk_t_property_details PRIMARY KEY (id)
 );
 
 ALTER TABLE t_property_details ADD CONSTRAINT FK_T_PROPERTY_DETAILS_ON_ADDRESS
-    FOREIGN KEY (address_id) REFERENCES t_property_address (address_id);
+    FOREIGN KEY (address_id) REFERENCES t_property_address (id);
 
 CREATE TABLE t_property (
-  property_id UUID NOT NULL,
+   id UUID NOT NULL,
    created_by VARCHAR(255) NOT NULL,
    created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
    last_modified_by VARCHAR(255),
@@ -44,11 +44,11 @@ CREATE TABLE t_property (
    check_out_to_time time WITHOUT TIME ZONE,
    property_details_id UUID,
    organization_id UUID NOT NULL,
-   CONSTRAINT pk_t_property PRIMARY KEY (property_id)
+   CONSTRAINT pk_t_property PRIMARY KEY (id)
 );
 
 ALTER TABLE t_property ADD CONSTRAINT FK_T_PROPERTY_ON_ORGANIZATION
-    FOREIGN KEY (organization_id) REFERENCES t_organization (organization_id);
+    FOREIGN KEY (organization_id) REFERENCES t_organization (id);
 
 ALTER TABLE t_property ADD CONSTRAINT FK_T_PROPERTY_ON_PROPERTY_DETAILS
-    FOREIGN KEY (property_details_id) REFERENCES t_property_details (property_details_id);
+    FOREIGN KEY (property_details_id) REFERENCES t_property_details (id);

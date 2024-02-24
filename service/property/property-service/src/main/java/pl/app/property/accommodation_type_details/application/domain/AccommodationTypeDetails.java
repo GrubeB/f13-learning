@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_type_details.application.domain.model;
+package pl.app.property.accommodation_type_details.application.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class AccommodationTypeDetails extends BaseAuditEntity<AccommodationTypeDetails, UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "type_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
     @Column(name = "accommodation_name")
     private String name;

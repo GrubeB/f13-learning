@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.command_controller.CommandController;
-import pl.app.property.accommodation_type_details.application.domain.model.AccommodationTypeDetails;
+import pl.app.property.accommodation_type_details.application.domain.AccommodationTypeDetails;
 import pl.app.property.accommodation_type_details.application.port.in.AccommodationTypeDetailsService;
 import pl.app.property.accommodation_type_details.application.port.in.command.UpdateAccommodationTypeDetailsCommand;
 import pl.app.property.accommodation_type_details.query.dto.AccommodationTypeDetailsDto;
