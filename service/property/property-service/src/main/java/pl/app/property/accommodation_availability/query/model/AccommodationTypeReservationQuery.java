@@ -35,7 +35,7 @@ public class AccommodationTypeReservationQuery extends BaseAuditEntity<Accommoda
 
     @OneToMany(mappedBy = "accommodationTypeReservation")
     @ToString.Exclude
-    private Set<AccommodationTypeReservationItemQuery> reservationItems= new LinkedHashSet<>();
+    private Set<AccommodationTypeReservationItemQuery> reservationItems = new LinkedHashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "accommodation_type_availability")

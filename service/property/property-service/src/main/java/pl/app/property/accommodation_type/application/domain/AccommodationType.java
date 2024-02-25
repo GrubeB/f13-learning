@@ -2,7 +2,6 @@ package pl.app.property.accommodation_type.application.domain;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
@@ -26,12 +25,13 @@ public class AccommodationType extends BaseJpaAuditDomainAggregateRoot<Accommoda
             cascade = CascadeType.ALL,
             mappedBy = "accommodationType",
             orphanRemoval = true)
-    private Set<Accommodation> accommodations = new LinkedHashSet<>();
+    private final Set<Accommodation> accommodations = new LinkedHashSet<>();
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "property_id", nullable = false))
     })
     private AggregateId property;
+
     @SuppressWarnings("unused")
     protected AccommodationType() {
         super();

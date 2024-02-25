@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.property.organization.application.domain.Organization;
-import pl.app.property.organization.query.dto.OrganizationDto;
 import pl.app.property.organization.application.port.out.OrganizationRepository;
+import pl.app.property.organization.query.dto.OrganizationDto;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

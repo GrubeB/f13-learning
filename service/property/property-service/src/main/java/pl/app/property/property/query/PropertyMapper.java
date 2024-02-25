@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
+import pl.app.property.property.application.domain.Property;
 import pl.app.property.property.application.domain.PropertyAddress;
 import pl.app.property.property.application.domain.PropertyDetails;
-import pl.app.property.property.application.domain.Property;
 import pl.app.property.property.query.dto.PropertyDto;
 
 @Getter

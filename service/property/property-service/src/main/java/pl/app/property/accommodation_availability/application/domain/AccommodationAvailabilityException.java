@@ -30,6 +30,7 @@ public interface AccommodationAvailabilityException {
             super(message);
         }
     }
+
     class AccommodationRestrictionValidationException extends ValidationException {
         public AccommodationRestrictionValidationException() {
             super("argument is not valid");
@@ -39,6 +40,7 @@ public interface AccommodationAvailabilityException {
             super(message);
         }
     }
+
     class NotFoundAccommodationTypeReservationException extends NotFoundException {
         public NotFoundAccommodationTypeReservationException() {
             super("not found accommodation type reservation");
@@ -66,6 +68,7 @@ public interface AccommodationAvailabilityException {
             return new NotFoundAccommodationRestrictionException("not found accommodation restriction with id: " + restrictionId);
         }
     }
+
     class NotFoundAccommodationException extends NotFoundException {
         public NotFoundAccommodationException() {
             super("not found accommodation");
@@ -79,6 +82,7 @@ public interface AccommodationAvailabilityException {
             return new NotFoundAccommodationException("not found accommodation with id: " + accommodationId);
         }
     }
+
     class NotFoundAccommodationTypeAvailabilityException extends NotFoundException {
         public NotFoundAccommodationTypeAvailabilityException() {
             super("not found accommodation type availability");

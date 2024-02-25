@@ -9,12 +9,15 @@ import lombok.ToString;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.common.util.DateUtils;
 import pl.app.common.ddd.annotation.DataTransferObjectAnnotation;
 import pl.app.common.ddd.shared.DateRange;
+import pl.app.common.util.DateUtils;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @AggregateRootAnnotation
@@ -35,10 +38,10 @@ public class AccommodationTypeReservation extends BaseJpaAuditDomainAggregateRoo
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationTypeReservation", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private Set<AccommodationTypeReservationItem> reservationItems= new LinkedHashSet<>();
+    private Set<AccommodationTypeReservationItem> reservationItems = new LinkedHashSet<>();
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "accommodation_type_availability",nullable = false)
+    @JoinColumn(name = "accommodation_type_availability", nullable = false)
     private AccommodationTypeAvailability accommodationTypeAvailability;
 
     @SuppressWarnings("unused")
@@ -91,6 +94,7 @@ public class AccommodationTypeReservation extends BaseJpaAuditDomainAggregateRoo
         ));
         setAssignedStatus(TypeReservationAssignedStatus.AUTO_ASSIGNED);
     }
+
     public void autoAssignTypeReservation(AccommodationTypeAvailability typeAvailability, AccommodationAssignmentPolicy assignmentPolicy) {
         if (isAssigned()) {
             removeAllReservations();
@@ -119,7 +123,8 @@ public class AccommodationTypeReservation extends BaseJpaAuditDomainAggregateRoo
     }
 
     @DataTransferObjectAnnotation
-    public record ReservationRequest(AccommodationAvailability accommodationAvailability, DateRange<LocalDate> dateRange) {
+    public record ReservationRequest(AccommodationAvailability accommodationAvailability,
+                                     DateRange<LocalDate> dateRange) {
     }
 
     // VERIFYING/VALIDATION

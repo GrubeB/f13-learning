@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.property.accommodation_type_details.application.port.in.AccommodationTypeDetailsService;
-import pl.app.property.accommodation_type_details.application.port.in.command.CreateAccommodationTypeDetailsCommand;
-import pl.app.property.accommodation_type_details.query.dto.AccommodationTypeDetailsDto;
-import pl.app.property.accommodation_type_details.query.AccommodationTypeDetailsMapper;
 import pl.app.property.accommodation_type_details.application.port.out.AccommodationTypeDetailsRepository;
+import pl.app.property.accommodation_type_details.query.AccommodationTypeDetailsMapper;
 
 @Service
 @RequiredArgsConstructor

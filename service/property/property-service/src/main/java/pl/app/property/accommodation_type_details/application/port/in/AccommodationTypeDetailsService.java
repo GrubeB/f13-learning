@@ -1,10 +1,10 @@
 package pl.app.property.accommodation_type_details.application.port.in;
 
 import pl.app.common.service.CommandService;
+import pl.app.property.accommodation_type_details.application.domain.AccommodationTypeDetails;
 import pl.app.property.accommodation_type_details.application.port.in.command.CreateAccommodationTypeDetailsCommand;
 import pl.app.property.accommodation_type_details.application.port.in.command.UpdateAccommodationTypeDetailsCommand;
 import pl.app.property.accommodation_type_details.query.dto.AccommodationTypeDetailsDto;
-import pl.app.property.accommodation_type_details.application.domain.AccommodationTypeDetails;
 
 import java.util.UUID;
 

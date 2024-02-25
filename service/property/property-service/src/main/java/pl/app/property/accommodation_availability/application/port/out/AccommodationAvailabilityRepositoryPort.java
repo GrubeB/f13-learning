@@ -12,7 +12,9 @@ import java.util.UUID;
 @DomainRepositoryAnnotation
 public interface AccommodationAvailabilityRepositoryPort {
     AccommodationTypeAvailability load(AggregateId aggregateId);
+
     AccommodationTypeAvailability load(AggregateId aggregateId, DateRange<LocalDate> dateRange);
+
     AccommodationTypeAvailability loadByAccommodationTypeId(AggregateId accommodationTypeId);
 
     AccommodationTypeAvailability loadByAccommodationTypeId(AggregateId accommodationTypeId, DateRange<LocalDate> dateRange);

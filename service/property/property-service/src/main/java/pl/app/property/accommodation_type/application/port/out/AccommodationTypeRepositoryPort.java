@@ -8,5 +8,6 @@ import pl.app.property.accommodation_type.application.domain.AccommodationType;
 @DomainRepositoryAnnotation
 public interface AccommodationTypeRepositoryPort {
     AccommodationType load(AggregateId aggregateId);
+
     void save(AccommodationType aggregate);
 }

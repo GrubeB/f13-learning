@@ -33,10 +33,10 @@ public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRo
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private Set<AccommodationAvailability> accommodationAvailabilities = new LinkedHashSet<>();
+    private final Set<AccommodationAvailability> accommodationAvailabilities = new LinkedHashSet<>();
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private Set<AccommodationTypeReservation> typeReservations = new LinkedHashSet<>();
+    private final Set<AccommodationTypeReservation> typeReservations = new LinkedHashSet<>();
 
     @Transient
     private AccommodationAssignmentPolicy assignmentPolicy;

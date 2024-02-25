@@ -26,13 +26,14 @@ public class AccommodationTypeAvailabilityEventHandler {
 
     @EventHandlingAnnotation
     public void handle(AccommodationCreatedEvent event) {
-        var command = new AddAccommodationAvailabilityCommand(event.getAccommodationTypeId(),event.getAccommodationId());
+        var command = new AddAccommodationAvailabilityCommand(event.getAccommodationTypeId(), event.getAccommodationId());
         gateway.send(command);
 
     }
+
     @EventHandlingAnnotation
     public void handle(AccommodationRemovedEvent event) {
-        var command = new RemoveAccommodationAvailabilityCommand(event.getAccommodationTypeId(),event.getAccommodationId());
+        var command = new RemoveAccommodationAvailabilityCommand(event.getAccommodationTypeId(), event.getAccommodationId());
         gateway.send(command);
     }
 }

@@ -8,7 +8,9 @@ import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseAuditEntity;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Immutable
@@ -30,6 +32,6 @@ public class AccommodationAvailabilityQuery extends BaseAuditEntity<Accommodatio
     private Set<AccommodationRestrictionQuery> restrictions = new LinkedHashSet<>();
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "accommodation_type_availability",nullable = false)
+    @JoinColumn(name = "accommodation_type_availability", nullable = false)
     private AccommodationTypeAvailabilityQuery accommodationTypeAvailability;
 }

@@ -32,7 +32,7 @@ public class AccommodationAvailability extends BaseJpaAuditDomainAggregateRoot<A
     private Set<AccommodationRestriction> restrictions = new LinkedHashSet<>();
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "accommodation_type_availability",nullable = false)
+    @JoinColumn(name = "accommodation_type_availability", nullable = false)
     private AccommodationTypeAvailability accommodationTypeAvailability;
 
     @SuppressWarnings("unused")

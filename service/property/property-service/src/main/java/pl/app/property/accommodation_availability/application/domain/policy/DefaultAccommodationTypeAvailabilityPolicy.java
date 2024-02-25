@@ -28,8 +28,8 @@ class DefaultAccommodationTypeAvailabilityPolicy implements AccommodationTypeAva
         final Set<AccommodationTypeReservation> noAssignedReservationTypes = accommodationTypeAvailability.getNoAssignedReservationsInRange(dateRange);
 
         Map<LocalDate, Integer> numberOfReservationOnSpecificDay = getNumberOfReservationOnSpecificDay(assignedReservation, noAssignedReservationTypes);
-        if(!numberOfReservationOnSpecificDay.values().stream()
-                .allMatch(numberOfReservations -> numberOfReservations + numberOdAccommodations <= accommodationAvailabilities.size())){
+        if (!numberOfReservationOnSpecificDay.values().stream()
+                .allMatch(numberOfReservations -> numberOfReservations + numberOdAccommodations <= accommodationAvailabilities.size())) {
             return false;
         }
         return accommodationAvailabilities.stream()

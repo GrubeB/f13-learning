@@ -1,4 +1,4 @@
-                  package pl.app.property;
+package pl.app.property;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

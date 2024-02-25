@@ -7,7 +7,9 @@ import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseAuditEntity;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 
 @Entity
@@ -15,7 +17,7 @@ import java.util.*;
 @Getter
 @Setter
 @Table(name = "t_accommodation_type_availability")
-public class AccommodationTypeAvailabilityQuery  extends BaseAuditEntity<AccommodationTypeAvailabilityQuery, UUID> {
+public class AccommodationTypeAvailabilityQuery extends BaseAuditEntity<AccommodationTypeAvailabilityQuery, UUID> {
     @Id
     private UUID id;
 

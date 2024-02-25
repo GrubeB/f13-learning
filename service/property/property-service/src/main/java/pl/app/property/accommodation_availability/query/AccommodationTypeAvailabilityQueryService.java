@@ -9,7 +9,6 @@ import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.property.accommodation_availability.query.dto.AccommodationTypeAvailabilityDto;
 import pl.app.property.accommodation_availability.query.model.AccommodationTypeAvailabilityQuery;
-import pl.app.property.accommodation_type.query.model.AccommodationTypeQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

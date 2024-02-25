@@ -13,7 +13,6 @@ import pl.app.common.util.DateUtils;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
 
 
 @EntityAnnotation

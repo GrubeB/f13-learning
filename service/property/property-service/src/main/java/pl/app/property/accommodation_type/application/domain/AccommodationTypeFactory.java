@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
-import pl.app.common.ddd.event.DomainEventPublisher;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
 
 @FactoryAnnotation

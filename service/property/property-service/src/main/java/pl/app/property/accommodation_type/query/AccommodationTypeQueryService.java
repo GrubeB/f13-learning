@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.property.accommodation_type.adapter.out.AccommodationTypeRepository;
 import pl.app.property.accommodation_type.query.dto.AccommodationTypeDto;
 import pl.app.property.accommodation_type.query.model.AccommodationTypeQuery;
 

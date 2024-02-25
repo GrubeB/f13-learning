@@ -5,9 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.command_controller.CommandController;
-import pl.app.property.organization.query.dto.OrganizationDto;
 import pl.app.property.organization.application.domain.Organization;
 import pl.app.property.organization.application.port.in.OrganizationService;
+import pl.app.property.organization.query.dto.OrganizationDto;
 
 import java.util.UUID;
 

@@ -9,9 +9,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.property.accommodation_type.query.dto.AccommodationDto;
-import pl.app.property.accommodation_type.query.dto.AccommodationTypeDto;
 import pl.app.property.accommodation_type.query.model.AccommodationQuery;
-import pl.app.property.accommodation_type.query.model.AccommodationTypeQuery;
 
 @Getter
 @Component

@@ -24,7 +24,7 @@ public class AccommodationTypeReservationItem extends BaseJpaAuditDomainEntity<A
     private AccommodationRestriction restriction;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "accommodation_type_reservation",nullable = false)
+    @JoinColumn(name = "accommodation_type_reservation", nullable = false)
     private AccommodationTypeReservation accommodationTypeReservation;
 
     @SuppressWarnings("unused")

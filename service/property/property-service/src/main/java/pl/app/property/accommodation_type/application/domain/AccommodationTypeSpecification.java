@@ -10,11 +10,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class AccommodationTypeSpecification{
+public class AccommodationTypeSpecification {
     @SpecificationAnnotation
     public static class UniqueAccommodationName implements
             CompositeSpecification<Accommodation> {
         private final Set<Accommodation> accommodations;
+
         public UniqueAccommodationName(AccommodationType accommodationType) {
             this.accommodations = accommodationType.getAccommodations();
         }
@@ -27,6 +28,7 @@ public class AccommodationTypeSpecification{
             return new ConjunctionSpecification<>(collect).isSatisfiedBy(candidate);
         }
     }
+
     @SpecificationAnnotation
     public static class SimilarName implements
             CompositeSpecification<Accommodation> {

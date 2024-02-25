@@ -9,8 +9,8 @@ import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.common.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.AccommodationAssignmentPolicy;
 import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
-import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
 import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailability;
+import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
 import pl.app.property.accommodation_availability.application.port.out.AccommodationAvailabilityRepositoryPort;
 
 import java.time.LocalDate;
