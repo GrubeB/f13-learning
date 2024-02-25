@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.app.common.ddd.AggregateId;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
+import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailability;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -16,28 +16,28 @@ public interface AccommodationTypeAvailabilityEntityRepository extends
     @Query("""
             select a.aggregateId
             from AccommodationTypeAvailability a
-            where a.accommodationTypeId.aggregateId = ?1""")
-    Optional<UUID> findIdByAccommodationType_AccommodationTypeId(UUID accommodationTypeId);
+            where a.accommodationType = ?1""")
+    Optional<AggregateId> findIdByAccommodationType_AccommodationType(AggregateId accommodationType);
+
+    @Query("""
+            select a.aggregateId
+            from AccommodationTypeAvailability a inner join a.accommodationAvailabilities accommodationAvailabilities
+            where accommodationAvailabilities.accommodation = ?1""")
+    Optional<AggregateId> findIdByAccommodationAvailabilities_Accommodation(AggregateId accommodation);
+
+    @Query("""
+            select a.aggregateId
+            from AccommodationTypeAvailability a inner join a.typeReservations typeReservations
+            where typeReservations.aggregateId = ?1""")
+    Optional<AggregateId> findIdByTypeReservations(AggregateId typeReservation);
 
 
-//    @Query("""
-//            select a.aggregateId
-//            from AccommodationTypeAvailability a inner join a.accommodationType.accommodationAvailabilities accommodationAvailabilities
-//            where accommodationAvailabilities.accommodationId = ?1""")
-//    Optional<UUID> findIdByAccommodationType_Accommodations_AccommodationId(UUID accommodationId);
-//
-//    @Query("""
-//            select a.accommodationTypeAvailabilityId
-//            from AccommodationTypeAvailabilityEntity a inner join a.accommodationTypeReservations accommodationTypeReservations
-//            where accommodationTypeReservations.accommodationTypeReservationId = ?1""")
-//    Optional<UUID> findIdByAccommodationTypeReservations_AccommodationTypeReservationId(UUID accommodationTypeReservationId);
-//
-//    @Query("""
-//            select a.accommodationTypeAvailabilityId
-//            from AccommodationTypeAvailabilityEntity a inner join a.accommodationRestrictions accommodationRestrictions
-//            where accommodationRestrictions.accommodationRestrictionId = ?1""")
-//    Optional<UUID> findIdByAccommodationRestrictions_AccommodationRestrictionId(UUID accommodationRestrictionId);
-
-
+    @Query("""
+            select a.aggregateId
+            from AccommodationTypeAvailability a
+            inner join a.accommodationAvailabilities accommodationAvailability
+            inner join accommodationAvailability.restrictions accommodationRestriction
+            where accommodationRestriction.entityId = ?1""")
+    Optional<AggregateId> findIdByAccommodationAvailabilities_AccommodationRestrictionId(UUID accommodationRestrictionId);
 
 }

@@ -1,5 +1,7 @@
 package pl.app.common.cqrs.command.handler;
 
+import java.lang.reflect.InvocationTargetException;
+
 /*
 * Object hold reference to method
 * */

@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_availability.application.domain.model;
+package pl.app.property.accommodation_availability.application.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
-import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 
 @EntityAnnotation

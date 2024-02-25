@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.shared.DateRange;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationRestrictionStatus;
+import pl.app.property.accommodation_availability.application.domain.AccommodationRestrictionStatus;
 
 import java.time.LocalDate;
 import java.util.UUID;

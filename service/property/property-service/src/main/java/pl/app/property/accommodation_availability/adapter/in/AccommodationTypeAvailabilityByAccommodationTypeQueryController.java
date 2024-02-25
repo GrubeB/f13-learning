@@ -23,6 +23,6 @@ public class AccommodationTypeAvailabilityByAccommodationTypeQueryController imp
     public static final String resourcePath = "/api/v1/accommodation-types/{accommodationTypeId}/" + resourceName;
     public final AccommodationTypeAvailabilityQueryService service;
     private final Map<String, String> parentFilterMap = new LinkedHashMap<>() {{
-        put("accommodationTypeId", "accommodationTypeId.aggregateId");
+        put("accommodationTypeId", "accommodationType.aggregateId");
     }};
 }

@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_availability.application.domain.model;
+package pl.app.property.accommodation_availability.application.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,6 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -26,7 +25,7 @@ public class AccommodationAvailability extends BaseJpaAuditDomainAggregateRoot<A
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "accommodation_id", nullable = false))
     })
-    private AggregateId accommodationId;
+    private AggregateId accommodation;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
@@ -41,9 +40,10 @@ public class AccommodationAvailability extends BaseJpaAuditDomainAggregateRoot<A
         super();
     }
 
-    public AccommodationAvailability(AggregateId accommodationId) {
+    public AccommodationAvailability(AggregateId accommodation, AccommodationTypeAvailability accommodationTypeAvailability) {
         super();
-        this.accommodationId = accommodationId;
+        this.accommodation = accommodation;
+        this.accommodationTypeAvailability = accommodationTypeAvailability;
     }
 
 
@@ -62,7 +62,7 @@ public class AccommodationAvailability extends BaseJpaAuditDomainAggregateRoot<A
     // RESTRICTION
     public AccommodationRestriction createRestriction(DateRange<LocalDate> dateRange, AccommodationRestrictionStatus status) {
         verifyAvailability(dateRange);
-        AccommodationRestriction newRestriction = new AccommodationRestriction(dateRange, status);
+        AccommodationRestriction newRestriction = new AccommodationRestriction(dateRange, status, this);
         restrictions.add(newRestriction);
         return newRestriction;
     }

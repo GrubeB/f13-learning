@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_availability.application.domain.model;
+package pl.app.property.accommodation_availability.application.domain;
 
 
 import jakarta.persistence.*;
@@ -6,15 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.util.DateUtils;
-import pl.app.common.ddd.BaseDomainEntity;
 import pl.app.common.ddd.annotation.DataTransferObjectAnnotation;
-import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.application.domain.AccommodationAssignmentPolicy;
-import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -36,7 +33,7 @@ public class AccommodationTypeReservation extends BaseJpaAuditDomainAggregateRoo
     @Column(name = "assigned_status", nullable = false)
     private TypeReservationAssignedStatus assignedStatus;
 
-    @OneToMany(mappedBy = "accommodationTypeReservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationTypeReservation", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Set<AccommodationTypeReservationItem> reservationItems= new LinkedHashSet<>();
 
@@ -89,13 +86,28 @@ public class AccommodationTypeReservation extends BaseJpaAuditDomainAggregateRoo
             return;
         }
         possibleReservations.forEach(possibleReservation -> createReservation(
-                typeAvailability.getAccommodationById(possibleReservation.accommodationId()),
+                typeAvailability.getAccommodationByIdOrThrow(new AggregateId(possibleReservation.accommodationId())),
+                possibleReservation.dateRange()
+        ));
+        setAssignedStatus(TypeReservationAssignedStatus.AUTO_ASSIGNED);
+    }
+    public void autoAssignTypeReservation(AccommodationTypeAvailability typeAvailability, AccommodationAssignmentPolicy assignmentPolicy) {
+        if (isAssigned()) {
+            removeAllReservations();
+        }
+        List<AccommodationAssignmentPolicy.PossibleReservation> possibleReservations = assignmentPolicy
+                .getPossibleAccommodationToReservation(typeAvailability, this);
+        if (possibleReservations.isEmpty()) {
+            return;
+        }
+        possibleReservations.forEach(possibleReservation -> createReservation(
+                typeAvailability.getAccommodationByIdOrThrow(new AggregateId(possibleReservation.accommodationId())),
                 possibleReservation.dateRange()
         ));
         setAssignedStatus(TypeReservationAssignedStatus.AUTO_ASSIGNED);
     }
 
-    public void tryToManualAssignTypeReservations(List<ReservationRequest> newReservations) {
+    public void manualAssignTypeReservations(List<ReservationRequest> newReservations) {
         if (isAssigned()) {
             removeAllReservations();
         }

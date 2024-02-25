@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
 
 @FactoryAnnotation
 @Component

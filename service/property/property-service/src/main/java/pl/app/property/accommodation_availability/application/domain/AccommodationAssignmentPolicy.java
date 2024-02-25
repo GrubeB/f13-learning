@@ -4,8 +4,6 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.annotation.DataTransferObjectAnnotation;
 import pl.app.common.ddd.annotation.PolicyAnnotation;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeReservation;
 
 import java.time.LocalDate;
 import java.util.List;

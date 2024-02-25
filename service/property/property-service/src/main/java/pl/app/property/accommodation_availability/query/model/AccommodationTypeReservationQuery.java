@@ -8,7 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.shared.DateRange;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.property.accommodation_availability.application.domain.model.TypeReservationAssignedStatus;
+import pl.app.property.accommodation_availability.application.domain.TypeReservationAssignedStatus;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;

@@ -7,7 +7,6 @@ import lombok.ToString;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.property.accommodation_type.query.model.AccommodationTypeQuery;
 
 import java.util.*;
 
@@ -24,7 +23,7 @@ public class AccommodationAvailabilityQuery extends BaseAuditEntity<Accommodatio
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "accommodation_id", nullable = false))
     })
-    private AggregateId accommodationId;
+    private AggregateId accommodation;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude

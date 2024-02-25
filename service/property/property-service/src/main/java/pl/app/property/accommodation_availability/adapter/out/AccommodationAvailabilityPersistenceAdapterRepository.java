@@ -10,7 +10,7 @@ import pl.app.common.ddd.shared.DateRange;
 import pl.app.property.accommodation_availability.application.domain.AccommodationAssignmentPolicy;
 import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
 import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
-import pl.app.property.accommodation_availability.application.domain.model.AccommodationTypeAvailability;
+import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailability;
 import pl.app.property.accommodation_availability.application.port.out.AccommodationAvailabilityRepositoryPort;
 
 import java.time.LocalDate;
@@ -29,88 +29,59 @@ class AccommodationAvailabilityPersistenceAdapterRepository implements
 
     @Override
     public AccommodationTypeAvailability loadByAccommodationTypeId(AggregateId accommodationTypeId) {
-        return repository.findIdByAccommodationType_AccommodationTypeId(accommodationTypeId.getId())
-                .map(aggregateId -> load(new AggregateId(aggregateId)))
+        return repository.findIdByAccommodationType_AccommodationType(accommodationTypeId)
+                .map(this::load)
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
 
     @Override
     public AccommodationTypeAvailability loadByAccommodationTypeId(AggregateId accommodationTypeId, DateRange<LocalDate> dateRange) {
-        return repository.findIdByAccommodationType_AccommodationTypeId(accommodationTypeId.getId())
-                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
+        return repository.findIdByAccommodationType_AccommodationType(accommodationTypeId)
+                .map(aggregateId -> load(aggregateId, dateRange))
                 .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
 
     @Override
-    public AccommodationTypeAvailability loadByAccommodationId(UUID accommodationId) {
-        return null;
+    public AccommodationTypeAvailability loadByAccommodationId(AggregateId accommodationId) {
+        return repository.findIdByAccommodationAvailabilities_Accommodation(accommodationId)
+                .map(this::load)
+                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
 
     @Override
-    public AccommodationTypeAvailability loadByAccommodationId(UUID accommodationId, DateRange<LocalDate> dateRange) {
-        return null;
+    public AccommodationTypeAvailability loadByAccommodationId(AggregateId accommodationId, DateRange<LocalDate> dateRange) {
+        return repository.findIdByAccommodationAvailabilities_Accommodation(accommodationId)
+                .map(aggregateId -> load(aggregateId, dateRange))
+                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
 
     @Override
-    public AccommodationTypeAvailability loadByTypeReservationId(UUID typeReservationId) {
-        return null;
+    public AccommodationTypeAvailability loadByTypeReservationId(AggregateId typeReservationId) {
+        return repository.findIdByTypeReservations(typeReservationId)
+                .map(this::load)
+                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
 
     @Override
-    public AccommodationTypeAvailability loadByTypeReservationId(UUID typeReservationId, DateRange<LocalDate> dateRange) {
-        return null;
+    public AccommodationTypeAvailability loadByTypeReservationId(AggregateId typeReservationId, DateRange<LocalDate> dateRange) {
+        return repository.findIdByTypeReservations(typeReservationId)
+                .map(aggregateId -> load(aggregateId, dateRange))
+                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
 
     @Override
     public AccommodationTypeAvailability loadByRestrictionId(UUID restrictionId) {
-        return null;
+        return repository.findIdByAccommodationAvailabilities_AccommodationRestrictionId(restrictionId)
+                .map(this::load)
+                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
 
     @Override
     public AccommodationTypeAvailability loadByRestrictionId(UUID restrictionId, DateRange<LocalDate> dateRange) {
-        return null;
+        return repository.findIdByAccommodationAvailabilities_AccommodationRestrictionId(restrictionId)
+                .map(aggregateId -> load(aggregateId, dateRange))
+                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
     }
-//    @Override
-//    public AccommodationTypeAvailability loadByAccommodationId(UUID accommodationId) {
-//        return repository.findIdByAccommodationType_Accommodations_AccommodationId(accommodationId)
-//                .map(aggregateId -> load(new AggregateId(aggregateId)))
-//                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-//    }
-//
-//    @Override
-//    public AccommodationTypeAvailability loadByAccommodationId(UUID accommodationId, DateRange<LocalDate> dateRange) {
-//        return repository.findIdByAccommodationType_Accommodations_AccommodationId(accommodationId)
-//                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
-//                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-//    }
-//
-//    @Override
-//    public AccommodationTypeAvailability loadByTypeReservationId(UUID typeReservationId) {
-//        return repository.findIdByAccommodationTypeReservations_AccommodationTypeReservationId(typeReservationId)
-//                .map(aggregateId -> load(new AggregateId(aggregateId)))
-//                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-//    }
-//
-//    @Override
-//    public AccommodationTypeAvailability loadByTypeReservationId(UUID typeReservationId, DateRange<LocalDate> dateRange) {
-//        return repository.findIdByAccommodationTypeReservations_AccommodationTypeReservationId(typeReservationId)
-//                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
-//                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-//    }
-//
-//    @Override
-//    public AccommodationTypeAvailability loadByRestrictionId(UUID reservationId) {
-//        return repository.findIdByAccommodationRestrictions_AccommodationRestrictionId(reservationId)
-//                .map(aggregateId -> load(new AggregateId(aggregateId)))
-//                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-//    }
-//
-//    @Override
-//    public AccommodationTypeAvailability loadByRestrictionId(UUID reservationId, DateRange<LocalDate> dateRange) {
-//        return repository.findIdByAccommodationRestrictions_AccommodationRestrictionId(reservationId)
-//                .map(aggregateId -> load(new AggregateId(aggregateId), dateRange))
-//                .orElseThrow(AccommodationAvailabilityException.NotFoundAccommodationTypeAvailabilityException::new);
-//    }
 
     @Override
     public AccommodationTypeAvailability load(AggregateId aggregateId) {

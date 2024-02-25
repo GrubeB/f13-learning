@@ -5,60 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3aa43723-3439-45c4-94bf-4e2dd971fb53" name="Changes" comment="save">
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/AccommodationTypeAvailabilityQueryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/AccommodationTypeAvailabilityQueryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationAvailabilityQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationRestrictionQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationTypeAvailabilityQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationTypeReservationItemQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationTypeReservationQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationTypeQueryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/ExceptionAdvice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/resources/db/migration/V4__accommodation_availability.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/AddAccommodationAvailabilityUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/RemoveAccommodationAvailabilityUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/command/AddAccommodationAvailabilityCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/command/RemoveAccommodationAvailabilityCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationQueryMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationQueryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationQueryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/dto/AccommodationDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/cqrs/src/main/java/pl/app/common/cqrs/command/handler/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/cqrs/src/main/java/pl/app/common/cqrs/command/handler/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/cqrs/src/main/java/pl/app/common/cqrs/command/handler/impl/SimpleCommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/cqrs/src/main/java/pl/app/common/cqrs/command/handler/impl/SimpleCommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/cqrs/src/main/java/pl/app/common/cqrs/command/handler/impl/SpringCommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/cqrs/src/main/java/pl/app/common/cqrs/command/handler/impl/SpringCommandHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/in/TopicSnapshotQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/in/TopicSnapshotByTopicQueryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/in/AccommodationTypeAvailabilityByAccommodationTypeQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/in/AccommodationTypeAvailabilityByAccommodationTypeQueryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/in/AccommodationTypeAvailabilityQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/in/AccommodationTypeAvailabilityQueryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/in/AccommodationTypeAvailabilityCommandHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/in/AccommodationTypeAvailabilityEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/in/AccommodationTypeAvailabilityEventHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/out/AccommodationAvailabilityPersistenceAdapterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/out/AccommodationAvailabilityPersistenceAdapterRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/out/AccommodationTypeAvailabilityEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/adapter/out/AccommodationTypeAvailabilityEntityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeAvailability.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeAvailability.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/DefaultAccommodationAssignmentPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/DefaultAccommodationAssignmentPolicy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/DefaultAccommodationTypeAvailabilityPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/DefaultAccommodationTypeAvailabilityPolicy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/MultiAccommodationTypeAvailabilityPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/MultiAccommodationTypeAvailabilityPolicy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/AccommodationTypeAvailabilityQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/AccommodationTypeAvailabilityQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/AccommodationTypeAvailabilityQueryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationAssignmentPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationAssignmentPolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationTypeAvailabilityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationTypeAvailabilityFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationTypeAvailabilityPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationTypeAvailabilityPolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationAvailability.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationAvailability.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationRestriction.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationRestriction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationRestrictionStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationRestrictionStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeAvailability.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationTypeAvailability.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationTypeReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/AccommodationTypeReservationItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/AccommodationTypeReservationItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/TypeReservationAssignedStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/TypeReservationAssignedStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/DefaultAccommodationAssignmentPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/policy/DefaultAccommodationAssignmentPolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/DefaultAccommodationTypeAvailabilityPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/policy/DefaultAccommodationTypeAvailabilityPolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/model/policy/MultiAccommodationTypeAvailabilityPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/domain/policy/MultiAccommodationTypeAvailabilityPolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/command/ChangeRestrictionStatusCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/command/ChangeRestrictionStatusCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/command/CreateRestrictionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/in/command/CreateRestrictionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/out/AccommodationAvailabilityRepositoryPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/port/out/AccommodationAvailabilityRepositoryPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/AssignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/AssignService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/AvailabilityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/AvailabilityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/RestrictionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/RestrictionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/TypeReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/TypeReservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/dto/AccommodationTypeAvailabilityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/dto/AccommodationTypeAvailabilityDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/mapper/AccommodationTypeAvailabilityQueryMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationTypeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/domain/AccommodationTypeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/command/CreateAccommodationTypeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/port/in/command/CreateAccommodationTypeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationTypeQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/AccommodationTypeQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/model/AccommodationTypeQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/model/AccommodationTypeQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/adapter/in/AccommodationTypeDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/adapter/in/AccommodationTypeDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/adapter/in/AccommodationTypeDetailsQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/adapter/in/AccommodationTypeDetailsQueryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/domain/model/AccommodationTypeDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/domain/AccommodationTypeDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/domain/model/GenderRoomType.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/domain/GenderRoomType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/domain/model/RoomType.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/domain/RoomType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/domain/service/AccommodationTypeDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/service/AccommodationTypeDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/port/in/AccommodationTypeDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/port/in/AccommodationTypeDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/port/in/command/UpdateAccommodationTypeDetailsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/port/in/command/UpdateAccommodationTypeDetailsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/port/out/AccommodationTypeDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/application/port/out/AccommodationTypeDetailsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/query/AccommodationTypeDetailsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/query/AccommodationTypeDetailsMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/query/AccommodationTypeDetailsQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/query/AccommodationTypeDetailsQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/query/dto/AccommodationTypeDetailsDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/query/dto/AccommodationTypeDetailsDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/application/domain/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/application/domain/Organization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/query/OrganizationQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/query/OrganizationQueryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/query/OrganizationQueryServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/query/dto/OrganizationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/organization/query/dto/OrganizationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/domain/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/domain/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/domain/PropertyAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/domain/PropertyAddress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/domain/PropertyDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/domain/PropertyDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/port/out/PropertyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/port/out/PropertyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/services/PropertyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/property/application/services/PropertyServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/resources/db/migration/V1__organization.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/resources/db/migration/V1__organization.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/resources/db/migration/V2__property.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/resources/db/migration/V2__property.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/resources/db/migration/V3__accommodation.sql" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/resources/db/migration/V3__accommodation.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationAvailabilityQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationAvailabilityQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationRestrictionQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationRestrictionQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationTypeAvailabilityQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationTypeAvailabilityQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationTypeReservationQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model/AccommodationTypeReservationQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/in/AccommodationTypeCommandHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/in/AccommodationTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/adapter/in/AccommodationTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/service/AccommodationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/application/service/AccommodationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/dto/AccommodationTypeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type/query/dto/AccommodationTypeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/adapter/in/AccommodationTypeDetailsCommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_type_details/adapter/in/AccommodationTypeDetailsCommandHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +80,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -116,15 +117,15 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
-    "last_opened_file_path": "C:/Users/Dawid/Desktop/f12-solo-leveling/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model",
-    "settings.editor.selected.configurable": "terminal"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dawid/Desktop/f12-solo-leveling/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/query/model&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\property\accommodation_availability\query\model" />
@@ -134,11 +135,11 @@
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\property\accommodation_type\query\model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pl.app.property.accommodation_type.query" />
+      <recent name="pl.app.property.accommodation_availability.application.port.in" />
+      <recent name="pl.app.property.accommodation_availability.application.port.in.command" />
       <recent name="pl.app.property.accommodation_availability.adapter.in" />
       <recent name="pl.app.property.accommodation_availability.query" />
-      <recent name="pl.app.property.accommodation_availability.query.dto" />
-      <recent name="pl.app.property.config" />
-      <recent name="pl.app.property.accommodation_type.query" />
     </key>
   </component>
   <component name="RunManager">
@@ -181,23 +182,20 @@
       <option name="project" value="LOCAL" />
       <updated>1708710451336</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="save">
+      <option name="closed" value="true" />
+      <created>1708757871141</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708757871141</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="save" />
     <option name="LAST_COMMIT_MESSAGE" value="save" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/accommodation_availability/application/service/AvailabilityService.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

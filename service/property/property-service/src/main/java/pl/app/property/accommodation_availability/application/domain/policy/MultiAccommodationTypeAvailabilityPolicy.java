@@ -1,14 +1,12 @@
-package pl.app.property.accommodation_availability.application.domain.model.policy;
+package pl.app.property.accommodation_availability.application.domain.policy;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
-import pl.app.property.accommodation_availability.application.domain.model.*;
+import pl.app.property.accommodation_availability.application.domain.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

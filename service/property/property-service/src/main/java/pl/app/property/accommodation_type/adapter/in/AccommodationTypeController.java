@@ -12,6 +12,10 @@ import pl.app.common.util.EntityLocationUriUtils;
 import pl.app.property.accommodation_type.application.port.in.command.AddAccommodationCommand;
 import pl.app.property.accommodation_type.application.port.in.command.CreateAccommodationTypeCommand;
 import pl.app.property.accommodation_type.application.port.in.command.RemoveAccommodationCommand;
+import pl.app.property.accommodation_type.query.AccommodationQueryService;
+import pl.app.property.accommodation_type.query.AccommodationTypeQueryService;
+import pl.app.property.accommodation_type.query.dto.AccommodationDto;
+import pl.app.property.accommodation_type.query.dto.AccommodationTypeDto;
 
 import java.util.UUID;
 
@@ -23,23 +27,25 @@ public class AccommodationTypeController {
     public static final String resourcePath = "/api/v1/" + resourceName;
 
     private final CommandGateway gateway;
+    private final AccommodationTypeQueryService accommodationTypeQueryService;
+    private final AccommodationQueryService accommodationQueryService;
 
     @PostMapping
-    public ResponseEntity<UUID> createAccommodationType(@RequestBody CreateAccommodationTypeCommand command, HttpServletRequest request) {
+    public ResponseEntity<AccommodationTypeDto> createAccommodationType(@RequestBody CreateAccommodationTypeCommand command, HttpServletRequest request) {
         UUID accommodationTypeId = gateway.send(command);
         return ResponseEntity
                 .created(EntityLocationUriUtils.createdEntityLocationURI(accommodationTypeId, request.getRequestURI()))
-                .body(accommodationTypeId);
+                .body(accommodationTypeQueryService.fetchById(accommodationTypeId, AccommodationTypeDto.class));
     }
 
     public static final String addAccommodationPath = "/add-accommodation";
 
     @PostMapping(path = addAccommodationPath)
-    public ResponseEntity<UUID> addAccommodation(@RequestBody AddAccommodationCommand command, HttpServletRequest request) {
+    public ResponseEntity<AccommodationDto> addAccommodation(@RequestBody AddAccommodationCommand command, HttpServletRequest request) {
         UUID accommodationId = gateway.send(command);
         return ResponseEntity
                 .created(EntityLocationUriUtils.createdEntityLocationURI(accommodationId, request.getRequestURI()))
-                .body(accommodationId);
+                .body(accommodationQueryService.fetchById(accommodationId, AccommodationDto.class));
     }
 
     public static final String removeAccommodationPath = "/remove-accommodation";

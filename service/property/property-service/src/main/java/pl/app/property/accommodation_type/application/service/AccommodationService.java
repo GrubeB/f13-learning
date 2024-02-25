@@ -3,6 +3,8 @@ package pl.app.property.accommodation_type.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
+import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.property.accommodation_type.application.domain.Accommodation;
 import pl.app.property.accommodation_type.application.domain.AccommodationType;
@@ -20,7 +22,8 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 @Transactional
-class AccommodationService implements
+@CommandHandlerAnnotation
+public class AccommodationService implements
         CreateAccommodationTypeUseCase,
         AddAccommodationUseCase,
         RemoveAccommodationUseCase {
@@ -28,6 +31,7 @@ class AccommodationService implements
     private final AccommodationTypeFactory accommodationTypeFactory;
 
     @Override
+    @CommandHandlingAnnotation
     public UUID createAccommodationType(CreateAccommodationTypeCommand command) {
         AccommodationType newAggregate = accommodationTypeFactory.createAccommodationType(new AggregateId(command.getPropertyId()));
         accommodationTypeRepositoryPort.save(newAggregate);
@@ -35,6 +39,7 @@ class AccommodationService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public UUID addAccommodation(AddAccommodationCommand command) {
         AccommodationType aggregate = accommodationTypeRepositoryPort.load(new AggregateId(command.getAccommodationTypeId()));
         Accommodation newAccommodation = new Accommodation(aggregate, command.getName(), command.getDescription());
@@ -44,6 +49,7 @@ class AccommodationService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void removeAccommodation(RemoveAccommodationCommand command) {
         AccommodationType aggregate = accommodationTypeRepositoryPort.load(new AggregateId(command.getAccommodationTypeId()));
         aggregate.removeAccommodationById(new AggregateId(command.getAccommodationId()));

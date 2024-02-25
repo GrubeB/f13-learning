@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_availability.application.domain.model;
+package pl.app.property.accommodation_availability.application.domain;
 
 public enum TypeReservationAssignedStatus {
     NO_ASSIGNED,

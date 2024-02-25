@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_availability.application.domain.model;
+package pl.app.property.accommodation_availability.application.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,6 @@ import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.common.ddd.shared.DateRange;
 import pl.app.common.util.DateUtils;
-import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -44,15 +43,10 @@ public class AccommodationRestriction extends BaseJpaAuditDomainEntity<Accommoda
         super();
     }
 
-    public AccommodationRestriction(DateRange<LocalDate> dateRange, AccommodationRestrictionStatus status) {
+    public AccommodationRestriction(DateRange<LocalDate> dateRange, AccommodationRestrictionStatus status, AccommodationAvailability accommodationAvailability) {
         this.status = status;
         this.dateRange = dateRange;
-    }
-
-    public AccommodationRestriction(UUID entityId, AccommodationRestrictionStatus status, DateRange<LocalDate> dateRange) {
-        super(entityId);
-        this.status = status;
-        this.dateRange = dateRange;
+        this.accommodationAvailability = accommodationAvailability;
     }
 
     // STATUS

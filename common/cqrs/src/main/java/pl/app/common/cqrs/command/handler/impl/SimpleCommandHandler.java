@@ -2,6 +2,7 @@ package pl.app.common.cqrs.command.handler.impl;
 
 import pl.app.common.cqrs.command.handler.CommandHandler;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class SimpleCommandHandler<R, C> implements
@@ -28,6 +29,11 @@ public class SimpleCommandHandler<R, C> implements
         try {
             Object result = method.invoke(object, command);
             return returnType.cast(result);
+        } catch (InvocationTargetException e) {
+            if (e.getTargetException() instanceof RuntimeException runtimeException) {
+                throw runtimeException;
+            }
+            throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

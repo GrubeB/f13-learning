@@ -4,18 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.app.property.accommodation_type_details.query.dto.AccommodationTypeDetailsDto;
 
 import java.io.Serializable;
-import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccommodationTypeDto implements Serializable {
+public class AccommodationDto implements Serializable {
     private UUID id;
-    private Set<AccommodationDto> accommodations;
-    private AccommodationTypeDetailsDto accommodationTypeDetails;
+    private String name;
+    private String description;
 }

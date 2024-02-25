@@ -1,4 +1,4 @@
-package pl.app.property.accommodation_availability.application.domain.model;
+package pl.app.property.accommodation_availability.application.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,9 +8,6 @@ import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.ddd.annotation.DataTransferObjectAnnotation;
 import pl.app.common.ddd.shared.DateRange;
-import pl.app.property.accommodation_availability.application.domain.AccommodationAssignmentPolicy;
-import pl.app.property.accommodation_availability.application.domain.AccommodationAvailabilityException;
-import pl.app.property.accommodation_availability.application.domain.AccommodationTypeAvailabilityPolicy;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -27,17 +24,17 @@ public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRo
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "property", nullable = false))
     })
-    private AggregateId propertyId;
+    private AggregateId property;
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "accommodation_type", nullable = false))
     })
-    private AggregateId accommodationTypeId;
+    private AggregateId accommodationType;
 
-    @OneToMany(mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Set<AccommodationAvailability> accommodationAvailabilities = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationTypeAvailability", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Set<AccommodationTypeReservation> typeReservations = new LinkedHashSet<>();
 
@@ -51,10 +48,25 @@ public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRo
         super();
     }
 
-    public AccommodationTypeAvailability(AggregateId propertyId, AggregateId accommodationTypeId) {
+    public AccommodationTypeAvailability(AggregateId property, AggregateId accommodationType) {
         super();
-        this.propertyId = propertyId;
-        this.accommodationTypeId = accommodationTypeId;
+        this.property = property;
+        this.accommodationType = accommodationType;
+    }
+
+    // ACCOMMODATIONS
+    public void addAccommodationAvailability(AggregateId accommodationId) {
+        Optional<AccommodationAvailability> accommodationById = getAccommodationById(accommodationId);
+        if (accommodationById.isPresent()) {
+            return;
+        }
+        AccommodationAvailability newAccommodationAvailability = new AccommodationAvailability(accommodationId, this);
+        this.accommodationAvailabilities.add(newAccommodationAvailability);
+    }
+
+    public void removeAccommodationAvailability(AggregateId accommodationId) {
+        getAccommodationById(accommodationId).ifPresent(accommodationAvailability ->
+                this.accommodationAvailabilities.remove(accommodationAvailability));
     }
 
     // AVAILABILITY
@@ -76,7 +88,7 @@ public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRo
         return newAccommodationTypeReservation;
     }
 
-    public void removeTypeReservation(UUID typeReservationId) {
+    public void removeTypeReservation(AggregateId typeReservationId) {
         AccommodationTypeReservation typeReservation = getTypeReservationById(typeReservationId);
         removeTypeReservation(typeReservation);
     }
@@ -87,32 +99,37 @@ public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRo
     }
 
     // ASSIGN TYPE RESERVATION
-    public void tryToAutoAssignTypeReservation(UUID typeReservationId) {
-        tryToAutoAssignTypeReservation(getTypeReservationById(typeReservationId));
+    public void autoAssignTypeReservation(AggregateId typeReservationId) {
+        autoAssignTypeReservation(getTypeReservationById(typeReservationId));
     }
 
-    public void tryToAutoAssignTypeReservation(AccommodationTypeReservation typeReservation) {
-        typeReservation.tryToAutoAssignTypeReservation(this, assignmentPolicy);
+    public void autoAssignTypeReservation(AccommodationTypeReservation typeReservation) {
+        typeReservation.autoAssignTypeReservation(this, assignmentPolicy);
     }
 
-    public void tryToManualAssignTypeReservations(UUID typeReservationId, List<ReservationRequest> newAccommodationReservations) {
+    public void tryToManualAssignTypeReservations(AggregateId typeReservationId, List<ReservationRequest> newAccommodationReservations) {
         AccommodationTypeReservation typeReservation = getTypeReservationById(typeReservationId);
-        typeReservation.tryToManualAssignTypeReservations(newAccommodationReservations.stream()
+        typeReservation.manualAssignTypeReservations(newAccommodationReservations.stream()
                 .map(r -> new AccommodationTypeReservation.ReservationRequest(
-                        getAccommodationById(r.accommodationId),
+                        getAccommodationByIdOrThrow(r.accommodationId),
                         r.dateRange
                 )).toList());
     }
 
     @DataTransferObjectAnnotation
-    public record ReservationRequest(UUID accommodationId, DateRange<LocalDate> dateRange) {
+    public record ReservationRequest(AggregateId accommodationId, DateRange<LocalDate> dateRange) {
     }
 
     // GETTERS
-    public AccommodationAvailability getAccommodationById(UUID accommodationId) {
+    public AccommodationAvailability getAccommodationByIdOrThrow(AggregateId accommodationId) {
+        return getAccommodationById(accommodationId)
+                .orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationException.fromId(accommodationId.getId()));
+    }
+
+    public Optional<AccommodationAvailability> getAccommodationById(AggregateId accommodationId) {
         return accommodationAvailabilities.stream()
-                .filter(accommodation -> Objects.equals(accommodation.getId(), accommodationId))
-                .findFirst().orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationException.fromId(accommodationId));
+                .filter(accommodation -> Objects.equals(accommodation.getAccommodation(), accommodationId))
+                .findFirst();
     }
 
     public AccommodationAvailability getAccommodationByRestrictionId(UUID restrictionId) {
@@ -134,10 +151,10 @@ public class AccommodationTypeAvailability extends BaseJpaAuditDomainAggregateRo
                 .findAny().orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeReservationException.fromId(reservationId));
     }
 
-    public AccommodationTypeReservation getTypeReservationById(UUID typeReservationId) {
+    public AccommodationTypeReservation getTypeReservationById(AggregateId typeReservationId) {
         return this.typeReservations.stream()
-                .filter(reservation -> typeReservationId.equals(reservation.getId()))
-                .findAny().orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeReservationException.fromId(typeReservationId));
+                .filter(reservation -> Objects.equals(typeReservationId, reservation.getAggregateId()))
+                .findAny().orElseThrow(() -> AccommodationAvailabilityException.NotFoundAccommodationTypeReservationException.fromId(typeReservationId.getId()));
     }
 
     public Set<AccommodationRestriction> getAssignedReservationsInRange(DateRange<LocalDate> dateRange) {

@@ -23,13 +23,13 @@ public class AccommodationTypeAvailabilityQuery  extends BaseAuditEntity<Accommo
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "property", nullable = false))
     })
-    private AggregateId propertyId;
+    private AggregateId property;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "accommodation_type", nullable = false))
     })
-    private AggregateId accommodationTypeId;
+    private AggregateId accommodationType;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "accommodationTypeAvailability")
     private Set<AccommodationAvailabilityQuery> accommodationAvailabilities = new LinkedHashSet<>();

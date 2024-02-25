@@ -3,6 +3,7 @@ package pl.app.common.cqrs.command.handler.impl;
 import org.springframework.beans.factory.BeanFactory;
 import pl.app.common.cqrs.command.handler.CommandHandler;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class SpringCommandHandler<R, C> implements
@@ -34,6 +35,11 @@ public class SpringCommandHandler<R, C> implements
         try {
             Object result = method.invoke(bean, command);
             return returnType.cast(result);
+        } catch (InvocationTargetException e) {
+            if (e.getTargetException() instanceof RuntimeException runtimeException) {
+                throw runtimeException;
+            }
+            throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
