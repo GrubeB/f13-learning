@@ -19,8 +19,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(TestController.class)
-@Import(WebMvcConfig.class)
-class SearchCriteriaHandlerMethodArgumentResolverTest {
+@Import(SearchCriteriaHandlerMethodBodyArgumentResolverWebMvcConfig.class)
+class SearchCriteriaHandlerMethodBodyArgumentResolverTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired

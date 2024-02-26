@@ -46,14 +46,14 @@ class SearchCriteriaHandlerMethodQueryArgumentResolver implements
         if (queryParam == null || queryParam.isBlank()) {
             return new SearchCriteria();
         }
-        return new SearchCriteria(resolveSearchCriteriaItems(queryParam));
+        return new SearchCriteria(resolveSearchCriteriaItems(removeQuote(queryParam)));
     }
 
     public List<SearchCriteriaItem> resolveSearchCriteriaItems(String query) {
         LinkedList<SearchCriteriaItem> items = new LinkedList<>();
-        String[] conjunction = query.split("(?<=\\sAND|and\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+        String[] conjunction = query.split("(?<=(?i)\\sAND\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
         for (String conjunctionElement : conjunction) {
-            String[] disjunction = conjunctionElement.split("(?<=\\sOR|or\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            String[] disjunction = conjunctionElement.split("(?<=(?i)\\sOR\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             for (String disjunctionElement : disjunction) {
                 resolveSearchCriteriaItem(disjunctionElement)
                         .ifPresent(items::add);
@@ -105,14 +105,15 @@ class SearchCriteriaHandlerMethodQueryArgumentResolver implements
     }
 
     private String removeConditionOperator(String value) {
-        return value.split("\\sAND|and\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0]
-                .split("\\sOR|or\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0];
+        return value.split("(?i)\\sAND(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0]
+                .split("(?i)\\sOR(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0];
     }
 
     private ConditionOperator resolveConditionOperator(String value) {
-        if (value.split("\\sAND|and\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)").length == 2) {
+        value = value.trim();
+        if (value.endsWith("AND") || value.endsWith("and")) {
             return ConditionOperator.AND;
-        } else if (value.split("\\sOR|or\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)").length == 2) {
+        } else if (value.endsWith("OR") || value.endsWith("or")) {
             return ConditionOperator.OR;
         } else {
             return null;
