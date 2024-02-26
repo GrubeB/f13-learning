@@ -11,8 +11,12 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-validation"
 
+    implementation "org.springframework.boot:spring-boot-starter-test"
+
     // https://mvnrepository.com/artifact/com.google.code.findbugs/annotations
     implementation 'com.google.code.findbugs:annotations:3.0.1'
+
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.1'
 }
 
 bootJar {

@@ -19,23 +19,25 @@ public class SearchCriteriaItem implements
     private transient String valueTo;
 
     private transient List<String> values;
+    private ConditionOperator conditionOperator;
 
     public SearchCriteriaItem() {
         this.values = new ArrayList<>();
-    }
-
-    public SearchCriteriaItem(String field, Operator operator, String value, String valueTo, List<String> values) {
-        this.field = field;
-        this.operator = operator;
-        this.value = value;
-        this.valueTo = valueTo;
-        this.values = values;
+        this.conditionOperator = ConditionOperator.AND;
     }
 
     public SearchCriteriaItem(String field, Operator operator, String value) {
         this.field = field;
         this.operator = operator;
         this.value = value;
+        this.conditionOperator = ConditionOperator.AND;
+    }
+
+    public SearchCriteriaItem(String field, Operator operator, String value, ConditionOperator conditionOperator) {
+        this.field = field;
+        this.operator = operator;
+        this.value = value;
+        this.conditionOperator = conditionOperator;
     }
 
     public SearchCriteriaItem(String field, Operator operator, String value, String valueTo) {
@@ -43,12 +45,29 @@ public class SearchCriteriaItem implements
         this.operator = operator;
         this.value = value;
         this.valueTo = valueTo;
+        this.conditionOperator = ConditionOperator.AND;
+    }
+
+    public SearchCriteriaItem(String field, Operator operator, String value, String valueTo, ConditionOperator conditionOperator) {
+        this.field = field;
+        this.operator = operator;
+        this.value = value;
+        this.valueTo = valueTo;
+        this.conditionOperator = conditionOperator;
     }
 
     public SearchCriteriaItem(String field, Operator operator, List<String> values) {
         this.field = field;
         this.operator = operator;
         this.values = values;
+        this.conditionOperator = ConditionOperator.AND;
+    }
+
+    public SearchCriteriaItem(String field, Operator operator, List<String> values, ConditionOperator conditionOperator) {
+        this.field = field;
+        this.operator = operator;
+        this.values = values;
+        this.conditionOperator = conditionOperator;
     }
 
     public String getField() {
@@ -89,6 +108,14 @@ public class SearchCriteriaItem implements
 
     public void setValues(List<String> values) {
         this.values = values;
+    }
+
+    public ConditionOperator getConditionOperator() {
+        return conditionOperator;
+    }
+
+    public void setConditionOperator(ConditionOperator conditionOperator) {
+        this.conditionOperator = conditionOperator;
     }
 
     @Override

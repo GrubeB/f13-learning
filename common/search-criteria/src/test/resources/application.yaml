@@ -1,0 +1,12 @@
+server:
+  port: 9006
+
+spring:
+  autoconfigure:
+    exclude:
+      org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,
+      org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+logging:
+  level:
+    pl.app: TRACE

@@ -13,10 +13,10 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(TopicSnapshotQueryController.resourcePath)
+@RequestMapping(TopicSnapshotByTopicQueryController.resourcePath)
 @RequiredArgsConstructor
 @Getter
-public class TopicSnapshotQueryController implements
+public class TopicSnapshotByTopicQueryController implements
         QueryController.DtoFetchableWithFilter.Full<UUID, TopicSnapshotQuery> {
 
     public static final String resourceName = "snapshots";

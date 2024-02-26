@@ -15,8 +15,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 // Allows injecting SearchCriteria instances into controller methods.
-class SearchCriteriaHandlerMethodArgumentResolver implements
+class SearchCriteriaHandlerMethodBodyArgumentResolver implements
         SearchCriteriaArgumentResolver {
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -30,7 +31,6 @@ class SearchCriteriaHandlerMethodArgumentResolver implements
             HttpServletRequest nativeRequest = webRequest.getNativeRequest(HttpServletRequest.class);
             if (Objects.nonNull(nativeRequest)) {
                 String requestBody = getRequestBody(nativeRequest);
-                ObjectMapper objectMapper = new ObjectMapper();
                 return objectMapper.readValue(requestBody, SearchCriteria.class);
             }
             return new SearchCriteria();
