@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3aa43723-3439-45c4-94bf-4e2dd971fb53" name="Changes" comment="reformat code">
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/ConditionOperator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/TestApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodArgumentResolverTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/TestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/WebMvcConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/resources/application.yaml" afterDir="false" />
+    <list default="true" id="3aa43723-3439-45c4-94bf-4e2dd971fb53" name="Changes" comment="save">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/Operator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/SearchCriteriaItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/SearchCriteriaItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaArgumentResolverConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaArgumentResolverConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/in/TopicSnapshotQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/topic/adapter/in/TopicSnapshotByTopicQueryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +133,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchCriteriaHandlerMethodArgumentResolverTest.testObjectMapper" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -159,7 +146,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodArgumentResolverTest.testObjectMapper&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -246,9 +233,9 @@
       <list>
         <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItem" />
         <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItems" />
+        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest" />
         <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteria" />
         <item itemvalue="Gradle.SearchCriteriaHandlerMethodArgumentResolverTest" />
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodArgumentResolverTest.testObjectMapper" />
       </list>
     </recent_temporary>
   </component>
@@ -296,13 +283,21 @@
       <option name="project" value="LOCAL" />
       <updated>1708859835397</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="save">
+      <option name="closed" value="true" />
+      <created>1708982529463</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708982529463</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="save" />
     <MESSAGE value="reformat code" />
-    <option name="LAST_COMMIT_MESSAGE" value="reformat code" />
+    <MESSAGE value="save" />
+    <option name="LAST_COMMIT_MESSAGE" value="save" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

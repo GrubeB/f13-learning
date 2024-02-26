@@ -7,6 +7,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
+import pl.app.common.search_criteria.ConditionOperator;
 import pl.app.common.search_criteria.Operator;
 import pl.app.common.search_criteria.SearchCriteria;
 import pl.app.common.search_criteria.SearchCriteriaItem;
@@ -14,6 +15,7 @@ import pl.app.common.search_criteria.SearchCriteriaItem;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 // Allows injecting SearchCriteria instances into controller methods.
 class SearchCriteriaHandlerMethodQueryArgumentResolver implements
@@ -44,16 +46,14 @@ class SearchCriteriaHandlerMethodQueryArgumentResolver implements
         if (queryParam == null || queryParam.isBlank()) {
             return new SearchCriteria();
         }
-        resolveSearchCriteriaItems(queryParam);
-        return null;
+        return new SearchCriteria(resolveSearchCriteriaItems(queryParam));
     }
 
-    // name="Ala" AND length>200 OR name="Ola" AND length<120
     public List<SearchCriteriaItem> resolveSearchCriteriaItems(String query) {
         LinkedList<SearchCriteriaItem> items = new LinkedList<>();
-        String[] conjunction = query.split("(?i)\\sAND\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+        String[] conjunction = query.split("(?<=\\sAND|and\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
         for (String conjunctionElement : conjunction) {
-            String[] disjunction = conjunctionElement.split("(?i)\\sOR\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            String[] disjunction = conjunctionElement.split("(?<=\\sOR|or\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             for (String disjunctionElement : disjunction) {
                 resolveSearchCriteriaItem(disjunctionElement)
                         .ifPresent(items::add);
@@ -80,19 +80,43 @@ class SearchCriteriaHandlerMethodQueryArgumentResolver implements
         String[] split = query.split(operator.getSymbol() + "(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
         if (split.length == 2) {
             String value = split[1];
+            ConditionOperator conditionOperator = resolveConditionOperator(value);
+            value = removeConditionOperator(value);
             if (valueIsArray(value)) {
-                value = value.replaceAll("^\\[|\\]$", "");
-                List<String> values = List.of(value.split(",")).stream()
+                value = removeBrackets(value);
+                List<String> values = Stream.of(value.split(","))
                         .map(String::trim)
-                        .map(e -> e.replaceAll("^\"|\"$", ""))
+                        .map(this::removeQuote)
                         .toList();
-                return Optional.of(new SearchCriteriaItem(split[0], operator, values));
+                return Optional.of(new SearchCriteriaItem(split[0], operator, values, conditionOperator));
             }
-            value = value.trim().replaceAll("^\"|\"$", "");
-
-            return Optional.of(new SearchCriteriaItem(split[0], operator, value));
+            value = removeQuote(value);
+            return Optional.of(new SearchCriteriaItem(split[0], operator, value, conditionOperator));
         }
         return Optional.empty();
+    }
+
+    private String removeQuote(String value) {
+        return value.trim().replaceAll("^\"|\"$", "");
+    }
+
+    private String removeBrackets(String value) {
+        return value.trim().replaceAll("^\\[|\\]$", "");
+    }
+
+    private String removeConditionOperator(String value) {
+        return value.split("\\sAND|and\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0]
+                .split("\\sOR|or\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0];
+    }
+
+    private ConditionOperator resolveConditionOperator(String value) {
+        if (value.split("\\sAND|and\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)").length == 2) {
+            return ConditionOperator.AND;
+        } else if (value.split("\\sOR|or\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)").length == 2) {
+            return ConditionOperator.OR;
+        } else {
+            return null;
+        }
     }
 
     private boolean valueIsArray(String value) {
