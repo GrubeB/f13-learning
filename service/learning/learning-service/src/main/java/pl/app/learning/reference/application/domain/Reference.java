@@ -49,9 +49,17 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
         this.referenceVoting.addUserLike(userId);
     }
 
+    public void removeLike(AggregateId userId) {
+        this.referenceVoting.removeUserLike(userId);
+    }
+
     public void addUserDislike(AggregateId userId) {
         this.referenceVoting.removeUserLike(userId);
         this.referenceVoting.addUserDislike(userId);
+    }
+
+    public void removeDislike(AggregateId userId) {
+        this.referenceVoting.removeUserDislike(userId);
     }
 
     public void updateReferenceInfo(String author, String title, LocalDate publicationDate, String description, String link) {
