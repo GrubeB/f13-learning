@@ -4,30 +4,29 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
-import pl.app.learning.category.application.port.in.command.*;
-import pl.app.learning.category.query.CategoryQueryService;
-import pl.app.learning.topic.application.port.in.command.AddCategoryToTopicCommand;
+import pl.app.learning.category.application.port.in.command.AddChildCategoryCommand;
+import pl.app.learning.category.application.port.in.command.RemoveChildCategoryCommand;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping(CategoryChildController.resourcePath)
 @RequiredArgsConstructor
 public class CategoryChildController {
-    public static final String resourceName = "categories";
-    public static final String resourcePath = "/api/v1/" + resourceName;
+    public static final String resourceName = "children";
+    public static final String resourcePath = "/api/v1/categories/{categoryId}/" + resourceName;
 
     private final CommandGateway gateway;
 
-    @PostMapping(path = "/{categoryId}/children/{childId}")
+    @PostMapping(path = "/{childId}")
     public ResponseEntity<Void> addChildCategoryCommand(@PathVariable UUID categoryId, @PathVariable UUID childId) {
         gateway.sendAsync(new AddChildCategoryCommand(categoryId, childId));
         return ResponseEntity
                 .accepted()
                 .build();
     }
-    @DeleteMapping(path = "/{categoryId}/children/{childId}")
+
+    @DeleteMapping(path = "/{childId}")
     public ResponseEntity<Void> removeChildCategoryCommand(@PathVariable UUID categoryId, @PathVariable UUID childId) {
         gateway.sendAsync(new RemoveChildCategoryCommand(categoryId, childId));
         return ResponseEntity
