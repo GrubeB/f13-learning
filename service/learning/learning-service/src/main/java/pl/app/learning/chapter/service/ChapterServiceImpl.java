@@ -20,15 +20,10 @@ class ChapterServiceImpl implements
         ChapterService {
     private final ChapterRepository repository;
     private final ChapterSnapshotRepository chapterSnapshotRepository;
-    private final ChapterMapper chapterMapper;
+    private final ChapterMapper merger;
     @Override
     public void beforeUpdate(UUID uuid, Chapter existingEntity, Chapter newEntity) {
         existingEntity.makeAndStoreSnapshot();
-    }
-
-    @Override
-    public Chapter merge(Chapter existingEntity, Chapter newEntity) {
-        return chapterMapper.merge(existingEntity, newEntity);
     }
 
     @Override
