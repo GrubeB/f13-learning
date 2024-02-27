@@ -101,4 +101,13 @@ public class TopicCommandController {
                 .accepted()
                 .build();
     }
+
+    // REVISION
+    @PostMapping("/merge-revision")
+    public ResponseEntity<Void> handle(@RequestBody MergeRevisionToTopicCommand command) {
+        gateway.sendAsync(command);
+        return ResponseEntity
+                .accepted()
+                .build();
+    }
 }
