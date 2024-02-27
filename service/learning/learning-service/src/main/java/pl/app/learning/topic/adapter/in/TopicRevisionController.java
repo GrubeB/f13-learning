@@ -11,7 +11,7 @@ import pl.app.learning.topic.application.port.in.command.MergeRevisionToTopicCom
 
 import java.util.UUID;
 
-@RestController
+@RestController("pl.app.learning.topic.adapter.in.TopicRevisionController")
 @RequestMapping(TopicRevisionController.resourcePath)
 @RequiredArgsConstructor
 public class TopicRevisionController {
