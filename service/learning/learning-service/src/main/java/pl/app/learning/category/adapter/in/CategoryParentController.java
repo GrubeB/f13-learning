@@ -18,26 +18,6 @@ public class CategoryParentController {
 
     private final CommandGateway gateway;
 
-    public static final String addParentCategoryPath = "/add-parent";
-
-    @PostMapping(path = addParentCategoryPath)
-    public ResponseEntity<Void> handle(@RequestBody AddParentCategoryCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
-    public static final String removeParentCategoryPath = "/remove-parent";
-
-    @PostMapping(path = removeParentCategoryPath)
-    public ResponseEntity<Void> handle(@RequestBody RemoveParentCategoryCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
     @PostMapping(path = "/{categoryId}/parents/{parentId}")
     public ResponseEntity<Void> addParentCategoryCommand(@PathVariable UUID categoryId, @PathVariable UUID parentId) {
         gateway.sendAsync(new AddParentCategoryCommand(categoryId, parentId));

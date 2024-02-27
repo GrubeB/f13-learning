@@ -5,7 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
-import pl.app.learning.category.application.port.in.command.*;
+import pl.app.learning.category.application.domain.CategoryStatus;
+import pl.app.learning.category.application.port.in.command.ChangeStatusCategoryCommand;
+import pl.app.learning.category.application.port.in.command.CreateCategoryCommand;
+import pl.app.learning.category.application.port.in.command.DeleteCategoryCommand;
+import pl.app.learning.category.application.port.in.command.UpdateCategoryCommand;
 import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.category.query.dto.CategoryDto;
 
@@ -29,26 +33,27 @@ public class CategoryController {
                 .body(service.fetchById(id, CategoryDto.class));
     }
 
-    @DeleteMapping(path = "/{categoryId}")
-    public ResponseEntity<Void> handle(@RequestBody DeleteCategoryCommand command) {
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<Void> handle(@PathVariable UUID categoryId) {
+        var command = new DeleteCategoryCommand(categoryId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()
                 .build();
     }
 
-    @PutMapping(path = "/{categoryId}")
-    public ResponseEntity<Void> handle(@RequestBody UpdateCategoryCommand command) {
+    @PutMapping("/{categoryId}")
+    public ResponseEntity<Void> handle(@PathVariable UUID categoryId, @RequestBody UpdateCategoryCommand command) {
+        command.setCategoryId(categoryId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()
                 .build();
     }
-    public static final String changeCategoryStatusPath = "/change-status";
 
-    @PostMapping(path = changeCategoryStatusPath)
-    public ResponseEntity<Void> handle(@RequestBody ChangeStatusCategoryCommand command) {
-        gateway.sendAsync(command);
+    @PutMapping("/{categoryId}/status/{status}")
+    public ResponseEntity<Void> handle(@PathVariable UUID categoryId, @PathVariable CategoryStatus status) {
+        gateway.sendAsync(new ChangeStatusCategoryCommand(categoryId, status));
         return ResponseEntity
                 .accepted()
                 .build();
