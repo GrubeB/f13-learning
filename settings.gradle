@@ -21,4 +21,3 @@ include "common:controller:command-controller"
 
 // SERVICES
 include "service:learning:learning-service"
-include "service:property:property-service"
