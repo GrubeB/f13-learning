@@ -1,4 +1,11 @@
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+
 spring:
+  profiles:
+    active: test
   datasource:
     replace: none
     url: jdbc:tc:postgresql:13:///postgres?TC_INITSCRIPT=sql/init-db.sql
@@ -9,13 +16,9 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-          ddl-auto: update
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: false
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-logging:
-  level:
-    pl.app: TRACE

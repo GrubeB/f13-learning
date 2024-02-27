@@ -5,25 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3aa43723-3439-45c4-94bf-4e2dd971fb53" name="Changes" comment="save">
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/IntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/Property.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/resources/sql/init-db.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaQueryParameterArgumentResolverConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/SearchCriteriaSpecificationIntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/audit/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/search-criteria/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/TestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/TestApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/BodyArgumentResolverWebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolverTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/QueryParameterArgumentResolverWebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/Operator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/SearchCriteriaSpecification.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/SearchCriteriaSpecification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaArgumentResolverConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaBodyArgumentResolverConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/IntegrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/learning/learning-service/src/main/java/pl/app/learning/config/WebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/java/pl/app/property/config/WebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/property/property-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/service/property/property-service/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +105,11 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.5360825",
     "settings.editor.selected.configurable": "terminal"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JAVA"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -125,15 +127,15 @@
       <recent name="pl.app.common.search_criteria.resolver" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="pl.app.common.search_criteria" />
       <recent name="pl.app.common.search_criteria.resolver" />
+      <recent name="pl.app.common.search_criteria" />
       <recent name="pl.app.property.accommodation_type.query" />
       <recent name="pl.app.property.accommodation_availability.application.port.in" />
       <recent name="pl.app.property.accommodation_availability.application.port.in.command" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.IntegrationTest.test2">
-    <configuration name="IntegrationTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.f12-solo-leveling:common:search-criteria [test]">
+    <configuration name="IntegrationTest.testGreaterOrEqualOperatorOperator" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -146,7 +148,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.test&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.testGreaterOrEqualOperatorOperator&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -157,7 +159,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="IntegrationTest.test2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="IntegrationTest.testInOperator" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -170,7 +172,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.test2&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.testInOperator&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -181,7 +183,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="IntegrationTest.textContextLoad" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="IntegrationTest.testLikeOperator" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -194,7 +196,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.textContextLoad&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.testLikeOperator&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -205,7 +207,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItem" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="IntegrationTest.testNotEqualOperatorOperator" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -218,7 +220,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItem&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.testNotEqualOperatorOperator&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -229,37 +231,35 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItems" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="f12-solo-leveling:common:search-criteria [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/common/search-criteria" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":common:search-criteria:test" />
-            <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItems&quot;" />
+            <option value="test" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.IntegrationTest.test2" />
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItem" />
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItems" />
-        <item itemvalue="Gradle.IntegrationTest.test" />
-        <item itemvalue="Gradle.IntegrationTest.textContextLoad" />
+        <item itemvalue="Gradle.f12-solo-leveling:common:search-criteria [test]" />
+        <item itemvalue="Gradle.IntegrationTest.testNotEqualOperatorOperator" />
+        <item itemvalue="Gradle.IntegrationTest.testGreaterOrEqualOperatorOperator" />
+        <item itemvalue="Gradle.IntegrationTest.testLikeOperator" />
+        <item itemvalue="Gradle.IntegrationTest.testInOperator" />
       </list>
     </recent_temporary>
   </component>
@@ -331,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708990726331</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="save">
+      <option name="closed" value="true" />
+      <created>1709024410909</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709024410909</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">

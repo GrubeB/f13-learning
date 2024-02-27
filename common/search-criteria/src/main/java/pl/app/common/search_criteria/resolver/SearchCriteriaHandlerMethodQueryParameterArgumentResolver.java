@@ -40,9 +40,9 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolver implements
 
     public List<SearchCriteriaItem> resolveSearchCriteriaItems(String query) {
         LinkedList<SearchCriteriaItem> items = new LinkedList<>();
-        String[] conjunction = query.split("(?<=(?i)\\sAND\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+        String[] conjunction = query.split("(?=(?i)\\sAND\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
         for (String conjunctionElement : conjunction) {
-            String[] disjunction = conjunctionElement.split("(?<=(?i)\\sOR\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            String[] disjunction = conjunctionElement.split("(?=(?i)\\sOR\\s)(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             for (String disjunctionElement : disjunction) {
                 resolveSearchCriteriaItem(disjunctionElement)
                         .ifPresent(items::add);
@@ -50,7 +50,6 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolver implements
         }
         return items;
     }
-
 
     // Operators are in a sequence from two-character to one-character symbol
     private final static List<Operator> supportedOperators = new LinkedList<>() {{
@@ -87,14 +86,15 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolver implements
     private Optional<SearchCriteriaItem> resolveSearchCriteriaItem(String query, Operator operator) {
         String[] split = query.split(operator.getSymbol() + "(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
         if (split.length == 2) {
+            String field = split[0];
             String value = split[1];
-            ConditionOperator conditionOperator = resolveConditionOperator(value);
-            value = removeConditionOperator(value);
+            ConditionOperator conditionOperator = resolveConditionOperator(field);
+            field = removeConditionOperator(field);
             if (valueIsArray(value)) {
                 return Optional.empty();
             }
             value = removeQuote(value);
-            return Optional.of(new SearchCriteriaItem(split[0], operator, value, conditionOperator));
+            return Optional.of(new SearchCriteriaItem(field, operator, value, conditionOperator));
         }
         return Optional.empty();
     }
@@ -102,9 +102,10 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolver implements
     private Optional<SearchCriteriaItem> resolveComplexSearchCriteriaItem(String query, Operator operator) {
         String[] split = query.split(operator.getSymbol() + "(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
         if (split.length == 2) {
+            String field = split[0];
             String value = split[1];
-            ConditionOperator conditionOperator = resolveConditionOperator(value);
-            value = removeConditionOperator(value);
+            ConditionOperator conditionOperator = resolveConditionOperator(field);
+            field = removeConditionOperator(field);
 
             if (!valueIsArray(value)) {
                 return Optional.empty();
@@ -114,7 +115,7 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolver implements
                     .map(String::trim)
                     .map(this::removeQuote)
                     .toList();
-            return Optional.of(new SearchCriteriaItem(split[0], operator, values, conditionOperator));
+            return Optional.of(new SearchCriteriaItem(field, operator, values, conditionOperator));
         }
         return Optional.empty();
     }
@@ -128,15 +129,21 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolver implements
     }
 
     private String removeConditionOperator(String value) {
-        return value.split("(?i)\\sAND(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0]
-                .split("(?i)\\sOR(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[0];
+        value = value.trim();
+        if (value.startsWith("AND") || value.startsWith("and")) {
+            return value.split("(?i)AND\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[1];
+        } else if (value.startsWith("OR") || value.startsWith("or")) {
+            return value.split("(?i)OR\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")[1];
+        } else {
+            return value;
+        }
     }
 
     private ConditionOperator resolveConditionOperator(String value) {
         value = value.trim();
-        if (value.endsWith("AND") || value.endsWith("and")) {
+        if (value.startsWith("AND") || value.startsWith("and")) {
             return ConditionOperator.AND;
-        } else if (value.endsWith("OR") || value.endsWith("or")) {
+        } else if (value.startsWith("OR") || value.startsWith("or")) {
             return ConditionOperator.OR;
         } else {
             return null;

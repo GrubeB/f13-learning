@@ -34,6 +34,8 @@ public class Property {
 
     @Column(name = "created_date")
     private Instant createdDate;
+    @Column(name = "number_od_rooms")
+    private Long numberOrRooms;
 
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
@@ -41,8 +43,9 @@ public class Property {
             orphanRemoval = true)
     private Set<PropertyAddress> addresses = new LinkedHashSet<>();
 
-    public Property(String name, LocalTime checkInFromTime, LocalTime checkInToTime, Instant createdDate, Set<PropertyAddress> addresses) {
+    public Property(String name,Long numberOrRooms, LocalTime checkInFromTime, LocalTime checkInToTime, Instant createdDate, Set<PropertyAddress> addresses) {
         this.name = name;
+        this.numberOrRooms = numberOrRooms;
         this.checkInFromTime = checkInFromTime;
         this.checkInToTime = checkInToTime;
         this.createdDate = createdDate;

@@ -43,7 +43,7 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolverTest {
                 .andReturn();
         reconstitutedSearchCriteria = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), SearchCriteria.class);
         assertThat(reconstitutedSearchCriteria.getCriteria()).hasSize(2);
-        assertThat(reconstitutedSearchCriteria.getCriteria().get(0).getConditionOperator()).isEqualTo(ConditionOperator.AND);
+        assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getConditionOperator()).isEqualTo(ConditionOperator.AND);
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getField()).isEqualTo("name");
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getOperator()).isEqualTo(Operator.LIKE);
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getValue()).isEqualTo("Ala");
@@ -53,7 +53,7 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolverTest {
                 .andReturn();
         reconstitutedSearchCriteria = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), SearchCriteria.class);
         assertThat(reconstitutedSearchCriteria.getCriteria()).hasSize(3);
-        assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getConditionOperator()).isEqualTo(ConditionOperator.OR);
+        assertThat(reconstitutedSearchCriteria.getCriteria().get(2).getConditionOperator()).isEqualTo(ConditionOperator.OR);
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getField()).isEqualTo("name");
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getOperator()).isEqualTo(Operator.LIKE);
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getValue()).isEqualTo("Ala");
@@ -63,7 +63,7 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolverTest {
                 .andReturn();
         reconstitutedSearchCriteria = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), SearchCriteria.class);
         assertThat(reconstitutedSearchCriteria.getCriteria()).hasSize(2);
-        assertThat(reconstitutedSearchCriteria.getCriteria().get(0).getConditionOperator()).isEqualTo(ConditionOperator.AND);
+        assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getConditionOperator()).isEqualTo(ConditionOperator.AND);
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getOperator()).isEqualTo(Operator.NO_IN);
         assertThat(reconstitutedSearchCriteria.getCriteria().get(1).getValues()).hasSize(4);
 

@@ -53,7 +53,7 @@ public enum Operator {
             return (root, query, criteriaBuilder) -> {
                 Path<Object> attribute = getPath(root, filter.getField());
                 Object values = fieldValueCaster.casValuesTo(filter.getValues(), attribute.getJavaType());
-                return criteriaBuilder.in(attribute).value(values).not();
+                return criteriaBuilder.not(criteriaBuilder.in(attribute).value(values));
             };
         }
     },
@@ -107,25 +107,25 @@ public enum Operator {
 
                 Class<?> fieldType = attribute.getJavaType();
                 if (fieldType == LocalTime.class) {
-                    return criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), (LocalTime) value);
+                    return criteriaBuilder.greaterThan(root.get(filter.getField()), (LocalTime) value);
                 } else if (fieldType == LocalDate.class) {
-                    return criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), (LocalDate) value);
+                    return criteriaBuilder.greaterThan(root.get(filter.getField()), (LocalDate) value);
                 } else if (fieldType == LocalDateTime.class) {
-                    return criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), (LocalDateTime) value);
+                    return criteriaBuilder.greaterThan(root.get(filter.getField()), (LocalDateTime) value);
                 } else if (fieldType == Instant.class) {
-                    return criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), (Instant) value);
+                    return criteriaBuilder.greaterThan(root.get(filter.getField()), (Instant) value);
                 } else if (fieldType == OffsetDateTime.class) {
-                    return criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), (OffsetDateTime) value);
+                    return criteriaBuilder.greaterThan(root.get(filter.getField()), (OffsetDateTime) value);
                 } else if (fieldType == ZonedDateTime.class) {
-                    return criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), (ZonedDateTime) value);
+                    return criteriaBuilder.greaterThan(root.get(filter.getField()), (ZonedDateTime) value);
                 } else if (fieldType == Character.class || fieldType == char.class) {
-                    return criteriaBuilder.greaterThanOrEqualTo(root.get(filter.getField()), (Character) value);
+                    return criteriaBuilder.greaterThan(root.get(filter.getField()), (Character) value);
                 } else if (fieldType == Short.class || fieldType == short.class
                         || fieldType == Integer.class || fieldType == int.class
                         || fieldType == Long.class || fieldType == long.class
                         || fieldType == Float.class || fieldType == float.class
                         || fieldType == Double.class || fieldType == double.class) {
-                    return criteriaBuilder.ge(root.get(filter.getField()), (Number) value);
+                    return criteriaBuilder.gt(root.get(filter.getField()), (Number) value);
                 }
 
                 logger.info("Can not use between for {} field type.", fieldType);
@@ -166,7 +166,8 @@ public enum Operator {
                 return criteriaBuilder.equal(criteriaBuilder.literal(Boolean.TRUE), Boolean.TRUE);
             };
         }
-    }, LESS_THAN("<") {
+    },
+    LESS_THAN("<") {
         public <T> Specification<T> build(SearchCriteriaItem filter) {
             return (root, query, criteriaBuilder) -> {
                 Path<Object> attribute = getPath(root, filter.getField());
@@ -174,25 +175,25 @@ public enum Operator {
 
                 Class<?> fieldType = attribute.getJavaType();
                 if (fieldType == LocalTime.class) {
-                    return criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), (LocalTime) value);
+                    return criteriaBuilder.lessThan(root.get(filter.getField()), (LocalTime) value);
                 } else if (fieldType == LocalDate.class) {
-                    return criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), (LocalDate) value);
+                    return criteriaBuilder.lessThan(root.get(filter.getField()), (LocalDate) value);
                 } else if (fieldType == LocalDateTime.class) {
-                    return criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), (LocalDateTime) value);
+                    return criteriaBuilder.lessThan(root.get(filter.getField()), (LocalDateTime) value);
                 } else if (fieldType == Instant.class) {
-                    return criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), (Instant) value);
+                    return criteriaBuilder.lessThan(root.get(filter.getField()), (Instant) value);
                 } else if (fieldType == OffsetDateTime.class) {
-                    return criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), (OffsetDateTime) value);
+                    return criteriaBuilder.lessThan(root.get(filter.getField()), (OffsetDateTime) value);
                 } else if (fieldType == ZonedDateTime.class) {
-                    return criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), (ZonedDateTime) value);
+                    return criteriaBuilder.lessThan(root.get(filter.getField()), (ZonedDateTime) value);
                 } else if (fieldType == Character.class || fieldType == char.class) {
-                    return criteriaBuilder.lessThanOrEqualTo(root.get(filter.getField()), (Character) value);
+                    return criteriaBuilder.lessThan(root.get(filter.getField()), (Character) value);
                 } else if (fieldType == Short.class || fieldType == short.class
                         || fieldType == Integer.class || fieldType == int.class
                         || fieldType == Long.class || fieldType == long.class
                         || fieldType == Float.class || fieldType == float.class
                         || fieldType == Double.class || fieldType == double.class) {
-                    return criteriaBuilder.le(root.get(filter.getField()), (Number) value);
+                    return criteriaBuilder.lt(root.get(filter.getField()), (Number) value);
                 }
                 logger.info("Can not use between for {} field type.", fieldType);
                 return criteriaBuilder.equal(criteriaBuilder.literal(Boolean.TRUE), Boolean.TRUE);

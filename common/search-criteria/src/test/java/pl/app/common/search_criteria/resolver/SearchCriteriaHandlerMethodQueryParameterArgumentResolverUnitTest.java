@@ -23,10 +23,10 @@ class SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest {
                 "name=\"Ala\" AND length>200 OR name=\"Ola\" AND length<120"
         )).hasSize(4);
         Assertions.assertThat(resolver.resolveSearchCriteriaItems(
-                "name=\"Ala AND Aga OR Kasia\" AND length>200 OR name=\"Ola\" AND length<120"
+                "name=\"and Ala AND and Aga OR or Kasia or\" AND length>200 OR name=\"Ola\" AND length<120"
         )).hasSize(4);
         Assertions.assertThat(resolver.resolveSearchCriteriaItems(
-                "name=\"Ala AND Aga OR Kasia\" and length>200 and length<120 or name=\"Ola\""
+                "name=\"and Ala AND and Aga OR or Kasia or\" and length>200 and length<120 or name=\"Ola\""
         )).hasSize(4);
     }
     @Test

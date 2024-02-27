@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.app.common.search_criteria.resolver.SearchCriteriaArgumentResolver;
-import pl.app.common.search_criteria.resolver.SearchCriteriaArgumentResolverConfig;
+import pl.app.common.search_criteria.resolver.SearchCriteriaBodyArgumentResolverConfig;
 
 import java.util.List;
 

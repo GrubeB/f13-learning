@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "pl.app.common.path_variable"
-version = "0.1.0"
+version = "0.2.0"
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"

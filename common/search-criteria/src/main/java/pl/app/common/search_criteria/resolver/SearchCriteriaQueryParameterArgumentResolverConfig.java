@@ -2,9 +2,9 @@ package pl.app.common.search_criteria.resolver;
 
 import org.springframework.context.annotation.Bean;
 
-public class SearchCriteriaArgumentResolverConfig {
+public class SearchCriteriaQueryParameterArgumentResolverConfig {
     @Bean
     public SearchCriteriaArgumentResolver searchCriteriaArgumentResolver() {
-        return new SearchCriteriaHandlerMethodBodyArgumentResolver();
+        return new SearchCriteriaHandlerMethodQueryParameterArgumentResolver();
     }
 }
