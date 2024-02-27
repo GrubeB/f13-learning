@@ -1,11 +1,20 @@
-server:
-  port: 9006
-
 spring:
-  autoconfigure:
-    exclude:
-      org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,
-      org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  datasource:
+    replace: none
+    url: jdbc:tc:postgresql:13:///postgres?TC_INITSCRIPT=sql/init-db.sql
+    hikari:
+      max-lifetime: 30000
+    testWhileIdle: true
+    test-on-borrow: true
+  jpa:
+    show-sql: true
+    hibernate:
+          ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 logging:
   level:

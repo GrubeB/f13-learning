@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
-public class SearchCriteriaHandlerMethodBodyArgumentResolverWebMvcConfig implements WebMvcConfigurer {
+public class BodyArgumentResolverWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(new SearchCriteriaHandlerMethodBodyArgumentResolver());

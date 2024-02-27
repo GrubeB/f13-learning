@@ -3,25 +3,22 @@ package pl.app.common.search_criteria.resolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pl.app.common.search_criteria.ConditionOperator;
 import pl.app.common.search_criteria.Operator;
 import pl.app.common.search_criteria.SearchCriteria;
-import pl.app.common.search_criteria.SearchCriteriaItem;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(TestController.class)
-@Import(SearchCriteriaHandlerMethodQueryArgumentResolverWebMvcConfig.class)
-class SearchCriteriaHandlerMethodQueryArgumentResolverTest {
+@Import(QueryParameterArgumentResolverWebMvcConfig.class)
+class SearchCriteriaHandlerMethodQueryParameterArgumentResolverTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired

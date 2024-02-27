@@ -5,13 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3aa43723-3439-45c4-94bf-4e2dd971fb53" name="Changes" comment="save">
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverWebMvcConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverWebMvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/IntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/Property.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyAddress.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/PropertyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/search-criteria/src/test/resources/sql/init-db.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodArgumentResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/WebMvcConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/audit/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/main/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/TestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/TestApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodBodyArgumentResolverWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/BodyArgumentResolverWebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolverTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/SearchCriteriaHandlerMethodQueryArgumentResolverWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/QueryParameterArgumentResolverWebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/java/pl/app/common/search_criteria/resolver/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/search-criteria/src/test/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/common/search-criteria/src/test/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +43,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/common/search-criteria">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -44,6 +62,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -77,27 +96,27 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dawid/Desktop/f12-solo-leveling/common/search-criteria/src/test/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5360825&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "C:/Users/Dawid/Desktop/f12-solo-leveling/common/search-criteria/src/test/resources",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5360825",
+    "settings.editor.selected.configurable": "terminal"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\search-criteria\src\test\resources" />
+      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\common\search-criteria\src\test\java\pl\app\common\search_criteria" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\property\property-service\src\main\java\pl\app\property\accommodation_availability\query\model" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\property\property-service\src\main\resources\db\migration" />
       <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\property\property-service\src\main\resources\db" />
-      <recent name="C:\Users\Dawid\Desktop\f12-solo-leveling\service\property\property-service\src\main\resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -106,15 +125,15 @@
       <recent name="pl.app.common.search_criteria.resolver" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="pl.app.common.search_criteria.resolver" />
       <recent name="pl.app.common.search_criteria" />
+      <recent name="pl.app.common.search_criteria.resolver" />
       <recent name="pl.app.property.accommodation_type.query" />
       <recent name="pl.app.property.accommodation_availability.application.port.in" />
       <recent name="pl.app.property.accommodation_availability.application.port.in.command" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverTest.test">
-    <configuration name="SearchCriteriaHandlerMethodQueryArgumentResolverTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.IntegrationTest.test2">
+    <configuration name="IntegrationTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -127,7 +146,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryArgumentResolverTest.test&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.test&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -138,7 +157,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="IntegrationTest.test2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -151,7 +170,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.test2&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -162,7 +181,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteria" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="IntegrationTest.textContextLoad" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -175,7 +194,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteria&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.IntegrationTest.textContextLoad&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -186,7 +205,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItem" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItem" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -199,7 +218,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItem&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItem&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -210,7 +229,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItems" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItems" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -223,7 +242,7 @@
           <list>
             <option value=":common:search-criteria:test" />
             <option value="--tests" />
-            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItems&quot;" />
+            <option value="&quot;pl.app.common.search_criteria.resolver.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItems&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -236,11 +255,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverTest.test" />
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItems" />
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest" />
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteriaItem" />
-        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest.resolveSearchCriteria" />
+        <item itemvalue="Gradle.IntegrationTest.test2" />
+        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItem" />
+        <item itemvalue="Gradle.SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest.resolveSearchCriteriaItems" />
+        <item itemvalue="Gradle.IntegrationTest.test" />
+        <item itemvalue="Gradle.IntegrationTest.textContextLoad" />
       </list>
     </recent_temporary>
   </component>
@@ -304,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708985514859</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="save">
+      <option name="closed" value="true" />
+      <created>1708990726331</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708990726331</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">

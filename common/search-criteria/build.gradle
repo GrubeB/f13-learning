@@ -6,17 +6,30 @@ group = "pl.app.common.path_variable"
 version = "0.1.0"
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-web"
-
     implementation "org.springframework.boot:spring-boot-starter-validation"
 
-    implementation "org.springframework.boot:spring-boot-starter-test"
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.1'
 
+    // JPA
+    runtimeOnly "org.postgresql:postgresql"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+
+    // LOMBOK
+    runtimeOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+
+    // TEST
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.testcontainers:postgresql"
+    testCompileOnly "org.projectlombok:lombok"
+    testAnnotationProcessor "org.projectlombok:lombok"
+
+    // BUGS FIX
     // https://mvnrepository.com/artifact/com.google.code.findbugs/annotations
     implementation 'com.google.code.findbugs:annotations:3.0.1'
-
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.1'
 }
 
 bootJar {

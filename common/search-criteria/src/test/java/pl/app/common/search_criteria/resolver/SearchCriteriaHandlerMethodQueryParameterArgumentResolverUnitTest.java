@@ -7,9 +7,9 @@ import pl.app.common.search_criteria.SearchCriteriaItem;
 
 import java.util.Optional;
 
-class SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest {
+class SearchCriteriaHandlerMethodQueryParameterArgumentResolverUnitTest {
 
-    private final SearchCriteriaHandlerMethodQueryArgumentResolver resolver = new SearchCriteriaHandlerMethodQueryArgumentResolver();
+    private final SearchCriteriaHandlerMethodQueryParameterArgumentResolver resolver = new SearchCriteriaHandlerMethodQueryParameterArgumentResolver();
 
     @Test
     void resolveSearchCriteriaItems() {
@@ -34,6 +34,8 @@ class SearchCriteriaHandlerMethodQueryArgumentResolverUnitTest {
         Optional<SearchCriteriaItem> searchCriteriaItem;
         searchCriteriaItem = resolver.resolveSearchCriteriaItem("name=\"Ala\"     ");
         Assertions.assertThat(searchCriteriaItem.isPresent()).isTrue();
+        Assertions.assertThat(searchCriteriaItem.get().getOperator()).isEqualTo(Operator.EQUAL);
+        Assertions.assertThat(searchCriteriaItem.get().getValue()).isEqualTo("Ala");
 
         searchCriteriaItem = resolver.resolveSearchCriteriaItem("name=[\"Ala\"]");
         Assertions.assertThat(searchCriteriaItem.isPresent()).isTrue();

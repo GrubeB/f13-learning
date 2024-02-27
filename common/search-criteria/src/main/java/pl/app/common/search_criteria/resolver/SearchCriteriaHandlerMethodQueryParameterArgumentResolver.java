@@ -18,20 +18,9 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 // Allows injecting SearchCriteria instances into controller methods.
-class SearchCriteriaHandlerMethodQueryArgumentResolver implements
+class SearchCriteriaHandlerMethodQueryParameterArgumentResolver implements
         SearchCriteriaArgumentResolver {
     private final static String QUERY_PARAMETER_NAME = "query";
-    private final static List<Operator> supportedOperators = new LinkedList<>() {{
-        add(Operator.NO_IN);
-        add(Operator.LESS_THAN_OR_EQUAL);
-        add(Operator.GREATER_THAN_OR_EQUAL);
-        add(Operator.NOT_EQUAL);
-        add(Operator.IN);
-        add(Operator.EQUAL);
-        add(Operator.LIKE);
-        add(Operator.GREATER_THAN);
-        add(Operator.LESS_THAN);
-    }};
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -62,13 +51,32 @@ class SearchCriteriaHandlerMethodQueryArgumentResolver implements
         return items;
     }
 
+
+    // Operators are in a sequence from two-character to one-character symbol
+    private final static List<Operator> supportedOperators = new LinkedList<>() {{
+        add(Operator.NO_IN);
+        add(Operator.LESS_THAN_OR_EQUAL);
+        add(Operator.GREATER_THAN_OR_EQUAL);
+        add(Operator.NOT_EQUAL);
+        add(Operator.IN);
+        add(Operator.EQUAL);
+        add(Operator.LIKE);
+        add(Operator.GREATER_THAN);
+        add(Operator.LESS_THAN);
+    }};
+
     public Optional<SearchCriteriaItem> resolveSearchCriteriaItem(String query) {
         if (query == null || (query = query.trim()).isBlank()) {
             return Optional.empty();
         }
         Optional<SearchCriteriaItem> searchCriteriaItem;
         for (Operator supportedOperator : supportedOperators) {
-            searchCriteriaItem = resolveSearchCriteriaItem(query, supportedOperator);
+            searchCriteriaItem = switch (supportedOperator) {
+                case EQUAL, NOT_EQUAL, LIKE, GREATER_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN, LESS_THAN_OR_EQUAL ->
+                        resolveSearchCriteriaItem(query, supportedOperator);
+                case IN, NO_IN -> resolveComplexSearchCriteriaItem(query, supportedOperator);
+                case BETWEEN -> Optional.empty();
+            };
             if (searchCriteriaItem.isPresent()) {
                 return searchCriteriaItem;
             }
@@ -83,15 +91,30 @@ class SearchCriteriaHandlerMethodQueryArgumentResolver implements
             ConditionOperator conditionOperator = resolveConditionOperator(value);
             value = removeConditionOperator(value);
             if (valueIsArray(value)) {
-                value = removeBrackets(value);
-                List<String> values = Stream.of(value.split(","))
-                        .map(String::trim)
-                        .map(this::removeQuote)
-                        .toList();
-                return Optional.of(new SearchCriteriaItem(split[0], operator, values, conditionOperator));
+                return Optional.empty();
             }
             value = removeQuote(value);
             return Optional.of(new SearchCriteriaItem(split[0], operator, value, conditionOperator));
+        }
+        return Optional.empty();
+    }
+
+    private Optional<SearchCriteriaItem> resolveComplexSearchCriteriaItem(String query, Operator operator) {
+        String[] split = query.split(operator.getSymbol() + "(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+        if (split.length == 2) {
+            String value = split[1];
+            ConditionOperator conditionOperator = resolveConditionOperator(value);
+            value = removeConditionOperator(value);
+
+            if (!valueIsArray(value)) {
+                return Optional.empty();
+            }
+            value = removeBrackets(value);
+            List<String> values = Stream.of(value.split(","))
+                    .map(String::trim)
+                    .map(this::removeQuote)
+                    .toList();
+            return Optional.of(new SearchCriteriaItem(split[0], operator, values, conditionOperator));
         }
         return Optional.empty();
     }
