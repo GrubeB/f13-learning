@@ -6,6 +6,7 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
+import pl.app.learning.group.application.domain.snapshot.GroupHasReferenceSnapshot;
 
 @EntityAnnotation
 @Entity
@@ -31,6 +32,13 @@ public class GroupHasReference extends BaseJpaAuditDomainEntity<GroupHasReferenc
     public GroupHasReference(Group group, AggregateId reference) {
         this.group = group;
         this.reference = reference;
+    }
+
+    public GroupHasReference revertSnapshot(Group group, GroupHasReferenceSnapshot snapshot) {
+        this.entityId = snapshot.getSnapshotOwnerId();
+        this.group = group;
+        this.reference = snapshot.getReference();
+        return this;
     }
 }
 

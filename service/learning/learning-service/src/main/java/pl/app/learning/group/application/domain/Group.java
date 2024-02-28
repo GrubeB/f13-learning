@@ -6,12 +6,15 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaSnapshotableDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.learning.group.application.domain.snapshot.GroupSnapshot;
+import pl.app.common.mapper.Join;
+import pl.app.common.mapper.MergerUtils;
+import pl.app.learning.group.application.domain.snapshot.*;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @AggregateRootAnnotation
 @Entity
@@ -173,11 +176,30 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
 
     @Override
     public GroupSnapshot makeSnapshot() {
-        return new GroupSnapshot();
+        var categorySnapshots = this.categories.stream().map(e -> new GroupHasCategorySnapshot(e, e.getCategory())).collect(Collectors.toSet());
+        var referenceSnapshots = this.references.stream().map(e -> new GroupHasReferenceSnapshot(e, e.getReference())).collect(Collectors.toSet());
+        var topicSnapshots = this.topics.stream().map(e -> new GroupHasTopicSnapshot(e, e.getTopic())).collect(Collectors.toSet());
+        var groupSnapshots = this.groups.stream().map(e -> new GroupHasGroupSnapshot(e, e.getChildGroup())).collect(Collectors.toSet());
+        return new GroupSnapshot(this, this.name, this.content, this.status, categorySnapshots, referenceSnapshots, topicSnapshots, groupSnapshots);
     }
 
     @Override
     public Group revertSnapshot(GroupSnapshot snapshot) {
+        this.name = snapshot.getName();
+        this.content = snapshot.getContent();
+        this.status = snapshot.getStatus();
+        MergerUtils.mergeCollections(Join.RIGHT, this.categories, snapshot.getCategories(),
+                (e, s) -> e.revertSnapshot(this, s), GroupHasCategory::new,
+                GroupHasCategory::getId, GroupHasCategorySnapshot::getId);
+        MergerUtils.mergeCollections(Join.RIGHT, this.references, snapshot.getReferences(),
+                (e, s) -> e.revertSnapshot(this, s), GroupHasReference::new,
+                GroupHasReference::getId, GroupHasReferenceSnapshot::getId);
+        MergerUtils.mergeCollections(Join.RIGHT, this.topics, snapshot.getTopics(),
+                (e, s) -> e.revertSnapshot(this, s), GroupHasTopic::new,
+                GroupHasTopic::getId, GroupHasTopicSnapshot::getId);
+        MergerUtils.mergeCollections(Join.RIGHT, this.groups, snapshot.getGroups(),
+                (e, s) -> e.revertSnapshot(this, s), GroupHasGroup::new,
+                GroupHasGroup::getId, GroupHasGroupSnapshot::getId);
         return this;
     }
 

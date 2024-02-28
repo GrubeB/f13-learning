@@ -6,6 +6,7 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
+import pl.app.learning.group.application.domain.snapshot.GroupHasGroupSnapshot;
 
 @EntityAnnotation
 @Entity
@@ -31,6 +32,13 @@ public class GroupHasGroup extends BaseJpaAuditDomainEntity<GroupHasGroup> {
     public GroupHasGroup(Group group, AggregateId childGroup) {
         this.group = group;
         this.childGroup = childGroup;
+    }
+
+    public GroupHasGroup revertSnapshot(Group group, GroupHasGroupSnapshot snapshot) {
+        this.entityId = snapshot.getSnapshotOwnerId();
+        this.group = group;
+        this.childGroup = snapshot.getChildGroup();
+        return this;
     }
 }
 

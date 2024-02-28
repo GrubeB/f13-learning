@@ -12,7 +12,6 @@ import pl.app.common.util.EntityLocationUriUtils;
 import pl.app.learning.group.application.port.in.command.*;
 import pl.app.learning.group.query.GroupQueryService;
 import pl.app.learning.group.query.dto.GroupDto;
-import pl.app.learning.topic.query.TopicQueryService;
 
 import java.util.UUID;
 
@@ -69,6 +68,15 @@ public class GroupCommandController {
 
     @PostMapping("/remove-reference")
     public ResponseEntity<Void> handle(@RequestBody RemoveReferenceFromGroupCommand command) {
+        gateway.sendAsync(command);
+        return ResponseEntity
+                .accepted()
+                .build();
+    }
+
+    // SNAPSHOT
+    @PostMapping("/revert-snapshot")
+    public ResponseEntity<Void> handle(@RequestBody RevertGroupSnapshotCommand command) {
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()
