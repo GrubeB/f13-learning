@@ -45,6 +45,7 @@ class ReferenceVotingService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void removeDislike(RemoveUserDislikeCommand command) {
         Reference aggregate = repository.load(new AggregateId(command.getReferenceId()));
         aggregate.removeDislike(new AggregateId(command.getUserId()));
@@ -52,6 +53,7 @@ class ReferenceVotingService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void removeLike(RemoveUserLikeCommand command) {
         Reference aggregate = repository.load(new AggregateId(command.getReferenceId()));
         aggregate.removeLike(new AggregateId(command.getUserId()));

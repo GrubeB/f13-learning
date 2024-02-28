@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.common.util.EntityLocationUriUtils;
-import pl.app.learning.topic.application.port.in.UpdateTopicUseCase;
 import pl.app.learning.topic.application.port.in.command.*;
 import pl.app.learning.topic.query.TopicQueryService;
 import pl.app.learning.topic.query.dto.TopicDto;
@@ -44,7 +43,7 @@ public class TopicCommandController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Void> handle(@RequestBody UpdateTopicUseCase command) {
+    public ResponseEntity<Void> handle(@RequestBody UpdateTopicCommand command) {
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()

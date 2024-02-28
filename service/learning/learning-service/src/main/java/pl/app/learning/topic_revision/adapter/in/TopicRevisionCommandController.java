@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TopicRevisionCommandController {
     public static final String resourceName = "topic-revisions";
-    public static final String resourcePath = "/api/v1/" + resourceName;
+    public static final String resourcePath = "/api/v1/" + resourceName + "/commands";
 
     private final CommandGateway gateway;
     public final TopicRevisionQueryService service;
