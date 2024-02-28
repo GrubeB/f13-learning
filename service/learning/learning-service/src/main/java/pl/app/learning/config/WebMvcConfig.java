@@ -11,6 +11,7 @@ import pl.app.common.path_variable.resolver.PathVariablesArgumentResolver;
 import pl.app.common.path_variable.resolver.PathVariablesArgumentResolverConfig;
 import pl.app.common.search_criteria.resolver.SearchCriteriaArgumentResolver;
 import pl.app.common.search_criteria.resolver.SearchCriteriaBodyArgumentResolverConfig;
+import pl.app.common.search_criteria.resolver.SearchCriteriaQueryParameterArgumentResolverConfig;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Import({
         DtoArgumentResolverConfig.class,
-        SearchCriteriaBodyArgumentResolverConfig.class,
+        SearchCriteriaQueryParameterArgumentResolverConfig.class,
         PathVariablesArgumentResolverConfig.class
 })
 public class WebMvcConfig implements WebMvcConfigurer {
