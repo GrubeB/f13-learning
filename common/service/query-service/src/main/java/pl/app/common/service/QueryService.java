@@ -6,11 +6,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.lang.NonNull;
-import pl.app.common.service.support.ServiceSupport;
 import pl.app.common.dto_criteria.Dto;
 import pl.app.common.mapper.Mapper;
 import pl.app.common.search_criteria.SearchCriteria;
 import pl.app.common.search_criteria.SearchCriteriaSpecification;
+import pl.app.common.service.support.ServiceSupport;
 import pl.app.common.shared.exception.NotFoundException;
 
 import java.util.List;
@@ -91,6 +91,11 @@ public interface QueryService {
             default ENTITY fetchById(@NonNull ID id) {
                 return getRepository().findById(id)
                         .orElseThrow(() -> new NotFoundException("object not found with id: " + id));
+            }
+
+            @Override
+            default List<ENTITY> fetchByIds(@NonNull List<ID> ids) {
+                return getRepository().findAllById(ids);
             }
 
             JpaRepository<ENTITY, ID> getRepository();
@@ -194,6 +199,14 @@ public interface QueryService {
                 return getMapper().map(entity, dtoClass);
             }
 
+            @Override
+            default <T> List<T> fetchByIds(@NonNull List<ID> ids, Class<T> dtoClass) {
+                List<ENTITY> entities = getRepository().findAllById(ids);
+                return entities.stream()
+                        .map(e -> getMapper().map(e, dtoClass))
+                        .collect(Collectors.toList());
+            }
+
             JpaRepository<ENTITY, ID> getRepository();
         }
     }
@@ -289,6 +302,14 @@ public interface QueryService {
                 ENTITY entity = getRepository().findById(id)
                         .orElseThrow(() -> new NotFoundException("object not found with id: " + id));
                 return getMapper().map(entity, getClass(dto));
+            }
+
+            @Override
+            default <T> List<T> fetchByIds(@NonNull List<ID> ids, Dto dto) {
+                List<ENTITY> entities = getRepository().findAllById(ids);
+                return entities.stream()
+                        .map(entity -> (T) getMapper().<ENTITY, T>map(entity, getClass(dto)))
+                        .collect(Collectors.toList());
             }
 
             JpaRepository<ENTITY, ID> getRepository();
