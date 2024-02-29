@@ -33,7 +33,8 @@ public class ReferenceController {
     }
 
     @DeleteMapping(path = "/{referenceId}")
-    public ResponseEntity<Void> handle(@RequestBody DeleteReferenceCommand command) {
+    public ResponseEntity<Void> handle(@PathVariable UUID referenceId) {
+        var command = new DeleteReferenceCommand(referenceId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()
@@ -41,7 +42,8 @@ public class ReferenceController {
     }
 
     @PutMapping(path = "/{referenceId}")
-    public ResponseEntity<Void> handle(@RequestBody UpdateReferenceCommand command) {
+    public ResponseEntity<Void> handle(@PathVariable UUID referenceId, @RequestBody UpdateReferenceCommand command) {
+        command.setReferenceId(referenceId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()

@@ -110,6 +110,13 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         this.status = status;
     }
 
+    public void verifyIsInDraftStatus() {
+        if (!TopicStatus.DRAFT.equals(this.status)) {
+            throw new TopicException.TopicWrongStatusException("Topic must be in Draft status, but is in: " + this.status);
+        }
+    }
+
+
     public void mergeRevision(TopicRevisionQuery revision) {
         this.name = revision.getName();
         this.content = revision.getContent();

@@ -13,32 +13,12 @@ import java.util.UUID;
 @RequestMapping(CategoryParentController.resourcePath)
 @RequiredArgsConstructor
 public class CategoryParentController {
-    public static final String resourceName = "categories";
-    public static final String resourcePath = "/api/v1/" + resourceName;
+    public static final String resourceName = "parents";
+    public static final String resourcePath = "/api/v1/categories/{categoryId}/" + resourceName;
 
     private final CommandGateway gateway;
 
-    public static final String addParentCategoryPath = "/add-parent";
-
-    @PostMapping(path = addParentCategoryPath)
-    public ResponseEntity<Void> handle(@RequestBody AddParentCategoryCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
-    public static final String removeParentCategoryPath = "/remove-parent";
-
-    @PostMapping(path = removeParentCategoryPath)
-    public ResponseEntity<Void> handle(@RequestBody RemoveParentCategoryCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
-    @PostMapping(path = "/{categoryId}/parents/{parentId}")
+    @PostMapping(path = "/{parentId}")
     public ResponseEntity<Void> addParentCategoryCommand(@PathVariable UUID categoryId, @PathVariable UUID parentId) {
         gateway.sendAsync(new AddParentCategoryCommand(categoryId, parentId));
         return ResponseEntity
@@ -46,7 +26,7 @@ public class CategoryParentController {
                 .build();
     }
 
-    @DeleteMapping(path = "/{categoryId}/parents/{parentId}")
+    @DeleteMapping(path = "/{parentId}")
     public ResponseEntity<Void> removeParentCategoryCommand(@PathVariable UUID categoryId, @PathVariable UUID parentId) {
         gateway.sendAsync(new RemoveParentCategoryCommand(categoryId, parentId));
         return ResponseEntity

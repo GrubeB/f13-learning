@@ -25,7 +25,7 @@ public class TopicRevisionController {
     public final TopicRevisionQueryService service;
 
     @PostMapping
-    public ResponseEntity<TopicRevisionDto> createAccommodationType(@RequestBody CreateTopicRevisionCommand command, HttpServletRequest request) {
+    public ResponseEntity<TopicRevisionDto> create(@RequestBody CreateTopicRevisionCommand command, HttpServletRequest request) {
         UUID topicRevisionId = gateway.send(command);
         TopicRevisionDto dto = service.fetchById(topicRevisionId, TopicRevisionDto.class);
         return ResponseEntity
@@ -33,16 +33,18 @@ public class TopicRevisionController {
                 .body(dto);
     }
 
-    @DeleteMapping(path = "/{topicRevisionId}")
-    public ResponseEntity<Void> handle(@RequestBody DeleteTopicRevisionCommand command) {
+    @DeleteMapping("/{topicRevisionId}")
+    public ResponseEntity<Void> delete(@PathVariable UUID topicRevisionId) {
+        var command = new DeleteTopicRevisionCommand(topicRevisionId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()
                 .build();
     }
 
-    @PutMapping(path = "/{topicRevisionId}")
-    public ResponseEntity<Void> handle(@RequestBody UpdateTopicRevisionCommand command) {
+    @PutMapping("/{topicRevisionId}")
+    public ResponseEntity<Void> update(@PathVariable UUID topicRevisionId, @RequestBody UpdateTopicRevisionCommand command) {
+        command.setTopicRevisionId(topicRevisionId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()

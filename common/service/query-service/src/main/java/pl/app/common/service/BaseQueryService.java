@@ -42,6 +42,8 @@ public interface BaseQueryService {
 
         interface FetchableById<ID, ENTITY> {
             ENTITY fetchById(@NonNull ID id);
+
+            List<ENTITY> fetchByIds(@NonNull List<ID> ids);
         }
     }
 
@@ -76,6 +78,8 @@ public interface BaseQueryService {
 
         interface ClassFetchableById<ID, ENTITY> {
             <T> T fetchById(@NonNull ID id, Class<T> dtoClass);
+
+            <T> List<T> fetchByIds(@NonNull List<ID> ids, Class<T> dtoClass);
         }
     }
 
@@ -110,6 +114,8 @@ public interface BaseQueryService {
 
         interface DtoFetchableById<ID, ENTITY> {
             <T> T fetchById(@NonNull ID id, Dto dto);
+
+            <T> List<T> fetchByIds(@NonNull List<ID> ids, Dto dto);
         }
     }
 }

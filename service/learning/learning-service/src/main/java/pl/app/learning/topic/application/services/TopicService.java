@@ -50,6 +50,7 @@ class TopicService implements
     @CommandHandlingAnnotation
     public void update(UpdateTopicCommand command) {
         Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
+        aggregate.verifyIsInDraftStatus();
         aggregate.updateContent(command.getName(), command.getContent());
         repositoryPort.save(aggregate);
     }

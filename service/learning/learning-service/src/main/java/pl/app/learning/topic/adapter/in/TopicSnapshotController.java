@@ -2,7 +2,10 @@ package pl.app.learning.topic.adapter.in;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.learning.topic.application.port.in.command.RevertTopicSnapshotCommand;
 
@@ -16,17 +19,9 @@ public class TopicSnapshotController {
     public static final String resourcePath = "/api/v1/topics/{topicId}/" + resourceName;
 
     private final CommandGateway gateway;
-    public static final String revertSnapshotPath = "/revert-snapshot";
-    @PostMapping(path = revertSnapshotPath)
-    public ResponseEntity<Void> handle(@RequestBody RevertTopicSnapshotCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
 
-    @PostMapping(path = "/{snapshotNumber}")
-    public ResponseEntity<Void> removeCategoryFromTopicCommand(@PathVariable UUID topicId, @PathVariable Long snapshotNumber) {
+    @PostMapping(path = "/{snapshotNumber}/revert")
+    public ResponseEntity<Void> revertSnapshot(@PathVariable UUID topicId, @PathVariable Long snapshotNumber) {
         gateway.sendAsync(new RevertTopicSnapshotCommand(topicId, snapshotNumber));
         return ResponseEntity
                 .accepted()
