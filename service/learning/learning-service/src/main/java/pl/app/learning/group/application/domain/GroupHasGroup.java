@@ -7,6 +7,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.learning.group.application.domain.snapshot.GroupHasGroupSnapshot;
+import pl.app.learning.group_revision.application.domain.GroupHasGroupRevision;
 
 @EntityAnnotation
 @Entity
@@ -38,6 +39,13 @@ public class GroupHasGroup extends BaseJpaAuditDomainEntity<GroupHasGroup> {
         this.entityId = snapshot.getSnapshotOwnerId();
         this.group = group;
         this.childGroup = snapshot.getChildGroup();
+        return this;
+    }
+
+    public GroupHasGroup mergeRevision(Group group, GroupHasGroupRevision revision) {
+        this.entityId = revision.getRevisionOwnerId();
+        this.group = group;
+        this.childGroup = revision.getChildGroup();
         return this;
     }
 }

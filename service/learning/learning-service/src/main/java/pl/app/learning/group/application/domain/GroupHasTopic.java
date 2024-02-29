@@ -7,6 +7,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.learning.group.application.domain.snapshot.GroupHasTopicSnapshot;
+import pl.app.learning.group_revision.application.domain.GroupHasTopicRevision;
 
 @EntityAnnotation
 @Entity
@@ -38,6 +39,13 @@ public class GroupHasTopic extends BaseJpaAuditDomainEntity<GroupHasTopic> {
         this.entityId = snapshot.getSnapshotOwnerId();
         this.group = group;
         this.topic = snapshot.getTopic();
+        return this;
+    }
+
+    public GroupHasTopic mergeRevision(Group group, GroupHasTopicRevision revision) {
+        this.entityId = revision.getRevisionOwnerId();
+        this.group = group;
+        this.topic = revision.getTopic();
         return this;
     }
 }

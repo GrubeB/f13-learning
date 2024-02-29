@@ -8,19 +8,22 @@ import pl.app.common.ddd.BaseJpaSnapshotableDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.mapper.Join;
 import pl.app.common.mapper.MergerUtils;
+import pl.app.common.model.revision.Revisionable;
 import pl.app.learning.group.application.domain.snapshot.*;
+import pl.app.learning.group_revision.application.domain.GroupHasCategoryRevision;
+import pl.app.learning.group_revision.application.domain.GroupHasGroupRevision;
+import pl.app.learning.group_revision.application.domain.GroupHasTopicRevision;
+import pl.app.learning.group_revision.application.domain.GroupRevision;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @AggregateRootAnnotation
 @Entity
 @Getter
 @Table(name = "t_group")
-public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSnapshot> {
+public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSnapshot> implements
+        Revisionable<Group, UUID, GroupRevision, UUID> {
     @Column(name = "topic_name", nullable = false)
     private String name;
     @Column(name = "topic_content", length = 8000)
@@ -190,18 +193,34 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
         this.status = snapshot.getStatus();
         MergerUtils.mergeCollections(Join.RIGHT, this.categories, snapshot.getCategories(),
                 (e, s) -> e.revertSnapshot(this, s), GroupHasCategory::new,
-                GroupHasCategory::getId, GroupHasCategorySnapshot::getId);
+                GroupHasCategory::getId, GroupHasCategorySnapshot::getSnapshotOwnerId);
         MergerUtils.mergeCollections(Join.RIGHT, this.references, snapshot.getReferences(),
                 (e, s) -> e.revertSnapshot(this, s), GroupHasReference::new,
-                GroupHasReference::getId, GroupHasReferenceSnapshot::getId);
+                GroupHasReference::getId, GroupHasReferenceSnapshot::getSnapshotOwnerId);
         MergerUtils.mergeCollections(Join.RIGHT, this.topics, snapshot.getTopics(),
                 (e, s) -> e.revertSnapshot(this, s), GroupHasTopic::new,
-                GroupHasTopic::getId, GroupHasTopicSnapshot::getId);
+                GroupHasTopic::getId, GroupHasTopicSnapshot::getSnapshotOwnerId);
         MergerUtils.mergeCollections(Join.RIGHT, this.groups, snapshot.getGroups(),
                 (e, s) -> e.revertSnapshot(this, s), GroupHasGroup::new,
-                GroupHasGroup::getId, GroupHasGroupSnapshot::getId);
+                GroupHasGroup::getId, GroupHasGroupSnapshot::getSnapshotOwnerId);
         return this;
     }
 
+    @Override
+    public Group mergeRevision(GroupRevision revision) {
+        this.name = revision.getName();
+        this.content = revision.getContent();
+        this.status = revision.getStatus();
+        MergerUtils.mergeCollections(Join.RIGHT, this.categories, revision.getCategories(),
+                (e, s) -> e.mergeRevision(this, s), GroupHasCategory::new,
+                GroupHasCategory::getId, GroupHasCategoryRevision::getRevisionOwnerId);
+        MergerUtils.mergeCollections(Join.RIGHT, this.topics, revision.getTopics(),
+                (e, s) -> e.mergeRevision(this, s), GroupHasTopic::new,
+                GroupHasTopic::getId, GroupHasTopicRevision::getRevisionOwnerId);
+        MergerUtils.mergeCollections(Join.RIGHT, this.groups, revision.getGroups(),
+                (e, s) -> e.mergeRevision(this, s), GroupHasGroup::new,
+                GroupHasGroup::getId, GroupHasGroupRevision::getRevisionOwnerId);
+        return this;
+    }
 }
 
