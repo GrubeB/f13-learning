@@ -8,9 +8,8 @@ import pl.app.common.ddd.event.DelayedDomainEventPublisher;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.learning.group.application.domain.Group;
 import pl.app.learning.group.application.port.out.GroupDomainRepositoryPort;
-import pl.app.learning.topic.application.domain.Topic;
+import pl.app.learning.group_snapshot.adapter.out.GroupSnapshotRepository;
 import pl.app.learning.topic.application.domain.TopicException;
-import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
 
 @Component
 @Transactional

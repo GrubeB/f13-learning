@@ -1,4 +1,4 @@
-package pl.app.learning.group.query.snapshot.model;
+package pl.app.learning.group_snapshot.query.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,8 +16,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "t_group_has_reference_snapshot")
-public class GroupHasReferenceSnapshotQuery extends BaseAuditEntity<GroupHasReferenceSnapshotQuery, UUID> {
+@Table(name = "t_group_has_group_snapshot")
+public class GroupHasGroupSnapshotQuery extends BaseAuditEntity<GroupHasGroupSnapshotQuery, UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "snapshot_id", nullable = false, updatable = false)
@@ -29,9 +29,9 @@ public class GroupHasReferenceSnapshotQuery extends BaseAuditEntity<GroupHasRefe
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "aggregateId", column = @Column(name = "reference_id", nullable = false, updatable = false))
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "group_id_2", nullable = false, updatable = false))
     })
-    private AggregateId reference;
+    private AggregateId childGroup;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "group_snapshot_id", nullable = false, updatable = false)

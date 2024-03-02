@@ -8,7 +8,7 @@ import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.group.application.domain.Group;
 import pl.app.learning.group.application.domain.GroupException;
-import pl.app.learning.group.application.domain.snapshot.GroupSnapshot;
+import pl.app.learning.group_snapshot.application.domain.GroupSnapshot;
 import pl.app.learning.group.application.port.in.RevertGroupSnapshotCase;
 import pl.app.learning.group.application.port.in.command.RevertGroupSnapshotCommand;
 import pl.app.learning.group.application.port.out.GroupDomainRepositoryPort;

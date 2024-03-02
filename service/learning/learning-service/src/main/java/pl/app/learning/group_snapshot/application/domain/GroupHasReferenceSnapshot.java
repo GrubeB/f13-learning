@@ -1,8 +1,9 @@
-package pl.app.learning.group.application.domain.snapshot;
+package pl.app.learning.group_snapshot.application.domain;
 
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseSnapshotEntity;
 import pl.app.learning.group.application.domain.GroupHasReference;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 @Table(name = "t_group_has_reference_snapshot")
 public class GroupHasReferenceSnapshot extends BaseSnapshotEntity<GroupHasReference, UUID, GroupHasReferenceSnapshot> {
 
@@ -26,11 +28,7 @@ public class GroupHasReferenceSnapshot extends BaseSnapshotEntity<GroupHasRefere
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "group_snapshot_id", nullable = false, updatable = false)
+    @ToString.Exclude
     private GroupSnapshot group;
-
-    public GroupHasReferenceSnapshot(GroupHasReference snapshotOwnerId, AggregateId reference) {
-        super(snapshotOwnerId);
-        this.reference = reference;
-    }
 }
 

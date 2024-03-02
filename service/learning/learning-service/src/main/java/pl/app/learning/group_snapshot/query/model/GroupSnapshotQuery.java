@@ -1,4 +1,4 @@
-package pl.app.learning.group.query.snapshot.model;
+package pl.app.learning.group_snapshot.query.model;
 
 
 import jakarta.persistence.*;

@@ -9,11 +9,11 @@ import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.mapper.Join;
 import pl.app.common.mapper.MergerUtils;
 import pl.app.common.model.revision.Revisionable;
-import pl.app.learning.group.application.domain.snapshot.*;
 import pl.app.learning.group_revision.application.domain.GroupHasCategoryRevision;
 import pl.app.learning.group_revision.application.domain.GroupHasGroupRevision;
 import pl.app.learning.group_revision.application.domain.GroupHasTopicRevision;
 import pl.app.learning.group_revision.application.domain.GroupRevision;
+import pl.app.learning.group_snapshot.application.domain.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -179,11 +179,37 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
 
     @Override
     public GroupSnapshot makeSnapshot() {
-        var categorySnapshots = this.categories.stream().map(e -> new GroupHasCategorySnapshot(e, e.getCategory())).collect(Collectors.toSet());
-        var referenceSnapshots = this.references.stream().map(e -> new GroupHasReferenceSnapshot(e, e.getReference())).collect(Collectors.toSet());
-        var topicSnapshots = this.topics.stream().map(e -> new GroupHasTopicSnapshot(e, e.getTopic())).collect(Collectors.toSet());
-        var groupSnapshots = this.groups.stream().map(e -> new GroupHasGroupSnapshot(e, e.getChildGroup())).collect(Collectors.toSet());
-        return new GroupSnapshot(this, this.name, this.content, this.status, categorySnapshots, referenceSnapshots, topicSnapshots, groupSnapshots);
+        GroupSnapshot snapshot = GroupSnapshot.builder()
+                .snapshotOwnerId(this.getId())
+                .name(this.name)
+                .content(this.content)
+                .status(this.status)
+                .build();
+        snapshot.setCategories(this.categories.stream().map(e ->
+                        GroupHasCategorySnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .category(e.getCategory())
+                                .build())
+                .collect(Collectors.toSet()));
+        snapshot.setGroups(this.groups.stream().map(e ->
+                        GroupHasGroupSnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .childGroup(e.getChildGroup())
+                                .build())
+                .collect(Collectors.toSet()));
+        snapshot.setReferences(this.references.stream().map(e ->
+                        GroupHasReferenceSnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .reference(e.getReference())
+                                .build())
+                .collect(Collectors.toSet()));
+        snapshot.setTopics(this.topics.stream().map(e ->
+                        GroupHasTopicSnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .topic(e.getTopic())
+                                .build())
+                .collect(Collectors.toSet()));
+        return snapshot;
     }
 
     @Override

@@ -1,12 +1,12 @@
-package pl.app.learning.group.adapter.in;
+package pl.app.learning.group_snapshot.adapter.in;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.group.query.snapshot.GroupSnapshotQueryService;
-import pl.app.learning.group.query.snapshot.model.GroupSnapshotQuery;
+import pl.app.learning.group_snapshot.query.GroupSnapshotQueryService;
+import pl.app.learning.group_snapshot.query.model.GroupSnapshotQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
