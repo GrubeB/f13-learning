@@ -6,7 +6,13 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaSnapshotableDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.learning.topic_revision.query.TopicRevisionQuery;
+import pl.app.common.mapper.Join;
+import pl.app.common.mapper.MergerUtils;
+import pl.app.common.model.revision.Revisionable;
+import pl.app.learning.group.application.domain.GroupHasCategory;
+import pl.app.learning.group_revision.application.domain.GroupHasCategoryRevision;
+import pl.app.learning.topic_revision.application.domain.TopicHasCategoryRevision;
+import pl.app.learning.topic_revision.application.domain.TopicRevision;
 
 import java.util.*;
 
@@ -14,7 +20,8 @@ import java.util.*;
 @Entity
 @Getter
 @Table(name = "t_topic")
-public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSnapshot> {
+public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSnapshot> implements
+        Revisionable<Topic, UUID, TopicRevision, UUID> {
     @Column(name = "topic_name")
     private String name;
     @Column(name = "topic_content")
@@ -75,7 +82,7 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
 
     public Optional<TopicHasReference> getReference(AggregateId reference) {
         return this.references.stream()
-                .filter(topicHasReference -> Objects.equals(topicHasReference.getReferenceId(), reference.getId()))
+                .filter(topicHasReference -> Objects.equals(topicHasReference.getReference(), reference))
                 .findAny();
     }
 
@@ -102,7 +109,7 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
 
     public Optional<TopicHasCategory> getCategory(AggregateId category) {
         return this.categories.stream()
-                .filter(topicHasCategory -> Objects.equals(topicHasCategory.getCategoryId(), category.getId()))
+                .filter(topicHasCategory -> Objects.equals(topicHasCategory.getCategory(), category))
                 .findAny();
     }
 
@@ -114,12 +121,6 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         if (!TopicStatus.DRAFT.equals(this.status)) {
             throw new TopicException.TopicWrongStatusException("Topic must be in Draft status, but is in: " + this.status);
         }
-    }
-
-
-    public void mergeRevision(TopicRevisionQuery revision) {
-        this.name = revision.getName();
-        this.content = revision.getContent();
     }
 
     @Override
@@ -137,6 +138,16 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         this.name = snapshot.getName();
         this.content = snapshot.getContent();
         this.status = snapshot.getStatus();
+        return this;
+    }
+
+    @Override
+    public Topic mergeRevision(TopicRevision revision) {
+        this.name = revision.getName();
+        this.content = revision.getContent();
+        MergerUtils.mergeCollections(Join.RIGHT, this.categories, revision.getCategories(),
+                (e, s) -> e.mergeRevision(this, s), TopicHasCategory::new,
+                TopicHasCategory::getId, TopicHasCategoryRevision::getRevisionOwnerId);
         return this;
     }
 }

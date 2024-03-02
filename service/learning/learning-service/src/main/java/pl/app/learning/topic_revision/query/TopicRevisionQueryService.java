@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
+import pl.app.learning.topic_revision.adapter.out.persistance.TopicRevisionRepository;
 import pl.app.learning.topic_revision.application.domain.TopicRevision;
 import pl.app.learning.topic_revision.query.dto.TopicRevisionDto;
 
@@ -19,9 +20,9 @@ import java.util.UUID;
 @Transactional(readOnly = true)
 @Getter
 public class TopicRevisionQueryService implements
-        QueryService.Full<UUID, TopicRevisionQuery> {
-    private final TopicRevisionQueryRepository repository;
-    private final TopicRevisionQueryRepository specificationRepository;
+        QueryService.Full<UUID, TopicRevision> {
+    private final TopicRevisionRepository repository;
+    private final TopicRevisionRepository specificationRepository;
     private final TopicRevisionQueryMapper mapper;
 
     private final Map<String, Class<?>> supportedDtoClasses = new LinkedHashMap<>() {{

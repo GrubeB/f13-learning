@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import pl.app.common.cqrs.command.annotation.CommandAnnotation;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @CommandAnnotation
@@ -14,7 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateTopicRevisionCommand implements
         Serializable {
-    private UUID topicRevisionId;
+    private UUID revisionId;
     private String name;
     private String content;
+    private List<CreateTopicRevisionCommand.Category> categories;
 }

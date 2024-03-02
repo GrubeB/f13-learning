@@ -6,6 +6,7 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
+import pl.app.learning.topic_revision.application.domain.TopicHasCategoryRevision;
 
 import java.util.UUID;
 
@@ -19,8 +20,11 @@ public class TopicHasCategory extends BaseJpaAuditDomainEntity<TopicHasCategory>
     @JoinColumn(name = "topic_id", nullable = false, updatable = false)
     private Topic topic;
 
-    @Column(name = "category_id", nullable = false)
-    private UUID categoryId;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "category_id", nullable = false, updatable = false))
+    })
+    private AggregateId category;
 
     @SuppressWarnings("unused")
     protected TopicHasCategory() {
@@ -29,7 +33,14 @@ public class TopicHasCategory extends BaseJpaAuditDomainEntity<TopicHasCategory>
 
     public TopicHasCategory(Topic topic, AggregateId category) {
         this.topic = topic;
-        this.categoryId = category.getId();
+        this.category = category;
+    }
+
+    public TopicHasCategory mergeRevision(Topic topic, TopicHasCategoryRevision revision) {
+        this.entityId = revision.getRevisionOwnerId();
+        this.topic = topic;
+        this.category = revision.getCategory();
+        return this;
     }
 }
 

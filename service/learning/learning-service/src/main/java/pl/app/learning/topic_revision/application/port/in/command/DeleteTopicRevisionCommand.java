@@ -14,5 +14,5 @@ import java.util.UUID;
 @AllArgsConstructor
 public class DeleteTopicRevisionCommand implements
         Serializable {
-    private UUID topicRevisionId;
+    private UUID revisionId;
 }

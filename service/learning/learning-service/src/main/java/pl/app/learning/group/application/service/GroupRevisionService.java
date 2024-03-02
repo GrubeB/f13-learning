@@ -12,10 +12,6 @@ import pl.app.learning.group.application.port.in.command.MergeRevisionToGroupCom
 import pl.app.learning.group.application.port.out.GroupDomainRepositoryPort;
 import pl.app.learning.group_revision.application.domain.GroupRevision;
 import pl.app.learning.group_revision.query.GroupRevisionQueryService;
-import pl.app.learning.topic.application.domain.Topic;
-import pl.app.learning.topic.application.port.in.command.MergeRevisionToTopicCommand;
-import pl.app.learning.topic_revision.query.TopicRevisionQuery;
-import pl.app.learning.topic_revision.query.TopicRevisionQueryService;
 
 @CommandHandlerAnnotation
 @Component("pl.app.learning.group.application.service.GroupRevisionService")

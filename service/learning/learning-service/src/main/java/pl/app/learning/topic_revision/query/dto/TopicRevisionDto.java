@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import pl.app.common.shared.dto.BaseDto;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -16,5 +17,5 @@ public class TopicRevisionDto implements
     private UUID id;
     private String name;
     private String content;
-    private BaseDto topic;
+    private List<UUID> categories;
 }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.service.QueryService;
 import pl.app.learning.group.query.snapshot.model.GroupSnapshotQuery;
-import pl.app.learning.topic.query.TopicSnapshotQueryRepository;
 
 import java.util.UUID;
 

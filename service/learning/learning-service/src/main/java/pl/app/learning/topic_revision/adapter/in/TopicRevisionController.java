@@ -44,7 +44,7 @@ public class TopicRevisionController {
 
     @PutMapping("/{topicRevisionId}")
     public ResponseEntity<Void> update(@PathVariable UUID topicRevisionId, @RequestBody UpdateTopicRevisionCommand command) {
-        command.setTopicRevisionId(topicRevisionId);
+        command.setRevisionId(topicRevisionId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()
