@@ -129,6 +129,8 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         TopicSnapshot snapshot = TopicSnapshot.builder()
                 .snapshotOwnerId(this.getId())
                 .name(this.name)
+                .content(this.content)
+                .status(this.status)
                 .build();
         snapshot.setCategories(this.categories.stream().map(e ->
                         TopicHasCategorySnapshot.builder()

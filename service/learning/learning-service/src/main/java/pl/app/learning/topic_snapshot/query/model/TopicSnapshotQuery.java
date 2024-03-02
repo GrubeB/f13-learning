@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
+import pl.app.learning.group_snapshot.query.model.GroupHasCategorySnapshotQuery;
 import pl.app.learning.topic.application.domain.TopicStatus;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Immutable
@@ -37,5 +40,9 @@ public class TopicSnapshotQuery extends BaseAuditEntity<TopicSnapshotQuery,UUID>
     @Enumerated(EnumType.STRING)
     @Column(name = "topic_status")
     private TopicStatus status;
+
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<TopicHasCategorySnapshotQuery> categories = new LinkedHashSet<>();
+
 }
 

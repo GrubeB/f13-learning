@@ -44,5 +44,11 @@ public class TopicSnapshot extends BaseJpaSnapshotDomainEntity<Topic, TopicSnaps
         category.setTopic(this);
         category.setSnapshotNumber(this.snapshotNumber);
     }
+
+    @Override
+    public void setSnapshotNumber(Long snapshotNumber) {
+        this.snapshotNumber = snapshotNumber;
+        this.categories.forEach(e -> e.setSnapshotNumber(snapshotNumber));
+    }
 }
 

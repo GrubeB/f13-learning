@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 public class TopicSnapshotByTopicQueryController implements
-        QueryController.DtoFetchableWithFilter.Full<UUID, TopicSnapshotQuery> {
+        QueryController.SimpleFetchableWithFilter.Full<UUID, TopicSnapshotQuery> {
 
     public static final String resourceName = "snapshots";
     public static final String resourcePath = "/api/v1/topics/{topicId}/" + resourceName;

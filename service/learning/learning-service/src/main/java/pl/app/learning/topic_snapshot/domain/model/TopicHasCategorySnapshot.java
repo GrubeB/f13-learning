@@ -6,11 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaSnapshotDomainEntity;
-import pl.app.common.model.BaseSnapshotEntity;
-import pl.app.learning.group.application.domain.snapshot.GroupSnapshot;
 import pl.app.learning.topic.application.domain.TopicHasCategory;
-
-import java.util.UUID;
 
 @Entity
 @Getter
