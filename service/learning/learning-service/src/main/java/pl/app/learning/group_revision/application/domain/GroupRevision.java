@@ -41,12 +41,6 @@ public class GroupRevision extends BaseRevisionEntity<Group, UUID, GroupRevision
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<GroupHasGroupRevision> groups = new LinkedHashSet<>();
 
-    @OneToOne(optional = false)
-    @JoinColumns({
-            @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false, updatable = false)
-    })
-    private GroupQuery group;
-
     public GroupRevision(Group revisionOwner) {
         super(revisionOwner);
     }

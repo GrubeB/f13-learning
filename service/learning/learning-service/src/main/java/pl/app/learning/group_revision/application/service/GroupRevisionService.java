@@ -47,7 +47,7 @@ class GroupRevisionService implements
     public UUID create(CreateGroupRevisionCommand command) {
         GroupQuery owner = groupQueryService.fetchById(command.getOwnerId());
         GroupRevision aggregate = new GroupRevision();
-        aggregate.setGroup(owner);
+        aggregate.setRevisionOwnerId(owner.getId());
         aggregate.setName(command.getName());
         aggregate.setContent(command.getContent());
         aggregate.setStatus(command.getStatus());

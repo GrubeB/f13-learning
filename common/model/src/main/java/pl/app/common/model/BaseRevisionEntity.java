@@ -31,7 +31,7 @@ public abstract class BaseRevisionEntity<
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "snapshot_id", nullable = false, updatable = false)
+    @Column(name = "revision_id", nullable = false, updatable = false)
     protected REVISION_ID id;
 
     @Column(name = "owner_id")
