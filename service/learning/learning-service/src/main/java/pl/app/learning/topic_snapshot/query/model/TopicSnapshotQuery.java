@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.learning.group_snapshot.query.model.GroupHasCategorySnapshotQuery;
 import pl.app.learning.topic.application.domain.TopicStatus;
 
 import java.util.LinkedHashSet;
@@ -22,7 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "t_topic_snapshot")
-public class TopicSnapshotQuery extends BaseAuditEntity<TopicSnapshotQuery,UUID> {
+public class TopicSnapshotQuery extends BaseAuditEntity<TopicSnapshotQuery, UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "snapshot_id", nullable = false, updatable = false)

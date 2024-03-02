@@ -10,7 +10,6 @@ import pl.app.common.dto_criteria.resolver.DtoArgumentResolverConfig;
 import pl.app.common.path_variable.resolver.PathVariablesArgumentResolver;
 import pl.app.common.path_variable.resolver.PathVariablesArgumentResolverConfig;
 import pl.app.common.search_criteria.resolver.SearchCriteriaArgumentResolver;
-import pl.app.common.search_criteria.resolver.SearchCriteriaBodyArgumentResolverConfig;
 import pl.app.common.search_criteria.resolver.SearchCriteriaQueryParameterArgumentResolverConfig;
 
 import java.util.List;

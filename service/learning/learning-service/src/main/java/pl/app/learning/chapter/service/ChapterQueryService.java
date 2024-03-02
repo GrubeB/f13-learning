@@ -15,7 +15,7 @@ import java.util.UUID;
 @Transactional(readOnly = true)
 @Getter
 public class ChapterQueryService implements
-        QueryService.SimpleFetchable.Full<UUID, Chapter>  {
+        QueryService.SimpleFetchable.Full<UUID, Chapter> {
     private final ChapterRepository repository;
     private final ChapterRepository specificationRepository;
 }

@@ -14,5 +14,6 @@ public interface ChapterSnapshotRepository extends
         JpaRepository<ChapterSnapshot, UUID>,
         JpaSpecificationExecutor<ChapterSnapshot> {
     List<ChapterSnapshot> findBySnapshotOwnerId(UUID snapshotOwnerId);
+
     Optional<ChapterSnapshot> findBySnapshotOwnerIdAndSnapshotNumber(UUID snapshotOwnerId, Long snapshotNumber);
 }

@@ -10,5 +10,6 @@ public interface ReferenceDomainRepositoryPort {
     Reference load(AggregateId aggregateId);
 
     void save(Reference aggregate);
+
     void delete(AggregateId aggregateId);
 }

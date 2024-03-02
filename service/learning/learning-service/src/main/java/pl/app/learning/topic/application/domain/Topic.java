@@ -31,9 +31,9 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
     @Column(name = "topic_status")
     private TopicStatus status;
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<TopicHasCategory> categories = new LinkedHashSet<>();
+    private final Set<TopicHasCategory> categories = new LinkedHashSet<>();
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<TopicHasReference> references = new LinkedHashSet<>();
+    private final Set<TopicHasReference> references = new LinkedHashSet<>();
 
     @SuppressWarnings("unused")
     protected Topic() {

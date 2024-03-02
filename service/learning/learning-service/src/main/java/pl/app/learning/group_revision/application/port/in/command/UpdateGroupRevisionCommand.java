@@ -8,7 +8,6 @@ import pl.app.learning.group.application.domain.GroupStatus;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @CommandAnnotation

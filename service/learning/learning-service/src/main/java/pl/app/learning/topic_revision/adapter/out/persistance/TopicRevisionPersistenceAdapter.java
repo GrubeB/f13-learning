@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
-import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.learning.topic_revision.application.domain.TopicRevision;
 import pl.app.learning.topic_revision.application.domain.TopicRevisionException;
 import pl.app.learning.topic_revision.application.port.out.TopicRevisionDomainRepositoryPort;

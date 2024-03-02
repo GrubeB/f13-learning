@@ -21,6 +21,7 @@ public interface TopicException {
             return new NotFoundTopicException("not found topic with id: " + topicId);
         }
     }
+
     class NotFoundTopicSnapshotException extends NotFoundException {
         public NotFoundTopicSnapshotException() {
             super("not found topic snapshot");
@@ -34,6 +35,7 @@ public interface TopicException {
             return new NotFoundTopicSnapshotException("not found topic snapshot with number: " + snapshotNumber);
         }
     }
+
     class TopicWrongStatusException extends ValidationException {
         public TopicWrongStatusException() {
             super("topic has wrong status to process command");

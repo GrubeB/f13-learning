@@ -1,4 +1,3 @@
-
 package pl.app.learning.category.application.service;
 
 import lombok.RequiredArgsConstructor;
@@ -26,8 +25,9 @@ class CategoryRelationService implements
         AddChildCategoryUseCase,
         AddParentCategoryUseCase,
         RemoveChildCategoryUseCase,
-        RemoveParentCategoryUseCase{
+        RemoveParentCategoryUseCase {
     private final CategoryDomainRepositoryPort repository;
+
     @Override
     @CommandHandlingAnnotation
     public void addChildCategory(AddChildCategoryCommand command) {

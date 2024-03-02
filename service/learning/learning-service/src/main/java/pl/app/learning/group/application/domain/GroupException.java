@@ -21,6 +21,7 @@ public interface GroupException {
             return new NotFoundGroupException("not found group with id: " + topicId);
         }
     }
+
     class NotFoundGroupSnapshotException extends NotFoundException {
         public NotFoundGroupSnapshotException() {
             super("not found group snapshot");
@@ -34,6 +35,7 @@ public interface GroupException {
             return new NotFoundGroupSnapshotException("not found group snapshot with number: " + snapshotNumber);
         }
     }
+
     class GroupWrongStatusException extends ValidationException {
         public GroupWrongStatusException() {
             super("group has wrong status to process command");

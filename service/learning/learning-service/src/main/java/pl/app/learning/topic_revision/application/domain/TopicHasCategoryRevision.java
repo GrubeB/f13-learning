@@ -10,8 +10,6 @@ import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.common.model.BaseRevisionEntity;
-import pl.app.learning.group.application.domain.GroupHasCategory;
-import pl.app.learning.group_revision.application.domain.GroupRevision;
 import pl.app.learning.topic.application.domain.TopicHasCategory;
 
 import java.util.UUID;

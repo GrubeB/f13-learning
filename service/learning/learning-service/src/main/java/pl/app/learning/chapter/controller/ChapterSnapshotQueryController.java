@@ -21,6 +21,7 @@ public class ChapterSnapshotQueryController {
     public static final String resourceName = "snapshots";
     public static final String resourcePath = "/api/v1/chapters/{chapterId}/" + resourceName;
     public final ChapterSnapshotQueryService service;
+
     @GetMapping
     ResponseEntity<?> fetchByIdAndDto(@PathVariable UUID chapterId, Dto dto) {
         return ResponseEntity

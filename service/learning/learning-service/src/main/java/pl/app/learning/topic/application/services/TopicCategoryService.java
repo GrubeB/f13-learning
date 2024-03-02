@@ -9,7 +9,6 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.search_criteria.Operator;
 import pl.app.common.search_criteria.SearchCriteria;
 import pl.app.common.search_criteria.SearchCriteriaItem;
-import pl.app.learning.category.query.CategoryQuery;
 import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.topic.application.domain.Topic;
 import pl.app.learning.topic.application.port.in.AddCategoryToTopicUseCase;

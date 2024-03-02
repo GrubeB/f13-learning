@@ -33,16 +33,16 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     private GroupStatus status;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasCategory> categories = new LinkedHashSet<>();
+    private final Set<GroupHasCategory> categories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasReference> references = new LinkedHashSet<>();
+    private final Set<GroupHasReference> references = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasTopic> topics = new LinkedHashSet<>();
+    private final Set<GroupHasTopic> topics = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasGroup> groups = new LinkedHashSet<>();
+    private final Set<GroupHasGroup> groups = new LinkedHashSet<>();
 
     @SuppressWarnings("unused")
     protected Group() {

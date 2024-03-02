@@ -7,8 +7,6 @@ import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.model.BaseRevisionEntity;
 import pl.app.learning.group.application.domain.Group;
-import pl.app.learning.group.application.domain.GroupStatus;
-import pl.app.learning.group.query.model.GroupQuery;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

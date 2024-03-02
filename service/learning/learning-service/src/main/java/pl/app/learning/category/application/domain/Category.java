@@ -22,10 +22,10 @@ public class Category extends BaseJpaAuditDomainAggregateRoot<Category> {
     private CategoryStatus status;
 
     @OneToMany(mappedBy = "child", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<CategoryHasCategory> parentCategories = new LinkedHashSet<>();
+    private final Set<CategoryHasCategory> parentCategories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<CategoryHasCategory> childCategories = new LinkedHashSet<>();
+    private final Set<CategoryHasCategory> childCategories = new LinkedHashSet<>();
 
 
     @SuppressWarnings("unused")

@@ -51,10 +51,12 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
             categories.forEach(this::addCategory);
         }
     }
+
     public void addCategory(GroupHasCategorySnapshot categorySnapshot) {
         this.categories.add(categorySnapshot);
         categorySnapshot.setGroup(this);
     }
+
     public void setReferences(Set<GroupHasReferenceSnapshot> references) {
         if (this.references != references) {
             this.references.forEach(e -> e.setGroup(null));
@@ -62,10 +64,12 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
             references.forEach(this::addReference);
         }
     }
+
     public void addReference(GroupHasReferenceSnapshot referenceSnapshot) {
         this.references.add(referenceSnapshot);
         referenceSnapshot.setGroup(this);
     }
+
     public void setTopics(Set<GroupHasTopicSnapshot> topics) {
         if (this.topics != topics) {
             this.topics.forEach(e -> e.setGroup(null));
@@ -73,10 +77,12 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
             topics.forEach(this::addTopic);
         }
     }
+
     public void addTopic(GroupHasTopicSnapshot topicSnapshot) {
         this.topics.add(topicSnapshot);
         topicSnapshot.setGroup(this);
     }
+
     public void setGroups(Set<GroupHasGroupSnapshot> groups) {
         if (this.groups != groups) {
             this.groups.forEach(e -> e.setGroup(null));
@@ -84,6 +90,7 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
             groups.forEach(this::addGroup);
         }
     }
+
     public void addGroup(GroupHasGroupSnapshot groupSnapshot) {
         this.groups.add(groupSnapshot);
         groupSnapshot.setGroup(this);

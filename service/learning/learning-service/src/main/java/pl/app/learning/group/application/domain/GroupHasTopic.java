@@ -6,8 +6,8 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
-import pl.app.learning.group_snapshot.application.domain.GroupHasTopicSnapshot;
 import pl.app.learning.group_revision.application.domain.GroupHasTopicRevision;
+import pl.app.learning.group_snapshot.application.domain.GroupHasTopicSnapshot;
 
 @EntityAnnotation
 @Entity

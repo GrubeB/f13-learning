@@ -7,6 +7,7 @@ import pl.app.common.cqrs.command.annotation.CommandAnnotation;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
 @CommandAnnotation
 @Data
 @NoArgsConstructor

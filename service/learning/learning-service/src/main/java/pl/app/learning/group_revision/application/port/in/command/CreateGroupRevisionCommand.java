@@ -23,6 +23,7 @@ public class CreateGroupRevisionCommand implements
     private List<Category> categories;
     private List<Topic> topics;
     private List<Group> groups;
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -31,6 +32,7 @@ public class CreateGroupRevisionCommand implements
         private UUID ownerId;
         private UUID categoryId;
     }
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -39,6 +41,7 @@ public class CreateGroupRevisionCommand implements
         private UUID ownerId;
         private UUID topicId;
     }
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor

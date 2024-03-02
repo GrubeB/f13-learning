@@ -1,7 +1,10 @@
 package pl.app.learning.chapter.model.snapshot;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import pl.app.common.model.BaseSnapshotEntity;
 import pl.app.learning.chapter.model.Chapter;
 

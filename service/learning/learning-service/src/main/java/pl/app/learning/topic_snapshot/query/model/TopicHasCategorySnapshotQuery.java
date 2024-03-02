@@ -7,7 +7,6 @@ import lombok.*;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.learning.group_snapshot.query.model.GroupSnapshotQuery;
 
 import java.util.UUID;
 

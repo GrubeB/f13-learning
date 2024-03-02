@@ -11,8 +11,6 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.category.query.CategoryQueryMapper;
-import pl.app.learning.category.query.dto.SimpleCategoryDto;
-import pl.app.learning.group.query.dto.SimpleGroupDto;
 import pl.app.learning.group_revision.application.domain.GroupHasCategoryRevision;
 import pl.app.learning.group_revision.application.domain.GroupHasGroupRevision;
 import pl.app.learning.group_revision.application.domain.GroupHasTopicRevision;
@@ -20,7 +18,6 @@ import pl.app.learning.group_revision.application.domain.GroupRevision;
 import pl.app.learning.group_revision.query.dto.GroupRevisionDto;
 import pl.app.learning.reference.query.ReferenceQueryMapper;
 import pl.app.learning.topic.query.TopicQueryMapper;
-import pl.app.learning.topic.query.dto.TopicDto;
 
 import java.util.List;
 import java.util.Set;
@@ -43,6 +40,7 @@ public class GroupRevisionQueryMapper extends BaseMapper {
         addMapper(GroupRevision.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(GroupRevision.class, AggregateId.class, e -> new AggregateId(e.getId()));
     }
+
     private void initGroupRevisionToGroupRevisionDto() {
         TypeMap<GroupRevision, GroupRevisionDto> typeMap = modelMapper.createTypeMap(GroupRevision.class, GroupRevisionDto.class);
 

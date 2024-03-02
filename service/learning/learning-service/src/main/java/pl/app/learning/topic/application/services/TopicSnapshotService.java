@@ -8,10 +8,10 @@ import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.topic.application.domain.Topic;
 import pl.app.learning.topic.application.domain.TopicException;
-import pl.app.learning.topic_snapshot.domain.model.TopicSnapshot;
 import pl.app.learning.topic.application.port.in.RevertTopicSnapshotUseCase;
 import pl.app.learning.topic.application.port.in.command.RevertTopicSnapshotCommand;
 import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
+import pl.app.learning.topic_snapshot.domain.model.TopicSnapshot;
 
 @CommandHandlerAnnotation
 @Component
