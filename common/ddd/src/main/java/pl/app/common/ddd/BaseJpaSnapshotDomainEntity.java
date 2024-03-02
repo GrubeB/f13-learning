@@ -22,11 +22,9 @@ public class BaseJpaSnapshotDomainEntity<
     }
 
     public BaseJpaSnapshotDomainEntity(ENTITY snapshotOwner) {
-        this.snapshotNumber = Instant.now().toEpochMilli();
         this.snapshotOwnerId = snapshotOwner.getId();
     }
     public BaseJpaSnapshotDomainEntity(UUID snapshotOwnerId) {
-        this.snapshotNumber = Instant.now().toEpochMilli();
         this.snapshotOwnerId = snapshotOwnerId;
     }
     public BaseJpaSnapshotDomainEntity(ENTITY snapshotOwner, Long snapshotNumber) {
