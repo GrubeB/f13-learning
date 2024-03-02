@@ -9,12 +9,13 @@ import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.mapper.Join;
 import pl.app.common.mapper.MergerUtils;
 import pl.app.common.model.revision.Revisionable;
-import pl.app.learning.group.application.domain.GroupHasCategory;
-import pl.app.learning.group_revision.application.domain.GroupHasCategoryRevision;
 import pl.app.learning.topic_revision.application.domain.TopicHasCategoryRevision;
 import pl.app.learning.topic_revision.application.domain.TopicRevision;
+import pl.app.learning.topic_snapshot.domain.model.TopicHasCategorySnapshot;
+import pl.app.learning.topic_snapshot.domain.model.TopicSnapshot;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @AggregateRootAnnotation
 @Entity
@@ -125,12 +126,17 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
 
     @Override
     public TopicSnapshot makeSnapshot() {
-        return new TopicSnapshot(
-                this,
-                this.name,
-                this.content,
-                this.status
-        );
+        TopicSnapshot snapshot = TopicSnapshot.builder()
+                .snapshotOwnerId(this.getId())
+                .name(this.name)
+                .build();
+        snapshot.setCategories(this.categories.stream().map(e ->
+                        TopicHasCategorySnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .category(e.getCategory())
+                                .build())
+                .collect(Collectors.toSet()));
+        return snapshot;
     }
 
     @Override
@@ -138,6 +144,9 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         this.name = snapshot.getName();
         this.content = snapshot.getContent();
         this.status = snapshot.getStatus();
+        MergerUtils.mergeCollections(Join.RIGHT, this.categories, snapshot.getCategories(),
+                (e, s) -> e.revertSnapshot(this, s), TopicHasCategory::new,
+                TopicHasCategory::getId, TopicHasCategorySnapshot::getSnapshotOwnerId);
         return this;
     }
 

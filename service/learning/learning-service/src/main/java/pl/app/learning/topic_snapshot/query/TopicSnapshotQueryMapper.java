@@ -1,4 +1,4 @@
-package pl.app.learning.topic.query;
+package pl.app.learning.topic_snapshot.query;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.learning.topic.query.dto.TopicSnapshotDto;
-import pl.app.learning.topic.query.model.TopicSnapshotQuery;
+import pl.app.learning.topic_snapshot.query.dto.TopicSnapshotDto;
+import pl.app.learning.topic_snapshot.query.model.TopicSnapshotQuery;
 
 @Getter
 @Component

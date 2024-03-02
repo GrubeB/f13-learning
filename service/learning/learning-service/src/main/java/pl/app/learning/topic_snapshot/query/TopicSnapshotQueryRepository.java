@@ -1,9 +1,9 @@
-package pl.app.learning.topic.query;
+package pl.app.learning.topic_snapshot.query;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-import pl.app.learning.topic.query.model.TopicSnapshotQuery;
+import pl.app.learning.topic_snapshot.query.model.TopicSnapshotQuery;
 
 import java.util.UUID;
 

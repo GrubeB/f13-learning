@@ -7,8 +7,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.learning.topic_revision.application.domain.TopicHasCategoryRevision;
-
-import java.util.UUID;
+import pl.app.learning.topic_snapshot.domain.model.TopicHasCategorySnapshot;
 
 @EntityAnnotation
 @Entity
@@ -34,6 +33,13 @@ public class TopicHasCategory extends BaseJpaAuditDomainEntity<TopicHasCategory>
     public TopicHasCategory(Topic topic, AggregateId category) {
         this.topic = topic;
         this.category = category;
+    }
+
+    public TopicHasCategory revertSnapshot(Topic topic, TopicHasCategorySnapshot snapshot) {
+        this.entityId = snapshot.getSnapshotOwnerId();
+        this.topic = topic;
+        this.category = snapshot.getCategory();
+        return this;
     }
 
     public TopicHasCategory mergeRevision(Topic topic, TopicHasCategoryRevision revision) {

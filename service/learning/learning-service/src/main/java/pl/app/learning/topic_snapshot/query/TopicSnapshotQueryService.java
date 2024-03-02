@@ -1,4 +1,4 @@
-package pl.app.learning.topic.query;
+package pl.app.learning.topic_snapshot.query;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.learning.topic.query.dto.TopicSnapshotDto;
-import pl.app.learning.topic.query.model.TopicSnapshotQuery;
+import pl.app.learning.topic_snapshot.query.dto.TopicSnapshotDto;
+import pl.app.learning.topic_snapshot.query.model.TopicSnapshotQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

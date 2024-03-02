@@ -1,12 +1,12 @@
-package pl.app.learning.topic.adapter.in;
+package pl.app.learning.topic_snapshot.adapter.in;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.topic.query.TopicSnapshotQueryService;
-import pl.app.learning.topic.query.model.TopicSnapshotQuery;
+import pl.app.learning.topic_snapshot.query.TopicSnapshotQueryService;
+import pl.app.learning.topic_snapshot.query.model.TopicSnapshotQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

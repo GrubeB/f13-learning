@@ -1,4 +1,4 @@
-package pl.app.learning.topic.query.dto;
+package pl.app.learning.topic_snapshot.query.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

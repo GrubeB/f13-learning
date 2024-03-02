@@ -1,4 +1,4 @@
-package pl.app.learning.topic.query.model;
+package pl.app.learning.topic_snapshot.query.model;
 
 
 import jakarta.persistence.*;
@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.common.model.BaseSnapshotEntity;
-import pl.app.learning.topic.application.domain.Topic;
 import pl.app.learning.topic.application.domain.TopicStatus;
 
 import java.util.UUID;
@@ -21,7 +19,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "t_topic_snapshot")
-//public class TopicSnapshotQuery extends BaseSnapshotEntity<Topic,UUID, TopicSnapshotQuery> {
 public class TopicSnapshotQuery extends BaseAuditEntity<TopicSnapshotQuery,UUID> {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
