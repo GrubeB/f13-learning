@@ -210,7 +210,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     public Group mergeRevision(GroupRevision revision) {
         this.name = revision.getName();
         this.content = revision.getContent();
-        this.status = revision.getStatus();
         MergerUtils.mergeCollections(Join.RIGHT, this.categories, revision.getCategories(),
                 (e, s) -> e.mergeRevision(this, s), GroupHasCategory::new,
                 GroupHasCategory::getId, GroupHasCategoryRevision::getRevisionOwnerId);

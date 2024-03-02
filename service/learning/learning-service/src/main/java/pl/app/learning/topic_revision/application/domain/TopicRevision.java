@@ -2,10 +2,7 @@ package pl.app.learning.topic_revision.application.domain;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
@@ -35,6 +32,7 @@ public class TopicRevision extends BaseRevisionEntity<Topic, UUID, TopicRevision
     private String content;
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Builder.Default
     private Set<TopicHasCategoryRevision> categories = new LinkedHashSet<>();
 
     public void setCategories(Set<TopicHasCategoryRevision> categories) {

@@ -2,10 +2,8 @@ package pl.app.learning.group_revision.application.domain;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.model.BaseRevisionEntity;
 import pl.app.learning.group.application.domain.Group;
@@ -22,6 +20,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Table(name = "t_group_revision")
 public class GroupRevision extends BaseRevisionEntity<Group, UUID, GroupRevision, UUID> {
     @Column(name = "topic_name", nullable = false)
@@ -29,16 +28,17 @@ public class GroupRevision extends BaseRevisionEntity<Group, UUID, GroupRevision
     @Column(name = "topic_content", length = 8000)
     private String content;
     @Enumerated(EnumType.STRING)
-    @Column(name = "topic_status", nullable = false)
-    private GroupStatus status;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Builder.Default
     private Set<GroupHasCategoryRevision> categories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Builder.Default
     private Set<GroupHasTopicRevision> topics = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Builder.Default
     private Set<GroupHasGroupRevision> groups = new LinkedHashSet<>();
 
     public GroupRevision(Group revisionOwner) {
