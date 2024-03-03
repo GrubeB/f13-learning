@@ -19,7 +19,8 @@ public class ChapterSnapshotQueryService implements
         QueryService.SimpleFetchable.Full<UUID, ChapterSnapshot> {
     private final ChapterSnapshotRepository repository;
     private final ChapterSnapshotRepository specificationRepository;
-    public List<ChapterSnapshot> findByOwnerId(UUID ownerId){
+
+    public List<ChapterSnapshot> findByOwnerId(UUID ownerId) {
         return repository.findBySnapshotOwnerId(ownerId);
     }
 }

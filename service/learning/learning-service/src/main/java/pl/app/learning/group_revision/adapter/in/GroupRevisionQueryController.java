@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
 import pl.app.learning.group_revision.application.domain.GroupRevision;
 import pl.app.learning.group_revision.query.GroupRevisionQueryService;
-import pl.app.learning.topic_revision.query.TopicRevisionQuery;
-import pl.app.learning.topic_revision.query.TopicRevisionQueryService;
 
 import java.util.UUID;
 

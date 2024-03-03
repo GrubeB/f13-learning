@@ -8,11 +8,16 @@ import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.reference.application.domain.Reference;
 import pl.app.learning.reference.application.domain.ReferenceFactory;
-import pl.app.learning.reference.application.port.in.*;
-import pl.app.learning.reference.application.port.in.command.*;
+import pl.app.learning.reference.application.port.in.CreateReferenceUseCase;
+import pl.app.learning.reference.application.port.in.DeleteReferenceUseCase;
+import pl.app.learning.reference.application.port.in.UpdateReferenceUseCase;
+import pl.app.learning.reference.application.port.in.command.CreateReferenceCommand;
+import pl.app.learning.reference.application.port.in.command.DeleteReferenceCommand;
+import pl.app.learning.reference.application.port.in.command.UpdateReferenceCommand;
 import pl.app.learning.reference.application.port.out.ReferenceDomainRepositoryPort;
 
 import java.util.UUID;
+
 @CommandHandlerAnnotation
 @Component
 @RequiredArgsConstructor

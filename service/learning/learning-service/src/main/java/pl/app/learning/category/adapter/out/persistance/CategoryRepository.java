@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.category.application.domain.Category;
-import pl.app.learning.reference.application.domain.Reference;
 
 import java.util.UUID;
 

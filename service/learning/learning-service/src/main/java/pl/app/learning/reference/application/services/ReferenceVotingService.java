@@ -7,7 +7,6 @@ import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
 import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.reference.application.domain.Reference;
-import pl.app.learning.reference.application.domain.ReferenceFactory;
 import pl.app.learning.reference.application.port.in.AddUserDislikeUseCase;
 import pl.app.learning.reference.application.port.in.AddUserLikeUseCase;
 import pl.app.learning.reference.application.port.in.RemoveUserDislikeUseCase;
@@ -17,6 +16,7 @@ import pl.app.learning.reference.application.port.in.command.AddUserLikeCommand;
 import pl.app.learning.reference.application.port.in.command.RemoveUserDislikeCommand;
 import pl.app.learning.reference.application.port.in.command.RemoveUserLikeCommand;
 import pl.app.learning.reference.application.port.out.ReferenceDomainRepositoryPort;
+
 @CommandHandlerAnnotation
 @Component
 @RequiredArgsConstructor

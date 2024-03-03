@@ -6,15 +6,23 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaSnapshotableDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.learning.topic_revision.query.TopicRevisionQuery;
+import pl.app.common.mapper.Join;
+import pl.app.common.mapper.MergerUtils;
+import pl.app.common.model.revision.Revisionable;
+import pl.app.learning.topic_revision.application.domain.TopicHasCategoryRevision;
+import pl.app.learning.topic_revision.application.domain.TopicRevision;
+import pl.app.learning.topic_snapshot.domain.model.TopicHasCategorySnapshot;
+import pl.app.learning.topic_snapshot.domain.model.TopicSnapshot;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @AggregateRootAnnotation
 @Entity
 @Getter
 @Table(name = "t_topic")
-public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSnapshot> {
+public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSnapshot> implements
+        Revisionable<Topic, UUID, TopicRevision, UUID> {
     @Column(name = "topic_name")
     private String name;
     @Column(name = "topic_content")
@@ -23,9 +31,9 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
     @Column(name = "topic_status")
     private TopicStatus status;
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<TopicHasCategory> categories = new LinkedHashSet<>();
+    private final Set<TopicHasCategory> categories = new LinkedHashSet<>();
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<TopicHasReference> references = new LinkedHashSet<>();
+    private final Set<TopicHasReference> references = new LinkedHashSet<>();
 
     @SuppressWarnings("unused")
     protected Topic() {
@@ -38,18 +46,24 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         this.content = content;
         categories.forEach(this::addCategory);
     }
+    // CONTENT
 
     public void updateContent(String name, String content) {
-        this.verifyThatTopicIsInDraftStatus();
         this.name = name;
         this.content = content;
     }
 
-    private void verifyThatTopicIsInDraftStatus() {
-        if (!Objects.equals(TopicStatus.DRAFT, this.status)) {
-            throw new TopicException.TopicWrongStatusException();
+    // STATUS
+    public void changeStatus(TopicStatus status) {
+        this.status = status;
+    }
+
+    public void verifyThatTopicHaveNoVerifiedStatus() {
+        if (TopicStatus.VERIFIED.equals(this.status)) {
+            throw new TopicException.TopicWrongStatusException("Topic must have a VERIFIED status, but currently have: " + this.status);
         }
     }
+    // REFERENCE
 
     public void addReferences(List<AggregateId> references) {
         references.forEach(this::addReference);
@@ -75,8 +89,21 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
 
     public Optional<TopicHasReference> getReference(AggregateId reference) {
         return this.references.stream()
-                .filter(topicHasReference -> Objects.equals(topicHasReference.getReferenceId(), reference.getId()))
+                .filter(topicHasReference -> Objects.equals(topicHasReference.getReference(), reference))
                 .findAny();
+    }
+
+    // CATEGORY
+    public void setCategories(List<AggregateId> newCategories) {
+        List<AggregateId> categoriesToRemove = this.categories.stream()
+                .map(TopicHasCategory::getCategory)
+                .filter(category -> !newCategories.contains(category))
+                .collect(Collectors.toList());
+        List<AggregateId> categoriesToAdd = newCategories.stream()
+                .filter(newCategory -> getCategory(newCategory).isEmpty())
+                .collect(Collectors.toList());
+        removeCategories(categoriesToRemove);
+        addCategories(categoriesToAdd);
     }
 
     public void addCategories(List<AggregateId> categories) {
@@ -102,34 +129,25 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
 
     public Optional<TopicHasCategory> getCategory(AggregateId category) {
         return this.categories.stream()
-                .filter(topicHasCategory -> Objects.equals(topicHasCategory.getCategoryId(), category.getId()))
+                .filter(topicHasCategory -> Objects.equals(topicHasCategory.getCategory(), category))
                 .findAny();
-    }
-
-    public void changeStatus(TopicStatus status) {
-        this.status = status;
-    }
-
-    public void verifyIsInDraftStatus() {
-        if (!TopicStatus.DRAFT.equals(this.status)) {
-            throw new TopicException.TopicWrongStatusException("Topic must be in Draft status, but is in: " + this.status);
-        }
-    }
-
-
-    public void mergeRevision(TopicRevisionQuery revision) {
-        this.name = revision.getName();
-        this.content = revision.getContent();
     }
 
     @Override
     public TopicSnapshot makeSnapshot() {
-        return new TopicSnapshot(
-                this,
-                this.name,
-                this.content,
-                this.status
-        );
+        TopicSnapshot snapshot = TopicSnapshot.builder()
+                .snapshotOwnerId(this.getId())
+                .name(this.name)
+                .content(this.content)
+                .status(this.status)
+                .build();
+        snapshot.setCategories(this.categories.stream().map(e ->
+                        TopicHasCategorySnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .category(e.getCategory())
+                                .build())
+                .collect(Collectors.toSet()));
+        return snapshot;
     }
 
     @Override
@@ -137,6 +155,19 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         this.name = snapshot.getName();
         this.content = snapshot.getContent();
         this.status = snapshot.getStatus();
+        MergerUtils.mergeCollections(Join.RIGHT, this.categories, snapshot.getCategories(),
+                (e, s) -> e.revertSnapshot(this, s), TopicHasCategory::new,
+                TopicHasCategory::getId, TopicHasCategorySnapshot::getSnapshotOwnerId);
+        return this;
+    }
+
+    @Override
+    public Topic mergeRevision(TopicRevision revision) {
+        this.name = revision.getName();
+        this.content = revision.getContent();
+        MergerUtils.mergeCollections(Join.RIGHT, this.categories, revision.getCategories(),
+                (e, s) -> e.mergeRevision(this, s), TopicHasCategory::new,
+                TopicHasCategory::getId, TopicHasCategoryRevision::getRevisionOwnerId);
         return this;
     }
 }

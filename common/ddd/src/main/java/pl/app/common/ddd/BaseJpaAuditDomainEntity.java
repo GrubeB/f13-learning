@@ -4,12 +4,14 @@ package pl.app.common.ddd;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.experimental.SuperBuilder;
 import pl.app.common.model.BaseAuditEntity;
 import pl.app.common.model.Identity;
 
 import java.util.UUID;
 
 @MappedSuperclass
+@SuperBuilder
 public class BaseJpaAuditDomainEntity<
         ENTITY extends Identity<UUID>
         > extends BaseAuditEntity<ENTITY, UUID> implements

@@ -3,11 +3,7 @@ package pl.app.learning.group_revision.query.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.group.application.domain.GroupStatus;
-import pl.app.learning.group.query.dto.SimpleGroupDto;
-import pl.app.learning.reference.query.dto.ReferenceDto;
-import pl.app.learning.topic.query.dto.TopicDto;
 
 import java.io.Serializable;
 import java.util.List;

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
 import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
+import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.topic.application.domain.Topic;
 import pl.app.learning.topic.application.domain.TopicFactory;
 import pl.app.learning.topic.application.port.in.ChangeTopicStatusUseCase;
@@ -18,6 +19,7 @@ import pl.app.learning.topic.application.port.in.command.DeleteTopicCommand;
 import pl.app.learning.topic.application.port.in.command.UpdateTopicCommand;
 import pl.app.learning.topic.application.port.out.TopicDomainRepositoryPort;
 
+import java.util.List;
 import java.util.UUID;
 
 @CommandHandlerAnnotation
@@ -30,36 +32,39 @@ class TopicService implements
         DeleteTopicUseCase,
         CreateTopicUseCase {
     private final TopicFactory factory;
-    private final TopicDomainRepositoryPort repositoryPort;
+    private final TopicDomainRepositoryPort repository;
+    private final CategoryQueryService categoryQueryService;
 
     @Override
     @CommandHandlingAnnotation
     public UUID createTopic(CreateTopicCommand command) {
         Topic newTopic = factory.create(command.getName(), command.getContent(), command.getCategoryIds());
-        repositoryPort.save(newTopic);
+        repository.save(newTopic);
         return newTopic.getId();
     }
 
     @Override
     @CommandHandlingAnnotation
     public void deleteTopic(DeleteTopicCommand command) {
-        repositoryPort.delete(new AggregateId(command.getTopicId()));
+        repository.delete(new AggregateId(command.getTopicId()));
     }
 
     @Override
     @CommandHandlingAnnotation
     public void update(UpdateTopicCommand command) {
-        Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
-        aggregate.verifyIsInDraftStatus();
+        Topic aggregate = repository.load(new AggregateId(command.getTopicId()));
+        aggregate.verifyThatTopicHaveNoVerifiedStatus();
         aggregate.updateContent(command.getName(), command.getContent());
-        repositoryPort.save(aggregate);
+        List<AggregateId> newCategories = categoryQueryService.fetchByIds(command.getCategoryIds(), AggregateId.class);
+        aggregate.setCategories(newCategories);
+        repository.save(aggregate);
     }
 
     @Override
     @CommandHandlingAnnotation
     public void changeStatus(ChangeTopicStatusCommand command) {
-        Topic aggregate = repositoryPort.load(new AggregateId(command.getTopicId()));
+        Topic aggregate = repository.load(new AggregateId(command.getTopicId()));
         aggregate.changeStatus(command.getStatus());
-        repositoryPort.save(aggregate);
+        repository.save(aggregate);
     }
 }

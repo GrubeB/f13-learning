@@ -7,8 +7,6 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 
-import java.util.UUID;
-
 @EntityAnnotation
 @Entity
 @Getter
@@ -19,8 +17,11 @@ public class TopicHasReference extends BaseJpaAuditDomainEntity<TopicHasReferenc
     @JoinColumn(name = "topic_id", nullable = false, updatable = false)
     private Topic topic;
 
-    @Column(name = "reference_id", nullable = false)
-    private UUID referenceId;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "reference_id", nullable = false, updatable = false))
+    })
+    private AggregateId reference;
 
     @SuppressWarnings("unused")
     protected TopicHasReference() {
@@ -29,7 +30,7 @@ public class TopicHasReference extends BaseJpaAuditDomainEntity<TopicHasReferenc
 
     public TopicHasReference(Topic topic, AggregateId reference) {
         this.topic = topic;
-        this.referenceId = reference.getId();
+        this.reference = reference;
     }
 }
 

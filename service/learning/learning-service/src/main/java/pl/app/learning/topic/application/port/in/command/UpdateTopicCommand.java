@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import pl.app.common.cqrs.command.annotation.CommandAnnotation;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @CommandAnnotation
@@ -17,4 +18,5 @@ public class UpdateTopicCommand implements
     private UUID topicId;
     private String name;
     private String content;
+    private List<UUID> categoryIds;
 }

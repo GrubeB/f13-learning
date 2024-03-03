@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.common.model.BaseRevisionEntity;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Table(name = "t_group_has_topic_revision")
 public class GroupHasTopicRevision extends BaseRevisionEntity<GroupHasTopic, UUID, GroupHasTopicRevision, UUID> {
 

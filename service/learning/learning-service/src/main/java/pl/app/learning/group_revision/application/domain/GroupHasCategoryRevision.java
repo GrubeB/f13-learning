@@ -6,13 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import pl.app.common.ddd.AggregateId;
-import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.common.model.BaseRevisionEntity;
-import pl.app.learning.group.application.domain.Group;
 import pl.app.learning.group.application.domain.GroupHasCategory;
-import pl.app.learning.group.application.domain.snapshot.GroupHasCategorySnapshot;
 
 import java.util.UUID;
 
@@ -22,6 +20,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Table(name = "t_group_has_category_revision")
 public class GroupHasCategoryRevision extends BaseRevisionEntity<GroupHasCategory, UUID, GroupHasCategoryRevision, UUID> {
 

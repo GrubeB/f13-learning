@@ -1,7 +1,10 @@
 package pl.app.learning.category.application.domain;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
@@ -24,6 +27,7 @@ public class CategoryHasCategory extends BaseJpaAuditDomainEntity<CategoryHasCat
     protected CategoryHasCategory() {
         super();
     }
+
     public CategoryHasCategory(Category parent, Category child) {
         this.child = child;
         this.parent = parent;

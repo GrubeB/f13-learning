@@ -10,6 +10,7 @@ import pl.app.learning.topic.application.domain.TopicStatus;
 import pl.app.learning.topic.application.port.in.command.ChangeTopicStatusCommand;
 import pl.app.learning.topic.application.port.in.command.CreateTopicCommand;
 import pl.app.learning.topic.application.port.in.command.DeleteTopicCommand;
+import pl.app.learning.topic.application.port.in.command.UpdateTopicCommand;
 import pl.app.learning.topic.query.TopicQueryService;
 import pl.app.learning.topic.query.dto.TopicDto;
 
@@ -44,8 +45,8 @@ public class TopicController {
     }
 
     @PutMapping("/{topicId}")
-    public ResponseEntity<Void> update(@PathVariable UUID topicId) {
-        var command = new DeleteTopicCommand(topicId);
+    public ResponseEntity<Void> update(@PathVariable UUID topicId, @RequestBody UpdateTopicCommand command) {
+        command.setTopicId(topicId);
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()

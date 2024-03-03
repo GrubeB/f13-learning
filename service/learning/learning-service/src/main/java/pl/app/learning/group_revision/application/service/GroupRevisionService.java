@@ -46,57 +46,55 @@ class GroupRevisionService implements
     @CommandHandlingAnnotation
     public UUID create(CreateGroupRevisionCommand command) {
         GroupQuery owner = groupQueryService.fetchById(command.getOwnerId());
-        GroupRevision aggregate = new GroupRevision();
-        aggregate.setGroup(owner);
-        aggregate.setName(command.getName());
-        aggregate.setContent(command.getContent());
-        aggregate.setStatus(command.getStatus());
 
-        updateCategories(aggregate, command.getCategories());
-        updateTopics(aggregate, command.getTopics());
-        updateGroups(aggregate, command.getGroups());
+        GroupRevision aggregate = GroupRevision.builder()
+                .revisionOwnerId(owner.getId())
+                .name(command.getName())
+                .content(command.getContent())
+                .build();
+
+        aggregate.setCategories(getGroupHasCategoryRevisions(aggregate, command.getCategories()));
+        aggregate.setTopics(getGroupHasTopicRevisions(aggregate, command.getTopics()));
+        aggregate.setGroups(getGroupHasGroupRevisions(aggregate, command.getGroups()));
 
         repository.save(aggregate);
         return aggregate.getId();
     }
 
-    private void updateGroups(GroupRevision aggregate, List<CreateGroupRevisionCommand.Group> groupCommands) {
+    private Set<GroupHasGroupRevision> getGroupHasGroupRevisions(GroupRevision aggregate, List<CreateGroupRevisionCommand.Group> groupCommands) {
         Map<UUID, AggregateId> groups = groupQueryService.fetchByIds(groupCommands.stream()
                         .map(command -> command.getGroupId())
                         .collect(Collectors.toList()), AggregateId.class)
                 .stream().collect(Collectors.toMap(AggregateId::getId, Function.identity()));
-        Set<GroupHasGroupRevision> groupHasCategoryRevisions = groupCommands.stream().map(command -> {
+        return groupCommands.stream().map(command -> {
             var groupHasGroupRevision = new GroupHasGroupRevision(aggregate, groups.get(command.getGroupId()));
             groupHasGroupRevision.setRevisionOwnerId(command.getOwnerId());
             return groupHasGroupRevision;
         }).collect(Collectors.toSet());
-        aggregate.setGroups(groupHasCategoryRevisions);
     }
 
-    private void updateTopics(GroupRevision aggregate, List<CreateGroupRevisionCommand.Topic> topicsCommands) {
+    private Set<GroupHasTopicRevision> getGroupHasTopicRevisions(GroupRevision aggregate, List<CreateGroupRevisionCommand.Topic> topicsCommands) {
         Map<UUID, AggregateId> topics = topicQueryService.fetchByIds(topicsCommands.stream()
                         .map(command -> command.getTopicId())
                         .collect(Collectors.toList()), AggregateId.class)
                 .stream().collect(Collectors.toMap(AggregateId::getId, Function.identity()));
-        Set<GroupHasTopicRevision> groupHasCategoryRevisions = topicsCommands.stream().map(command -> {
+        return topicsCommands.stream().map(command -> {
             var groupHasTopicRevision = new GroupHasTopicRevision(aggregate, topics.get(command.getTopicId()));
             groupHasTopicRevision.setRevisionOwnerId(command.getOwnerId());
             return groupHasTopicRevision;
         }).collect(Collectors.toSet());
-        aggregate.setTopics(groupHasCategoryRevisions);
     }
 
-    private void updateCategories(GroupRevision aggregate, List<CreateGroupRevisionCommand.Category> categoryCommands) {
+    private Set<GroupHasCategoryRevision> getGroupHasCategoryRevisions(GroupRevision aggregate, List<CreateGroupRevisionCommand.Category> categoryCommands) {
         Map<UUID, AggregateId> categories = categoryQueryService.fetchByIds(categoryCommands.stream()
                         .map(command -> command.getCategoryId())
                         .collect(Collectors.toList()), AggregateId.class)
                 .stream().collect(Collectors.toMap(AggregateId::getId, Function.identity()));
-        Set<GroupHasCategoryRevision> groupHasCategoryRevisions = categoryCommands.stream().map(command -> {
+        return categoryCommands.stream().map(command -> {
             var groupHasCategoryRevision = new GroupHasCategoryRevision(aggregate, categories.get(command.getCategoryId()));
             groupHasCategoryRevision.setRevisionOwnerId(command.getOwnerId());
             return groupHasCategoryRevision;
         }).collect(Collectors.toSet());
-        aggregate.setCategories(groupHasCategoryRevisions);
     }
 
     @Override
@@ -112,11 +110,10 @@ class GroupRevisionService implements
         GroupRevision aggregate = repository.load(new AggregateId(command.getRevisionId()));
         aggregate.setName(command.getName());
         aggregate.setContent(command.getContent());
-        aggregate.setStatus(command.getStatus());
 
-        updateCategories(aggregate, command.getCategories());
-        updateTopics(aggregate, command.getTopics());
-        updateGroups(aggregate, command.getGroups());
+        aggregate.setCategories(getGroupHasCategoryRevisions(aggregate, command.getCategories()));
+        aggregate.setTopics(getGroupHasTopicRevisions(aggregate, command.getTopics()));
+        aggregate.setGroups(getGroupHasGroupRevisions(aggregate, command.getGroups()));
 
         repository.save(aggregate);
     }

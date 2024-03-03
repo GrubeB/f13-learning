@@ -1,0 +1,1 @@
+ALTER TABLE t_group_revision DROP COLUMN topic_status;

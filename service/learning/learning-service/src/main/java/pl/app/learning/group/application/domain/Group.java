@@ -9,11 +9,11 @@ import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.mapper.Join;
 import pl.app.common.mapper.MergerUtils;
 import pl.app.common.model.revision.Revisionable;
-import pl.app.learning.group.application.domain.snapshot.*;
 import pl.app.learning.group_revision.application.domain.GroupHasCategoryRevision;
 import pl.app.learning.group_revision.application.domain.GroupHasGroupRevision;
 import pl.app.learning.group_revision.application.domain.GroupHasTopicRevision;
 import pl.app.learning.group_revision.application.domain.GroupRevision;
+import pl.app.learning.group_snapshot.application.domain.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,16 +33,16 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     private GroupStatus status;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasCategory> categories = new LinkedHashSet<>();
+    private final Set<GroupHasCategory> categories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasReference> references = new LinkedHashSet<>();
+    private final Set<GroupHasReference> references = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasTopic> topics = new LinkedHashSet<>();
+    private final Set<GroupHasTopic> topics = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<GroupHasGroup> groups = new LinkedHashSet<>();
+    private final Set<GroupHasGroup> groups = new LinkedHashSet<>();
 
     @SuppressWarnings("unused")
     protected Group() {
@@ -65,7 +65,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     // CONTENT
 
     public void updateContent(String name, String content) {
-        this.verifyIsInDraftStatus();
         this.name = name;
         this.content = content;
     }
@@ -75,16 +74,23 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
         this.status = status;
     }
 
-    public void verifyIsInDraftStatus() {
-        if (!GroupStatus.DRAFT.equals(this.status)) {
-            throw new GroupException.GroupWrongStatusException("Group must be in Draft status, but is in: " + this.status);
+    public void verifyThatTopicHaveNoVerifiedStatus() {
+        if (GroupStatus.VERIFIED.equals(this.status)) {
+            throw new GroupException.GroupWrongStatusException("Group must have a VERIFIED status, but currently have: " + this.status);
         }
     }
 
     // CATEGORY
-    public void setCategories(Set<AggregateId> categories) {
-        this.categories.clear();
-        categories.forEach(this::addCategory);
+    public void setCategories(Set<AggregateId> newCategories) {
+        List<AggregateId> categoriesToRemove = this.categories.stream()
+                .map(GroupHasCategory::getCategory)
+                .filter(e -> !newCategories.contains(e))
+                .toList();
+        List<AggregateId> categoriesToAdd = newCategories.stream()
+                .filter(ne -> getCategory(ne).isEmpty())
+                .toList();
+        categoriesToRemove.forEach(this::removeCategory);
+        categoriesToAdd.forEach(this::addCategory);
     }
 
     public void addCategory(AggregateId category) {
@@ -130,9 +136,16 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     }
 
     // TOPIC
-    public void setTopics(Set<AggregateId> topics) {
-        this.topics.clear();
-        topics.forEach(this::addTopic);
+    public void setTopics(Set<AggregateId> newCategories) {
+        List<AggregateId> topicsToRemove = this.topics.stream()
+                .map(GroupHasTopic::getTopic)
+                .filter(e -> !newCategories.contains(e))
+                .toList();
+        List<AggregateId> topicsToAdd = newCategories.stream()
+                .filter(ne -> getTopic(ne).isEmpty())
+                .toList();
+        topicsToRemove.forEach(this::removeTopic);
+        topicsToAdd.forEach(this::addTopic);
     }
 
     public void addTopic(AggregateId topic) {
@@ -154,9 +167,16 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     }
 
     // GROUP
-    public void setGroups(Set<AggregateId> groups) {
-        this.groups.clear();
-        groups.forEach(this::addGroup);
+    public void setGroups(Set<AggregateId> newGroups) {
+        List<AggregateId> groupsToRemove = this.groups.stream()
+                .map(GroupHasGroup::getChildGroup)
+                .filter(e -> !newGroups.contains(e))
+                .toList();
+        List<AggregateId> groupsToAdd = newGroups.stream()
+                .filter(ne -> getGroup(ne).isEmpty())
+                .toList();
+        groupsToRemove.forEach(this::removeGroup);
+        groupsToAdd.forEach(this::addGroup);
     }
 
     public void addGroup(AggregateId group) {
@@ -179,11 +199,37 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
 
     @Override
     public GroupSnapshot makeSnapshot() {
-        var categorySnapshots = this.categories.stream().map(e -> new GroupHasCategorySnapshot(e, e.getCategory())).collect(Collectors.toSet());
-        var referenceSnapshots = this.references.stream().map(e -> new GroupHasReferenceSnapshot(e, e.getReference())).collect(Collectors.toSet());
-        var topicSnapshots = this.topics.stream().map(e -> new GroupHasTopicSnapshot(e, e.getTopic())).collect(Collectors.toSet());
-        var groupSnapshots = this.groups.stream().map(e -> new GroupHasGroupSnapshot(e, e.getChildGroup())).collect(Collectors.toSet());
-        return new GroupSnapshot(this, this.name, this.content, this.status, categorySnapshots, referenceSnapshots, topicSnapshots, groupSnapshots);
+        GroupSnapshot snapshot = GroupSnapshot.builder()
+                .snapshotOwnerId(this.getId())
+                .name(this.name)
+                .content(this.content)
+                .status(this.status)
+                .build();
+        snapshot.setCategories(this.categories.stream().map(e ->
+                        GroupHasCategorySnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .category(e.getCategory())
+                                .build())
+                .collect(Collectors.toSet()));
+        snapshot.setGroups(this.groups.stream().map(e ->
+                        GroupHasGroupSnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .childGroup(e.getChildGroup())
+                                .build())
+                .collect(Collectors.toSet()));
+        snapshot.setReferences(this.references.stream().map(e ->
+                        GroupHasReferenceSnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .reference(e.getReference())
+                                .build())
+                .collect(Collectors.toSet()));
+        snapshot.setTopics(this.topics.stream().map(e ->
+                        GroupHasTopicSnapshot.builder()
+                                .snapshotOwnerId(e.getId())
+                                .topic(e.getTopic())
+                                .build())
+                .collect(Collectors.toSet()));
+        return snapshot;
     }
 
     @Override
@@ -210,7 +256,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     public Group mergeRevision(GroupRevision revision) {
         this.name = revision.getName();
         this.content = revision.getContent();
-        this.status = revision.getStatus();
         MergerUtils.mergeCollections(Join.RIGHT, this.categories, revision.getCategories(),
                 (e, s) -> e.mergeRevision(this, s), GroupHasCategory::new,
                 GroupHasCategory::getId, GroupHasCategoryRevision::getRevisionOwnerId);

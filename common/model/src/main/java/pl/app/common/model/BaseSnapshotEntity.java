@@ -1,6 +1,7 @@
 package pl.app.common.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -33,17 +34,16 @@ public abstract class BaseSnapshotEntity<
     protected ENTITY_ID id;
 
     @Column(name = "snapshot_number", nullable = false, updatable = false)
-    protected Long snapshotNumber;
+    @Builder.Default
+    protected Long snapshotNumber = Instant.now().toEpochMilli();
 
     @Column(name = "owner_id")
     protected ENTITY_ID snapshotOwnerId;
 
     public BaseSnapshotEntity() {
-        this.snapshotNumber = Instant.now().toEpochMilli();
     }
 
     public BaseSnapshotEntity(ENTITY snapshotOwnerId) {
-        this.snapshotNumber = Instant.now().toEpochMilli();
         this.snapshotOwnerId = snapshotOwnerId.getId();
     }
 
