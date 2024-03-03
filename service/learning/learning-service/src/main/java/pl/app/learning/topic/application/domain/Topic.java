@@ -46,18 +46,24 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         this.content = content;
         categories.forEach(this::addCategory);
     }
+    // CONTENT
 
     public void updateContent(String name, String content) {
-        this.verifyThatTopicIsInDraftStatus();
         this.name = name;
         this.content = content;
     }
 
-    private void verifyThatTopicIsInDraftStatus() {
-        if (!Objects.equals(TopicStatus.DRAFT, this.status)) {
-            throw new TopicException.TopicWrongStatusException();
+    // STATUS
+    public void changeStatus(TopicStatus status) {
+        this.status = status;
+    }
+
+    public void verifyThatTopicHaveNoVerifiedStatus() {
+        if (TopicStatus.VERIFIED.equals(this.status)) {
+            throw new TopicException.TopicWrongStatusException("Topic must have a VERIFIED status, but currently have: " + this.status);
         }
     }
+    // REFERENCE
 
     public void addReferences(List<AggregateId> references) {
         references.forEach(this::addReference);
@@ -87,6 +93,19 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
                 .findAny();
     }
 
+    // CATEGORY
+    public void setCategories(List<AggregateId> newCategories) {
+        List<AggregateId> categoriesToRemove = this.categories.stream()
+                .map(TopicHasCategory::getCategory)
+                .filter(category -> !newCategories.contains(category))
+                .collect(Collectors.toList());
+        List<AggregateId> categoriesToAdd = newCategories.stream()
+                .filter(newCategory -> getCategory(newCategory).isEmpty())
+                .collect(Collectors.toList());
+        removeCategories(categoriesToRemove);
+        addCategories(categoriesToAdd);
+    }
+
     public void addCategories(List<AggregateId> categories) {
         categories.forEach(this::addCategory);
     }
@@ -112,16 +131,6 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         return this.categories.stream()
                 .filter(topicHasCategory -> Objects.equals(topicHasCategory.getCategory(), category))
                 .findAny();
-    }
-
-    public void changeStatus(TopicStatus status) {
-        this.status = status;
-    }
-
-    public void verifyIsInDraftStatus() {
-        if (!TopicStatus.DRAFT.equals(this.status)) {
-            throw new TopicException.TopicWrongStatusException("Topic must be in Draft status, but is in: " + this.status);
-        }
     }
 
     @Override
