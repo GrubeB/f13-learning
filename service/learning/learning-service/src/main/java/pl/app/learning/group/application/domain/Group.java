@@ -65,7 +65,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     // CONTENT
 
     public void updateContent(String name, String content) {
-        this.verifyIsInDraftStatus();
         this.name = name;
         this.content = content;
     }
@@ -75,16 +74,23 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
         this.status = status;
     }
 
-    public void verifyIsInDraftStatus() {
-        if (!GroupStatus.DRAFT.equals(this.status)) {
-            throw new GroupException.GroupWrongStatusException("Group must be in Draft status, but is in: " + this.status);
+    public void verifyThatTopicHaveNoVerifiedStatus() {
+        if (GroupStatus.VERIFIED.equals(this.status)) {
+            throw new GroupException.GroupWrongStatusException("Group must have a VERIFIED status, but currently have: " + this.status);
         }
     }
 
     // CATEGORY
-    public void setCategories(Set<AggregateId> categories) {
-        this.categories.clear();
-        categories.forEach(this::addCategory);
+    public void setCategories(Set<AggregateId> newCategories) {
+        List<AggregateId> categoriesToRemove = this.categories.stream()
+                .map(GroupHasCategory::getCategory)
+                .filter(e -> !newCategories.contains(e))
+                .toList();
+        List<AggregateId> categoriesToAdd = newCategories.stream()
+                .filter(ne -> getCategory(ne).isEmpty())
+                .toList();
+        categoriesToRemove.forEach(this::removeCategory);
+        categoriesToAdd.forEach(this::addCategory);
     }
 
     public void addCategory(AggregateId category) {
@@ -130,9 +136,16 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     }
 
     // TOPIC
-    public void setTopics(Set<AggregateId> topics) {
-        this.topics.clear();
-        topics.forEach(this::addTopic);
+    public void setTopics(Set<AggregateId> newCategories) {
+        List<AggregateId> topicsToRemove = this.topics.stream()
+                .map(GroupHasTopic::getTopic)
+                .filter(e -> !newCategories.contains(e))
+                .toList();
+        List<AggregateId> topicsToAdd = newCategories.stream()
+                .filter(ne -> getTopic(ne).isEmpty())
+                .toList();
+        topicsToRemove.forEach(this::removeTopic);
+        topicsToAdd.forEach(this::addTopic);
     }
 
     public void addTopic(AggregateId topic) {
@@ -154,9 +167,16 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     }
 
     // GROUP
-    public void setGroups(Set<AggregateId> groups) {
-        this.groups.clear();
-        groups.forEach(this::addGroup);
+    public void setGroups(Set<AggregateId> newGroups) {
+        List<AggregateId> groupsToRemove = this.groups.stream()
+                .map(GroupHasGroup::getChildGroup)
+                .filter(e -> !newGroups.contains(e))
+                .toList();
+        List<AggregateId> groupsToAdd = newGroups.stream()
+                .filter(ne -> getGroup(ne).isEmpty())
+                .toList();
+        groupsToRemove.forEach(this::removeGroup);
+        groupsToAdd.forEach(this::addGroup);
     }
 
     public void addGroup(AggregateId group) {

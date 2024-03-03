@@ -52,7 +52,7 @@ class GroupService implements
     @CommandHandlingAnnotation
     public void update(UpdateGroupCommand command) {
         Group aggregate = repository.load(new AggregateId(command.getGroupId()));
-        aggregate.verifyIsInDraftStatus();
+        aggregate.verifyThatTopicHaveNoVerifiedStatus();
         aggregate.updateContent(command.getName(), command.getContent());
         aggregate.setCategories(command.getCategoryIds().stream().map(AggregateId::new).collect(Collectors.toSet()));
         aggregate.setTopics(command.getTopicIds().stream().map(AggregateId::new).collect(Collectors.toSet()));
