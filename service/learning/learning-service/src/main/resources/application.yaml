@@ -1,13 +1,13 @@
 server:
-  port: 9006
+  port: ${SERVER_PORT:9006}
 
 spring:
   application:
     name: learning-service
   datasource:
-    url: jdbc:postgresql://localhost:5435/postgres
-    username: postgres
-    password: postgres
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5435/postgres}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
