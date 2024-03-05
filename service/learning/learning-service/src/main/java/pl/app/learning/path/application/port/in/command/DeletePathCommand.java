@@ -1,4 +1,4 @@
-package pl.app.learning.path.application.port.in;
+package pl.app.learning.path.application.port.in.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

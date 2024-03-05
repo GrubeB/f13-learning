@@ -1,4 +1,4 @@
-package pl.app.learning.path.application.port.in;
+package pl.app.learning.path.application.port.in.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,7 @@ public class UpdatePathCommand implements
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class Item implements
+    public static class Item implements
             Serializable {
         private UUID itemId;
         private Long number;

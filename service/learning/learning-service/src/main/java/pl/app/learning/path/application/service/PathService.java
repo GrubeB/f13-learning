@@ -9,6 +9,10 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.learning.path.application.domain.Path;
 import pl.app.learning.path.application.domain.PathFactory;
 import pl.app.learning.path.application.port.in.*;
+import pl.app.learning.path.application.port.in.command.ChangePathStatusCommand;
+import pl.app.learning.path.application.port.in.command.CreatePathCommand;
+import pl.app.learning.path.application.port.in.command.DeletePathCommand;
+import pl.app.learning.path.application.port.in.command.UpdatePathCommand;
 import pl.app.learning.path.application.port.out.PathDomainRepositoryPort;
 
 import java.util.UUID;

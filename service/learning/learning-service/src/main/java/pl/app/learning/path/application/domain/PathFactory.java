@@ -8,7 +8,7 @@ import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.group.query.GroupQueryService;
-import pl.app.learning.path.application.port.in.CreatePathCommand;
+import pl.app.learning.path.application.port.in.command.CreatePathCommand;
 import pl.app.learning.topic.query.TopicQueryService;
 
 import java.util.List;
