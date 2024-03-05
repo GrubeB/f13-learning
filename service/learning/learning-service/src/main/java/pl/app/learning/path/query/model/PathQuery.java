@@ -7,18 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
-import pl.app.common.ddd.AggregateId;
-import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
-import pl.app.common.ddd.annotation.AggregateRootAnnotation;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.learning.path.application.domain.ItemEntityType;
-import pl.app.learning.path.application.domain.PathException;
-import pl.app.learning.path.application.domain.PathSpecification;
 import pl.app.learning.path.application.domain.PathStatus;
-import pl.app.learning.topic.query.model.TopicQuery;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Immutable
 @Entity

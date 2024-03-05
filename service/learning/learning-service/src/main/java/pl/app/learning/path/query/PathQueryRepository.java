@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import pl.app.learning.path.query.model.PathQuery;
-import pl.app.learning.topic.query.model.TopicQuery;
 
 import java.util.UUID;
 
