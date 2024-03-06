@@ -17,6 +17,7 @@ import pl.app.learning.group.query.dto.GroupDto;
 import pl.app.learning.group.query.model.GroupQuery;
 import pl.app.learning.path.application.domain.ItemEntityType;
 import pl.app.learning.path.query.dto.PathDto;
+import pl.app.learning.path.query.dto.SimplePathDto;
 import pl.app.learning.path.query.model.PathHasCategoryQuery;
 import pl.app.learning.path.query.model.PathItemQuery;
 import pl.app.learning.path.query.model.PathQuery;
@@ -39,10 +40,41 @@ public class PathQueryMapper extends BaseMapper {
     @PostConstruct
     void init() {
         initPathQueryToPathDto();
+        initPathQueryToSimplePathDto();
 
         addMapper(PathQuery.class, PathDto.class, e -> modelMapper.map(e, PathDto.class));
+        addMapper(PathQuery.class, SimplePathDto.class, e -> modelMapper.map(e, SimplePathDto.class));
         addMapper(PathQuery.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(PathQuery.class, AggregateId.class, e -> new AggregateId(e.getId()));
+    }
+
+    private void initPathQueryToSimplePathDto() {
+        TypeMap<PathQuery, SimplePathDto> typeMap = modelMapper.createTypeMap(PathQuery.class, SimplePathDto.class);
+
+
+        Converter<Set<PathItemQuery>, Set<SimplePathDto.PathItem>> pathItemTopicConverter = context -> context.getSource().stream()
+                .map(item -> {
+                    if (item.getEntity() instanceof TopicQuery topicQuery) {
+                        return new SimplePathDto.PathItem(
+                                item.getId(),
+                                item.getNumber(),
+                                item.getType(),
+                                ItemEntityType.TOPIC,
+                                topicQuery.getId()
+                        );
+                    } else if (item.getEntity() instanceof GroupQuery groupQuery) {
+                        return new SimplePathDto.PathItem(
+                                item.getId(),
+                                item.getNumber(),
+                                item.getType(),
+                                ItemEntityType.GROUP,
+                                groupQuery.getId()
+                        );
+                    }
+                    return null;
+                })
+                .collect(Collectors.toSet());
+        typeMap.addMappings(mapper -> mapper.using(pathItemTopicConverter).map(PathQuery::getItems, SimplePathDto::setItems));
     }
 
     private void initPathQueryToPathDto() {

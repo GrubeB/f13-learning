@@ -8,6 +8,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.path.query.dto.PathDto;
+import pl.app.learning.path.query.dto.SimplePathDto;
 import pl.app.learning.path.query.model.PathQuery;
 
 import java.util.LinkedHashMap;
@@ -26,6 +27,7 @@ public class PathQueryService implements
 
     private final Map<String, Class<?>> supportedDtoClasses = new LinkedHashMap<>() {{
         put("PathDto", PathDto.class);
+        put("SimplePathDto", SimplePathDto.class);
         put("BaseDto", BaseDto.class);
         put("AggregateId", AggregateId.class);
     }};

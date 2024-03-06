@@ -6,6 +6,8 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
+import pl.app.common.mapper.Join;
+import pl.app.common.mapper.MergerUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -106,6 +108,19 @@ public class Path extends BaseJpaAuditDomainAggregateRoot<Path> {
 
 
     // ITEMS
+
+    public void setItems(List<PathItem> newPathItems) {
+        List<PathItem> itemsToRemove = this.items.stream()
+                .filter(existingItem -> !newPathItems.contains(existingItem))
+                .toList();
+        List<PathItem> itemsToAdd = newPathItems.stream()
+                .filter(newItem -> newItem.getId() == null || getItem(newItem.getId()).isEmpty())
+                .toList();
+
+        itemsToRemove.forEach(i -> removeItem(i.getId()));
+        itemsToAdd.forEach(this::addItem);
+        MergerUtils.mergeCollections(Join.INNER, this.items, newPathItems, PathItem::merge, PathItem::getId);
+    }
 
     public void addItem(PathItem item) {
         if (getItem(item.getId()).isPresent()) {

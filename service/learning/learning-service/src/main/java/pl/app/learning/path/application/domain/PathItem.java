@@ -6,6 +6,8 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 
+import java.util.UUID;
+
 @EntityAnnotation
 @Entity
 @Getter
@@ -36,11 +38,28 @@ public class PathItem extends BaseJpaAuditDomainEntity<PathItem> {
         super();
     }
 
+    public PathItem(UUID entityId, Long number, ItemType type, ItemEntityType entityType, AggregateId entity) {
+        super(entityId);
+        this.number = number;
+        this.type = type;
+        this.entityType = entityType;
+        this.entity = entity;
+    }
+
     public PathItem(Long number, ItemType type, ItemEntityType entityType, AggregateId entity) {
         this.number = number;
         this.type = type;
         this.entityType = entityType;
         this.entity = entity;
+    }
+
+    public PathItem merge(PathItem source) {
+        this.number = source.getNumber();
+        this.type = source.getType();
+        this.entityType = source.getEntityType();
+        this.entity = source.getEntity();
+        this.path = source.getPath();
+        return this;
     }
 
     public void setPath(Path path) {
