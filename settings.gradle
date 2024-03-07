@@ -21,3 +21,4 @@ include "common:controller:command-controller"
 
 // SERVICES
 include "service:learning:learning-service"
+include "service:authorization:authorization-service"
