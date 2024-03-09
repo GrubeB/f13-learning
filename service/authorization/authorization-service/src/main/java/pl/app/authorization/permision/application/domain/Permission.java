@@ -15,7 +15,6 @@ import pl.app.common.ddd.event.DomainEventPublisher;
         @UniqueConstraint(name = "uc_permission_permission_name", columnNames = {"permission_name"})
 })
 public class Permission extends BaseJpaAuditDomainAggregateRoot<Permission> {
-    @Enumerated(EnumType.STRING)
     @Column(name = "permission_name", nullable = false)
     private String name;
 

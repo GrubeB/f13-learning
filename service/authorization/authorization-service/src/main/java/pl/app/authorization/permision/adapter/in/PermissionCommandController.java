@@ -28,10 +28,10 @@ public class PermissionCommandController {
 
     @PostMapping("/create")
     public ResponseEntity<PermissionDto> handle(@RequestBody CreatePermissionCommand command, HttpServletRequest request) {
-        UUID groupId = gateway.send(command);
+        UUID aggregateId = gateway.send(command);
         return ResponseEntity
-                .created(EntityLocationUriUtils.createdEntityLocationURI(groupId, request.getRequestURI()))
-                .body(service.fetchById(groupId, PermissionDto.class));
+                .created(EntityLocationUriUtils.createdEntityLocationURI(aggregateId, request.getRequestURI()))
+                .body(service.fetchById(aggregateId, PermissionDto.class));
     }
 
     @PostMapping("/delete")

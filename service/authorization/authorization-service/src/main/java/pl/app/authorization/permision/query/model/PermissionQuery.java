@@ -23,7 +23,6 @@ import java.util.UUID;
 public class PermissionQuery extends BaseAuditEntity<PermissionQuery, UUID> {
     @Id
     private UUID id;
-    @Enumerated(EnumType.STRING)
     @Column(name = "permission_name", nullable = false)
     private String name;
 }
