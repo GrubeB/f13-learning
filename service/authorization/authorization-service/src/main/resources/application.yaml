@@ -5,12 +5,12 @@ spring:
   application:
     name: learning-service
   datasource:
-    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5435/postgres}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5436/postgres}
     username: ${DATASOURCE_USERNAME:postgres}
     password: ${DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   flyway:
-    enabled: false
+    enabled: true
     baseline-on-migrate: true
     baseline-version: 0
     user: postgres
