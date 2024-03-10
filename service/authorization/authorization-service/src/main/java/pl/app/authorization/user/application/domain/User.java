@@ -25,7 +25,6 @@ public class User extends BaseJpaAuditDomainAggregateRoot<User> {
     @Column(nullable = false)
     private String password;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
-    @Builder.Default
     private Set<UserHasRole> roles = new LinkedHashSet<>();
 
     @Transient
@@ -64,7 +63,7 @@ public class User extends BaseJpaAuditDomainAggregateRoot<User> {
         // Have eight characters or more and contains: capital letter, lowercase letter, one digit, one special symbol
         if (rawPassword == null
                 || rawPassword.length() < MINIMAL_PASSWORD_LENGTH
-                || !Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$", Pattern.CASE_INSENSITIVE).matcher(password).matches()) {
+                || !Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$", Pattern.CASE_INSENSITIVE).matcher(rawPassword).matches()) {
             throw new UserException.PasswordValidationException();
         }
         this.password = passwordEncoder.encode(rawPassword);
