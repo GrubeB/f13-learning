@@ -33,7 +33,6 @@ dependencies {
 
     // SECURITY
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
 
     // VALIDATION
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -44,8 +43,13 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation 'org.flywaydb:flyway-core'
 
+    // LOMBOK
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
+
+    // MAPPER
+    implementation 'org.modelmapper:modelmapper:3.1.1'
+    implementation 'org.modelmapper.extensions:modelmapper-spring:3.1.1'
 
     // TEST
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -53,10 +57,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation "org.testcontainers:postgresql"
-
-    // MAPPER
-    implementation 'org.modelmapper:modelmapper:3.1.1'
-    implementation 'org.modelmapper.extensions:modelmapper-spring:3.1.1'
 
     // https://mvnrepository.com/artifact/com.google.code.findbugs/annotations
     implementation 'com.google.code.findbugs:annotations:3.0.1'
