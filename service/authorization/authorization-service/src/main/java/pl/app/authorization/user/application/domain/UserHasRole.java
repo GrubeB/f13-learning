@@ -25,6 +25,7 @@ public class UserHasRole extends BaseJpaAuditDomainEntity<UserHasRole> {
     protected UserHasRole() {
         super();
     }
+
     public UserHasRole(User user, AggregateId role) {
         this.role = role;
         this.user = user;

@@ -24,6 +24,7 @@ public class RoleQueryController implements
     public static final String resourceName = "roles";
     public static final String resourcePath = "/api/v1/" + resourceName;
     public final RoleQueryService service;
+
     @GetMapping("/{name}")
     public ResponseEntity<?> fetchByNameAndDto(@PathVariable String name,
                                                Dto dto) {

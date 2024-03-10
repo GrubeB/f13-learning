@@ -27,7 +27,7 @@ public class PermissionQueryController implements
 
     @GetMapping("/{name}")
     public ResponseEntity<?> fetchByNameAndDto(@PathVariable String name,
-                                              Dto dto) {
+                                               Dto dto) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(getService().fetchByName(name, dto));

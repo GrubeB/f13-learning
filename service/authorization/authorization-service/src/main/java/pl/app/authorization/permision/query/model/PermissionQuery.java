@@ -1,14 +1,14 @@
 package pl.app.authorization.permision.query.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
-import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
-import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.common.ddd.event.DomainEventPublisher;
 import pl.app.common.model.BaseAuditEntity;
 
 import java.util.UUID;

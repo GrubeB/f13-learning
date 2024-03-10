@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "t_role_has_permission")
-public class RoleHasPermissionQuery  extends BaseAuditEntity<RoleHasPermissionQuery, UUID> {
+public class RoleHasPermissionQuery extends BaseAuditEntity<RoleHasPermissionQuery, UUID> {
     @Id
     private UUID id;
     @ManyToOne

@@ -8,6 +8,7 @@ import pl.app.common.ddd.annotation.DomainRepositoryAnnotation;
 @DomainRepositoryAnnotation
 public interface PermissionDomainRepositoryPort {
     Permission load(AggregateId aggregateId);
+
     Permission load(String permissionName);
 
     void save(Permission aggregate);

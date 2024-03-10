@@ -41,8 +41,9 @@ class PermissionPersistenceAdapter implements
             publisher.publishDelayedEvents();
         }
     }
+
     @Override
-    public void delete(Permission aggregate)  {
+    public void delete(Permission aggregate) {
         if (aggregate.getEventPublisher() instanceof DelayedDomainEventPublisher publisher) {
             publisher.publishDelayedEvents();
         }

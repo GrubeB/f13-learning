@@ -3,7 +3,6 @@ package pl.app.authorization.permision.application.domain.event;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.app.common.cqrs.command.annotation.CommandAnnotation;
 import pl.app.common.cqrs.event.annotation.EventAnnotation;
 
 import java.io.Serializable;

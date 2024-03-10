@@ -31,6 +31,7 @@ public class RoleQueryService implements
         put("BaseDto", BaseDto.class);
         put("AggregateId", AggregateId.class);
     }};
+
     public <T> T fetchByName(String name, Dto dto) {
         var entity = getRepository().findByName(name)
                 .orElseThrow(() -> new NotFoundException("object not found with name: " + name));

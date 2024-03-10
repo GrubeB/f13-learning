@@ -1,9 +1,7 @@
 package pl.app.authorization.role.application.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.ToString;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
@@ -27,6 +25,7 @@ public class RoleHasPermission extends BaseJpaAuditDomainEntity<RoleHasPermissio
     protected RoleHasPermission() {
         super();
     }
+
     public RoleHasPermission(Role role, AggregateId permission) {
         this.permission = permission;
         this.role = role;

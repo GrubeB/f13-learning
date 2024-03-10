@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.app.authorization.permision.query.PermissionQueryService;
 import pl.app.authorization.role.application.port.in.CreateRoleCommand;
 import pl.app.authorization.role.application.port.in.DeleteRoleCommand;
 import pl.app.authorization.role.application.port.in.UpdateRoleCommand;

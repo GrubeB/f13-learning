@@ -1,6 +1,9 @@
 package pl.app.authorization.permision.application.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import pl.app.authorization.permision.application.domain.event.PermissionCreatedEvent;
 import pl.app.authorization.permision.application.domain.event.PermissionDeletedEvent;

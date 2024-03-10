@@ -1,7 +1,6 @@
 package pl.app.authorization.role.application.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import pl.app.authorization.role.application.domain.event.RoleCreatedEvent;
 import pl.app.authorization.role.application.domain.event.RoleDeletedEvent;
@@ -22,7 +21,7 @@ public class Role extends BaseJpaAuditDomainAggregateRoot<Role> {
     @Column(name = "role_name", nullable = false)
     private String name;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "role", orphanRemoval = true)
-    private Set<RoleHasPermission> permissions = new LinkedHashSet<>();
+    private final Set<RoleHasPermission> permissions = new LinkedHashSet<>();
 
     @SuppressWarnings("unused")
     protected Role() {

@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pl.app.authorization.permision.query.model.PermissionQuery;
 import pl.app.authorization.role.query.model.RoleQuery;
 
 import java.util.Optional;

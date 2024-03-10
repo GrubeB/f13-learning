@@ -1,7 +1,6 @@
 package pl.app.authorization.user.application.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.app.authorization.user.application.domain.event.UserCreatedEvent;
@@ -25,7 +24,7 @@ public class User extends BaseJpaAuditDomainAggregateRoot<User> {
     @Column(nullable = false)
     private String password;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
-    private Set<UserHasRole> roles = new LinkedHashSet<>();
+    private final Set<UserHasRole> roles = new LinkedHashSet<>();
 
     @Transient
     private PasswordEncoder passwordEncoder;

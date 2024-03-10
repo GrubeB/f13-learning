@@ -48,6 +48,7 @@ public class RoleCommandController {
                 .accepted()
                 .build();
     }
+
     @PostMapping("/add-permission")
     public ResponseEntity<Void> handle(@RequestBody AddPermissionToRoleCommand command) {
         gateway.sendAsync(command);
@@ -55,6 +56,7 @@ public class RoleCommandController {
                 .accepted()
                 .build();
     }
+
     @PostMapping("/remove-permission")
     public ResponseEntity<Void> handle(@RequestBody RemovePermissionFromRoleCommand command) {
         gateway.sendAsync(command);

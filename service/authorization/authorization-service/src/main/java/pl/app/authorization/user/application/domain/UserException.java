@@ -24,6 +24,7 @@ public interface UserException {
             return new NotFoundUserException("not found user with email: " + email);
         }
     }
+
     class PasswordValidationException extends ValidationException {
         public PasswordValidationException() {
             super("password validation exception");
@@ -33,6 +34,7 @@ public interface UserException {
             super(message);
         }
     }
+
     class EmailValidationException extends ValidationException {
         public EmailValidationException() {
             super("email validation exception");

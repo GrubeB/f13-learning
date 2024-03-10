@@ -31,6 +31,7 @@ public class RoleQueryMapper extends BaseMapper {
         addMapper(RoleQuery.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(RoleQuery.class, AggregateId.class, e -> new AggregateId(e.getId()));
     }
+
     private void initRoleQueryToRoleDto() {
         TypeMap<RoleQuery, RoleDto> typeMap = modelMapper.createTypeMap(RoleQuery.class, RoleDto.class);
 

@@ -18,6 +18,7 @@ public interface PermissionException {
         public static NotFoundPermissionException fromName(String name) {
             return new NotFoundPermissionException("not found permission with name: " + name);
         }
+
         public static NotFoundPermissionException fromId(UUID id) {
             return new NotFoundPermissionException("not found permission with id: " + id);
         }

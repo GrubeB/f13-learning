@@ -1,7 +1,6 @@
 package pl.app.authorization.user.application.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.authorization.role.query.RoleQueryService;
