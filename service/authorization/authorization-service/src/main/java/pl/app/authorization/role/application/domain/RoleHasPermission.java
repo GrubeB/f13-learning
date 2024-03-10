@@ -20,7 +20,7 @@ public class RoleHasPermission extends BaseJpaAuditDomainEntity<RoleHasPermissio
     private AggregateId permission;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", updatable = false, nullable = false)
+    @JoinColumn(name = "role_id", updatable = false, nullable = false)
     private Role role;
 
     @SuppressWarnings("unused")

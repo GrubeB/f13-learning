@@ -22,7 +22,6 @@ public class Role extends BaseJpaAuditDomainAggregateRoot<Role> {
     @Column(name = "role_name", nullable = false)
     private String name;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "role", orphanRemoval = true)
-    @Builder.Default
     private Set<RoleHasPermission> permissions = new LinkedHashSet<>();
 
     @SuppressWarnings("unused")

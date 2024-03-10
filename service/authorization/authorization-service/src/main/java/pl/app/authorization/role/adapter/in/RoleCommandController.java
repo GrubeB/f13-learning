@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.app.authorization.permision.query.PermissionQueryService;
 import pl.app.authorization.role.application.port.in.*;
+import pl.app.authorization.role.query.RoleQueryService;
 import pl.app.authorization.role.query.dto.RoleDto;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.common.util.EntityLocationUriUtils;
@@ -23,14 +23,14 @@ public class RoleCommandController {
     public static final String resourcePath = "/api/v1/" + resourceName + "/commands";
 
     private final CommandGateway gateway;
-    public final PermissionQueryService service;
+    public final RoleQueryService service;
 
     @PostMapping("/create")
     public ResponseEntity<RoleDto> handle(@RequestBody CreateRoleCommand command, HttpServletRequest request) {
-        UUID groupId = gateway.send(command);
+        UUID aggregateId = gateway.send(command);
         return ResponseEntity
-                .created(EntityLocationUriUtils.createdEntityLocationURI(groupId, request.getRequestURI()))
-                .body(service.fetchById(groupId, RoleDto.class));
+                .created(EntityLocationUriUtils.createdEntityLocationURI(aggregateId, request.getRequestURI()))
+                .body(service.fetchById(aggregateId, RoleDto.class));
     }
 
     @PostMapping("/delete")

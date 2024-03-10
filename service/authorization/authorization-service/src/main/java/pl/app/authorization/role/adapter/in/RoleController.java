@@ -8,6 +8,7 @@ import pl.app.authorization.permision.query.PermissionQueryService;
 import pl.app.authorization.role.application.port.in.CreateRoleCommand;
 import pl.app.authorization.role.application.port.in.DeleteRoleCommand;
 import pl.app.authorization.role.application.port.in.UpdateRoleCommand;
+import pl.app.authorization.role.query.RoleQueryService;
 import pl.app.authorization.role.query.dto.RoleDto;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.common.util.EntityLocationUriUtils;
@@ -22,7 +23,7 @@ public class RoleController {
     public static final String resourcePath = "/api/v1/" + resourceName;
 
     private final CommandGateway gateway;
-    public final PermissionQueryService service;
+    public final RoleQueryService service;
 
     @PostMapping
     public ResponseEntity<RoleDto> create(@RequestBody CreateRoleCommand command, HttpServletRequest request) {

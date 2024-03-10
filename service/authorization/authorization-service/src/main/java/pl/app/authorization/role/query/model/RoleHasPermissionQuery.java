@@ -24,7 +24,7 @@ public class RoleHasPermissionQuery  extends BaseAuditEntity<RoleHasPermissionQu
     private PermissionQuery permission;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "role_id")
     @ToString.Exclude
     @JsonIgnore
     private RoleQuery role;

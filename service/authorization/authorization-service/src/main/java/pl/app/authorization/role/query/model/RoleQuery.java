@@ -22,6 +22,5 @@ public class RoleQuery  extends BaseAuditEntity<RoleQuery, UUID> {
     @Column(name = "role_name")
     private String name;
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "role")
-    @Builder.Default
     private Set<RoleHasPermissionQuery> permissions = new LinkedHashSet<>();
 }

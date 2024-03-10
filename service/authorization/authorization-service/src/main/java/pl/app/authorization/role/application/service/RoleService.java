@@ -54,7 +54,7 @@ class RoleService implements
         var aggregate = repository.load(command.getName());
         List<AggregateId> permissions = getPermissionsByNames(command.getPermissions());
         aggregate.setPermissions(permissions);
-        repository.delete(aggregate);
+        repository.save(aggregate);
     }
 
     @Override
@@ -63,7 +63,7 @@ class RoleService implements
         var aggregate = repository.load(command.getName());
         List<AggregateId> permissions = getPermissionsByNames(command.getPermissions());
         permissions.forEach(aggregate::addPermission);
-        repository.delete(aggregate);
+        repository.save(aggregate);
     }
 
     @Override
@@ -72,7 +72,7 @@ class RoleService implements
         var aggregate = repository.load(command.getName());
         List<AggregateId> permissions = getPermissionsByNames(command.getPermissions());
         permissions.forEach(aggregate::removePermission);
-        repository.delete(aggregate);
+        repository.save(aggregate);
     }
 
     private List<AggregateId> getPermissionsByNames(List<String> command) {
