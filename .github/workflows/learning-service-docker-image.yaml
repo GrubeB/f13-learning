@@ -18,5 +18,5 @@ jobs:
           docker build . -f ${{ env.PATH_TO_DOCKERFILE }} -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
       - name: publish
         run: |
-          docker login -u grubeb -p ${{ secrets.GIT_TOKEN }} {{ env.REGISTRY }}
+          docker login -u grubeb -p ${{ secrets.GIT_TOKEN }} ${{ env.REGISTRY }}
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
