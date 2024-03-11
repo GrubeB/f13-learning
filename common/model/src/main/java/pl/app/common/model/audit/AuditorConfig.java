@@ -9,7 +9,7 @@ import java.util.Optional;
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class AuditorConfig {
     @Bean
-    public AuditorAware<String> auditorProvider(AuthenticationProvider provider) {
+    public AuditorAware<String> auditorProvider(UserNameProvider provider) {
         return () -> Optional.of(provider.getCurrentUserName().orElse("-"));
     }
 }

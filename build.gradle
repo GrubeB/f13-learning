@@ -3,20 +3,19 @@ plugins {
     id "io.spring.dependency-management" version "1.1.0"
 }
 
-version = '0.0.1'
+version = '0.3.0'
 
 ext {
-    ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION = "3.1.4"
+    ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION = "3.2.3"
 
     JUNIT_JUPITER_API_VERSION = "5.8.1"
     JUNIT_JUPITER_ENGINE_VERSION = "5.8.1"
     JUNIT_VERSION = '4.13.2'
     JUPITER_VERSION = '5.8.1'
 
-    MAPSTRUCT_VERSION = '1.5.3.Final'
-
     JJWT_VERSION = '0.11.5'
-    JJWT_VERSION = '0.11.5'
+    // DATA
+    FLYWAY_VERSION = "9.21.1"
 }
 
 subprojects {
