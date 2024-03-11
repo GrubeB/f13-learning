@@ -60,6 +60,6 @@ dependencies {
 
 tasks.jar {
     manifest {
-        archiveFileName.set("${project.name}.jar")
+        archiveFileName.set("learning-service.jar")
     }
 }

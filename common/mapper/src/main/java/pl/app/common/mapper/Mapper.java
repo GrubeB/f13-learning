@@ -8,6 +8,9 @@ import java.util.function.Function;
 public interface Mapper {
     default <T, R> R map(T source, Class<R> destinationClass) {
         Class<T> sourceClass = (Class<T>) source.getClass();
+        if (sourceClass.isAssignableFrom(destinationClass)) {
+            return (R) source;
+        }
         Function<T, R> mapper = getMapper(sourceClass, destinationClass);
         if (mapper == null) {
             throw new RuntimeException("Mapper " + getClass().getName() + " has no mapper from " + sourceClass.getName() + " to " + destinationClass.getName());

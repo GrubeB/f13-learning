@@ -1,0 +1,70 @@
+plugins {
+    id "org.springframework.boot" version "$ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION"
+    id "org.flywaydb.flyway" version "$FLYWAY_VERSION"
+}
+
+group = "pl.app.authorization"
+version = "0.2.0"
+
+dependencies {
+    implementation project(':common:shared')
+    implementation project(':common:util')
+
+    implementation project(':common:search-criteria')
+    implementation project(':common:path-variable')
+    implementation project(':common:dto-criteria')
+    implementation project(':common:mapper')
+    implementation project(':common:model')
+    implementation project(':common:root-aware')
+    implementation project(':common:ddd')
+    implementation project(':common:cqrs')
+    implementation project(':common:security')
+
+    implementation project(':common:controller:command-controller')
+    implementation project(':common:controller:controller-support')
+    implementation project(':common:controller:query-controller')
+
+    implementation project(':common:service:query-service')
+    implementation project(':common:service:command-service')
+    implementation project(':common:service:service-support')
+
+    // WEB
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-configuration-processor"
+
+    // SECURITY
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // VALIDATION
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // JPA
+    runtimeOnly "org.postgresql:postgresql"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation 'org.flywaydb:flyway-core'
+
+    // LOMBOK
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+
+    // MAPPER
+    implementation 'org.modelmapper:modelmapper:3.1.1'
+    implementation 'org.modelmapper.extensions:modelmapper-spring:3.1.1'
+
+    // TEST
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation "org.testcontainers:postgresql"
+
+    // https://mvnrepository.com/artifact/com.google.code.findbugs/annotations
+    implementation 'com.google.code.findbugs:annotations:3.0.1'
+}
+
+tasks.jar {
+    manifest {
+        archiveFileName.set("authorization-service.jar")
+    }
+}
