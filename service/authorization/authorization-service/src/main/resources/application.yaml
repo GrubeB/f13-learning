@@ -5,13 +5,13 @@ application:
   security:
     jwt:
       secret-key: ${JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
-      expiration: 86400000 # 24 * 60 * 60 * 1000
+      expiration: 604800000 # 7 * 24 * 60 * 60 * 1000
 
 spring:
   application:
-    name: learning-service
+    name: authorization-service
   datasource:
-    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5436/postgres}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5437/postgres}
     username: ${DATASOURCE_USERNAME:postgres}
     password: ${DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver

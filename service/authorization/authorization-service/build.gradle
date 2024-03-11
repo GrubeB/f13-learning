@@ -65,6 +65,6 @@ dependencies {
 
 tasks.jar {
     manifest {
-        archiveFileName.set("${project.name}.jar")
+        archiveFileName.set("authorization-service.jar")
     }
 }
