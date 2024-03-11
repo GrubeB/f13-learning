@@ -22,7 +22,7 @@ The goal of the project was to write application to learn.
 ### Prod
 1. Remove old service image:
 
-        docker rmi learning-service -f
+        docker rmi ghcr.io/grubeb/learning-service:latest ghcr.io/grubeb/authorization-service:latest -f
 
 2. Start prod env:
 
@@ -40,17 +40,28 @@ The goal of the project was to write application to learn.
    - With test:
 
             .\gradlew build -x test
-3. Run application:
+3. Run applications:
 
          .\gradlew :service:learning:learning-service:bootRun
+         .\gradlew :service:authorization:authorization-service:bootRun
 
 
 ## Docker
 ### Publish image
-1. Build learning-service image:
+#### Learning-service
+1. Build image:
 
-        docker build -f .\.docker\learning_service_image\Dockerfile -t grubeb/learning-service:latest .
+        docker build . -f .\.docker\learning_service_image\Dockerfile -t ghcr.io/grubeb/learning-service:latest
 
 2. Publish image:
 
-         docker push grubeb/learning-service:latest
+         docker push ghcr.io/grubeb/learning-service:latest
+
+#### Authorization-service
+1. Build image:
+
+        docker build . -f .\.docker\authorization_service_image\Dockerfile -t ghcr.io/grubeb/authorization-service:latest
+
+2. Publish image:
+
+         docker push ghcr.io/grubeb/authorization-service:latest
