@@ -1,6 +1,7 @@
 package pl.app.authorization.user.adapter.out;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.authorization.user.application.domain.User;
@@ -17,12 +18,14 @@ class UserPersistenceAdapter implements
         UserDomainRepositoryPort {
     private final UserRepository repository;
     private final DomainEventPublisherFactory domainEventPublisherFactory;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User load(AggregateId aggregateId) {
         var aggregate = repository.findById(aggregateId)
                 .orElseThrow(() -> UserException.NotFoundUserException.fromId(aggregateId.getId()));
         aggregate.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
+        aggregate.setPasswordEncoder(passwordEncoder);
         return aggregate;
     }
 

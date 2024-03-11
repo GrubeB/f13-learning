@@ -26,7 +26,7 @@ public class UserController {
     public final UserQueryService service;
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody RegisterUserCommand command, HttpServletRequest request) {
+    public ResponseEntity<UserDto> register(@RequestBody RegisterUserCommand command, HttpServletRequest request) {
         UUID aggregateId = gateway.send(command);
         var dto = service.fetchById(aggregateId, UserDto.class);
         return ResponseEntity

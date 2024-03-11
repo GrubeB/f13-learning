@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import pl.app.common.model.audit.AuditHibernateListenerConfig;
 import pl.app.common.model.audit.AuditorConfig;
-import pl.app.common.model.audit.AuthenticationProvider;
+import pl.app.common.model.audit.UserNameProvider;
 
 import java.util.Optional;
 
@@ -18,8 +18,8 @@ import java.util.Optional;
 })
 public class AuditConfig {
     @Bean
-    public AuthenticationProvider authenticationProvider() {
-        return new AuthenticationProvider() {
+    public UserNameProvider userNameProvider() {
+        return new UserNameProvider() {
             @Override
             public Optional<String> getCurrentUserName() {
                 return Optional.of("-");

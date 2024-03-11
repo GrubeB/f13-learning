@@ -13,6 +13,7 @@ ext {
     JUNIT_VERSION = '4.13.2'
     JUPITER_VERSION = '5.8.1'
 
+    JJWT_VERSION = '0.11.5'
     // DATA
     FLYWAY_VERSION = "9.21.1"
 }

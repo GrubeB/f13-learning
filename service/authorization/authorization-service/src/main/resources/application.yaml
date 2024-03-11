@@ -1,6 +1,12 @@
 server:
   port: ${SERVER_PORT:9007}
 
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration: 86400000 # 24 * 60 * 60 * 1000
+
 spring:
   application:
     name: learning-service
@@ -19,8 +25,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
-#      ddl-auto: create-drop
-#      ddl-auto: update
     properties:
       hibernate:
         format_sql: false

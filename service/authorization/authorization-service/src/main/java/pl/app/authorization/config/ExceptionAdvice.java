@@ -17,36 +17,11 @@ import java.time.LocalDateTime;
 public class ExceptionAdvice {
     private static final Logger logger = LoggerFactory.getLogger(ExceptionAdvice.class);
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ApiError> authenticationExceptionHandler(AuthenticationException exception, HttpServletRequest request) {
-        logger.error(exception.getMessage(), exception);
-        ApiError apiError = new ApiError(
-                request.getRequestURI(),
-                exception.getMessage(),
-                HttpStatus.UNAUTHORIZED.value(),
-                LocalDateTime.now()
-        );
-        return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(apiError);
-    }
-
-    @ExceptionHandler(AuthorizationException.class)
-    public ResponseEntity<ApiError> authorizationExceptionHandler(AuthorizationException exception, HttpServletRequest request) {
-        logger.error(exception.getMessage(), exception);
-        ApiError apiError = new ApiError(
-                request.getRequestURI(),
-                exception.getMessage(),
-                HttpStatus.FORBIDDEN.value(),
-                LocalDateTime.now()
-        );
-        return ResponseEntity
-                .status(HttpStatus.FORBIDDEN)
-                .body(apiError);
-    }
-
-    @ExceptionHandler(InvalidStateException.class)
-    public ResponseEntity<ApiError> invalidStateExceptionHandler(InvalidStateException exception, HttpServletRequest request) {
+    @ExceptionHandler({
+            AuthenticationException.class,
+            org.springframework.security.core.AuthenticationException.class,
+    })
+    public ResponseEntity<ApiError> authenticationExceptionHandler(Exception exception, HttpServletRequest request) {
         logger.error(exception.getMessage(), exception);
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
@@ -59,8 +34,42 @@ public class ExceptionAdvice {
                 .body(apiError);
     }
 
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity<ApiError> iOExceptionHandler(IOException exception, HttpServletRequest request) {
+    @ExceptionHandler({
+            AuthorizationException.class,
+    })
+    public ResponseEntity<ApiError> authorizationExceptionHandler(Exception exception, HttpServletRequest request) {
+        logger.error(exception.getMessage(), exception);
+        ApiError apiError = new ApiError(
+                request.getRequestURI(),
+                exception.getMessage(),
+                HttpStatus.FORBIDDEN.value(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(apiError);
+    }
+
+    @ExceptionHandler({
+            InvalidStateException.class,
+    })
+    public ResponseEntity<ApiError> invalidStateExceptionHandler(Exception exception, HttpServletRequest request) {
+        logger.error(exception.getMessage(), exception);
+        ApiError apiError = new ApiError(
+                request.getRequestURI(),
+                exception.getMessage(),
+                HttpStatus.BAD_REQUEST.value(),
+                LocalDateTime.now()
+        );
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(apiError);
+    }
+
+    @ExceptionHandler({
+            IOException.class,
+    })
+    public ResponseEntity<ApiError> iOExceptionHandler(Exception exception, HttpServletRequest request) {
         logger.error(exception.getMessage(), exception);
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
@@ -73,8 +82,10 @@ public class ExceptionAdvice {
                 .body(apiError);
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ApiError> notFoundExceptionHandler(NotFoundException exception, HttpServletRequest request) {
+    @ExceptionHandler({
+            NotFoundException.class,
+    })
+    public ResponseEntity<ApiError> notFoundExceptionHandler(Exception exception, HttpServletRequest request) {
         logger.error(exception.getMessage(), exception);
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
@@ -87,7 +98,11 @@ public class ExceptionAdvice {
                 .body(apiError);
     }
 
-    @ExceptionHandler({ValidationException.class, ConstraintViolationException.class, MethodArgumentNotValidException.class})
+    @ExceptionHandler({
+            ValidationException.class,
+            ConstraintViolationException.class,
+            MethodArgumentNotValidException.class,
+    })
     public ResponseEntity<ApiError> validationExceptionHandler(Exception exception, HttpServletRequest request) {
         logger.error(exception.getMessage(), exception);
         ApiError apiError = new ApiError(
@@ -101,7 +116,9 @@ public class ExceptionAdvice {
                 .body(apiError);
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler({
+            Exception.class,
+    })
     public ResponseEntity<ApiError> exceptionHandler(Exception exception, HttpServletRequest request) {
         logger.error(exception.getMessage(), exception);
         ApiError apiError = new ApiError(

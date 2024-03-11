@@ -10,6 +10,7 @@ include "common:root-aware"
 include "common:model"
 include "common:ddd"
 include "common:cqrs"
+include "common:security"
 
 include "common:service:service-support"
 include "common:service:query-service"

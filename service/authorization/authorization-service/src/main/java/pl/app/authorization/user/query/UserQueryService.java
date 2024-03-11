@@ -7,8 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.authorization.user.query.dto.UserDto;
 import pl.app.authorization.user.query.model.UserQuery;
 import pl.app.common.ddd.AggregateId;
+import pl.app.common.dto_criteria.Dto;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
+import pl.app.common.shared.exception.NotFoundException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,4 +31,9 @@ public class UserQueryService implements
         put("BaseDto", BaseDto.class);
         put("AggregateId", AggregateId.class);
     }};
+
+    public UserQuery fetchByEmail(String email) {
+        return getRepository().findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("object not found with email: " + email));
+    }
 }

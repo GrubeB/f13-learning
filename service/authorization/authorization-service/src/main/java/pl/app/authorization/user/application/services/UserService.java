@@ -57,6 +57,7 @@ class UserService implements
     }
 
     @Override
+    @CommandHandlingAnnotation
     public void changePassword(ChangePasswordCommand command) {
         var aggregate = repository.load(new AggregateId(command.getUserId()));
         aggregate.changePassword(command.getCurrentPassword(), command.getNewPassword());

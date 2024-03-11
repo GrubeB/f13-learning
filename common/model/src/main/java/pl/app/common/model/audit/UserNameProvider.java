@@ -2,6 +2,6 @@ package pl.app.common.model.audit;
 
 import java.util.Optional;
 
-public interface AuthenticationProvider {
+public interface UserNameProvider {
     Optional<String> getCurrentUserName();
 }

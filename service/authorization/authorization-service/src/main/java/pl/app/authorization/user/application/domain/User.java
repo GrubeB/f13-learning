@@ -69,7 +69,7 @@ public class User extends BaseJpaAuditDomainAggregateRoot<User> {
     }
 
     public void changePassword(String currentPassword, String newPassword) {
-        if (!this.password.endsWith(passwordEncoder.encode(currentPassword))) {
+        if (!passwordEncoder.matches(currentPassword, this.password)) {
             throw new UserException.PasswordValidationException();
         }
         setPassword(newPassword);

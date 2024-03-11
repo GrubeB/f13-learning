@@ -18,6 +18,7 @@ dependencies {
     implementation project(':common:root-aware')
     implementation project(':common:ddd')
     implementation project(':common:cqrs')
+    implementation project(':common:security')
 
     implementation project(':common:controller:command-controller')
     implementation project(':common:controller:controller-support')
