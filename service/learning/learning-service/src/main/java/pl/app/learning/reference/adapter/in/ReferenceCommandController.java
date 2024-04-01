@@ -35,7 +35,7 @@ public class ReferenceCommandController {
 
     @PostMapping("/delete")
     public ResponseEntity<Void> handle(@RequestBody DeleteReferenceCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -43,7 +43,7 @@ public class ReferenceCommandController {
 
     @PostMapping("/update")
     public ResponseEntity<Void> handle(@RequestBody UpdateReferenceCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -52,7 +52,7 @@ public class ReferenceCommandController {
     // VOTING
     @PostMapping("/add-like")
     public ResponseEntity<Void> handle(@RequestBody AddUserLikeCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -60,7 +60,7 @@ public class ReferenceCommandController {
 
     @PostMapping("/remove-like")
     public ResponseEntity<Void> handle(@RequestBody RemoveUserLikeCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -68,7 +68,7 @@ public class ReferenceCommandController {
 
     @PostMapping("/add-dislike")
     public ResponseEntity<Void> handle(@RequestBody AddUserDislikeCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -76,7 +76,7 @@ public class ReferenceCommandController {
 
     @PostMapping("/remove-dislike")
     public ResponseEntity<Void> handle(@RequestBody RemoveUserDislikeCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

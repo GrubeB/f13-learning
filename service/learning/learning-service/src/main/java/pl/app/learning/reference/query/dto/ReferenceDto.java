@@ -4,6 +4,7 @@ import lombok.Data;
 import pl.app.learning.reference.application.domain.ReferenceStatus;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -19,4 +20,9 @@ public class ReferenceDto implements
     private ReferenceStatus status;
     private Long likesNumber;
     private Long dislikesNumber;
+
+    private String createdBy;
+    private Instant createdDate;
+    private String lastModifiedBy;
+    private Instant lastModifiedDate;
 }

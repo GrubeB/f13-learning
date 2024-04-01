@@ -1,38 +1,36 @@
 plugins {
     id 'java'
-    id "io.spring.dependency-management" version "1.1.0"
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 version = '0.3.0'
 
 ext {
-    ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION = "3.2.3"
+    // SPRING BOOT
+    ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION = '3.2.3'
+    SPRING_DEPENDENCY_MANAGEMENT = '1.1.0'
 
-    JUNIT_JUPITER_API_VERSION = "5.8.1"
-    JUNIT_JUPITER_ENGINE_VERSION = "5.8.1"
+    // TEST
+    JUNIT_JUPITER_API_VERSION = '5.8.1'
+    JUNIT_JUPITER_ENGINE_VERSION = '5.8.1'
     JUNIT_VERSION = '4.13.2'
     JUPITER_VERSION = '5.8.1'
 
-    JJWT_VERSION = '0.11.5'
     // DATA
-    FLYWAY_VERSION = "9.21.1"
+    FLYWAY_VERSION = '9.21.1'
+
+    // SECURITY
+    JJWT_VERSION = '0.11.5'
 }
 
 subprojects {
     sourceCompatibility = "17"
 
-    group = "pl.app"
-    version = "0.0.1"
+    group = 'pl.app'
+    version = '0.0.1'
 
-    apply plugin: "java"
-    apply plugin: "java-library"
-    apply plugin: "io.spring.dependency-management"
+    apply plugin: 'java'
 
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:${ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION}"
-        }
-    }
     repositories {
         mavenCentral()
         maven {

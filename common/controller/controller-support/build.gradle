@@ -1,8 +1,16 @@
 plugins {
+    id 'java-library'
+    id 'io.spring.dependency-management'
 }
 
 group = "pl.app.common.conntroler.support"
 version = "0.1.0"
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION}"
+    }
+}
 
 dependencies {
     implementation project(':common:search-criteria')
@@ -10,6 +18,7 @@ dependencies {
     implementation project(':common:dto-criteria')
     implementation project(':common:mapper')
 
+    api "org.springframework.boot:spring-boot-starter-web"
     // https://mvnrepository.com/artifact/com.google.code.findbugs/annotations
     implementation 'com.google.code.findbugs:annotations:3.0.1'
 }

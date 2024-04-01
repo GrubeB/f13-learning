@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.app.common.dto_criteria.resolver.DtoArgumentResolver;
 import pl.app.common.dto_criteria.resolver.DtoArgumentResolverConfig;
@@ -32,5 +34,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         resolvers.add(searchCriteriaArgumentResolver);
         resolvers.add(pathVariablesArgumentResolver);
         WebMvcConfigurer.super.addArgumentResolvers(resolvers);
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+       registry.addMapping("/**");
     }
 }

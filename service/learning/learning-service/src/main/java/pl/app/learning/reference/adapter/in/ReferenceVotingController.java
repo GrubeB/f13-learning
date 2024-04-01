@@ -23,7 +23,7 @@ public class ReferenceVotingController {
     @PostMapping("/{referenceId}/likes")
     public ResponseEntity<Void> createLike(@PathVariable UUID referenceId, @RequestBody AddUserLikeCommand command) {
         command.setReferenceId(referenceId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -32,7 +32,7 @@ public class ReferenceVotingController {
     @DeleteMapping("/{referenceId}/likes")
     public ResponseEntity<Void> deleteLike(@PathVariable UUID referenceId, @RequestBody RemoveUserLikeCommand command) {
         command.setReferenceId(referenceId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -41,7 +41,7 @@ public class ReferenceVotingController {
     @PostMapping("/{referenceId}/dislikes")
     public ResponseEntity<Void> createDislike(@PathVariable UUID referenceId, @RequestBody AddUserDislikeCommand command) {
         command.setReferenceId(referenceId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -50,7 +50,7 @@ public class ReferenceVotingController {
     @DeleteMapping("/{referenceId}/dislikes")
     public ResponseEntity<Void> deleteDislike(@PathVariable UUID referenceId, @RequestBody RemoveUserDislikeCommand command) {
         command.setReferenceId(referenceId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
