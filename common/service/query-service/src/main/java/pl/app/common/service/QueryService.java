@@ -13,7 +13,9 @@ import pl.app.common.search_criteria.SearchCriteriaSpecification;
 import pl.app.common.service.support.ServiceSupport;
 import pl.app.common.shared.exception.NotFoundException;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public interface QueryService {
@@ -95,6 +97,9 @@ public interface QueryService {
 
             @Override
             default List<ENTITY> fetchByIds(@NonNull List<ID> ids) {
+                if(Objects.isNull(ids) || ids.isEmpty()){
+                    return Collections.emptyList();
+                }
                 return getRepository().findAllById(ids);
             }
 
@@ -201,6 +206,9 @@ public interface QueryService {
 
             @Override
             default <T> List<T> fetchByIds(@NonNull List<ID> ids, Class<T> dtoClass) {
+                if(Objects.isNull(ids) || ids.isEmpty()){
+                    return Collections.emptyList();
+                }
                 List<ENTITY> entities = getRepository().findAllById(ids);
                 return entities.stream()
                         .map(e -> getMapper().map(e, dtoClass))
@@ -306,6 +314,9 @@ public interface QueryService {
 
             @Override
             default <T> List<T> fetchByIds(@NonNull List<ID> ids, Dto dto) {
+                if(Objects.isNull(ids) || ids.isEmpty()){
+                    return Collections.emptyList();
+                }
                 List<ENTITY> entities = getRepository().findAllById(ids);
                 return entities.stream()
                         .map(entity -> (T) getMapper().<ENTITY, T>map(entity, getClass(dto)))

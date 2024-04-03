@@ -37,7 +37,7 @@ public class ReferenceVoting extends BaseJpaAuditDomainEntity<ReferenceVoting> {
             return newVote;
         });
         vote.setType(UserVoteType.LIKE);
-        calculateLikesNumber();
+        calculateLikesNumberAndDislikesNumber();
         return true;
     }
 
@@ -45,7 +45,7 @@ public class ReferenceVoting extends BaseJpaAuditDomainEntity<ReferenceVoting> {
         if (!this.votes.removeIf(vote -> Objects.equals(vote.getUserId(), userId.getId()))) {
             return false;
         }
-        calculateLikesNumber();
+        calculateLikesNumberAndDislikesNumber();
         return true;
     }
 
@@ -60,7 +60,7 @@ public class ReferenceVoting extends BaseJpaAuditDomainEntity<ReferenceVoting> {
             return newVote;
         });
         vote.setType(UserVoteType.DISLIKE);
-        calculateDislikesNumber();
+        calculateLikesNumberAndDislikesNumber();
         return true;
     }
 
@@ -68,7 +68,7 @@ public class ReferenceVoting extends BaseJpaAuditDomainEntity<ReferenceVoting> {
         if (!this.votes.removeIf(vote -> Objects.equals(vote.getUserId(), userId.getId()))) {
             return false;
         }
-        calculateDislikesNumber();
+        calculateLikesNumberAndDislikesNumber();
         return true;
     }
 
@@ -77,13 +77,10 @@ public class ReferenceVoting extends BaseJpaAuditDomainEntity<ReferenceVoting> {
                 .filter(vote -> Objects.equals(vote.getUserId(), userId))
                 .findAny();
     }
-
-    private void calculateLikesNumber() {
+    private void calculateLikesNumberAndDislikesNumber() {
         this.likesNumber = votes.stream().filter(v -> UserVoteType.LIKE.equals(v.getType())).count();
-    }
-
-    private void calculateDislikesNumber() {
         this.dislikesNumber = votes.stream().filter(v -> UserVoteType.DISLIKE.equals(v.getType())).count();
     }
+
 }
 

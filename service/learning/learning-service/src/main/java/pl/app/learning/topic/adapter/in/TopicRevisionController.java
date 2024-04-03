@@ -23,7 +23,7 @@ public class TopicRevisionController {
     @PostMapping("/{topicRevisionId}/merge")
     public ResponseEntity<Void> handle(@PathVariable UUID topicId, @PathVariable UUID topicRevisionId) {
         var command = new MergeRevisionToTopicCommand(topicId, topicRevisionId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

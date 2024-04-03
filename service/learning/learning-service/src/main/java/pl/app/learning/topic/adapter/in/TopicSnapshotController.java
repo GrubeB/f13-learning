@@ -22,7 +22,7 @@ public class TopicSnapshotController {
 
     @PostMapping(path = "/{snapshotNumber}/revert")
     public ResponseEntity<Void> revertSnapshot(@PathVariable UUID topicId, @PathVariable Long snapshotNumber) {
-        gateway.sendAsync(new RevertTopicSnapshotCommand(topicId, snapshotNumber));
+        gateway.send(new RevertTopicSnapshotCommand(topicId, snapshotNumber));
         return ResponseEntity
                 .accepted()
                 .build();

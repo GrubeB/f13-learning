@@ -34,7 +34,7 @@ public class CategoryCommandController {
 
     @PostMapping("/delete")
     public ResponseEntity<Void> handle(@RequestBody DeleteCategoryCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -42,7 +42,7 @@ public class CategoryCommandController {
 
     @PostMapping("/update")
     public ResponseEntity<Void> handle(@RequestBody UpdateCategoryCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -50,7 +50,7 @@ public class CategoryCommandController {
 
     @PostMapping("/change-status")
     public ResponseEntity<Void> handle(@RequestBody ChangeStatusCategoryCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -59,7 +59,7 @@ public class CategoryCommandController {
     // PARENT
     @PostMapping("/add-parent")
     public ResponseEntity<Void> handle(@RequestBody AddParentCategoryCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -67,7 +67,7 @@ public class CategoryCommandController {
 
     @PostMapping("/remove-parent")
     public ResponseEntity<Void> handle(@RequestBody RemoveParentCategoryCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -76,7 +76,7 @@ public class CategoryCommandController {
     // CHILD
     @PostMapping("/add-child")
     public ResponseEntity<Void> handle(@RequestBody AddChildCategoryCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -84,7 +84,7 @@ public class CategoryCommandController {
 
     @PostMapping("/remove-child")
     public ResponseEntity<Void> handle(@RequestBody RemoveChildCategoryCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

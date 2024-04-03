@@ -17,10 +17,13 @@ import pl.app.learning.reference.application.port.in.command.RemoveUserDislikeCo
 import pl.app.learning.reference.application.port.in.command.RemoveUserLikeCommand;
 import pl.app.learning.reference.application.port.out.ReferenceDomainRepositoryPort;
 
+import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
+import static org.springframework.transaction.annotation.Isolation.SERIALIZABLE;
+
 @CommandHandlerAnnotation
 @Component
 @RequiredArgsConstructor
-@Transactional
+@Transactional(isolation = REPEATABLE_READ)
 class ReferenceVotingService implements
         RemoveUserDislikeUseCase,
         RemoveUserLikeUseCase,

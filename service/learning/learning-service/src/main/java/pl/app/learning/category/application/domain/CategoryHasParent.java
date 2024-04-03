@@ -1,11 +1,9 @@
 package pl.app.learning.category.application.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 
@@ -13,22 +11,24 @@ import pl.app.common.ddd.annotation.EntityAnnotation;
 @Entity
 @Getter
 @Table(name = "t_category_has_category")
-public class CategoryHasCategory extends BaseJpaAuditDomainEntity<CategoryHasCategory> {
+public class CategoryHasParent extends BaseJpaAuditDomainEntity<CategoryHasParent> {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "category_1_id", nullable = false, updatable = false)
     private Category child;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "category_2_id", nullable = false, updatable = false)
-    private Category parent;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "category_2_id", nullable = false, updatable = false))
+    })
+    private AggregateId parent;
 
     @SuppressWarnings("unused")
-    protected CategoryHasCategory() {
+    protected CategoryHasParent() {
         super();
     }
 
-    public CategoryHasCategory(Category parent, Category child) {
+    public CategoryHasParent(AggregateId parent, Category child) {
         this.child = child;
         this.parent = parent;
     }
