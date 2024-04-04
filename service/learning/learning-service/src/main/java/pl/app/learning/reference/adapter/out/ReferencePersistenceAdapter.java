@@ -1,4 +1,4 @@
-package pl.app.learning.reference.adapter.out.persistance;
+package pl.app.learning.reference.adapter.out;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
-import pl.app.learning.reference.application.port.in.command.AddUserDislikeCommand;
-import pl.app.learning.reference.application.port.in.command.AddUserLikeCommand;
-import pl.app.learning.reference.application.port.in.command.RemoveUserDislikeCommand;
-import pl.app.learning.reference.application.port.in.command.RemoveUserLikeCommand;
+import pl.app.learning.voting.application.domain.DomainObjectType;
+import pl.app.learning.voting.application.port.in.command.*;
 
 import java.util.UUID;
 
@@ -20,36 +18,44 @@ public class ReferenceVotingController {
 
     private final CommandGateway gateway;
 
-    @PostMapping("/{referenceId}/likes")
-    public ResponseEntity<Void> createLike(@PathVariable UUID referenceId, @RequestBody AddUserLikeCommand command) {
-        command.setReferenceId(referenceId);
+    @PostMapping("/{referenceId}/likes/{userId}")
+    public ResponseEntity<Void> createLike(@PathVariable UUID referenceId, @PathVariable UUID userId) {
+        var command = new AddUserLikeCommand(referenceId, DomainObjectType.REFERENCE, userId);
         gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
     }
 
-    @DeleteMapping("/{referenceId}/likes")
-    public ResponseEntity<Void> deleteLike(@PathVariable UUID referenceId, @RequestBody RemoveUserLikeCommand command) {
-        command.setReferenceId(referenceId);
+    @DeleteMapping("/{referenceId}/likes/{userId}")
+    public ResponseEntity<Void> deleteLike(@PathVariable UUID referenceId, @PathVariable UUID userId) {
+        var command = new RemoveUserLikeCommand(referenceId, DomainObjectType.REFERENCE, userId);
         gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
     }
 
-    @PostMapping("/{referenceId}/dislikes")
-    public ResponseEntity<Void> createDislike(@PathVariable UUID referenceId, @RequestBody AddUserDislikeCommand command) {
-        command.setReferenceId(referenceId);
+    @PostMapping("/{referenceId}/dislikes/{userId}")
+    public ResponseEntity<Void> createDislike(@PathVariable UUID referenceId, @PathVariable UUID userId) {
+        var command = new AddUserDislikeCommand(referenceId, DomainObjectType.REFERENCE, userId);
         gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
     }
 
-    @DeleteMapping("/{referenceId}/dislikes")
-    public ResponseEntity<Void> deleteDislike(@PathVariable UUID referenceId, @RequestBody RemoveUserDislikeCommand command) {
-        command.setReferenceId(referenceId);
+    @DeleteMapping("/{referenceId}/dislikes/{userId}")
+    public ResponseEntity<Void> deleteDislike(@PathVariable UUID referenceId, @PathVariable UUID userId) {
+        var command = new RemoveUserDislikeCommand(referenceId, DomainObjectType.REFERENCE, userId);
+        gateway.send(command);
+        return ResponseEntity
+                .accepted()
+                .build();
+    }
+    @DeleteMapping("/{referenceId}/likes-dislikes/{userId}")
+    public ResponseEntity<Void> deleteLikeAndDislike(@PathVariable UUID referenceId, @PathVariable UUID userId) {
+        var command = new RemoveUserLikeAndDislikeCommand(referenceId, DomainObjectType.REFERENCE, userId);
         gateway.send(command);
         return ResponseEntity
                 .accepted()
