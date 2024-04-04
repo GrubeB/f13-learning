@@ -1,4 +1,4 @@
-package pl.app.learning.reference.application.domain;
+package pl.app.learning.voting.application.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "t_reference_voting_vote")
+@Table(name = "t_voting_vote")
 public class UserVote extends BaseJpaAuditDomainEntity<UserVote> {
     @Column(name = "user_id", nullable = false, updatable = false)
     private UUID userId;
@@ -25,7 +25,7 @@ public class UserVote extends BaseJpaAuditDomainEntity<UserVote> {
     private UserVoteType type;
 
     @ManyToOne
-    @JoinColumn(name = "reference_voting_id")
-    private ReferenceVoting referenceVoting;
+    @JoinColumn(name = "voting_id")
+    private Voting voting;
 }
 
