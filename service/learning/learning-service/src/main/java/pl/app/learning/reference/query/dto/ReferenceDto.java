@@ -2,6 +2,7 @@ package pl.app.learning.reference.query.dto;
 
 import lombok.Data;
 import pl.app.learning.reference.application.domain.ReferenceStatus;
+import pl.app.learning.voting.query.dto.VotingDto;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -18,8 +19,7 @@ public class ReferenceDto implements
     private String description;
     private String link;
     private ReferenceStatus status;
-    private Long likesNumber;
-    private Long dislikesNumber;
+    private VotingDto voting;
 
     private String createdBy;
     private Instant createdDate;

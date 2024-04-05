@@ -11,7 +11,4 @@ public class VotingDto implements
         Serializable {
     private Long likesNumber;
     private Long dislikesNumber;
-
-    private UUID domainObject;
-    private DomainObjectType domainObjectType;
 }

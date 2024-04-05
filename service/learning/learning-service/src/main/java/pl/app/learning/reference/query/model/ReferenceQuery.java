@@ -1,4 +1,4 @@
-package pl.app.learning.reference.query;
+package pl.app.learning.reference.query.model;
 
 
 import jakarta.persistence.*;
@@ -28,6 +28,6 @@ public class ReferenceQuery extends BaseAuditEntity<ReferenceQuery, UUID> {
     private ReferenceStatus status;
     @OneToOne
     @JoinColumn(name = "reference_voting_id")
-    private VotingQuery referenceVoting;
+    private VotingQuery voting;
 }
 

@@ -1,4 +1,4 @@
-package pl.app.learning.reference.adapter.in;
+package pl.app.learning.voting.adapter.in;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

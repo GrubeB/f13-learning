@@ -10,6 +10,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.reference.query.dto.ReferenceDto;
+import pl.app.learning.reference.query.model.ReferenceQuery;
 
 @Getter
 @Component
@@ -19,10 +20,6 @@ public class ReferenceQueryMapper extends BaseMapper {
 
     @PostConstruct
     void init() {
-        TypeMap<ReferenceQuery, ReferenceDto> typeMap = modelMapper.createTypeMap(ReferenceQuery.class, ReferenceDto.class);
-        typeMap.addMapping(r -> r.getReferenceVoting().getDislikesNumber(), ReferenceDto::setDislikesNumber);
-        typeMap.addMapping(r -> r.getReferenceVoting().getLikesNumber(), ReferenceDto::setLikesNumber);
-
         addMapper(ReferenceQuery.class, ReferenceDto.class, e -> modelMapper.map(e, ReferenceDto.class));
         addMapper(ReferenceQuery.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(ReferenceQuery.class, AggregateId.class, e -> new AggregateId(e.getId()));
