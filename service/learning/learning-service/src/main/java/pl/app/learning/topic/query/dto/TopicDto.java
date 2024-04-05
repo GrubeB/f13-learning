@@ -9,6 +9,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import pl.app.common.model.audit.AuditColumnName;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
+import pl.app.learning.comment.query.dto.CommentContainerDto;
+import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.application.domain.TopicStatus;
 
@@ -32,4 +34,5 @@ public class TopicDto implements
     private Instant createdDate;
     private String lastModifiedBy;
     private Instant lastModifiedDate;
+    private CommentContainerDto comment;
 }
