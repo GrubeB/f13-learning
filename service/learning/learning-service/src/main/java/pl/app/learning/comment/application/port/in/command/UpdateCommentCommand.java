@@ -12,7 +12,9 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteCommandCommand implements
+public class UpdateCommentCommand implements
         Serializable {
     private UUID commentId;
+    private UUID userId;
+    private String content;
 }

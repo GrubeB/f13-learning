@@ -19,12 +19,12 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 @Transactional
-class CommandService implements
+class CommentService implements
         CreateContainerUseCase,
         CreateCommentUseCase,
         CreateReplyUseCase,
-        DeleteCommandUseCase,
-        UpdateCommandUseCase {
+        DeleteCommentUseCase,
+        UpdateCommentUseCase {
     private final CommentDomainRepositoryPort repository;
     private final CommentFactory commentFactory;
 
@@ -58,7 +58,7 @@ class CommandService implements
 
     @Override
     @CommandHandlingAnnotation
-    public void delete(DeleteCommandCommand command) {
+    public void delete(DeleteCommentCommand command) {
         var aggregate = repository.loadByCommentId(command.getCommentId());
         aggregate.deleteComment(command.getCommentId());
         repository.save(aggregate);
@@ -66,7 +66,7 @@ class CommandService implements
 
     @Override
     @CommandHandlingAnnotation
-    public void update(UpdateCommandCommand command) {
+    public void update(UpdateCommentCommand command) {
         var aggregate = repository.loadByCommentId(command.getCommentId());
         aggregate.updateComment(command.getCommentId(), command.getContent());
         repository.save(aggregate);

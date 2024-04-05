@@ -46,7 +46,6 @@ public class CommentContainer extends BaseJpaAuditDomainAggregateRoot<CommentCon
         this.comments.add(comment);
     }
     public void addComment(UUID parentCommentId, Comment comment) {
-        comment.setContainer(this);
         getComment(parentCommentId).ifPresent(parentComment -> parentComment.addComment(comment));
     }
     public void updateComment(UUID commentId, String content) {
