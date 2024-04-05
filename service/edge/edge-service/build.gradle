@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "pl.app.edge"
-version = "0.1.0"
+version = "0.2.0"
 
 ext {
     set('springCloudVersion', "2023.0.0")
