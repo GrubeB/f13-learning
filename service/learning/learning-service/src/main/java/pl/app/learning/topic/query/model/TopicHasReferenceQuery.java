@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.BaseJpaAuditDomainEntity;
-import pl.app.learning.reference.query.ReferenceQuery;
+import pl.app.learning.reference.query.model.ReferenceQuery;
 
 @Immutable
 @Entity

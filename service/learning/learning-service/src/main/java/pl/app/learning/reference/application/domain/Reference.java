@@ -21,9 +21,11 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
     private String link;
     private ReferenceStatus status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reference_voting_id")
-    private ReferenceVoting referenceVoting;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "reference_voting_id"))
+    })
+    private AggregateId voting;
 
     @SuppressWarnings("unused")
     protected Reference() {
@@ -37,29 +39,10 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
         this.description = description;
         this.link = link;
         this.status = ReferenceStatus.UNVERIFIED;
-        this.referenceVoting = new ReferenceVoting();
     }
 
     public void changeStatus(ReferenceStatus status) {
         this.status = status;
-    }
-
-    public void addUserLike(AggregateId userId) {
-        this.referenceVoting.removeUserDislike(userId);
-        this.referenceVoting.addUserLike(userId);
-    }
-
-    public void removeLike(AggregateId userId) {
-        this.referenceVoting.removeUserLike(userId);
-    }
-
-    public void addUserDislike(AggregateId userId) {
-        this.referenceVoting.removeUserLike(userId);
-        this.referenceVoting.addUserDislike(userId);
-    }
-
-    public void removeDislike(AggregateId userId) {
-        this.referenceVoting.removeUserDislike(userId);
     }
 
     public void updateReferenceInfo(String author, String title, LocalDate publicationDate, String description, String link) {
@@ -68,6 +51,9 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
         this.publicationDate = publicationDate;
         this.description = description;
         this.link = link;
+    }
+    public void setVoting(AggregateId voting){
+        this.voting = voting;
     }
 }
 

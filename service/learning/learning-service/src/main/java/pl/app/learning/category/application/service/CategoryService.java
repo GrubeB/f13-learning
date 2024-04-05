@@ -17,7 +17,9 @@ import pl.app.learning.category.application.port.in.command.CreateCategoryComman
 import pl.app.learning.category.application.port.in.command.DeleteCategoryCommand;
 import pl.app.learning.category.application.port.in.command.UpdateCategoryCommand;
 import pl.app.learning.category.application.port.out.CategoryDomainRepositoryPort;
+import pl.app.learning.category.query.CategoryQueryService;
 
+import java.util.List;
 import java.util.UUID;
 
 @CommandHandlerAnnotation
@@ -31,11 +33,12 @@ class CategoryService implements
         CreateCategoryUseCase {
     private final CategoryFactory factory;
     private final CategoryDomainRepositoryPort repository;
+    private final CategoryQueryService categoryQueryService;
 
     @Override
     @CommandHandlingAnnotation
     public UUID createCategory(CreateCategoryCommand command) {
-        Category aggregate = factory.create(command.getName(), command.getDescription());
+        Category aggregate = factory.create(command.getName(), command.getDescription(), command.getParents(), command.getChildren());
         repository.save(aggregate);
         return aggregate.getId();
     }
@@ -51,6 +54,10 @@ class CategoryService implements
     public void updateCategory(UpdateCategoryCommand command) {
         Category aggregate = repository.load(new AggregateId(command.getCategoryId()));
         aggregate.updateInfo(command.getName(), command.getDescription());
+        List<AggregateId> parentCategories = categoryQueryService.fetchByIds(command.getParents(), AggregateId.class);
+        List<AggregateId> childCategories = categoryQueryService.fetchByIds(command.getChildren(), AggregateId.class);
+        aggregate.setParentCategories(parentCategories);
+        aggregate.setChildCategories(childCategories);
         repository.save(aggregate);
     }
 

@@ -8,6 +8,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.reference.query.dto.ReferenceDto;
+import pl.app.learning.reference.query.model.ReferenceQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

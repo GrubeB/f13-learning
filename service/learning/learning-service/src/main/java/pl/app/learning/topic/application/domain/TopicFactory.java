@@ -7,6 +7,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.learning.category.query.CategoryQueryService;
+import pl.app.learning.topic.application.port.out.CreateCommentContainerPort;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,11 +18,16 @@ import java.util.UUID;
 public class TopicFactory {
     private final DomainEventPublisherFactory domainEventPublisherFactory;
     private final CategoryQueryService categoryQueryService;
+    private final CreateCommentContainerPort createCommentContainerPort;
 
     public Topic create(String name, String content, List<UUID> categoryIds) {
         List<AggregateId> categories = categoryQueryService.fetchByIds(categoryIds, AggregateId.class);
-        Topic topic = new Topic(name, content, TopicStatus.DRAFT, categories.stream().map(c -> new AggregateId(c.getId())).toList());
-        topic.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
-        return topic;
+        var aggregate = new Topic(name, content, TopicStatus.DRAFT, categories.stream().map(c -> new AggregateId(c.getId())).toList());
+        aggregate.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
+
+        AggregateId commandContainer = createCommentContainerPort.create(aggregate.getAggregateId());
+        aggregate.setCommentContainer(commandContainer);
+
+        return aggregate;
     }
 }

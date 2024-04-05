@@ -38,7 +38,7 @@ public class TopicController {
     @DeleteMapping("/{topicId}")
     public ResponseEntity<Void> delete(@PathVariable UUID topicId) {
         var command = new DeleteTopicCommand(topicId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -47,7 +47,7 @@ public class TopicController {
     @PutMapping("/{topicId}")
     public ResponseEntity<Void> update(@PathVariable UUID topicId, @RequestBody UpdateTopicCommand command) {
         command.setTopicId(topicId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -56,7 +56,7 @@ public class TopicController {
     @PutMapping("/{topicId}/status/{status}")
     public ResponseEntity<Void> changeStatus(@PathVariable UUID topicId, @PathVariable TopicStatus status) {
         var command = new ChangeTopicStatusCommand(topicId, status);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

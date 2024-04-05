@@ -35,6 +35,13 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<TopicHasReference> references = new LinkedHashSet<>();
 
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "comment_container_id"))
+    })
+    private AggregateId commentContainer;
+
     @SuppressWarnings("unused")
     protected Topic() {
         super();
@@ -131,6 +138,10 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         return this.categories.stream()
                 .filter(topicHasCategory -> Objects.equals(topicHasCategory.getCategory(), category))
                 .findAny();
+    }
+
+    public void setCommentContainer(AggregateId commentContainer){
+        this.commentContainer = commentContainer;
     }
 
     @Override

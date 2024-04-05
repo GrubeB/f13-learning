@@ -1,4 +1,5 @@
 plugins {
+    id "io.spring.dependency-management"
     id "org.springframework.boot" version "$ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION"
     id "org.flywaydb.flyway" version "$FLYWAY_VERSION"
 }
@@ -6,6 +7,11 @@ plugins {
 group = "pl.app.authorization"
 version = "0.1.0"
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION}"
+    }
+}
 dependencies {
     implementation project(':common:shared')
     implementation project(':common:util')

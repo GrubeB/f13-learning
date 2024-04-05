@@ -22,10 +22,10 @@ public class Category extends BaseJpaAuditDomainAggregateRoot<Category> {
     private CategoryStatus status;
 
     @OneToMany(mappedBy = "child", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private final Set<CategoryHasCategory> parentCategories = new LinkedHashSet<>();
+    private final Set<CategoryHasParent> parentCategories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private final Set<CategoryHasCategory> childCategories = new LinkedHashSet<>();
+    private final Set<CategoryHasChild> childCategories = new LinkedHashSet<>();
 
 
     @SuppressWarnings("unused")
@@ -33,11 +33,13 @@ public class Category extends BaseJpaAuditDomainAggregateRoot<Category> {
         super();
     }
 
-    public Category(String name, String description) {
+    public Category(String name, String description, List<AggregateId> parentCategories, List<AggregateId> childCategories) {
         super();
         this.name = name;
         this.description = description;
         this.status = CategoryStatus.UNVERIFIED;
+        setParentCategories(parentCategories);
+        setChildCategories(childCategories);
     }
 
 
@@ -46,62 +48,56 @@ public class Category extends BaseJpaAuditDomainAggregateRoot<Category> {
         this.description = description;
     }
 
-    public void addParentCategory(Category parentCategory) {
-        if (getParentCategory(parentCategory.getAggregateId()).isPresent()) {
+    public void addParentCategory(AggregateId parentCategory) {
+        if (getParentCategory(parentCategory).isPresent()) {
             return;
         }
-        CategoryHasCategory categoryHasCategory = new CategoryHasCategory(parentCategory, this);
+        CategoryHasParent categoryHasCategory = new CategoryHasParent(parentCategory, this);
         parentCategories.add(categoryHasCategory);
     }
 
-    public void removeParentCategory(Category parentCategory) {
-        getParentCategory(parentCategory.getAggregateId())
-                .ifPresent(chc -> {
-                    this.parentCategories.remove(chc);
-                    chc.getParent().removeChildCategory(this);
-                });
+    public void removeParentCategory(AggregateId parentCategory) {
+        getParentCategory(parentCategory)
+                .ifPresent(this.parentCategories::remove);
     }
 
-    public void addChildCategory(Category childCategory) {
-        if (getChildCategory(childCategory.getAggregateId()).isPresent()) {
+    public void addChildCategory(AggregateId childCategory) {
+        if (getChildCategory(childCategory).isPresent()) {
             return;
         }
-        CategoryHasCategory categoryHasCategory = new CategoryHasCategory(this, childCategory);
+        CategoryHasChild categoryHasCategory = new CategoryHasChild(this, childCategory);
         childCategories.add(categoryHasCategory);
     }
 
-    public void removeChildCategory(Category childCategory) {
-        getChildCategory(childCategory.getAggregateId())
-                .ifPresent(chc -> {
-                    this.childCategories.remove(chc);
-                    chc.getChild().removeParentCategory(this);
-                });
+    public void removeChildCategory(AggregateId childCategory) {
+        getChildCategory(childCategory)
+                .ifPresent(this.childCategories::remove);
     }
 
     public void setStatus(CategoryStatus status) {
         this.status = status;
     }
 
-    private Optional<CategoryHasCategory> getParentCategory(AggregateId aggregateId) {
+    private Optional<CategoryHasParent> getParentCategory(AggregateId aggregateId) {
         return this.parentCategories.stream()
-                .filter(c -> Objects.equals(aggregateId, c.getParent().getAggregateId()))
+                .filter(c -> Objects.equals(aggregateId, c.getParent()))
                 .findAny();
     }
 
-    private Optional<CategoryHasCategory> getChildCategory(AggregateId aggregateId) {
+    private Optional<CategoryHasChild> getChildCategory(AggregateId aggregateId) {
         return this.childCategories.stream()
-                .filter(c -> Objects.equals(aggregateId, c.getChild().getAggregateId()))
+                .filter(c -> Objects.equals(aggregateId, c.getChild()))
                 .findAny();
     }
 
-    public void setChildCategories(List<Category> categories) {
-        childCategories.clear();
-        categories.forEach(this::addChildCategory);
+    public void setParentCategories(List<AggregateId> parentCategories) {
+        this.parentCategories.clear();
+        parentCategories.forEach(this::addParentCategory);
     }
 
-    public void setParentCategories(List<Category> categories) {
-        parentCategories.clear();
-        categories.forEach(this::addParentCategory);
+    public void setChildCategories(List<AggregateId> childCategories) {
+        this.childCategories.clear();
+        childCategories.forEach(this::addChildCategory);
     }
 }
 
