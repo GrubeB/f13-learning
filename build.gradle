@@ -3,7 +3,7 @@ plugins {
     id "io.spring.dependency-management" version "1.1.0"
 }
 
-version = '0.3.0'
+version = '0.4.0'
 
 ext {
     ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION = "3.2.3"
@@ -30,7 +30,7 @@ subprojects {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:3.1.1"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION}"
         }
     }
     repositories {
