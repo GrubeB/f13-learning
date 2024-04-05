@@ -30,13 +30,6 @@ public class CommentContainerQueryMapper extends BaseMapper {
 
     @PostConstruct
     void init() {
-//        TypeMap<CommentContainerQuery, CommentContainerDto> typeMap = modelMapper.createTypeMap(CommentContainerQuery.class, CommentContainerDto.class);
-//        Converter<Set<TopicHasCategoryQuery>, List<SimpleCategoryDto>> categoryConverter = context -> context.getSource().stream()
-//                .map(TopicHasCategoryQuery::getCategory)
-//                .map(c -> categoryQueryMapper.map(c, SimpleCategoryDto.class))
-//                .toList();
-//        typeMap.addMappings(mapper -> mapper.using(categoryConverter).map(TopicQuery::getCategories, TopicDto::setCategories));
-
         addMapper(CommentContainerQuery.class, CommentContainerDto.class, e -> modelMapper.map(e, CommentContainerDto.class));
         addMapper(CommentContainerQuery.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(CommentContainerQuery.class, AggregateId.class, e -> new AggregateId(e.getId()));

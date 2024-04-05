@@ -1,4 +1,4 @@
-package pl.app.learning.topic.adapter.in;
+package pl.app.learning.comment.adapter.in;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,6 @@ import pl.app.learning.comment.application.port.in.command.DeleteCommandCommand;
 import pl.app.learning.comment.query.CommentQueryService;
 import pl.app.learning.comment.query.dto.CommentDto;
 import pl.app.learning.voting.application.domain.DomainObjectType;
-import pl.app.learning.voting.application.port.in.command.*;
 
 import java.util.UUID;
 

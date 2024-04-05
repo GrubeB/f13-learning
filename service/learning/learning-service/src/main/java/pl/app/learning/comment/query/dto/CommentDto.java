@@ -9,6 +9,7 @@ import pl.app.learning.voting.query.dto.VotingDto;
 import pl.app.learning.voting.query.model.VotingQuery;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -21,4 +22,9 @@ public class CommentDto implements
     private UUID userId;
     private Set<CommentDto> comments;
     private VotingDto voting;
+
+    private String createdBy;
+    private Instant createdDate;
+    private String lastModifiedBy;
+    private Instant lastModifiedDate;
 }
