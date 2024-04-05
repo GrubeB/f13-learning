@@ -36,7 +36,7 @@ public class CategoryController {
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<Void> handle(@PathVariable UUID categoryId) {
         var command = new DeleteCategoryCommand(categoryId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -45,7 +45,7 @@ public class CategoryController {
     @PutMapping("/{categoryId}")
     public ResponseEntity<Void> handle(@PathVariable UUID categoryId, @RequestBody UpdateCategoryCommand command) {
         command.setCategoryId(categoryId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -53,7 +53,7 @@ public class CategoryController {
 
     @PutMapping("/{categoryId}/status/{status}")
     public ResponseEntity<Void> handle(@PathVariable UUID categoryId, @PathVariable CategoryStatus status) {
-        gateway.sendAsync(new ChangeStatusCategoryCommand(categoryId, status));
+        gateway.send(new ChangeStatusCategoryCommand(categoryId, status));
         return ResponseEntity
                 .accepted()
                 .build();

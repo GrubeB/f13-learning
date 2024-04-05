@@ -21,7 +21,7 @@ public class TopicCategoryController {
 
     @PostMapping("/{categoryId}")
     public ResponseEntity<Void> create(@PathVariable UUID topicId, @PathVariable UUID categoryId) {
-        gateway.sendAsync(new AddCategoryToTopicCommand(topicId, List.of(categoryId)));
+        gateway.send(new AddCategoryToTopicCommand(topicId, List.of(categoryId)));
         return ResponseEntity
                 .accepted()
                 .build();
@@ -29,7 +29,7 @@ public class TopicCategoryController {
 
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<Void> delete(@PathVariable UUID topicId, @PathVariable UUID categoryId) {
-        gateway.sendAsync(new RemoveCategoryFromTopicCommand(topicId, List.of(categoryId)));
+        gateway.send(new RemoveCategoryFromTopicCommand(topicId, List.of(categoryId)));
         return ResponseEntity
                 .accepted()
                 .build();

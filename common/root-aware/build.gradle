@@ -1,9 +1,17 @@
 plugins {
-    id "org.springframework.boot" version "$ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION"
+    id 'java-library'
+    id 'io.spring.dependency-management'
+    id 'org.springframework.boot' version "$ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION"
 }
 
 group = "pl.app.common.audit"
 version = "0.1.2"
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${ORG_SPRINGBOOTFRAMEWORK_BOOT_VERSION}"
+    }
+}
 
 dependencies {
     implementation project(':common:model')

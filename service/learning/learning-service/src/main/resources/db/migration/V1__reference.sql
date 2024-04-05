@@ -23,6 +23,7 @@ ALTER TABLE
   t_reference_voting_vote
 ADD
   CONSTRAINT FK_T_REFERENCE_VOTING_VOTE_ON_REFERENCE_VOTING FOREIGN KEY (reference_voting_id) REFERENCES t_reference_voting (id);
+
 create TABLE t_reference (
   created_by VARCHAR(255) NOT NULL,
   created_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,

@@ -36,7 +36,7 @@ public class TopicCommandController {
 
     @PostMapping("/delete")
     public ResponseEntity<Void> handle(@RequestBody DeleteTopicCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -44,7 +44,7 @@ public class TopicCommandController {
 
     @PostMapping("/update")
     public ResponseEntity<Void> handle(@RequestBody UpdateTopicCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -52,7 +52,7 @@ public class TopicCommandController {
 
     @PostMapping("/change-status")
     public ResponseEntity<Void> handle(@RequestBody ChangeTopicStatusCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -61,7 +61,7 @@ public class TopicCommandController {
     // CATEGORY
     @PostMapping("/add-category")
     public ResponseEntity<Void> handle(@RequestBody AddCategoryToTopicCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
