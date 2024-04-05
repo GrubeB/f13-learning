@@ -28,7 +28,9 @@ spring:
               /api/v1/paths/**, 
               /api/v1/references/**, 
               /api/v1/topics/**, 
-              /api/v1/topic-revisions/**
+              /api/v1/topic-revisions/**,
+              /api/v1/votings/**,
+              /api/v1/comments/**
 
 logging:
   level:
