@@ -43,7 +43,6 @@ public class HttpRequestConfig {
                         AuthenticationController.resourcePath + all
                 ).permitAll()
                 // FILE
-                // TODO
                 .requestMatchers(and(or(GET), or(
                         "/favicon.ico",
                         FileController.resourcePath,

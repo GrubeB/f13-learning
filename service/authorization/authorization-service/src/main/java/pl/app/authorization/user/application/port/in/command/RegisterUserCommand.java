@@ -14,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class RegisterUserCommand implements Serializable {
     private String email;
+    private String username;
+    private String fullName;
     private String password;
     private List<String> roles;
 }

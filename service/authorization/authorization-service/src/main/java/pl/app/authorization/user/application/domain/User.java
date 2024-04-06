@@ -42,9 +42,11 @@ public class User extends BaseJpaAuditDomainAggregateRoot<User> {
         super();
     }
 
-    public User(String email, String rawPassword, List<AggregateId> roles, DomainEventPublisher eventPublisher, PasswordEncoder passwordEncoder) {
+    public User(String email,String username, String fullName, String rawPassword, List<AggregateId> roles, DomainEventPublisher eventPublisher, PasswordEncoder passwordEncoder) {
         super(eventPublisher);
         this.passwordEncoder = passwordEncoder;
+        this.username = username;
+        this.fullName = fullName;
 
         setEmail(email);
         setPassword(rawPassword);

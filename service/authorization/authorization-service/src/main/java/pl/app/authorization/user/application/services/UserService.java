@@ -37,7 +37,7 @@ class UserService implements
     @Override
     @CommandHandlingAnnotation
     public UUID register(RegisterUserCommand command) {
-        var aggregate = factory.create(command.getEmail(), command.getPassword(), command.getRoles());
+        var aggregate = factory.create(command.getEmail(), command.getUsername(), command.getFullName(), command.getPassword(), command.getRoles());
         repository.save(aggregate);
         return aggregate.getId();
     }

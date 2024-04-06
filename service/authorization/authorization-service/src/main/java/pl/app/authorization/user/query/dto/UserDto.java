@@ -1,11 +1,11 @@
 package pl.app.authorization.user.query.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,4 +21,9 @@ public class UserDto implements
     private UUID avatarFileId;
     private List<String> roles;
     private List<String> permissions;
+
+    private String createdBy;
+    private Instant createdDate;
+    private String lastModifiedBy;
+    private Instant lastModifiedDate;
 }
