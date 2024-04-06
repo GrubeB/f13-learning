@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.app.authorization.user.application.port.in.AddRoleToUserCommand;
-import pl.app.authorization.user.application.port.in.ChangePasswordCommand;
-import pl.app.authorization.user.application.port.in.RegisterUserCommand;
-import pl.app.authorization.user.application.port.in.RemoveRoleFromUserCommand;
+import pl.app.authorization.user.application.port.in.command.*;
 import pl.app.authorization.user.query.UserQueryService;
 import pl.app.authorization.user.query.dto.UserDto;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
@@ -54,6 +51,13 @@ public class UserCommandController {
 
     @PostMapping("/change-password")
     public ResponseEntity<Void> handle(@RequestBody ChangePasswordCommand command) {
+        gateway.sendAsync(command);
+        return ResponseEntity
+                .accepted()
+                .build();
+    }
+    @PostMapping("/avatar")
+    public ResponseEntity<Void> handle(@RequestBody SetAvatarCommand command) {
         gateway.sendAsync(command);
         return ResponseEntity
                 .accepted()

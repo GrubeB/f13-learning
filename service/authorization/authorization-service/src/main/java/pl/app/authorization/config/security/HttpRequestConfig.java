@@ -19,6 +19,7 @@ import pl.app.authorization.user.adapter.in.UserController;
 import pl.app.authorization.user.adapter.in.UserQueryController;
 import pl.app.common.security.authorization.AuthorizeHttpRequestCustomizer;
 import pl.app.common.shared.permission.PermissionName;
+import pl.app.file.file.adapter.in.FileController;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,6 +42,13 @@ public class HttpRequestConfig {
                         AuthenticationController.resourcePath,
                         AuthenticationController.resourcePath + all
                 ).permitAll()
+                // FILE
+                .requestMatchers(and(or(GET), or(
+                        "/favicon.ico",
+                        FileController.resourcePath,
+                        FileController.resourcePath + all
+                )))
+                .permitAll()
                 // PERMISSION
                 .requestMatchers(and(or(GET), or(
                         PermissionQueryController.resourcePath,

@@ -1,4 +1,4 @@
-package pl.app.authorization.user.application.port.in;
+package pl.app.authorization.user.application.port.in.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
