@@ -1,0 +1,8 @@
+application:
+  storage:
+    local:
+      path: local-directory
+
+spring:
+  application:
+    name: app-name
