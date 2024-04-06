@@ -10,6 +10,7 @@ import pl.app.common.model.audit.UserNameProvider;
 import pl.app.common.security.authentication.AuthenticationService;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Configuration
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class AuditConfig {
         return new UserNameProvider() {
             @Override
             public Optional<String> getCurrentUserName() {
-                return authenticationService.getCurrentUserName();
+                return authenticationService.getCurrentUserId().map(UUID::toString);
             }
         };
     }
