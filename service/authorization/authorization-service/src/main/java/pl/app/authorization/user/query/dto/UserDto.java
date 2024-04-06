@@ -20,4 +20,5 @@ public class UserDto implements
     private String username;
     private UUID avatarFileId;
     private List<String> roles;
+    private List<String> permissions;
 }
