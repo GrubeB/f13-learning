@@ -13,6 +13,7 @@ dependencyManagement {
     }
 }
 dependencies {
+    implementation project(':common:file-management')
     implementation project(':common:shared')
     implementation project(':common:util')
 

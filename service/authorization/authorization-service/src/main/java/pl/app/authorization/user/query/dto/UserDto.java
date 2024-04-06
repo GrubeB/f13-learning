@@ -1,5 +1,6 @@
 package pl.app.authorization.user.query.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +16,8 @@ public class UserDto implements
         Serializable {
     private UUID id;
     private String email;
+    private String fullName;
+    private String username;
+    private UUID avatarFileId;
     private List<String> roles;
 }
