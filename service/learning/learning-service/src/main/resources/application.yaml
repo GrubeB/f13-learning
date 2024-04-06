@@ -1,6 +1,12 @@
 server:
   port: ${SERVER_PORT:9006}
 
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration: 604800000 # 7 * 24 * 60 * 60 * 1000
+
 spring:
   application:
     name: learning-service

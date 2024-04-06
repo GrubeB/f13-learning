@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Import;
 import pl.app.common.model.audit.AuditHibernateListenerConfig;
 import pl.app.common.model.audit.AuditorConfig;
 import pl.app.common.model.audit.UserNameProvider;
+import pl.app.common.security.authentication.AuthenticationService;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Configuration
 @RequiredArgsConstructor
@@ -18,11 +20,11 @@ import java.util.Optional;
 })
 public class AuditConfig {
     @Bean
-    public UserNameProvider userNameProvider() {
+    public UserNameProvider userNameProvider(AuthenticationService authenticationService) {
         return new UserNameProvider() {
             @Override
             public Optional<String> getCurrentUserName() {
-                return Optional.of("-");
+                return authenticationService.getCurrentUserId().map(UUID::toString);
             }
         };
     }

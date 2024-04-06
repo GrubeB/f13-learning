@@ -25,6 +25,7 @@ dependencies {
     implementation project(':common:root-aware')
     implementation project(':common:ddd')
     implementation project(':common:cqrs')
+    implementation project(':common:security')
 
     implementation project(':common:controller:command-controller')
     implementation project(':common:controller:controller-support')
@@ -37,6 +38,9 @@ dependencies {
     // WEB
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-configuration-processor"
+
+    // SECURITY
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // VALIDATION
     implementation 'org.springframework.boot:spring-boot-starter-validation'
