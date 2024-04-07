@@ -42,5 +42,9 @@ public class TopicQuery extends BaseAuditEntity<TopicQuery, UUID> {
     @OneToOne
     @JoinColumn(name = "comment_container_id")
     private CommentContainerQuery comment;
+
+    @OneToOne
+    @JoinColumn(name = "voting_id")
+    private VotingQuery voting;
 }
 
