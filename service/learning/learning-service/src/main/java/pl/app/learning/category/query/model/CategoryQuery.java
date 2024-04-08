@@ -1,4 +1,4 @@
-package pl.app.learning.category.query;
+package pl.app.learning.category.query.model;
 
 
 import jakarta.persistence.*;
@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
 import pl.app.learning.category.application.domain.CategoryStatus;
+import pl.app.learning.category.query.CategoryHasCategoryQuery;
+import pl.app.learning.voting.query.model.VotingQuery;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -32,5 +34,9 @@ public class CategoryQuery extends BaseAuditEntity<CategoryQuery, UUID> {
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<CategoryHasCategoryQuery> childCategories = new LinkedHashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "voting_id")
+    private VotingQuery voting;
 }
 
