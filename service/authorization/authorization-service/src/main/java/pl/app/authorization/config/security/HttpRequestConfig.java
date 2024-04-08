@@ -37,6 +37,7 @@ public class HttpRequestConfig {
     @Bean
     AuthorizeHttpRequestCustomizer authorizeHttpRequestCustomizer() {
         return c -> c
+                .requestMatchers(and(or(GET))).permitAll()
                 // AUTH
                 .requestMatchers(
                         AuthenticationController.resourcePath,
