@@ -26,78 +26,8 @@ public class HttpRequestConfig {
     @Bean
     AuthorizeHttpRequestCustomizer authorizeHttpRequestCustomizer() {
         return c -> c
+                .requestMatchers(and(or(GET))).permitAll()
                 .anyRequest().authenticated();
-//                // AUTH
-//                .requestMatchers(
-//                        AuthenticationController.resourcePath,
-//                        AuthenticationController.resourcePath + all
-//                ).permitAll()
-//                // FILE
-//                .requestMatchers(and(or(GET), or(
-//                        "/favicon.ico",
-//                        FileController.resourcePath,
-//                        FileController.resourcePath + all
-//                )))
-//                .permitAll()
-//                // PERMISSION
-//                .requestMatchers(and(or(GET), or(
-//                        PermissionQueryController.resourcePath,
-//                        PermissionQueryController.resourcePath + all
-//                ))).access(
-//                        hasAuthority(PermissionName.PERMISSION_READ.getPermission())
-//                )
-//
-//                .requestMatchers(and(or(POST, DELETE, PUT), or(
-//                        PermissionController.resourcePath
-//                ))).access(
-//                        hasAuthority(PermissionName.PERMISSION_WRITE.getPermission())
-//                )
-//
-//                .requestMatchers(and(or(POST, DELETE, PUT), or(
-//                        PermissionCommandController.resourcePath
-//                ))).access(
-//                        hasAuthority(PermissionName.PERMISSION_WRITE.getPermission())
-//                )
-//                // ROLE
-//                .requestMatchers(and(or(GET), or(
-//                        RoleQueryController.resourcePath,
-//                        RoleQueryController.resourcePath + all
-//                ))).access(
-//                        hasAuthority(PermissionName.ROLE_READ.getPermission())
-//                )
-//
-//                .requestMatchers(and(or(POST, DELETE, PUT), or(
-//                        RoleController.resourcePath
-//                ))).access(
-//                        hasAuthority(PermissionName.ROLE_WRITE.getPermission())
-//                )
-//
-//                .requestMatchers(and(or(POST, DELETE, PUT), or(
-//                        RoleCommandController.resourcePath
-//                ))).access(
-//                        hasAuthority(PermissionName.ROLE_WRITE.getPermission())
-//                )
-//
-//                // USER
-//                .requestMatchers(and(or(GET), or(
-//                        UserQueryController.resourcePath,
-//                        UserQueryController.resourcePath + all
-//                ))).access(
-//                        hasAuthority(PermissionName.USER_READ.getPermission())
-//                )
-//
-//                .requestMatchers(and(or(POST), or(
-//                        UserController.resourcePath
-//                ))).permitAll()
-//
-//                .requestMatchers(and(or(POST), or(
-//                        UserCommandController.resourcePath + all
-//                ))).access(
-//                        hasAuthority(PermissionName.USER_WRITE.getPermission())
-//                )
-//
-//                // OTHER
-//                .anyRequest().authenticated();
     }
 
     private RequestMatcher or(HttpMethod... methods) {
