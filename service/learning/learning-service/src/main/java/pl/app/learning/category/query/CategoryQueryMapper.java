@@ -12,6 +12,7 @@ import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.category.query.dto.CategoryDto;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
+import pl.app.learning.category.query.model.CategoryQuery;
 
 import java.util.List;
 import java.util.Set;

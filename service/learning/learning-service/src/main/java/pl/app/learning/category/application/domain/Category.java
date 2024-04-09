@@ -27,6 +27,11 @@ public class Category extends BaseJpaAuditDomainAggregateRoot<Category> {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<CategoryHasChild> childCategories = new LinkedHashSet<>();
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "voting_id"))
+    })
+    private AggregateId voting;
 
     @SuppressWarnings("unused")
     protected Category() {
@@ -98,6 +103,10 @@ public class Category extends BaseJpaAuditDomainAggregateRoot<Category> {
     public void setChildCategories(List<AggregateId> childCategories) {
         this.childCategories.clear();
         childCategories.forEach(this::addChildCategory);
+    }
+
+    public void setVoting(AggregateId voting) {
+        this.voting = voting;
     }
 }
 
