@@ -7,7 +7,6 @@ import pl.app.common.cqrs.command.annotation.CommandHandlerAnnotation;
 import pl.app.common.cqrs.command.annotation.CommandHandlingAnnotation;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.reference.application.domain.Reference;
-import pl.app.learning.reference.application.domain.ReferenceContainer;
 import pl.app.learning.reference.application.domain.ReferenceFactory;
 import pl.app.learning.reference.application.port.in.CreateReferenceUseCase;
 import pl.app.learning.reference.application.port.in.DeleteReferenceUseCase;
@@ -16,7 +15,6 @@ import pl.app.learning.reference.application.port.in.command.CreateReferenceComm
 import pl.app.learning.reference.application.port.in.command.DeleteReferenceCommand;
 import pl.app.learning.reference.application.port.in.command.UpdateReferenceCommand;
 import pl.app.learning.reference.application.port.out.ReferenceContainerDomainRepositoryPort;
-import pl.app.learning.reference.application.port.out.ReferenceDomainRepositoryPort;
 
 import java.util.UUID;
 
@@ -45,7 +43,7 @@ class ReferenceService implements
     @CommandHandlingAnnotation
     public void updateReference(UpdateReferenceCommand command) {
         var aggregate = repository.loadByReference(new AggregateId(command.getReferenceId()));
-        aggregate.updateReference(new AggregateId(command.getReferenceId()),command.getAuthor(), command.getTitle(), command.getPublicationDate(), command.getDescription(), command.getLink());
+        aggregate.updateReference(new AggregateId(command.getReferenceId()), command.getAuthor(), command.getTitle(), command.getPublicationDate(), command.getDescription(), command.getLink());
         repository.save(aggregate);
     }
 

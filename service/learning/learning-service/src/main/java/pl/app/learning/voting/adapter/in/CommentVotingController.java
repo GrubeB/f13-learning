@@ -53,6 +53,7 @@ public class CommentVotingController {
                 .accepted()
                 .build();
     }
+
     @DeleteMapping("/{commentId}/likes-dislikes/{userId}")
     public ResponseEntity<Void> deleteLikeAndDislike(@PathVariable UUID commentId, @PathVariable UUID userId) {
         var command = new RemoveUserLikeAndDislikeCommand(commentId, DomainObjectType.COMMENT, userId);

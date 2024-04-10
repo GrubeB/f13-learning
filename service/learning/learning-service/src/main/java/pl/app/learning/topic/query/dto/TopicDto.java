@@ -1,18 +1,11 @@
 package pl.app.learning.topic.query.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import pl.app.common.model.audit.AuditColumnName;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.comment.query.dto.CommentContainerDto;
-import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.reference.query.dto.ReferenceContainerDto;
-import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.application.domain.TopicStatus;
 import pl.app.learning.voting.query.dto.VotingDto;
 

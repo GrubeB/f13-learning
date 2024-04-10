@@ -6,12 +6,13 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.EntityAnnotation;
-import pl.app.learning.reference.application.domain.Reference;
 import pl.app.learning.voting.application.domain.DomainObjectType;
 
 import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 @EntityAnnotation
 @Entity
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 public class ReferenceContainer extends BaseJpaAuditDomainAggregateRoot<ReferenceContainer> {
 
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Reference> references = new LinkedHashSet<>();
+    private final Set<Reference> references = new LinkedHashSet<>();
 
     @Embedded
     @AttributeOverrides({
@@ -45,11 +46,12 @@ public class ReferenceContainer extends BaseJpaAuditDomainAggregateRoot<Referenc
         reference.setContainer(this);
         this.references.add(reference);
     }
+
     public void removeReference(AggregateId reference) {
         this.references.removeIf(e -> Objects.equals(e.getAggregateId(), reference));
     }
 
-    public void updateReference(AggregateId reference,  String author, String title, LocalDate publicationDate, String description, String link) {
+    public void updateReference(AggregateId reference, String author, String title, LocalDate publicationDate, String description, String link) {
         getReference(reference)
                 .ifPresent(e -> e.updateReferenceInfo(author, title, publicationDate, description, link));
     }

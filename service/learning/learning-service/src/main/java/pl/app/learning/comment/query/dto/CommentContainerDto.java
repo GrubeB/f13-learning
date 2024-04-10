@@ -1,7 +1,6 @@
 package pl.app.learning.comment.query.dto;
 
 import lombok.Data;
-import pl.app.learning.comment.application.domain.Comment;
 import pl.app.learning.voting.application.domain.DomainObjectType;
 
 import java.io.Serializable;

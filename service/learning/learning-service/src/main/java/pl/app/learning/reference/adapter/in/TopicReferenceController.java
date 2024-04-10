@@ -12,7 +12,6 @@ import pl.app.learning.reference.query.ReferenceQueryService;
 import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.voting.application.domain.DomainObjectType;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,6 +23,7 @@ public class TopicReferenceController {
 
     private final ReferenceQueryService queryService;
     private final CommandGateway gateway;
+
     @PostMapping()
     public ResponseEntity<ReferenceDto> create(@PathVariable UUID topicId, @RequestBody CreateReferenceCommand command) {
         command.setDomainObjectId(topicId);
@@ -41,6 +41,7 @@ public class TopicReferenceController {
                 .accepted()
                 .build();
     }
+
     @PutMapping(path = "/{referenceId}")
     public ResponseEntity<Void> update(@PathVariable UUID referenceId, @RequestBody UpdateReferenceCommand command) {
         command.setReferenceId(referenceId);

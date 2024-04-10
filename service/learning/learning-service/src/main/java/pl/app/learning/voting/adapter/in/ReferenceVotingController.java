@@ -53,6 +53,7 @@ public class ReferenceVotingController {
                 .accepted()
                 .build();
     }
+
     @DeleteMapping("/{referenceId}/likes-dislikes/{userId}")
     public ResponseEntity<Void> deleteLikeAndDislike(@PathVariable UUID referenceId, @PathVariable UUID userId) {
         var command = new RemoveUserLikeAndDislikeCommand(referenceId, DomainObjectType.REFERENCE, userId);

@@ -7,9 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.learning.comment.query.dto.CommentContainerDto;
 import pl.app.learning.comment.query.dto.CommentDto;
-import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.comment.query.model.CommentQuery;
 
 import java.util.LinkedHashMap;

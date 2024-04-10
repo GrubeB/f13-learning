@@ -23,6 +23,7 @@ public class GroupReferenceController {
 
     private final ReferenceQueryService queryService;
     private final CommandGateway gateway;
+
     @PostMapping()
     public ResponseEntity<ReferenceDto> create(@PathVariable UUID groupId, @RequestBody CreateReferenceCommand command) {
         command.setDomainObjectId(groupId);
@@ -40,6 +41,7 @@ public class GroupReferenceController {
                 .accepted()
                 .build();
     }
+
     @PutMapping(path = "/{referenceId}")
     public ResponseEntity<Void> update(@PathVariable UUID referenceId, @RequestBody UpdateReferenceCommand command) {
         command.setReferenceId(referenceId);

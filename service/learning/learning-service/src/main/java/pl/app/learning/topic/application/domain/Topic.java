@@ -120,12 +120,14 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
                 .findAny();
     }
 
-    public void setCommentContainer(AggregateId commentContainer){
+    public void setCommentContainer(AggregateId commentContainer) {
         this.commentContainer = commentContainer;
     }
-    public void setReferenceContainer(AggregateId referenceContainer){
+
+    public void setReferenceContainer(AggregateId referenceContainer) {
         this.referenceContainer = referenceContainer;
     }
+
     public void setVoting(AggregateId voting) {
         this.voting = voting;
     }

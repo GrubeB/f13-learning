@@ -13,7 +13,10 @@ import pl.app.learning.group_revision.application.domain.GroupHasCategoryRevisio
 import pl.app.learning.group_revision.application.domain.GroupHasGroupRevision;
 import pl.app.learning.group_revision.application.domain.GroupHasTopicRevision;
 import pl.app.learning.group_revision.application.domain.GroupRevision;
-import pl.app.learning.group_snapshot.application.domain.*;
+import pl.app.learning.group_snapshot.application.domain.GroupHasCategorySnapshot;
+import pl.app.learning.group_snapshot.application.domain.GroupHasGroupSnapshot;
+import pl.app.learning.group_snapshot.application.domain.GroupHasTopicSnapshot;
+import pl.app.learning.group_snapshot.application.domain.GroupSnapshot;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -188,12 +191,14 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
                 .findAny();
     }
 
-    public void setCommentContainer(AggregateId commentContainer){
+    public void setCommentContainer(AggregateId commentContainer) {
         this.commentContainer = commentContainer;
     }
-    public void setReferenceContainer(AggregateId referenceContainer){
+
+    public void setReferenceContainer(AggregateId referenceContainer) {
         this.referenceContainer = referenceContainer;
     }
+
     public void setVoting(AggregateId voting) {
         this.voting = voting;
     }

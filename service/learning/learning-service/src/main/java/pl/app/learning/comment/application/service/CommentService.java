@@ -31,7 +31,7 @@ class CommentService implements
     @Override
     @CommandHandlingAnnotation
     public UUID create(CreateCommentContainerCommand command) {
-        var aggregate= new CommentContainer(new AggregateId(command.getDomainObjectId()), command.getDomainObjectType());
+        var aggregate = new CommentContainer(new AggregateId(command.getDomainObjectId()), command.getDomainObjectType());
         repository.save(aggregate);
         return aggregate.getId();
     }
@@ -39,7 +39,7 @@ class CommentService implements
     @Override
     @CommandHandlingAnnotation
     public UUID create(CreateCommentCommand command) {
-        var aggregate= repository.load(new AggregateId(command.getDomainObjectId()), command.getDomainObjectType());
+        var aggregate = repository.load(new AggregateId(command.getDomainObjectId()), command.getDomainObjectType());
         Comment comment = commentFactory.create(command.getContent(), new AggregateId(command.getUserId()));
         aggregate.addComment(comment);
         repository.save(aggregate);
@@ -49,7 +49,7 @@ class CommentService implements
     @Override
     @CommandHandlingAnnotation
     public UUID create(CreateReplyCommand command) {
-        var aggregate= repository.loadByParentCommentId(command.getParentCommentId());
+        var aggregate = repository.loadByParentCommentId(command.getParentCommentId());
         Comment comment = commentFactory.create(command.getContent(), new AggregateId(command.getUserId()));
         aggregate.addComment(command.getParentCommentId(), comment);
         repository.save(aggregate);

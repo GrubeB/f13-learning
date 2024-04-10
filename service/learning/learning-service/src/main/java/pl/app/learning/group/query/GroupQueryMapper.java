@@ -14,9 +14,11 @@ import pl.app.learning.category.query.CategoryQueryMapper;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.group.query.dto.GroupDto;
 import pl.app.learning.group.query.dto.SimpleGroupDto;
-import pl.app.learning.group.query.model.*;
+import pl.app.learning.group.query.model.GroupHasCategoryQuery;
+import pl.app.learning.group.query.model.GroupHasGroupQuery;
+import pl.app.learning.group.query.model.GroupHasTopicQuery;
+import pl.app.learning.group.query.model.GroupQuery;
 import pl.app.learning.reference.query.ReferenceQueryMapper;
-import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.query.TopicQueryMapper;
 import pl.app.learning.topic.query.dto.TopicDto;
 

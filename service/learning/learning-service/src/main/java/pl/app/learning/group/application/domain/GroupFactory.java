@@ -6,21 +6,14 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
-import pl.app.common.search_criteria.Operator;
-import pl.app.common.search_criteria.SearchCriteria;
-import pl.app.common.search_criteria.SearchCriteriaItem;
 import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.group.application.port.out.CreateGroupCommentContainerPort;
 import pl.app.learning.group.application.port.out.CreateGroupReferenceContainerPort;
 import pl.app.learning.group.application.port.out.CreateGroupVotingPort;
 import pl.app.learning.group.query.GroupQueryService;
-import pl.app.learning.topic.application.port.out.CreateTopicCommentContainerPort;
-import pl.app.learning.topic.application.port.out.CreateTopicVotingPort;
 import pl.app.learning.topic.query.TopicQueryService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @FactoryAnnotation

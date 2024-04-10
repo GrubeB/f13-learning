@@ -7,7 +7,6 @@ import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.common.ddd.AggregateId;
 import pl.app.learning.comment.application.port.in.command.CreateCommentContainerCommand;
 import pl.app.learning.group.application.port.out.CreateGroupCommentContainerPort;
-import pl.app.learning.topic.application.port.out.CreateTopicCommentContainerPort;
 import pl.app.learning.voting.application.domain.DomainObjectType;
 
 import java.util.UUID;

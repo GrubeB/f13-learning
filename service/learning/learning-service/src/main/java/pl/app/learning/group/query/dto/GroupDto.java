@@ -7,7 +7,6 @@ import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.comment.query.dto.CommentContainerDto;
 import pl.app.learning.group.application.domain.GroupStatus;
 import pl.app.learning.reference.query.dto.ReferenceContainerDto;
-import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.query.dto.TopicDto;
 import pl.app.learning.voting.query.dto.VotingDto;
 

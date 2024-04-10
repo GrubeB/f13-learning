@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.reference.application.domain.ReferenceStatus;
 import pl.app.learning.voting.query.model.VotingQuery;
 

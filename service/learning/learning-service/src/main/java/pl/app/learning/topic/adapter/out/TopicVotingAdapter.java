@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.cqrs.command.gateway.CommandGateway;
 import pl.app.common.ddd.AggregateId;
-import pl.app.learning.reference.application.port.out.CreateVotingPort;
 import pl.app.learning.topic.application.port.out.CreateTopicVotingPort;
 import pl.app.learning.voting.application.domain.DomainObjectType;
 import pl.app.learning.voting.application.port.in.command.CreateVotingCommand;

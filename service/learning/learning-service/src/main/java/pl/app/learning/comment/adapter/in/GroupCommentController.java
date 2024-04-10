@@ -32,6 +32,7 @@ public class GroupCommentController {
         return ResponseEntity
                 .ok(commentQueryService.fetchById(commentId, CommentDto.class));
     }
+
     @PutMapping("/{commentId}")
     public ResponseEntity<Void> update(@PathVariable UUID commentId, @RequestBody UpdateCommentCommand command) {
         command.setCommentId(commentId);
@@ -40,6 +41,7 @@ public class GroupCommentController {
                 .accepted()
                 .build();
     }
+
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> delete(@PathVariable UUID groupId, @PathVariable UUID commentId) {
         gateway.send(new DeleteCommentCommand(commentId));
@@ -47,6 +49,7 @@ public class GroupCommentController {
                 .accepted()
                 .build();
     }
+
     @PostMapping("/{parentCommentId}/comments")
     public ResponseEntity<CommentDto> createReplay(@PathVariable UUID groupId, @PathVariable UUID parentCommentId, @RequestBody CreateReplyCommand command) {
         command.setParentCommentId(parentCommentId);
@@ -54,6 +57,7 @@ public class GroupCommentController {
         return ResponseEntity
                 .ok(commentQueryService.fetchById(commentId, CommentDto.class));
     }
+
     @PutMapping("/{parentCommentId}/comments/{commentId}")
     public ResponseEntity<Void> updateReplay(@PathVariable UUID commentId, @RequestBody UpdateCommentCommand command) {
         command.setCommentId(commentId);
@@ -62,6 +66,7 @@ public class GroupCommentController {
                 .accepted()
                 .build();
     }
+
     @DeleteMapping("/{parentCommentId}/comments/{commentId}")
     public ResponseEntity<Void> deleteReplay(@PathVariable UUID groupId, @PathVariable UUID commentId) {
         gateway.send(new DeleteCommentCommand(commentId));

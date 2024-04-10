@@ -6,8 +6,6 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
-import pl.app.learning.comment.application.domain.Comment;
-import pl.app.learning.comment.application.domain.CommentContainer;
 
 import java.time.LocalDate;
 
@@ -60,7 +58,8 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
         this.description = description;
         this.link = link;
     }
-    public void setVoting(AggregateId voting){
+
+    public void setVoting(AggregateId voting) {
         this.voting = voting;
     }
 

@@ -7,8 +7,8 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.learning.category.query.CategoryQueryService;
-import pl.app.learning.topic.application.port.out.CreateTopicReferenceContainerPort;
 import pl.app.learning.topic.application.port.out.CreateTopicCommentContainerPort;
+import pl.app.learning.topic.application.port.out.CreateTopicReferenceContainerPort;
 import pl.app.learning.topic.application.port.out.CreateTopicVotingPort;
 
 import java.util.List;

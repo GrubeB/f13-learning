@@ -2,7 +2,6 @@ package pl.app.learning.reference.application.domain;
 
 
 import pl.app.common.shared.exception.NotFoundException;
-import pl.app.learning.comment.application.domain.CommentException;
 import pl.app.learning.voting.application.domain.DomainObjectType;
 
 import java.util.UUID;
@@ -22,6 +21,7 @@ public interface ReferenceException {
             return new NotFoundReferenceException("not found reference with id: " + referenceId);
         }
     }
+
     class NotFoundReferenceContainerException extends NotFoundException {
         public NotFoundReferenceContainerException() {
             super("not found reference container");
@@ -32,7 +32,7 @@ public interface ReferenceException {
         }
 
         public static NotFoundReferenceContainerException fromDomainObject(UUID domainObjectId, DomainObjectType domainObjectType) {
-            return new NotFoundReferenceContainerException("not found reference container for domain object id: " +  domainObjectId +" of type: " + domainObjectType);
+            return new NotFoundReferenceContainerException("not found reference container for domain object id: " + domainObjectId + " of type: " + domainObjectType);
         }
     }
 }

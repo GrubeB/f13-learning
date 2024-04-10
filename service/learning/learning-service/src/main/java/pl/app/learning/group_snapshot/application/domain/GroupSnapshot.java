@@ -52,6 +52,7 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
         this.categories.add(categorySnapshot);
         categorySnapshot.setGroup(this);
     }
+
     public void setTopics(Set<GroupHasTopicSnapshot> topics) {
         if (this.topics != topics) {
             this.topics.forEach(e -> e.setGroup(null));

@@ -7,7 +7,6 @@ import pl.app.common.cqrs.command.annotation.CommandAnnotation;
 import pl.app.learning.voting.application.domain.DomainObjectType;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.UUID;
 
 @CommandAnnotation

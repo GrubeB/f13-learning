@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.learning.voting.application.domain.DomainObjectType;
 import pl.app.learning.voting.application.domain.UserVoteType;
-import pl.app.learning.voting.application.domain.Voting;
 
 import java.util.UUID;
 

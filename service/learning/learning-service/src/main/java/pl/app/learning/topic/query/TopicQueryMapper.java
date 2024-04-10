@@ -13,7 +13,6 @@ import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.category.query.CategoryQueryMapper;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.reference.query.ReferenceQueryMapper;
-import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.query.dto.TopicDto;
 import pl.app.learning.topic.query.model.TopicHasCategoryQuery;
 import pl.app.learning.topic.query.model.TopicQuery;

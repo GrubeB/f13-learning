@@ -8,9 +8,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.voting.query.dto.UserVoteDto;
-import pl.app.learning.voting.query.dto.VotingDto;
 import pl.app.learning.voting.query.model.UserVoteQuery;
-import pl.app.learning.voting.query.model.VotingQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

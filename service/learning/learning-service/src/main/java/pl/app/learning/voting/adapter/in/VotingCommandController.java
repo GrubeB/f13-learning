@@ -17,6 +17,7 @@ public class VotingCommandController {
     public static final String resourcePath = "/api/v1/" + resourceName + "/commands";
 
     private final CommandGateway gateway;
+
     @PostMapping("/add-like")
     public ResponseEntity<Void> handle(@RequestBody AddUserLikeCommand command) {
         gateway.send(command);
@@ -48,6 +49,7 @@ public class VotingCommandController {
                 .accepted()
                 .build();
     }
+
     @PostMapping("/remove")
     public ResponseEntity<Void> handle(@RequestBody RemoveUserLikeAndDislikeCommand command) {
         gateway.send(command);

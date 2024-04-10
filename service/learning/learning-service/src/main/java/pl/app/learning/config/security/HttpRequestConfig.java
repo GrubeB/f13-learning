@@ -8,14 +8,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import pl.app.common.security.authorization.AuthorizeHttpRequestCustomizer;
-import pl.app.common.shared.permission.PermissionName;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.springframework.http.HttpMethod.*;
-import static org.springframework.security.authorization.AuthorityAuthorizationManager.hasAuthority;
+import static org.springframework.http.HttpMethod.GET;
 
 @Configuration
 public class HttpRequestConfig {

@@ -9,9 +9,7 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.reference.query.dto.ReferenceContainerDto;
-import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.reference.query.model.ReferenceContainerQuery;
-import pl.app.learning.reference.query.model.ReferenceQuery;
 
 @Getter
 @Component
