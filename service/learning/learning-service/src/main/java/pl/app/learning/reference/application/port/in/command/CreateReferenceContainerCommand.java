@@ -1,20 +1,20 @@
-package pl.app.learning.topic.application.port.in.command;
+package pl.app.learning.reference.application.port.in.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.app.common.cqrs.command.annotation.CommandAnnotation;
+import pl.app.learning.voting.application.domain.DomainObjectType;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.UUID;
 
 @CommandAnnotation
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RemoveReferenceFromTopicCommand implements
+public class CreateReferenceContainerCommand implements
         Serializable {
-    private UUID topicId;
-    private List<UUID> referenceIds;
+    private UUID domainObjectId;
+    private DomainObjectType domainObjectType;
 }

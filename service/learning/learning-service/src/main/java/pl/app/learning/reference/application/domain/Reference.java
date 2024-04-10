@@ -6,6 +6,8 @@ import lombok.Getter;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.AggregateRootAnnotation;
+import pl.app.learning.comment.application.domain.Comment;
+import pl.app.learning.comment.application.domain.CommentContainer;
 
 import java.time.LocalDate;
 
@@ -26,6 +28,12 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
             @AttributeOverride(name = "aggregateId", column = @Column(name = "reference_voting_id"))
     })
     private AggregateId voting;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "container_id", referencedColumnName = "id")
+    })
+    private ReferenceContainer container;
 
     @SuppressWarnings("unused")
     protected Reference() {
@@ -54,6 +62,10 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
     }
     public void setVoting(AggregateId voting){
         this.voting = voting;
+    }
+
+    public void setContainer(ReferenceContainer referenceContainer) {
+        this.container = referenceContainer;
     }
 }
 

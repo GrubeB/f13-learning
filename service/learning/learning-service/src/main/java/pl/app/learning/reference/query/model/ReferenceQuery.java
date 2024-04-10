@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
+import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.reference.application.domain.ReferenceStatus;
 import pl.app.learning.voting.query.model.VotingQuery;
 
@@ -29,5 +30,9 @@ public class ReferenceQuery extends BaseAuditEntity<ReferenceQuery, UUID> {
     @OneToOne
     @JoinColumn(name = "reference_voting_id")
     private VotingQuery voting;
+
+    @ManyToOne
+    @JoinColumn(name = "container_id")
+    private ReferenceContainerQuery container;
 }
 

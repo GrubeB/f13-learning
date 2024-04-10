@@ -11,6 +11,7 @@ import pl.app.common.model.audit.AuditColumnName;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.comment.query.dto.CommentContainerDto;
 import pl.app.learning.comment.query.model.CommentContainerQuery;
+import pl.app.learning.reference.query.dto.ReferenceContainerDto;
 import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.application.domain.TopicStatus;
 import pl.app.learning.voting.query.dto.VotingDto;
@@ -30,9 +31,9 @@ public class TopicDto implements
     private String content;
     private TopicStatus status;
     private List<SimpleCategoryDto> categories;
-    private List<ReferenceDto> references;
     private CommentContainerDto comment;
     private VotingDto voting;
+    private ReferenceContainerDto reference;
     private String createdBy;
     private Instant createdDate;
     private String lastModifiedBy;

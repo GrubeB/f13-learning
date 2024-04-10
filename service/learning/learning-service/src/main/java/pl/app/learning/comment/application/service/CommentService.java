@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional
 class CommentService implements
-        CreateContainerUseCase,
+        CreateCommentContainerUseCase,
         CreateCommentUseCase,
         CreateReplyUseCase,
         DeleteCommentUseCase,
