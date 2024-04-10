@@ -20,7 +20,7 @@ public interface CommentException {
             return new NotFoundCommentException("not found comment with id: " + commentId);
         }
         public static NotFoundCommentException fromDomainObject(UUID domainObjectId, DomainObjectType domainObjectType) {
-            return new NotFoundCommentException("not found comment for domain object id: " + domainObjectId);
+            return new NotFoundCommentException("not found comment for domain object id: " +  domainObjectId +" of type: " + domainObjectType);
         }
     }
 }

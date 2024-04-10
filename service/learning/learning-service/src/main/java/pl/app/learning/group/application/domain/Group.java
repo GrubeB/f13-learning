@@ -44,6 +44,18 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<GroupHasGroup> groups = new LinkedHashSet<>();
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "voting_id"))
+    })
+    private AggregateId voting;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "comment_container_id"))
+    })
+    private AggregateId commentContainer;
+
     @SuppressWarnings("unused")
     protected Group() {
         super();
@@ -52,9 +64,9 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     public Group(String name,
                  String content,
                  GroupStatus status,
-                 Set<AggregateId> categories,
-                 Set<AggregateId> topics,
-                 Set<AggregateId> groups) {
+                 List<AggregateId> categories,
+                 List<AggregateId> topics,
+                 List<AggregateId> groups) {
         this.name = name;
         this.content = content;
         this.status = status;
@@ -195,6 +207,14 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
         return this.groups.stream()
                 .filter(e -> Objects.equals(e.getChildGroup(), group))
                 .findAny();
+    }
+
+    public void setCommentContainer(AggregateId commentContainer){
+        this.commentContainer = commentContainer;
+    }
+
+    public void setVoting(AggregateId voting) {
+        this.voting = voting;
     }
 
     @Override

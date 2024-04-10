@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
+import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.group.application.domain.GroupStatus;
+import pl.app.learning.voting.query.model.VotingQuery;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -43,5 +45,13 @@ public class GroupQuery extends BaseAuditEntity<GroupQuery, UUID> {
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
     private Set<GroupHasGroupQuery> groups = new LinkedHashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "comment_container_id")
+    private CommentContainerQuery comment;
+
+    @OneToOne
+    @JoinColumn(name = "voting_id")
+    private VotingQuery voting;
 }
 
