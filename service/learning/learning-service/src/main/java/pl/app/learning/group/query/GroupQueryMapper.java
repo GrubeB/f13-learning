@@ -62,12 +62,6 @@ public class GroupQueryMapper extends BaseMapper {
                 .toList();
         typeMap.addMappings(mapper -> mapper.using(categoryConverter).map(GroupQuery::getCategories, GroupDto::setCategories));
 
-        Converter<Set<GroupHasReferenceQuery>, List<ReferenceDto>> referenceConverter = context -> context.getSource().stream()
-                .map(GroupHasReferenceQuery::getReference)
-                .map(c -> referenceQueryMapper.map(c, ReferenceDto.class))
-                .toList();
-        typeMap.addMappings(mapper -> mapper.using(referenceConverter).map(GroupQuery::getReferences, GroupDto::setReferences));
-
         Converter<Set<GroupHasTopicQuery>, List<TopicDto>> topicConverter = context -> context.getSource().stream()
                 .map(GroupHasTopicQuery::getTopic)
                 .map(c -> topicQueryMapper.map(c, TopicDto.class))

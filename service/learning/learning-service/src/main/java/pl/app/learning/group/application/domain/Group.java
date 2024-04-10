@@ -36,9 +36,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     private final Set<GroupHasCategory> categories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private final Set<GroupHasReference> references = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<GroupHasTopic> topics = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -55,6 +52,12 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
             @AttributeOverride(name = "aggregateId", column = @Column(name = "comment_container_id"))
     })
     private AggregateId commentContainer;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "reference_container_id"))
+    })
+    private AggregateId referenceContainer;
 
     @SuppressWarnings("unused")
     protected Group() {
@@ -123,30 +126,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
                 .findAny();
     }
 
-    // REFERENCE
-    public void setReferences(Set<AggregateId> references) {
-        this.references.clear();
-        references.forEach(this::addReference);
-    }
-
-    public void addReference(AggregateId reference) {
-        if (getReference(reference).isPresent()) {
-            return;
-        }
-        this.references.add(new GroupHasReference(this, reference));
-    }
-
-    public void removeReference(AggregateId reference) {
-        getReference(reference)
-                .ifPresent(groupHasReference -> this.references.remove(groupHasReference));
-    }
-
-    public Optional<GroupHasReference> getReference(AggregateId reference) {
-        return this.references.stream()
-                .filter(e -> Objects.equals(e.getReference(), reference))
-                .findAny();
-    }
-
     // TOPIC
     public void setTopics(Set<AggregateId> newCategories) {
         List<AggregateId> topicsToRemove = this.topics.stream()
@@ -212,7 +191,9 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     public void setCommentContainer(AggregateId commentContainer){
         this.commentContainer = commentContainer;
     }
-
+    public void setReferenceContainer(AggregateId referenceContainer){
+        this.referenceContainer = referenceContainer;
+    }
     public void setVoting(AggregateId voting) {
         this.voting = voting;
     }
@@ -237,12 +218,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
                                 .childGroup(e.getChildGroup())
                                 .build())
                 .collect(Collectors.toSet()));
-        snapshot.setReferences(this.references.stream().map(e ->
-                        GroupHasReferenceSnapshot.builder()
-                                .snapshotOwnerId(e.getId())
-                                .reference(e.getReference())
-                                .build())
-                .collect(Collectors.toSet()));
         snapshot.setTopics(this.topics.stream().map(e ->
                         GroupHasTopicSnapshot.builder()
                                 .snapshotOwnerId(e.getId())
@@ -260,9 +235,6 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
         MergerUtils.mergeCollections(Join.RIGHT, this.categories, snapshot.getCategories(),
                 (e, s) -> e.revertSnapshot(this, s), GroupHasCategory::new,
                 GroupHasCategory::getId, GroupHasCategorySnapshot::getSnapshotOwnerId);
-        MergerUtils.mergeCollections(Join.RIGHT, this.references, snapshot.getReferences(),
-                (e, s) -> e.revertSnapshot(this, s), GroupHasReference::new,
-                GroupHasReference::getId, GroupHasReferenceSnapshot::getSnapshotOwnerId);
         MergerUtils.mergeCollections(Join.RIGHT, this.topics, snapshot.getTopics(),
                 (e, s) -> e.revertSnapshot(this, s), GroupHasTopic::new,
                 GroupHasTopic::getId, GroupHasTopicSnapshot::getSnapshotOwnerId);

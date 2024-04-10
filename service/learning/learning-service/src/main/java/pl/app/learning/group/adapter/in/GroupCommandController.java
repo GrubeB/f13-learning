@@ -57,23 +57,6 @@ public class GroupCommandController {
                 .build();
     }
 
-    // REFERENCES
-    @PostMapping("/add-reference")
-    public ResponseEntity<Void> handle(@RequestBody AddReferenceToGroupCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
-    @PostMapping("/remove-reference")
-    public ResponseEntity<Void> handle(@RequestBody RemoveReferenceFromGroupCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
     // SNAPSHOT
     @PostMapping("/revert-snapshot")
     public ResponseEntity<Void> handle(@RequestBody RevertGroupSnapshotCommand command) {
