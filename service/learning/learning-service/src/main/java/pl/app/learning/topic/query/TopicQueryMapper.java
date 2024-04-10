@@ -13,10 +13,8 @@ import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.category.query.CategoryQueryMapper;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.reference.query.ReferenceQueryMapper;
-import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.query.dto.TopicDto;
 import pl.app.learning.topic.query.model.TopicHasCategoryQuery;
-import pl.app.learning.topic.query.model.TopicHasReferenceQuery;
 import pl.app.learning.topic.query.model.TopicQuery;
 
 import java.util.List;
@@ -38,11 +36,6 @@ public class TopicQueryMapper extends BaseMapper {
                 .map(c -> categoryQueryMapper.map(c, SimpleCategoryDto.class))
                 .toList();
         typeMap.addMappings(mapper -> mapper.using(categoryConverter).map(TopicQuery::getCategories, TopicDto::setCategories));
-        Converter<Set<TopicHasReferenceQuery>, List<ReferenceDto>> referenceConverter = context -> context.getSource().stream()
-                .map(TopicHasReferenceQuery::getReference)
-                .map(c -> referenceQueryMapper.map(c, ReferenceDto.class))
-                .toList();
-        typeMap.addMappings(mapper -> mapper.using(referenceConverter).map(TopicQuery::getReferences, TopicDto::setReferences));
 
         addMapper(TopicQuery.class, TopicDto.class, e -> modelMapper.map(e, TopicDto.class));
         addMapper(TopicQuery.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));

@@ -29,5 +29,9 @@ public class ReferenceQuery extends BaseAuditEntity<ReferenceQuery, UUID> {
     @OneToOne
     @JoinColumn(name = "reference_voting_id")
     private VotingQuery voting;
+
+    @ManyToOne
+    @JoinColumn(name = "container_id")
+    private ReferenceContainerQuery container;
 }
 

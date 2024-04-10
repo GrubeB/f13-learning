@@ -16,6 +16,4 @@ public interface CommandContainerRepository extends
 
     Optional<CommentContainer> findByComments_EntityId(UUID entityId);
 
-    Optional<CommentContainer> findByComments_ParentComment_EntityId(UUID entityId);
-
 }

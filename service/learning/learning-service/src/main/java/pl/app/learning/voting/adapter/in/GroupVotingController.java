@@ -53,6 +53,7 @@ public class GroupVotingController {
                 .accepted()
                 .build();
     }
+
     @DeleteMapping("/{groupId}/likes-dislikes/{userId}")
     public ResponseEntity<Void> deleteLikeAndDislike(@PathVariable UUID groupId, @PathVariable UUID userId) {
         var command = new RemoveUserLikeAndDislikeCommand(groupId, DomainObjectType.GROUP, userId);

@@ -19,6 +19,7 @@ public class CategoryFactory {
     private final DomainEventPublisherFactory domainEventPublisherFactory;
     private final CategoryQueryService categoryQueryService;
     private final CreateCategoryVotingPort createCategoryVotingPort;
+
     public Category create(String name, String description, List<UUID> parentIds, List<UUID> childIds) {
         List<AggregateId> parentCategories = categoryQueryService.fetchByIds(parentIds, AggregateId.class);
         List<AggregateId> childCategories = categoryQueryService.fetchByIds(childIds, AggregateId.class);

@@ -6,10 +6,6 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.learning.comment.application.port.out.CreateCommentVotingPort;
-import pl.app.learning.reference.application.port.out.CreateVotingPort;
-
-import java.time.LocalDate;
-import java.util.UUID;
 
 @FactoryAnnotation
 @Component

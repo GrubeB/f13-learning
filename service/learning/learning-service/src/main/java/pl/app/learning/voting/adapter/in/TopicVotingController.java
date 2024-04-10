@@ -53,6 +53,7 @@ public class TopicVotingController {
                 .accepted()
                 .build();
     }
+
     @DeleteMapping("/{topicId}/likes-dislikes/{userId}")
     public ResponseEntity<Void> deleteLikeAndDislike(@PathVariable UUID topicId, @PathVariable UUID userId) {
         var command = new RemoveUserLikeAndDislikeCommand(topicId, DomainObjectType.TOPIC, userId);

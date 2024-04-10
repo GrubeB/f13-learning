@@ -7,7 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.dto_criteria.Dto;
 import pl.app.common.query_controller.QueryController;
 import pl.app.common.search_criteria.Operator;
@@ -28,9 +31,10 @@ public class VotingQueryController implements
     public static final String resourcePath = "/api/v1/" + resourceName;
 
     private final UserVoteQueryService service;
+
     @GetMapping("/users/{userId}")
     ResponseEntity<Page<?>> fetchByUser(@PathVariable UUID userId, @Valid SearchCriteria searchCriteria, Pageable pageable, Dto dto) {
-        searchCriteria.addCriteria(new SearchCriteriaItem("userId", Operator.EQUAL,userId.toString()));
+        searchCriteria.addCriteria(new SearchCriteriaItem("userId", Operator.EQUAL, userId.toString()));
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(service.fetchByCriteria(searchCriteria, pageable, dto));

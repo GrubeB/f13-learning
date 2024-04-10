@@ -11,7 +11,9 @@ import java.util.UUID;
 @DomainRepositoryAnnotation
 public interface CommentDomainRepositoryPort {
     CommentContainer load(AggregateId domainObject, DomainObjectType domainObjectType);
+
     CommentContainer loadByParentCommentId(UUID parentCommentId);
+
     CommentContainer loadByCommentId(UUID commentId);
 
     void save(CommentContainer aggregate);

@@ -27,6 +27,12 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
     })
     private AggregateId voting;
 
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "container_id", referencedColumnName = "id")
+    })
+    private ReferenceContainer container;
+
     @SuppressWarnings("unused")
     protected Reference() {
         super();
@@ -52,8 +58,13 @@ public class Reference extends BaseJpaAuditDomainAggregateRoot<Reference> {
         this.description = description;
         this.link = link;
     }
-    public void setVoting(AggregateId voting){
+
+    public void setVoting(AggregateId voting) {
         this.voting = voting;
+    }
+
+    public void setContainer(ReferenceContainer referenceContainer) {
+        this.container = referenceContainer;
     }
 }
 

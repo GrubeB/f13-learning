@@ -7,8 +7,6 @@ import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.BaseJpaAuditDomainAggregateRoot;
 import pl.app.common.ddd.annotation.EntityAnnotation;
 import pl.app.learning.voting.application.domain.DomainObjectType;
-import pl.app.learning.voting.application.domain.UserVote;
-import pl.app.learning.voting.application.domain.UserVoteType;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,7 +18,7 @@ import java.util.stream.Collectors;
 public class CommentContainer extends BaseJpaAuditDomainAggregateRoot<CommentContainer> {
 
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Comment> comments = new LinkedHashSet<>();
+    private final Set<Comment> comments = new LinkedHashSet<>();
 
     @Embedded
     @AttributeOverrides({
@@ -45,9 +43,11 @@ public class CommentContainer extends BaseJpaAuditDomainAggregateRoot<CommentCon
         comment.setContainer(this);
         this.comments.add(comment);
     }
+
     public void addComment(UUID parentCommentId, Comment comment) {
         getComment(parentCommentId).ifPresent(parentComment -> parentComment.addComment(comment));
     }
+
     public void updateComment(UUID commentId, String content) {
         getComment(commentId)
                 .ifPresent(comment -> comment.setContent(content));
@@ -55,14 +55,14 @@ public class CommentContainer extends BaseJpaAuditDomainAggregateRoot<CommentCon
 
     public void deleteComment(UUID commentId) {
         Optional<Comment> comment = getComment(commentId);
-        if(comment.isEmpty()){
+        if (comment.isEmpty()) {
             return;
         }
-        if(this.comments.remove(comment.get())){
+        if (this.comments.remove(comment.get())) {
             return;
         }
         Comment parentComment = comment.get().getParentComment();
-        if(parentComment != null) {
+        if (parentComment != null) {
             parentComment.deleteComment(comment.get());
         }
     }
@@ -72,7 +72,8 @@ public class CommentContainer extends BaseJpaAuditDomainAggregateRoot<CommentCon
                 .filter(c -> Objects.equals(commentId, c.getId()))
                 .findAny();
     }
-    public Set<Comment> getAllComments(){
+
+    public Set<Comment> getAllComments() {
         return this.comments.stream()
                 .map(Comment::getAllComments)
                 .flatMap(Set::stream)

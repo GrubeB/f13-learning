@@ -50,13 +50,14 @@ public class Comment extends BaseJpaAuditDomainEntity<Comment> {
     })
     private CommentContainer container;
 
-    public Comment( String content, AggregateId user) {
+    public Comment(String content, AggregateId user) {
         this.content = content;
         this.user = user;
         this.voting = null;
         this.parentComment = null;
         this.container = null;
     }
+
     public Set<Comment> getAllComments() {
         return Stream.concat(Stream.of(this), this.comments.stream().map(Comment::getAllComments).flatMap(Set::stream))
                 .collect(Collectors.toSet());

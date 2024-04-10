@@ -10,6 +10,7 @@ import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
 import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.group.application.domain.GroupStatus;
+import pl.app.learning.reference.query.model.ReferenceContainerQuery;
 import pl.app.learning.voting.query.model.VotingQuery;
 
 import java.util.LinkedHashSet;
@@ -38,9 +39,6 @@ public class GroupQuery extends BaseAuditEntity<GroupQuery, UUID> {
     private Set<GroupHasCategoryQuery> categories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
-    private Set<GroupHasReferenceQuery> references = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
     private Set<GroupHasTopicQuery> topics = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
@@ -53,5 +51,9 @@ public class GroupQuery extends BaseAuditEntity<GroupQuery, UUID> {
     @OneToOne
     @JoinColumn(name = "voting_id")
     private VotingQuery voting;
+
+    @OneToOne
+    @JoinColumn(name = "reference_container_id")
+    private ReferenceContainerQuery reference;
 }
 

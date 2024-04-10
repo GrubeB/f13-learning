@@ -4,6 +4,6 @@ import pl.app.learning.comment.application.port.in.command.CreateCommentContaine
 
 import java.util.UUID;
 
-public interface CreateContainerUseCase {
+public interface CreateCommentContainerUseCase {
     UUID create(CreateCommentContainerCommand command);
 }

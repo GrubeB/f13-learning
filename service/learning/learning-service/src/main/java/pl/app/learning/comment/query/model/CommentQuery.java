@@ -4,11 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
-import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseAuditEntity;
-import pl.app.learning.comment.application.domain.Comment;
-import pl.app.learning.comment.application.domain.CommentContainer;
-import pl.app.learning.voting.application.domain.DomainObjectType;
 import pl.app.learning.voting.query.model.VotingQuery;
 
 import java.util.LinkedHashSet;

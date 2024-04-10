@@ -6,20 +6,14 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
-import pl.app.common.search_criteria.Operator;
-import pl.app.common.search_criteria.SearchCriteria;
-import pl.app.common.search_criteria.SearchCriteriaItem;
 import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.group.application.port.out.CreateGroupCommentContainerPort;
+import pl.app.learning.group.application.port.out.CreateGroupReferenceContainerPort;
 import pl.app.learning.group.application.port.out.CreateGroupVotingPort;
 import pl.app.learning.group.query.GroupQueryService;
-import pl.app.learning.topic.application.port.out.CreateTopicCommentContainerPort;
-import pl.app.learning.topic.application.port.out.CreateTopicVotingPort;
 import pl.app.learning.topic.query.TopicQueryService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @FactoryAnnotation
@@ -32,6 +26,7 @@ public class GroupFactory {
     private final GroupQueryService groupQueryService;
     private final CreateGroupCommentContainerPort createCommentContainerPort;
     private final CreateGroupVotingPort createVotingPort;
+    private final CreateGroupReferenceContainerPort createReferenceContainerPort;
 
     public Group create(String name, String content, List<UUID> categoryIds, List<UUID> topicIds, List<UUID> groupIds) {
 
@@ -46,6 +41,9 @@ public class GroupFactory {
 
         AggregateId voting = createVotingPort.createVoting(aggregate.getAggregateId());
         aggregate.setVoting(voting);
+
+        AggregateId referenceContainer = createReferenceContainerPort.create(aggregate.getAggregateId());
+        aggregate.setReferenceContainer(referenceContainer);
 
         return aggregate;
     }
