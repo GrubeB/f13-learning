@@ -31,4 +31,5 @@ public class GroupQueryService implements
         put("BaseDto", BaseDto.class);
         put("AggregateId", AggregateId.class);
     }};
+
 }

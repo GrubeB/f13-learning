@@ -35,7 +35,7 @@ public class GroupCommandController {
 
     @PostMapping("/delete")
     public ResponseEntity<Void> handle(@RequestBody DeleteGroupCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -43,7 +43,7 @@ public class GroupCommandController {
 
     @PostMapping("/update")
     public ResponseEntity<Void> handle(@RequestBody UpdateGroupCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -51,7 +51,7 @@ public class GroupCommandController {
 
     @PostMapping("/change-status")
     public ResponseEntity<Void> handle(@RequestBody ChangeGroupStatusCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -60,7 +60,7 @@ public class GroupCommandController {
     // SNAPSHOT
     @PostMapping("/revert-snapshot")
     public ResponseEntity<Void> handle(@RequestBody RevertGroupSnapshotCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -69,7 +69,7 @@ public class GroupCommandController {
     // REVISION
     @PostMapping("/merge-revision")
     public ResponseEntity<Void> handle(@RequestBody MergeRevisionToGroupCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

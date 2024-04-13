@@ -22,7 +22,7 @@ public class GroupSnapshotController {
 
     @PostMapping(path = "/{snapshotNumber}/revert")
     public ResponseEntity<Void> revertSnapshot(@PathVariable UUID groupId, @PathVariable Long snapshotNumber) {
-        gateway.sendAsync(new RevertGroupSnapshotCommand(groupId, snapshotNumber));
+        gateway.send(new RevertGroupSnapshotCommand(groupId, snapshotNumber));
         return ResponseEntity
                 .accepted()
                 .build();
