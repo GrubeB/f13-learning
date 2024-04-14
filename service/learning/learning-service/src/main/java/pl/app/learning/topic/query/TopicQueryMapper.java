@@ -30,13 +30,6 @@ public class TopicQueryMapper extends BaseMapper {
 
     @PostConstruct
     void init() {
-        TypeMap<TopicQuery, TopicDto> typeMap = modelMapper.createTypeMap(TopicQuery.class, TopicDto.class);
-        Converter<Set<TopicHasCategoryQuery>, List<SimpleCategoryDto>> categoryConverter = context -> context.getSource().stream()
-                .map(TopicHasCategoryQuery::getCategory)
-                .map(c -> categoryQueryMapper.map(c, SimpleCategoryDto.class))
-                .toList();
-        typeMap.addMappings(mapper -> mapper.using(categoryConverter).map(TopicQuery::getCategories, TopicDto::setCategories));
-
         addMapper(TopicQuery.class, TopicDto.class, e -> modelMapper.map(e, TopicDto.class));
         addMapper(TopicQuery.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(TopicQuery.class, AggregateId.class, e -> new AggregateId(e.getId()));

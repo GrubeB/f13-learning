@@ -51,6 +51,12 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
     })
     private AggregateId referenceContainer;
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "progress_container_id"))
+    })
+    private AggregateId progressContainer;
+
     @SuppressWarnings("unused")
     protected Topic() {
         super();
@@ -127,7 +133,9 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
     public void setReferenceContainer(AggregateId referenceContainer) {
         this.referenceContainer = referenceContainer;
     }
-
+    public void setProgressContainer(AggregateId progressContainer) {
+        this.progressContainer = progressContainer;
+    }
     public void setVoting(AggregateId voting) {
         this.voting = voting;
     }
