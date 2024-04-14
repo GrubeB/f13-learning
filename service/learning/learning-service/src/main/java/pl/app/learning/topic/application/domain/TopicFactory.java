@@ -8,6 +8,7 @@ import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.topic.application.port.out.CreateTopicCommentContainerPort;
+import pl.app.learning.topic.application.port.out.CreateTopicProgressContainerPort;
 import pl.app.learning.topic.application.port.out.CreateTopicReferenceContainerPort;
 import pl.app.learning.topic.application.port.out.CreateTopicVotingPort;
 
@@ -23,6 +24,7 @@ public class TopicFactory {
     private final CreateTopicCommentContainerPort createCommentContainerPort;
     private final CreateTopicVotingPort createVotingPort;
     private final CreateTopicReferenceContainerPort createReferenceContainerPort;
+    private final CreateTopicProgressContainerPort createProgressContainerPort;
 
     public Topic create(String name, String content, List<UUID> categoryIds) {
         List<AggregateId> categories = categoryQueryService.fetchByIds(categoryIds, AggregateId.class);
@@ -34,6 +36,9 @@ public class TopicFactory {
 
         AggregateId referenceContainer = createReferenceContainerPort.create(aggregate.getAggregateId());
         aggregate.setReferenceContainer(referenceContainer);
+
+        AggregateId progressContainer = createProgressContainerPort.create(aggregate.getAggregateId());
+        aggregate.setProgressContainer(progressContainer);
 
         AggregateId voting = createVotingPort.createVoting(aggregate.getAggregateId());
         aggregate.setVoting(voting);
