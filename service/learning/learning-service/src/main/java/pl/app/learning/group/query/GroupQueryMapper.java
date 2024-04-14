@@ -67,6 +67,7 @@ public class GroupQueryMapper extends BaseMapper {
 
                 map(source.getComment().getComments()).setComments(null);
                 map(source.getReference().getReferences()).setReferences(null);
+                map(source.getProgress().getProgresses()).setProgresses(null);
             }
         });
 

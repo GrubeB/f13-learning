@@ -35,6 +35,7 @@ public class GroupDto implements
     private VotingDto voting;
     private Set<CommentDto> comments;
     private Set<ReferenceDto> references;
+    private Set<ProgressDto> progresses;
 
     private String createdBy;
     private Instant createdDate;
