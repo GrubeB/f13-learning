@@ -10,6 +10,7 @@ import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
 import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.group.application.domain.GroupStatus;
+import pl.app.learning.progress.query.model.ProgressContainerQuery;
 import pl.app.learning.reference.query.model.ReferenceContainerQuery;
 import pl.app.learning.voting.query.model.VotingQuery;
 
@@ -55,5 +56,9 @@ public class GroupQuery extends BaseAuditEntity<GroupQuery, UUID> {
     @OneToOne
     @JoinColumn(name = "reference_container_id")
     private ReferenceContainerQuery reference;
+
+    @OneToOne
+    @JoinColumn(name = "progress_container_id")
+    private ProgressContainerQuery progress;
 }
 

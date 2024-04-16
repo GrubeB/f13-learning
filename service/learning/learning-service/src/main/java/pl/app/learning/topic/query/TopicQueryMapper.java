@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
+import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
@@ -30,6 +30,19 @@ public class TopicQueryMapper extends BaseMapper {
 
     @PostConstruct
     void init() {
+        modelMapper.addMappings(new PropertyMap<TopicQuery, TopicDto>() {
+            @Override
+            protected void configure() {
+                using((Converter<Set<TopicHasCategoryQuery>, List<SimpleCategoryDto>>) context -> context.getSource().stream()
+                        .map(TopicHasCategoryQuery::getCategory)
+                        .map(c -> modelMapper.map(c, SimpleCategoryDto.class))
+                        .toList()
+                ).map(source.getCategories()).setCategories(null);
+                map(source.getComment().getComments()).setComments(null);
+                map(source.getReference().getReferences()).setReferences(null);
+                map(source.getProgress().getProgresses()).setProgresses(null);
+            }
+        });
         addMapper(TopicQuery.class, TopicDto.class, e -> modelMapper.map(e, TopicDto.class));
         addMapper(TopicQuery.class, BaseDto.class, e -> modelMapper.map(e, BaseDto.class));
         addMapper(TopicQuery.class, AggregateId.class, e -> new AggregateId(e.getId()));

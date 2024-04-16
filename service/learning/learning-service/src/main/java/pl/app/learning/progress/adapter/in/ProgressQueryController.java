@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.progress.query.ProgressContainerQueryService;
 import pl.app.learning.progress.query.ProgressQueryService;
 import pl.app.learning.progress.query.model.ProgressQuery;
 
