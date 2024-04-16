@@ -17,7 +17,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import pl.app.common.security.authorization.AuthorizeHttpRequestCustomizer;
 import pl.app.common.security.token.JwtAuthenticationFilter;
 
-import java.util.Arrays;
 import java.util.List;
 
 

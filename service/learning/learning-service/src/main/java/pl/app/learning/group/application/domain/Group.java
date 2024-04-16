@@ -61,6 +61,11 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
             @AttributeOverride(name = "aggregateId", column = @Column(name = "reference_container_id"))
     })
     private AggregateId referenceContainer;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "progress_container_id"))
+    })
+    private AggregateId progressContainer;
 
     @SuppressWarnings("unused")
     protected Group() {
@@ -197,6 +202,10 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
 
     public void setReferenceContainer(AggregateId referenceContainer) {
         this.referenceContainer = referenceContainer;
+    }
+
+    public void setProgressContainer(AggregateId progressContainer) {
+        this.progressContainer = progressContainer;
     }
 
     public void setVoting(AggregateId voting) {

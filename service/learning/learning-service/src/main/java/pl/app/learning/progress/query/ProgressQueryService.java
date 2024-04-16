@@ -7,10 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.learning.progress.query.dto.ProgressContainerDto;
 import pl.app.learning.progress.query.dto.ProgressDto;
 import pl.app.learning.progress.query.model.ProgressQuery;
-import pl.app.learning.voting.query.model.UserVoteQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

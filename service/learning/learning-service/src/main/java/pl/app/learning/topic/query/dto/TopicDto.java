@@ -4,16 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
-import pl.app.learning.comment.query.dto.CommentContainerDto;
-import pl.app.learning.progress.query.dto.ProgressContainerDto;
-import pl.app.learning.progress.query.model.ProgressContainerQuery;
-import pl.app.learning.reference.query.dto.ReferenceContainerDto;
+import pl.app.learning.comment.query.dto.CommentDto;
+import pl.app.learning.progress.query.dto.ProgressDto;
+import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.application.domain.TopicStatus;
 import pl.app.learning.voting.query.dto.VotingDto;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -26,10 +26,11 @@ public class TopicDto implements
     private String content;
     private TopicStatus status;
     private List<SimpleCategoryDto> categories;
-    private CommentContainerDto comment;
     private VotingDto voting;
-    private ReferenceContainerDto reference;
-    private ProgressContainerDto progress;
+    private Set<CommentDto> comments;
+    private Set<ReferenceDto> references;
+    private Set<ProgressDto> progresses;
+
     private String createdBy;
     private Instant createdDate;
     private String lastModifiedBy;
