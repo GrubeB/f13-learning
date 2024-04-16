@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.mapper.BaseMapper;
 import pl.app.common.shared.dto.BaseDto;
-import pl.app.learning.progress.query.dto.ProgressDto;
-import pl.app.learning.progress.query.model.ProgressQuery;
 import pl.app.learning.voting.query.dto.UserVoteDto;
 import pl.app.learning.voting.query.model.UserVoteQuery;
 

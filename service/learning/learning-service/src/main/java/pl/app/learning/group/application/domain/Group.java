@@ -203,6 +203,7 @@ public class Group extends BaseJpaSnapshotableDomainAggregateRoot<Group, GroupSn
     public void setReferenceContainer(AggregateId referenceContainer) {
         this.referenceContainer = referenceContainer;
     }
+
     public void setProgressContainer(AggregateId progressContainer) {
         this.progressContainer = progressContainer;
     }

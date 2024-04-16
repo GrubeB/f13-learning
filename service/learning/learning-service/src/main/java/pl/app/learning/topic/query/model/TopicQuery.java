@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
-import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseAuditEntity;
 import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.progress.query.model.ProgressContainerQuery;
@@ -50,7 +49,7 @@ public class TopicQuery extends BaseAuditEntity<TopicQuery, UUID> {
     @OneToOne
     @JoinColumn(name = "reference_container_id")
     private ReferenceContainerQuery reference;
-    
+
     @OneToOne
     @JoinColumn(name = "progress_container_id")
     private ProgressContainerQuery progress;

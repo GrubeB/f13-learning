@@ -9,7 +9,6 @@ import pl.app.common.service.QueryService;
 import pl.app.common.shared.dto.BaseDto;
 import pl.app.learning.progress.query.dto.ProgressContainerDto;
 import pl.app.learning.progress.query.model.ProgressContainerQuery;
-import pl.app.learning.voting.query.model.UserVoteQuery;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
