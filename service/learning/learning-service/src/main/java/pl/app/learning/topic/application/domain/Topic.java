@@ -32,15 +32,30 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
     private TopicStatus status;
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<TopicHasCategory> categories = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private final Set<TopicHasReference> references = new LinkedHashSet<>();
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "voting_id"))
+    })
+    private AggregateId voting;
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "comment_container_id"))
     })
     private AggregateId commentContainer;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "reference_container_id"))
+    })
+    private AggregateId referenceContainer;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "progress_container_id"))
+    })
+    private AggregateId progressContainer;
 
     @SuppressWarnings("unused")
     protected Topic() {
@@ -69,35 +84,6 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
         if (TopicStatus.VERIFIED.equals(this.status)) {
             throw new TopicException.TopicWrongStatusException("Topic must have a VERIFIED status, but currently have: " + this.status);
         }
-    }
-    // REFERENCE
-
-    public void addReferences(List<AggregateId> references) {
-        references.forEach(this::addReference);
-    }
-
-    public void addReference(AggregateId reference) {
-        if (getReference(reference).isPresent()) {
-            return;
-        }
-        TopicHasReference newTopicHasReference = new TopicHasReference(this, reference);
-        this.references.add(newTopicHasReference);
-    }
-
-    public void removeReferences(List<AggregateId> references) {
-        references.forEach(this::removeReference);
-    }
-
-    public void removeReference(AggregateId reference) {
-        getReference(reference)
-                .ifPresent(topicHasReference -> this.references.remove(topicHasReference));
-    }
-
-
-    public Optional<TopicHasReference> getReference(AggregateId reference) {
-        return this.references.stream()
-                .filter(topicHasReference -> Objects.equals(topicHasReference.getReference(), reference))
-                .findAny();
     }
 
     // CATEGORY
@@ -140,8 +126,18 @@ public class Topic extends BaseJpaSnapshotableDomainAggregateRoot<Topic, TopicSn
                 .findAny();
     }
 
-    public void setCommentContainer(AggregateId commentContainer){
+    public void setCommentContainer(AggregateId commentContainer) {
         this.commentContainer = commentContainer;
+    }
+
+    public void setReferenceContainer(AggregateId referenceContainer) {
+        this.referenceContainer = referenceContainer;
+    }
+    public void setProgressContainer(AggregateId progressContainer) {
+        this.progressContainer = progressContainer;
+    }
+    public void setVoting(AggregateId voting) {
+        this.voting = voting;
     }
 
     @Override

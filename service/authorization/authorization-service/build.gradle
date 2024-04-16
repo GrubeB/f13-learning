@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "pl.app.authorization"
-version = "0.1.0"
+version = "0.2.0"
 
 dependencyManagement {
     imports {
@@ -13,6 +13,7 @@ dependencyManagement {
     }
 }
 dependencies {
+    implementation project(':common:file-management')
     implementation project(':common:shared')
     implementation project(':common:util')
 

@@ -34,10 +34,6 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Builder.Default
-    private Set<GroupHasReferenceSnapshot> references = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @Builder.Default
     private Set<GroupHasTopicSnapshot> topics = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -55,19 +51,6 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
     public void addCategory(GroupHasCategorySnapshot categorySnapshot) {
         this.categories.add(categorySnapshot);
         categorySnapshot.setGroup(this);
-    }
-
-    public void setReferences(Set<GroupHasReferenceSnapshot> references) {
-        if (this.references != references) {
-            this.references.forEach(e -> e.setGroup(null));
-            this.references.clear();
-            references.forEach(this::addReference);
-        }
-    }
-
-    public void addReference(GroupHasReferenceSnapshot referenceSnapshot) {
-        this.references.add(referenceSnapshot);
-        referenceSnapshot.setGroup(this);
     }
 
     public void setTopics(Set<GroupHasTopicSnapshot> topics) {
@@ -100,7 +83,6 @@ public class GroupSnapshot extends BaseJpaSnapshotDomainEntity<Group, GroupSnaps
     public void setSnapshotNumber(Long snapshotNumber) {
         this.snapshotNumber = snapshotNumber;
         this.categories.forEach(e -> e.setSnapshotNumber(snapshotNumber));
-        this.references.forEach(e -> e.setSnapshotNumber(snapshotNumber));
         this.topics.forEach(e -> e.setSnapshotNumber(snapshotNumber));
         this.groups.forEach(e -> e.setSnapshotNumber(snapshotNumber));
     }

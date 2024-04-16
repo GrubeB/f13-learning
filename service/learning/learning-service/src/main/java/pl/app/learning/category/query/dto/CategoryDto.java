@@ -3,6 +3,7 @@ package pl.app.learning.category.query.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.app.learning.category.application.domain.CategoryStatus;
+import pl.app.learning.voting.query.dto.VotingDto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,11 +19,5 @@ public class CategoryDto implements
     private CategoryStatus status;
     private List<SimpleCategoryDto> parents;
     private List<SimpleCategoryDto> children;
-
-    public CategoryDto(UUID id, String name, String description, CategoryStatus status) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-    }
+    private VotingDto voting;
 }

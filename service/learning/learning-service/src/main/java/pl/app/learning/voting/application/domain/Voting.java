@@ -28,6 +28,7 @@ public class Voting extends BaseJpaAuditDomainAggregateRoot<Voting> {
     private AggregateId domainObject;
     @Column(name = "domain_object_type", nullable = false, updatable = false)
     private DomainObjectType domainObjectType;
+
     public Voting(AggregateId domainObject, DomainObjectType domainObjectType) {
         super();
         this.domainObject = domainObject;
@@ -63,14 +64,16 @@ public class Voting extends BaseJpaAuditDomainAggregateRoot<Voting> {
         calculateLikesNumberAndDislikesNumber();
         return true;
     }
+
     public boolean removeLikeAndDislike(AggregateId userId) {
         if (!this.votes.removeIf(vote -> Objects.equals(vote.getUserId(), userId.getId()))
-        && !this.votes.removeIf(vote -> Objects.equals(vote.getUserId(), userId.getId()))) {
+                && !this.votes.removeIf(vote -> Objects.equals(vote.getUserId(), userId.getId()))) {
             return false;
         }
         calculateLikesNumberAndDislikesNumber();
         return true;
     }
+
     public boolean addDislike(AggregateId userId) {
         Optional<UserVote> voteOptional = getUserVote(userId.getId());
         if (voteOptional.isPresent() && UserVoteType.DISLIKE.equals(voteOptional.get().getType())) {

@@ -1,0 +1,3 @@
+ALTER TABLE t_user ADD COLUMN full_name VARCHAR(255);
+ALTER TABLE t_user ADD COLUMN user_name VARCHAR(255);
+ALTER TABLE t_user ADD COLUMN avatar_file_id UUID;

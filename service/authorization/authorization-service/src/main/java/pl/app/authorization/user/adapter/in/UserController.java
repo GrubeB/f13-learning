@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.app.authorization.user.application.port.in.RegisterUserCommand;
+import pl.app.authorization.user.application.port.in.command.RegisterUserCommand;
 import pl.app.authorization.user.query.UserQueryService;
 import pl.app.authorization.user.query.dto.UserDto;
 import pl.app.common.cqrs.command.gateway.CommandGateway;

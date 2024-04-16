@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
+import pl.app.learning.category.query.model.CategoryQuery;
 
 import java.util.UUID;
 

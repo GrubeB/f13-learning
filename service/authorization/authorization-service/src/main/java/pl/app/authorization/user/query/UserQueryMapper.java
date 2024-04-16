@@ -7,6 +7,8 @@ import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
+import pl.app.authorization.permision.query.model.PermissionQuery;
+import pl.app.authorization.role.query.model.RoleHasPermissionQuery;
 import pl.app.authorization.role.query.model.RoleQuery;
 import pl.app.authorization.user.query.dto.UserDto;
 import pl.app.authorization.user.query.model.UserHasRoleQuery;
@@ -40,5 +42,14 @@ public class UserQueryMapper extends BaseMapper {
                 .map(RoleQuery::getName)
                 .toList();
         typeMap.addMappings(mapper -> mapper.using(converter).map(UserQuery::getRoles, UserDto::setRoles));
+
+        Converter<Set<UserHasRoleQuery>, List<String>> converter2 = context -> context.getSource().stream()
+                .map(UserHasRoleQuery::getRole)
+                .map(RoleQuery::getPermissions)
+                .flatMap(Set::stream)
+                .map(RoleHasPermissionQuery::getPermission)
+                .map(PermissionQuery::getName)
+                .toList();
+        typeMap.addMappings(mapper -> mapper.using(converter2).map(UserQuery::getRoles, UserDto::setPermissions));
     }
 }

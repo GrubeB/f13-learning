@@ -21,6 +21,12 @@ import java.util.regex.Pattern;
 public class User extends BaseJpaAuditDomainAggregateRoot<User> {
     @Column(nullable = false)
     private String email;
+    @Column(name = "full_name")
+    private String fullName;
+    @Column(name = "user_name")
+    private String username;
+    @Column(name = "avatar_file_id")
+    private UUID avatarFileId;
     @Column(nullable = false)
     private String password;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
@@ -36,9 +42,11 @@ public class User extends BaseJpaAuditDomainAggregateRoot<User> {
         super();
     }
 
-    public User(String email, String rawPassword, List<AggregateId> roles, DomainEventPublisher eventPublisher, PasswordEncoder passwordEncoder) {
+    public User(String email,String username, String fullName, String rawPassword, List<AggregateId> roles, DomainEventPublisher eventPublisher, PasswordEncoder passwordEncoder) {
         super(eventPublisher);
         this.passwordEncoder = passwordEncoder;
+        this.username = username;
+        this.fullName = fullName;
 
         setEmail(email);
         setPassword(rawPassword);
@@ -106,4 +114,7 @@ public class User extends BaseJpaAuditDomainAggregateRoot<User> {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public void setAvatar(UUID avatarFileId) {
+        this.avatarFileId = avatarFileId;
+    }
 }

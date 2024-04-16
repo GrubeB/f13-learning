@@ -6,16 +6,14 @@ import org.springframework.stereotype.Component;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.ddd.annotation.FactoryAnnotation;
 import pl.app.common.ddd.event.DomainEventPublisherFactory;
-import pl.app.common.search_criteria.Operator;
-import pl.app.common.search_criteria.SearchCriteria;
-import pl.app.common.search_criteria.SearchCriteriaItem;
 import pl.app.learning.category.query.CategoryQueryService;
+import pl.app.learning.group.application.port.out.CreateGroupCommentContainerPort;
+import pl.app.learning.group.application.port.out.CreateGroupReferenceContainerPort;
+import pl.app.learning.group.application.port.out.CreateGroupVotingPort;
 import pl.app.learning.group.query.GroupQueryService;
 import pl.app.learning.topic.query.TopicQueryService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @FactoryAnnotation
@@ -26,23 +24,27 @@ public class GroupFactory {
     private final CategoryQueryService categoryQueryService;
     private final TopicQueryService topicQueryService;
     private final GroupQueryService groupQueryService;
+    private final CreateGroupCommentContainerPort createCommentContainerPort;
+    private final CreateGroupVotingPort createVotingPort;
+    private final CreateGroupReferenceContainerPort createReferenceContainerPort;
 
     public Group create(String name, String content, List<UUID> categoryIds, List<UUID> topicIds, List<UUID> groupIds) {
 
-        Set<AggregateId> categories = new HashSet<>(categoryQueryService.fetchByCriteria(new SearchCriteria(List.of(
-                new SearchCriteriaItem("id", Operator.IN, categoryIds.stream().map(UUID::toString).toList())
-        )), AggregateId.class));
+        List<AggregateId> categories = categoryQueryService.fetchByIds(categoryIds, AggregateId.class);
+        List<AggregateId> topics = topicQueryService.fetchByIds(topicIds, AggregateId.class);
+        List<AggregateId> groups = groupQueryService.fetchByIds(groupIds, AggregateId.class);
+        var aggregate = new Group(name, content, GroupStatus.DRAFT, categories, topics, groups);
+        aggregate.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
 
-        Set<AggregateId> topics = new HashSet<>(topicQueryService.fetchByCriteria(new SearchCriteria(List.of(
-                new SearchCriteriaItem("id", Operator.IN, topicIds.stream().map(UUID::toString).toList())
-        )), AggregateId.class));
+        AggregateId commandContainer = createCommentContainerPort.create(aggregate.getAggregateId());
+        aggregate.setCommentContainer(commandContainer);
 
-        Set<AggregateId> groups = new HashSet<>(groupQueryService.fetchByCriteria(new SearchCriteria(List.of(
-                new SearchCriteriaItem("id", Operator.IN, groupIds.stream().map(UUID::toString).toList())
-        )), AggregateId.class));
+        AggregateId voting = createVotingPort.createVoting(aggregate.getAggregateId());
+        aggregate.setVoting(voting);
 
-        Group group = new Group(name, content, GroupStatus.DRAFT, categories, topics, groups);
-        group.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
-        return group;
+        AggregateId referenceContainer = createReferenceContainerPort.create(aggregate.getAggregateId());
+        aggregate.setReferenceContainer(referenceContainer);
+
+        return aggregate;
     }
 }

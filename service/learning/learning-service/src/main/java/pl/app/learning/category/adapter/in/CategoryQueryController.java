@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.category.query.CategoryQuery;
 import pl.app.learning.category.query.CategoryQueryService;
+import pl.app.learning.category.query.model.CategoryQuery;
 
 import java.util.UUID;
 

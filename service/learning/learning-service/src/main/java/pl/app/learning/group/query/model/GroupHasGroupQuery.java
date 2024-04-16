@@ -22,8 +22,8 @@ public class GroupHasGroupQuery extends BaseAuditEntity<GroupHasGroupQuery, UUID
     @Id
     private UUID id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "group_id_1", nullable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "group_id_1")
     private GroupQuery group;
 
     @OneToOne

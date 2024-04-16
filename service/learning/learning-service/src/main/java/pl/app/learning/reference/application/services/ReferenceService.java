@@ -14,7 +14,7 @@ import pl.app.learning.reference.application.port.in.UpdateReferenceUseCase;
 import pl.app.learning.reference.application.port.in.command.CreateReferenceCommand;
 import pl.app.learning.reference.application.port.in.command.DeleteReferenceCommand;
 import pl.app.learning.reference.application.port.in.command.UpdateReferenceCommand;
-import pl.app.learning.reference.application.port.out.ReferenceDomainRepositoryPort;
+import pl.app.learning.reference.application.port.out.ReferenceContainerDomainRepositoryPort;
 
 import java.util.UUID;
 
@@ -27,27 +27,31 @@ class ReferenceService implements
         UpdateReferenceUseCase,
         CreateReferenceUseCase {
     private final ReferenceFactory factory;
-    private final ReferenceDomainRepositoryPort repository;
+    private final ReferenceContainerDomainRepositoryPort repository;
 
     @Override
     @CommandHandlingAnnotation
     public UUID createReference(CreateReferenceCommand command) {
-        Reference aggregate = factory.create(command.getAuthor(), command.getTitle(), command.getPublicationDate(), command.getDescription(), command.getLink());
+        var aggregate = repository.load(new AggregateId(command.getDomainObjectId()), command.getDomainObjectType());
+        Reference newReference = factory.create(command.getAuthor(), command.getTitle(), command.getPublicationDate(), command.getDescription(), command.getLink());
+        aggregate.addReference(newReference);
         repository.save(aggregate);
-        return aggregate.getId();
+        return newReference.getId();
     }
 
     @Override
     @CommandHandlingAnnotation
     public void updateReference(UpdateReferenceCommand command) {
-        Reference aggregate = repository.load(new AggregateId(command.getReferenceId()));
-        aggregate.updateReferenceInfo(command.getAuthor(), command.getTitle(), command.getPublicationDate(), command.getDescription(), command.getLink());
+        var aggregate = repository.loadByReference(new AggregateId(command.getReferenceId()));
+        aggregate.updateReference(new AggregateId(command.getReferenceId()), command.getAuthor(), command.getTitle(), command.getPublicationDate(), command.getDescription(), command.getLink());
         repository.save(aggregate);
     }
 
     @Override
     @CommandHandlingAnnotation
     public void deleteReference(DeleteReferenceCommand command) {
-        repository.delete(new AggregateId(command.getReferenceId()));
+        var aggregate = repository.loadByReference(new AggregateId(command.getReferenceId()));
+        aggregate.removeReference(new AggregateId(command.getReferenceId()));
+        repository.save(aggregate);
     }
 }

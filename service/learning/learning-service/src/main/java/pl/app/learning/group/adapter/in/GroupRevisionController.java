@@ -23,7 +23,7 @@ public class GroupRevisionController {
     @PostMapping("/{revisionId}/merge")
     public ResponseEntity<Void> handle(@PathVariable UUID groupId, @PathVariable UUID revisionId) {
         var command = new MergeRevisionToGroupCommand(groupId, revisionId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

@@ -17,7 +17,7 @@ public interface VotingException {
         }
 
         public static NotFoundVotingException fromDomainObject(UUID domainObjectId, DomainObjectType domainObjectType) {
-            return new NotFoundVotingException("not found voting for domain object id: " + domainObjectId);
+            return new NotFoundVotingException("not found voting for domain object id: " + domainObjectId + " of type: " + domainObjectType);
         }
     }
 }

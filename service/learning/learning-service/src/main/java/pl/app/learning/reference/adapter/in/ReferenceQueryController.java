@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.app.common.query_controller.QueryController;
-import pl.app.learning.reference.query.model.ReferenceQuery;
 import pl.app.learning.reference.query.ReferenceQueryService;
+import pl.app.learning.reference.query.model.ReferenceQuery;
 
 import java.util.UUID;
 

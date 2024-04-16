@@ -75,23 +75,6 @@ public class TopicCommandController {
                 .build();
     }
 
-    // REFERENCES
-    @PostMapping("/add-reference")
-    public ResponseEntity<Void> handle(@RequestBody AddReferenceToTopicCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
-    @PostMapping("/remove-reference")
-    public ResponseEntity<Void> handle(@RequestBody RemoveReferenceFromTopicCommand command) {
-        gateway.sendAsync(command);
-        return ResponseEntity
-                .accepted()
-                .build();
-    }
-
     // SNAPSHOT
     @PostMapping("/revert-snapshot")
     public ResponseEntity<Void> handle(@RequestBody RevertTopicSnapshotCommand command) {

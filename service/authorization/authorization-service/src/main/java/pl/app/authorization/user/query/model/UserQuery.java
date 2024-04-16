@@ -22,6 +22,12 @@ public class UserQuery extends BaseAuditEntity<UserQuery, UUID> {
     @Id
     private UUID id;
     private String email;
+    @Column(name = "full_name")
+    private String fullName;
+    @Column(name = "user_name")
+    private String username;
+    @Column(name = "avatar_file_id")
+    private UUID avatarFileId;
     private String password;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserHasRoleQuery> roles;

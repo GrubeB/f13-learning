@@ -10,9 +10,6 @@ import pl.app.learning.comment.application.domain.CommentContainer;
 import pl.app.learning.comment.application.domain.CommentException;
 import pl.app.learning.comment.application.port.out.CommentDomainRepositoryPort;
 import pl.app.learning.voting.application.domain.DomainObjectType;
-import pl.app.learning.voting.application.domain.Voting;
-import pl.app.learning.voting.application.domain.VotingException;
-import pl.app.learning.voting.application.port.out.VotingDomainRepositoryPort;
 
 import java.util.UUID;
 
@@ -39,6 +36,7 @@ class CommandContainerPersistenceAdapter implements
         entity.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
         return entity;
     }
+
     @Override
     public CommentContainer load(AggregateId domainObject, DomainObjectType domainObjectType) {
         var entity = repository.findByDomainObject_AggregateIdAndDomainObjectType(domainObject.getId(), domainObjectType)

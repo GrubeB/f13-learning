@@ -14,9 +14,11 @@ import pl.app.learning.category.query.CategoryQueryMapper;
 import pl.app.learning.category.query.dto.SimpleCategoryDto;
 import pl.app.learning.group.query.dto.GroupDto;
 import pl.app.learning.group.query.dto.SimpleGroupDto;
-import pl.app.learning.group.query.model.*;
+import pl.app.learning.group.query.model.GroupHasCategoryQuery;
+import pl.app.learning.group.query.model.GroupHasGroupQuery;
+import pl.app.learning.group.query.model.GroupHasTopicQuery;
+import pl.app.learning.group.query.model.GroupQuery;
 import pl.app.learning.reference.query.ReferenceQueryMapper;
-import pl.app.learning.reference.query.dto.ReferenceDto;
 import pl.app.learning.topic.query.TopicQueryMapper;
 import pl.app.learning.topic.query.dto.TopicDto;
 
@@ -62,12 +64,6 @@ public class GroupQueryMapper extends BaseMapper {
                 .toList();
         typeMap.addMappings(mapper -> mapper.using(categoryConverter).map(GroupQuery::getCategories, GroupDto::setCategories));
 
-        Converter<Set<GroupHasReferenceQuery>, List<ReferenceDto>> referenceConverter = context -> context.getSource().stream()
-                .map(GroupHasReferenceQuery::getReference)
-                .map(c -> referenceQueryMapper.map(c, ReferenceDto.class))
-                .toList();
-        typeMap.addMappings(mapper -> mapper.using(referenceConverter).map(GroupQuery::getReferences, GroupDto::setReferences));
-
         Converter<Set<GroupHasTopicQuery>, List<TopicDto>> topicConverter = context -> context.getSource().stream()
                 .map(GroupHasTopicQuery::getTopic)
                 .map(c -> topicQueryMapper.map(c, TopicDto.class))
@@ -75,7 +71,7 @@ public class GroupQueryMapper extends BaseMapper {
         typeMap.addMappings(mapper -> mapper.using(topicConverter).map(GroupQuery::getTopics, GroupDto::setTopics));
 
         Converter<Set<GroupHasGroupQuery>, List<SimpleGroupDto>> groupConverter = context -> context.getSource().stream()
-                .map(GroupHasGroupQuery::getGroup)
+                .map(GroupHasGroupQuery::getChildGroup)
                 .map(c -> this.map(c, SimpleGroupDto.class))
                 .toList();
         typeMap.addMappings(mapper -> mapper.using(groupConverter).map(GroupQuery::getGroups, GroupDto::setGroups));

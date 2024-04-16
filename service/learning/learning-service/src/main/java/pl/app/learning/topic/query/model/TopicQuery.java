@@ -10,6 +10,8 @@ import org.hibernate.annotations.Immutable;
 import pl.app.common.ddd.AggregateId;
 import pl.app.common.model.BaseAuditEntity;
 import pl.app.learning.comment.query.model.CommentContainerQuery;
+import pl.app.learning.progress.query.model.ProgressContainerQuery;
+import pl.app.learning.reference.query.model.ReferenceContainerQuery;
 import pl.app.learning.topic.application.domain.TopicStatus;
 import pl.app.learning.voting.query.model.VotingQuery;
 
@@ -36,11 +38,21 @@ public class TopicQuery extends BaseAuditEntity<TopicQuery, UUID> {
     private TopicStatus status;
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<TopicHasCategoryQuery> categories = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<TopicHasReferenceQuery> references = new LinkedHashSet<>();
 
     @OneToOne
     @JoinColumn(name = "comment_container_id")
     private CommentContainerQuery comment;
+
+    @OneToOne
+    @JoinColumn(name = "voting_id")
+    private VotingQuery voting;
+
+    @OneToOne
+    @JoinColumn(name = "reference_container_id")
+    private ReferenceContainerQuery reference;
+    
+    @OneToOne
+    @JoinColumn(name = "progress_container_id")
+    private ProgressContainerQuery progress;
 }
 

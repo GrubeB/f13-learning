@@ -22,10 +22,10 @@ public class UserFactory {
     private final RoleQueryService roleQueryService;
     private final PasswordEncoder passwordEncoder;
 
-    public User create(String email, String rawPassword, List<String> roleNames) {
+    public User create(String email, String username, String fullName, String rawPassword, List<String> roleNames) {
         List<AggregateId> roles = roleQueryService.fetchByCriteria(new SearchCriteria(List.of(
                 new SearchCriteriaItem("name", Operator.IN, roleNames)
         )), AggregateId.class);
-        return new User(email, rawPassword, roles, domainEventPublisherFactory.getEventPublisher(), passwordEncoder);
+        return new User(email,username,fullName, rawPassword, roles, domainEventPublisherFactory.getEventPublisher(), passwordEncoder);
     }
 }

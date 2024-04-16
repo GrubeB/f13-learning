@@ -38,7 +38,7 @@ public class GroupController {
     @DeleteMapping("/{groupId}")
     public ResponseEntity<Void> delete(@PathVariable UUID groupId) {
         var command = new DeleteGroupCommand(groupId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -47,7 +47,7 @@ public class GroupController {
     @PutMapping("/{groupId}")
     public ResponseEntity<Void> update(@PathVariable UUID groupId, @RequestBody UpdateGroupCommand command) {
         command.setGroupId(groupId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -56,7 +56,7 @@ public class GroupController {
     @PutMapping("/{groupId}/status/{status}")
     public ResponseEntity<Void> changeStatus(@PathVariable UUID groupId, @PathVariable GroupStatus status) {
         var command = new ChangeGroupStatusCommand(groupId, status);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
