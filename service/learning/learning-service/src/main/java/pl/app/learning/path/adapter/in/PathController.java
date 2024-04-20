@@ -38,7 +38,7 @@ public class PathController {
     @DeleteMapping("/{pathId}")
     public ResponseEntity<Void> delete(@PathVariable UUID pathId) {
         var command = new DeletePathCommand(pathId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -47,7 +47,7 @@ public class PathController {
     @PutMapping("/{pathId}")
     public ResponseEntity<Void> update(@PathVariable UUID pathId, @RequestBody UpdatePathCommand command) {
         command.setPathId(pathId);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -56,7 +56,7 @@ public class PathController {
     @PutMapping("/{pathId}/status/{status}")
     public ResponseEntity<Void> changeStatus(@PathVariable UUID pathId, @PathVariable PathStatus status) {
         var command = new ChangePathStatusCommand(pathId, status);
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

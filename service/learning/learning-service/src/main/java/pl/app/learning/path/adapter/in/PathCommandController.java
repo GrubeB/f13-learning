@@ -38,7 +38,7 @@ public class PathCommandController {
 
     @PostMapping("/delete")
     public ResponseEntity<Void> handle(@RequestBody DeletePathCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -46,7 +46,7 @@ public class PathCommandController {
 
     @PostMapping("/update")
     public ResponseEntity<Void> handle(@RequestBody UpdatePathCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();
@@ -54,7 +54,7 @@ public class PathCommandController {
 
     @PostMapping("/change-status")
     public ResponseEntity<Void> handle(@RequestBody ChangePathStatusCommand command) {
-        gateway.sendAsync(command);
+        gateway.send(command);
         return ResponseEntity
                 .accepted()
                 .build();

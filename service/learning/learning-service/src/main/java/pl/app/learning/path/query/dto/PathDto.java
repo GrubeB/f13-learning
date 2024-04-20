@@ -11,6 +11,7 @@ import pl.app.learning.path.application.domain.PathStatus;
 import pl.app.learning.topic.query.dto.TopicDto;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,6 +28,11 @@ public class PathDto implements
     private Set<PathItemTopic> topics;
     private Set<PathItemGroup> groups;
 
+    private String createdBy;
+    private Instant createdDate;
+    private String lastModifiedBy;
+    private Instant lastModifiedDate;
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
@@ -37,7 +43,7 @@ public class PathDto implements
         private ItemType type;
         private ItemEntityType entityType;
         private UUID entityId;
-        private TopicDto topic;
+        private TopicDto entity;
     }
 
     @Data
@@ -50,6 +56,6 @@ public class PathDto implements
         private ItemType type;
         private ItemEntityType entityType;
         private UUID entityId;
-        private GroupDto group;
+        private GroupDto entity;
     }
 }

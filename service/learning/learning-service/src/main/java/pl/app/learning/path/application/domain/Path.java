@@ -123,7 +123,7 @@ public class Path extends BaseJpaAuditDomainAggregateRoot<Path> {
     }
 
     public void addItem(PathItem item) {
-        if (getItem(item.getId()).isPresent()) {
+        if (item.getId() != null && getItem(item.getId()).isPresent()) {
             return;
         }
         if (!new PathSpecification.UniqueEntitiesInPathItems(getItems()).isSatisfiedBy(item)) {
