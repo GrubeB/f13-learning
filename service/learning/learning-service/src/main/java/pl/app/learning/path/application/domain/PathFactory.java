@@ -9,6 +9,9 @@ import pl.app.common.ddd.event.DomainEventPublisherFactory;
 import pl.app.learning.category.query.CategoryQueryService;
 import pl.app.learning.group.query.GroupQueryService;
 import pl.app.learning.path.application.port.in.command.CreatePathCommand;
+import pl.app.learning.path.application.port.out.CreatePathCommentContainerPort;
+import pl.app.learning.path.application.port.out.CreatePathProgressContainerPort;
+import pl.app.learning.path.application.port.out.CreatePathVotingPort;
 import pl.app.learning.topic.query.TopicQueryService;
 
 import java.util.List;
@@ -26,12 +29,25 @@ public class PathFactory {
     private final CategoryQueryService categoryQueryService;
     private final TopicQueryService topicQueryService;
     private final GroupQueryService groupQueryService;
+    private final CreatePathCommentContainerPort createCommentContainerPort;
+    private final CreatePathProgressContainerPort createProgressContainerPort;
+    private final CreatePathVotingPort createVotingPort;
 
     public Path create(CreatePathCommand command) {
         List<AggregateId> categories = categoryQueryService.fetchByIds(command.getCategoryIds(), AggregateId.class);
 
         var aggregate = new Path(command.getName(), command.getContent(), PathStatus.DRAFT, categories, getItems(command.getItems()));
         aggregate.setEventPublisher(domainEventPublisherFactory.getEventPublisher());
+
+        AggregateId commandContainer = createCommentContainerPort.create(aggregate.getAggregateId());
+        aggregate.setCommentContainer(commandContainer);
+
+        AggregateId progressContainer = createProgressContainerPort.create(aggregate.getAggregateId());
+        aggregate.setProgressContainer(progressContainer);
+
+        AggregateId voting = createVotingPort.createVoting(aggregate.getAggregateId());
+        aggregate.setVoting(voting);
+
         return aggregate;
     }
 

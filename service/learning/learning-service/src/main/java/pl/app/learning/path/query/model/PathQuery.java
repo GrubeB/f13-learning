@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 import pl.app.common.model.BaseAuditEntity;
+import pl.app.learning.comment.query.model.CommentContainerQuery;
 import pl.app.learning.path.application.domain.PathStatus;
+import pl.app.learning.progress.query.model.ProgressContainerQuery;
+import pl.app.learning.voting.query.model.VotingQuery;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -31,9 +34,21 @@ public class PathQuery extends BaseAuditEntity<PathQuery, UUID> {
     @Enumerated(EnumType.STRING)
     @Column(name = "path_status")
     private PathStatus status;
-    @OneToMany(mappedBy = "path", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private final Set<PathHasCategoryQuery> categories = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "path", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private final Set<PathItemQuery> items = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "path", fetch = FetchType.EAGER)
+    private Set<PathHasCategoryQuery> categories = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "path", fetch = FetchType.EAGER)
+    private Set<PathItemQuery> items = new LinkedHashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "comment_container_id")
+    private CommentContainerQuery comment;
+
+    @OneToOne
+    @JoinColumn(name = "voting_id")
+    private VotingQuery voting;
+
+    @OneToOne
+    @JoinColumn(name = "progress_container_id")
+    private ProgressContainerQuery progress;
 }
 

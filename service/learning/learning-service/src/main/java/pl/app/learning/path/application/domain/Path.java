@@ -32,6 +32,24 @@ public class Path extends BaseJpaAuditDomainAggregateRoot<Path> {
     @OneToMany(mappedBy = "path", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<PathItem> items = new LinkedHashSet<>();
 
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "voting_id"))
+    })
+    private AggregateId voting;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "comment_container_id"))
+    })
+    private AggregateId commentContainer;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "aggregateId", column = @Column(name = "progress_container_id"))
+    })
+    private AggregateId progressContainer;
+
     @SuppressWarnings("unused")
     protected Path() {
         super();
@@ -123,7 +141,7 @@ public class Path extends BaseJpaAuditDomainAggregateRoot<Path> {
     }
 
     public void addItem(PathItem item) {
-        if (getItem(item.getId()).isPresent()) {
+        if (item.getId() != null && getItem(item.getId()).isPresent()) {
             return;
         }
         if (!new PathSpecification.UniqueEntitiesInPathItems(getItems()).isSatisfiedBy(item)) {
@@ -148,6 +166,18 @@ public class Path extends BaseJpaAuditDomainAggregateRoot<Path> {
         return this.items.stream()
                 .filter(item -> Objects.equals(item.getId(), itemId))
                 .findAny();
+    }
+
+    public void setCommentContainer(AggregateId commentContainer) {
+        this.commentContainer = commentContainer;
+    }
+
+    public void setProgressContainer(AggregateId progressContainer) {
+        this.progressContainer = progressContainer;
+    }
+
+    public void setVoting(AggregateId voting) {
+        this.voting = voting;
     }
 }
 
